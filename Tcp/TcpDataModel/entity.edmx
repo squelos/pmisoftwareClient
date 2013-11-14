@@ -70,6 +70,8 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Semester" Relationship="entity.SeasonSemester" FromRole="Season" ToRole="Semester" />
+          <Property Type="DateTime" Name="start" Nullable="false" />
+          <Property Type="DateTime" Name="end" Nullable="false" />
         </EntityType>
         <EntityType Name="Semester">
           <Key>
@@ -78,6 +80,8 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Season" Relationship="entity.SeasonSemester" FromRole="Semester" ToRole="Season" />
           <NavigationProperty Name="Payment" Relationship="entity.PaymentSemester" FromRole="Semester" ToRole="Payment" />
+          <Property Type="DateTime" Name="start" Nullable="false" />
+          <Property Type="DateTime" Name="end" Nullable="false" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -86,6 +90,9 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Player" Relationship="entity.PlayerPayment" FromRole="Payment" ToRole="Player" />
           <NavigationProperty Name="Semester" Relationship="entity.PaymentSemester" FromRole="Payment" ToRole="Semester" />
+          <Property Type="entity.PaymentMethod" Name="method" Nullable="false" />
+          <Property Type="Double" Name="amount" Nullable="false" />
+          <Property Type="DateTime" Name="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Badge">
           <Key>
@@ -94,7 +101,10 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Player" Relationship="entity.BadgePlayer" FromRole="Badge" ToRole="Player" />
           <NavigationProperty Name="Opening" Relationship="entity.OpeningBadge" FromRole="Badge" ToRole="Opening" />
-          <Property Type="String" Name="Property1" Nullable="false" />
+          <Property Type="Int32" Name="number" Nullable="false" />
+          <Property Type="Int32" Name="hash" Nullable="false" />
+          <Property Type="Boolean" Name="isEnabled" Nullable="false" />
+          <Property Type="Boolean" Name="isMaster" Nullable="false" />
         </EntityType>
         <EntityType Name="BookingAggregation">
           <Key>
@@ -149,6 +159,22 @@
           <NavigationProperty Name="PreferencePeriod" Relationship="entity.PreferencePeriodPlayer" FromRole="Player" ToRole="PreferencePeriod" />
           <NavigationProperty Name="Booking" Relationship="entity.PlayerBooking" FromRole="Player" ToRole="Booking" />
           <NavigationProperty Name="Payment" Relationship="entity.PlayerPayment" FromRole="Player" ToRole="Payment" />
+          <Property Type="String" Name="firstName" Nullable="false" />
+          <Property Type="String" Name="lastName" Nullable="false" />
+          <Property Type="DateTime" Name="birthDate" Nullable="false" />
+          <Property Type="entity.BallLevel" Name="level" Nullable="false" />
+          <Property Type="String" Name="ranking" Nullable="false" />
+          <Property Type="String" Name="email" Nullable="false" />
+          <Property Type="String" Name="street" Nullable="false" />
+          <Property Type="String" Name="zipCode" Nullable="false" />
+          <Property Type="String" Name="city" Nullable="false" />
+          <Property Type="String" Name="phone1" Nullable="false" />
+          <Property Type="String" Name="phone2" Nullable="false" />
+          <Property Type="entity.PlayerStatus" Name="status" Nullable="false" />
+          <Property Type="Boolean" Name="isEnabled" Nullable="false" />
+          <Property Type="String" Name="passwordHash" Nullable="false" />
+          <Property Type="DateTime" Name="lastLogin" Nullable="false" />
+          <Property Type="String" Name="licenceNumber" Nullable="false" />
         </EntityType>
         <EntityType Name="PreferencePeriod">
           <Key>
@@ -156,6 +182,10 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Player" Relationship="entity.PreferencePeriodPlayer" FromRole="PreferencePeriod" ToRole="Player" />
+          <Property Type="Int32" Name="beginningHour" Nullable="false" />
+          <Property Type="Int32" Name="endHour" Nullable="false" />
+          <Property Type="Int32" Name="beginningMin" Nullable="false" />
+          <Property Type="Int32" Name="endmin" Nullable="false" />
         </EntityType>
         <EnumType Name="Days">
           <Member Name="Monday" />
@@ -214,6 +244,18 @@
           <End Type="entity.Opening" Role="Opening" Multiplicity="1" />
           <End Type="entity.Badge" Role="Badge" Multiplicity="*" />
         </Association>
+        <EnumType Name="PlayerStatus">
+          <Member Name="Simple" />
+          <Member Name="ClubMnager" />
+          <Member Name="Admin" />
+        </EnumType>
+        <EnumType Name="PlayerCategory">
+          <Member Name="Hobby" />
+          <Member Name="Competition" />
+          <Member Name="Disabled" />
+          <Member Name="TennisSchool" />
+          <Member Name="Training" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

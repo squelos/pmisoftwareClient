@@ -7,13 +7,13 @@
       <Diagram DiagramId="1a932b47b9f34da6a29968e675ba7f26" Name="Diagram1" >
         <EntityTypeShape EntityType="entity.Season" Width="1.5" PointX="3.125" PointY="1.375" />
         <EntityTypeShape EntityType="entity.Semester" Width="1.5" PointX="5.5" PointY="1.375" />
-        <EntityTypeShape EntityType="entity.Payment" Width="1.5" PointX="5.5" PointY="3.5" />
-        <EntityTypeShape EntityType="entity.Badge" Width="1.5" PointX="7.875" PointY="7.875" />
+        <EntityTypeShape EntityType="entity.Payment" Width="1.5" PointX="5.5" PointY="3.875" />
+        <EntityTypeShape EntityType="entity.Badge" Width="1.5" PointX="10.75" PointY="8" />
         <EntityTypeShape EntityType="entity.BookingAggregation" Width="1.5" PointX="10.75" PointY="1.125" />
         <EntityTypeShape EntityType="entity.Booking" Width="1.5" PointX="10.75" PointY="3.25" />
         <EntityTypeShape EntityType="entity.Court" Width="1.5" PointX="13.875" PointY="2.125" />
         <EntityTypeShape EntityType="entity.Opening" Width="1.5" PointX="13.875" PointY="4.625" />
-        <EntityTypeShape EntityType="entity.Player" Width="1.5" PointX="7.875" PointY="5.25" />
+        <EntityTypeShape EntityType="entity.Player" Width="1.5" PointX="8" PointY="4.125" />
         <EntityTypeShape EntityType="entity.PreferencePeriod" Width="1.5" PointX="2.875" PointY="5.875" />
         <AssociationConnector Association="entity.SeasonSemester" />
         <AssociationConnector Association="entity.BookingAggregationBooking" />
