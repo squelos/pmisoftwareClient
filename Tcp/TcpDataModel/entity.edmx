@@ -13,7 +13,207 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="entity" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="entityContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SeasonJeu" EntityType="entity.Season" />
+          <EntitySet Name="SemesterJeu" EntityType="entity.Semester" />
+          <EntitySet Name="PaymentJeu" EntityType="entity.Payment" />
+          <EntitySet Name="BadgeJeu" EntityType="entity.Badge" />
+          <EntitySet Name="BookingAggregationJeu" EntityType="entity.BookingAggregation" />
+          <EntitySet Name="BookingJeu" EntityType="entity.Booking" />
+          <EntitySet Name="CourtJeu" EntityType="entity.Court" />
+          <EntitySet Name="OpeningJeu" EntityType="entity.Opening" />
+          <EntitySet Name="PlayerJeu" EntityType="entity.Player" />
+          <EntitySet Name="PreferencePeriodJeu" EntityType="entity.PreferencePeriod" />
+          <AssociationSet Name="SeasonSemester" Association="entity.SeasonSemester">
+            <End Role="Season" EntitySet="SeasonJeu" />
+            <End Role="Semester" EntitySet="SemesterJeu" />
+          </AssociationSet>
+          <AssociationSet Name="BookingAggregationBooking" Association="entity.BookingAggregationBooking">
+            <End Role="BookingAggregation" EntitySet="BookingAggregationJeu" />
+            <End Role="Booking" EntitySet="BookingJeu" />
+          </AssociationSet>
+          <AssociationSet Name="BookingCourt" Association="entity.BookingCourt">
+            <End Role="Booking" EntitySet="BookingJeu" />
+            <End Role="Court" EntitySet="CourtJeu" />
+          </AssociationSet>
+          <AssociationSet Name="CourtOpening" Association="entity.CourtOpening">
+            <End Role="Court" EntitySet="CourtJeu" />
+            <End Role="Opening" EntitySet="OpeningJeu" />
+          </AssociationSet>
+          <AssociationSet Name="BadgePlayer" Association="entity.BadgePlayer">
+            <End Role="Badge" EntitySet="BadgeJeu" />
+            <End Role="Player" EntitySet="PlayerJeu" />
+          </AssociationSet>
+          <AssociationSet Name="PreferencePeriodPlayer" Association="entity.PreferencePeriodPlayer">
+            <End Role="PreferencePeriod" EntitySet="PreferencePeriodJeu" />
+            <End Role="Player" EntitySet="PlayerJeu" />
+          </AssociationSet>
+          <AssociationSet Name="PlayerBooking" Association="entity.PlayerBooking">
+            <End Role="Player" EntitySet="PlayerJeu" />
+            <End Role="Booking" EntitySet="BookingJeu" />
+          </AssociationSet>
+          <AssociationSet Name="PlayerPayment" Association="entity.PlayerPayment">
+            <End Role="Player" EntitySet="PlayerJeu" />
+            <End Role="Payment" EntitySet="PaymentJeu" />
+          </AssociationSet>
+          <AssociationSet Name="PaymentSemester" Association="entity.PaymentSemester">
+            <End Role="Payment" EntitySet="PaymentJeu" />
+            <End Role="Semester" EntitySet="SemesterJeu" />
+          </AssociationSet>
+          <AssociationSet Name="OpeningBadge" Association="entity.OpeningBadge">
+            <End Role="Opening" EntitySet="OpeningJeu" />
+            <End Role="Badge" EntitySet="BadgeJeu" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Season">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Semester" Relationship="entity.SeasonSemester" FromRole="Season" ToRole="Semester" />
+        </EntityType>
+        <EntityType Name="Semester">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Season" Relationship="entity.SeasonSemester" FromRole="Semester" ToRole="Season" />
+          <NavigationProperty Name="Payment" Relationship="entity.PaymentSemester" FromRole="Semester" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Player" Relationship="entity.PlayerPayment" FromRole="Payment" ToRole="Player" />
+          <NavigationProperty Name="Semester" Relationship="entity.PaymentSemester" FromRole="Payment" ToRole="Semester" />
+        </EntityType>
+        <EntityType Name="Badge">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Player" Relationship="entity.BadgePlayer" FromRole="Badge" ToRole="Player" />
+          <NavigationProperty Name="Opening" Relationship="entity.OpeningBadge" FromRole="Badge" ToRole="Opening" />
+          <Property Type="String" Name="Property1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookingAggregation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Booking" Relationship="entity.BookingAggregationBooking" FromRole="BookingAggregation" ToRole="Booking" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="BookingAggregation" Relationship="entity.BookingAggregationBooking" FromRole="Booking" ToRole="BookingAggregation" />
+          <NavigationProperty Name="Court" Relationship="entity.BookingCourt" FromRole="Booking" ToRole="Court" />
+          <NavigationProperty Name="Player" Relationship="entity.PlayerBooking" FromRole="Booking" ToRole="Player" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="Boolean" Name="isSpecial" Nullable="false" />
+          <Property Type="DateTime" Name="start" Nullable="false" />
+          <Property Type="DateTime" Name="end" Nullable="false" />
+        </EntityType>
+        <EnumType Name="PaymentMethod">
+          <Member Name="Check" />
+          <Member Name="Cash" />
+          <Member Name="HolidayVoucher" />
+        </EnumType>
+        <EntityType Name="Court">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Booking" Relationship="entity.BookingCourt" FromRole="Court" ToRole="Booking" />
+          <NavigationProperty Name="Opening" Relationship="entity.CourtOpening" FromRole="Court" ToRole="Opening" />
+          <Property Type="Int32" Name="number" Nullable="false" />
+          <Property Type="Boolean" Name="isCovered" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Opening">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Court" Relationship="entity.CourtOpening" FromRole="Opening" ToRole="Court" />
+          <Property Type="DateTime" Name="time" Nullable="false" />
+          <NavigationProperty Name="Badge" Relationship="entity.OpeningBadge" FromRole="Opening" ToRole="Badge" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Badge" Relationship="entity.BadgePlayer" FromRole="Player" ToRole="Badge" />
+          <NavigationProperty Name="PreferencePeriod" Relationship="entity.PreferencePeriodPlayer" FromRole="Player" ToRole="PreferencePeriod" />
+          <NavigationProperty Name="Booking" Relationship="entity.PlayerBooking" FromRole="Player" ToRole="Booking" />
+          <NavigationProperty Name="Payment" Relationship="entity.PlayerPayment" FromRole="Player" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="PreferencePeriod">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Player" Relationship="entity.PreferencePeriodPlayer" FromRole="PreferencePeriod" ToRole="Player" />
+        </EntityType>
+        <EnumType Name="Days">
+          <Member Name="Monday" />
+          <Member Name="Tuesday" />
+          <Member Name="Wednesday" />
+          <Member Name="Thursday" />
+          <Member Name="Friday" />
+          <Member Name="Sunday" />
+          <Member Name="Saturday" />
+        </EnumType>
+        <EnumType Name="BallLevel" >
+          <Member Name="Blanche" />
+          <Member Name="Jaune" />
+          <Member Name="Orange" />
+          <Member Name="Verte" />
+          <Member Name="Rouge" />
+          <Member Name="Raquette" />
+        </EnumType>
+        <Association Name="SeasonSemester">
+          <End Type="entity.Season" Role="Season" Multiplicity="1" />
+          <End Type="entity.Semester" Role="Semester" Multiplicity="*" />
+        </Association>
+        <Association Name="BookingAggregationBooking">
+          <End Type="entity.BookingAggregation" Role="BookingAggregation" Multiplicity="1" />
+          <End Type="entity.Booking" Role="Booking" Multiplicity="*" />
+        </Association>
+        <Association Name="BookingCourt">
+          <End Type="entity.Booking" Role="Booking" Multiplicity="1" />
+          <End Type="entity.Court" Role="Court" Multiplicity="*" />
+        </Association>
+        <Association Name="CourtOpening">
+          <End Type="entity.Court" Role="Court" Multiplicity="1" />
+          <End Type="entity.Opening" Role="Opening" Multiplicity="*" />
+        </Association>
+        <Association Name="BadgePlayer">
+          <End Type="entity.Badge" Role="Badge" Multiplicity="1" />
+          <End Type="entity.Player" Role="Player" Multiplicity="*" />
+        </Association>
+        <Association Name="PreferencePeriodPlayer">
+          <End Type="entity.PreferencePeriod" Role="PreferencePeriod" Multiplicity="1" />
+          <End Type="entity.Player" Role="Player" Multiplicity="*" />
+        </Association>
+        <Association Name="PlayerBooking">
+          <End Type="entity.Player" Role="Player" Multiplicity="1" />
+          <End Type="entity.Booking" Role="Booking" Multiplicity="*" />
+        </Association>
+        <Association Name="PlayerPayment">
+          <End Type="entity.Player" Role="Player" Multiplicity="1" />
+          <End Type="entity.Payment" Role="Payment" Multiplicity="*" />
+        </Association>
+        <Association Name="PaymentSemester">
+          <End Type="entity.Payment" Role="Payment" Multiplicity="1" />
+          <End Type="entity.Semester" Role="Semester" Multiplicity="*" />
+        </Association>
+        <Association Name="OpeningBadge">
+          <End Type="entity.Opening" Role="Opening" Multiplicity="1" />
+          <End Type="entity.Badge" Role="Badge" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
