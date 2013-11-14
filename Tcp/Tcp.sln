@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpUI", "TcpUI\TcpUI.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpModernUI", "TcpModernUI\TcpModernUI.csproj", "{CD8116C4-313D-4D10-849D-A93046844279}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpUIMahAppsMetro", "TcpUIMahAppsMetro\TcpUIMahAppsMetro.csproj", "{A7E458BD-1D4F-4C0F-8E25-11A3348BD2A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CD8116C4-313D-4D10-849D-A93046844279}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD8116C4-313D-4D10-849D-A93046844279}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD8116C4-313D-4D10-849D-A93046844279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7E458BD-1D4F-4C0F-8E25-11A3348BD2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7E458BD-1D4F-4C0F-8E25-11A3348BD2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7E458BD-1D4F-4C0F-8E25-11A3348BD2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7E458BD-1D4F-4C0F-8E25-11A3348BD2A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
