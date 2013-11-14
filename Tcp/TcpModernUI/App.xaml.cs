@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Tcp
+namespace TcpModernUI
 {
     /// <summary>
     /// Interaction logic for App.xaml

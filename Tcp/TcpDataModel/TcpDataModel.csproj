@@ -60,7 +60,6 @@
     <Compile Include="BookingAggregation.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Court.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>

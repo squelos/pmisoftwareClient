@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.20827.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tcp", "Tcp\Tcp.csproj", "{A166FD06-999B-4ED6-B9DF-2C4B57124990}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpDataModel", "TcpDataModel\TcpDataModel.csproj", "{44434E2F-8746-4E8E-BB0C-18AFBB314FBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpUI", "TcpUI\TcpUI.csproj", "{93F8044A-1983-43CD-B44E-0ADB08675372}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpModernUI", "TcpModernUI\TcpModernUI.csproj", "{CD8116C4-313D-4D10-849D-A93046844279}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A166FD06-999B-4ED6-B9DF-2C4B57124990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A166FD06-999B-4ED6-B9DF-2C4B57124990}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A166FD06-999B-4ED6-B9DF-2C4B57124990}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A166FD06-999B-4ED6-B9DF-2C4B57124990}.Release|Any CPU.Build.0 = Release|Any CPU
 		{44434E2F-8746-4E8E-BB0C-18AFBB314FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{44434E2F-8746-4E8E-BB0C-18AFBB314FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44434E2F-8746-4E8E-BB0C-18AFBB314FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44434E2F-8746-4E8E-BB0C-18AFBB314FBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93F8044A-1983-43CD-B44E-0ADB08675372}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93F8044A-1983-43CD-B44E-0ADB08675372}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93F8044A-1983-43CD-B44E-0ADB08675372}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93F8044A-1983-43CD-B44E-0ADB08675372}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD8116C4-313D-4D10-849D-A93046844279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD8116C4-313D-4D10-849D-A93046844279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD8116C4-313D-4D10-849D-A93046844279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD8116C4-313D-4D10-849D-A93046844279}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
