@@ -16,11 +16,28 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="350,77,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource SquareButtonStyle}"/>
-        <Label Content="Test Label&#xD;&#xA;" HorizontalAlignment="Left" Margin="72,59,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox HorizontalAlignment="Left" Margin="125,150,0,0" VerticalAlignment="Top" Width="120"/>
-        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="103,106,0,0" VerticalAlignment="Top"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="350,42,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="125,207,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Controls:TextboxHelper.ClearTextButton="True" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="317*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="223,190,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource SquareButtonStyle}" Grid.Column="1"/>
+        <Label Content="Test Label&#xD;&#xA;" HorizontalAlignment="Left" Margin="67,34,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <ComboBox HorizontalAlignment="Left" Margin="67,135,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="67,91,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="223,39,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="67,192,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Controls:TextboxHelper.ClearTextButton="True" Grid.Column="1" />
+        <TabControl Margin="0" TabStripPlacement="Left">
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5">
+                    <Menu Margin="0">
+                        <MenuItem Header="Test"/>
+                        <MenuItem Header="Test2"/>
+                    </Menu>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Controls:MetroWindow>
