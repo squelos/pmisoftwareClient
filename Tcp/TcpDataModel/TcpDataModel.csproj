@@ -60,6 +60,9 @@
     <Compile Include="BookingAggregation.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Category.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Court.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
@@ -107,6 +110,9 @@
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Semester.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrainingPreferences.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
   </ItemGroup>
