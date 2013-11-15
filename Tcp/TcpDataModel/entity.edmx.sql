@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/14/2013 17:06:02
+-- Date Created: 11/15/2013 15:16:05
 -- Generated from EDMX file: C:\Users\squelos\Documents\GitHub\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,95 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_SeasonSemester]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SemesterJeu] DROP CONSTRAINT [FK_SeasonSemester];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BookingAggregationBooking]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingAggregationBooking];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BookingCourt]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingCourt];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CourtOpening]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OpeningJeu] DROP CONSTRAINT [FK_CourtOpening];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BadgePlayer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BadgeJeu] DROP CONSTRAINT [FK_BadgePlayer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PreferencePeriodPlayer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PreferencePeriodJeu] DROP CONSTRAINT [FK_PreferencePeriodPlayer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerBooking]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_PlayerBooking];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerPayment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentJeu] DROP CONSTRAINT [FK_PlayerPayment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentSemester_Payment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentSemester] DROP CONSTRAINT [FK_PaymentSemester_Payment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentSemester_Semester]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentSemester] DROP CONSTRAINT [FK_PaymentSemester_Semester];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OpeningBadge]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OpeningJeu] DROP CONSTRAINT [FK_OpeningBadge];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerCategory1_Player]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlayerCategory1] DROP CONSTRAINT [FK_PlayerCategory1_Player];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerCategory1_Category]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlayerCategory1] DROP CONSTRAINT [FK_PlayerCategory1_Category];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerTrainingPreferences]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TrainingPreferencesSet] DROP CONSTRAINT [FK_PlayerTrainingPreferences];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[SeasonJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SeasonJeu];
+GO
+IF OBJECT_ID(N'[dbo].[SemesterJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SemesterJeu];
+GO
+IF OBJECT_ID(N'[dbo].[PaymentJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PaymentJeu];
+GO
+IF OBJECT_ID(N'[dbo].[BadgeJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BadgeJeu];
+GO
+IF OBJECT_ID(N'[dbo].[BookingAggregationJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BookingAggregationJeu];
+GO
+IF OBJECT_ID(N'[dbo].[BookingJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BookingJeu];
+GO
+IF OBJECT_ID(N'[dbo].[CourtJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CourtJeu];
+GO
+IF OBJECT_ID(N'[dbo].[OpeningJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OpeningJeu];
+GO
+IF OBJECT_ID(N'[dbo].[PlayerJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PlayerJeu];
+GO
+IF OBJECT_ID(N'[dbo].[PreferencePeriodJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PreferencePeriodJeu];
+GO
+IF OBJECT_ID(N'[dbo].[CategorySet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CategorySet];
+GO
+IF OBJECT_ID(N'[dbo].[TrainingPreferencesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TrainingPreferencesSet];
+GO
+IF OBJECT_ID(N'[dbo].[PaymentSemester]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PaymentSemester];
+GO
+IF OBJECT_ID(N'[dbo].[PlayerCategory1]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PlayerCategory1];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -130,6 +214,24 @@ CREATE TABLE [dbo].[PreferencePeriodJeu] (
     [endHour] int  NOT NULL,
     [beginningMin] int  NOT NULL,
     [endmin] int  NOT NULL,
+    [day] int  NOT NULL,
+    [Player_ID] int  NOT NULL
+);
+GO
+
+-- Creating table 'CategorySet'
+CREATE TABLE [dbo].[CategorySet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [category] int  NOT NULL
+);
+GO
+
+-- Creating table 'TrainingPreferencesSet'
+CREATE TABLE [dbo].[TrainingPreferencesSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [day] int  NOT NULL,
+    [beginning] int  NOT NULL,
+    [end] int  NOT NULL,
     [Player_ID] int  NOT NULL
 );
 GO
@@ -138,6 +240,13 @@ GO
 CREATE TABLE [dbo].[PaymentSemester] (
     [Payment_ID] int  NOT NULL,
     [Semester_ID] int  NOT NULL
+);
+GO
+
+-- Creating table 'PlayerCategory1'
+CREATE TABLE [dbo].[PlayerCategory1] (
+    [Player_ID] int  NOT NULL,
+    [Category_Id] int  NOT NULL
 );
 GO
 
@@ -205,10 +314,28 @@ ADD CONSTRAINT [PK_PreferencePeriodJeu]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'CategorySet'
+ALTER TABLE [dbo].[CategorySet]
+ADD CONSTRAINT [PK_CategorySet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'TrainingPreferencesSet'
+ALTER TABLE [dbo].[TrainingPreferencesSet]
+ADD CONSTRAINT [PK_TrainingPreferencesSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- Creating primary key on [Payment_ID], [Semester_ID] in table 'PaymentSemester'
 ALTER TABLE [dbo].[PaymentSemester]
 ADD CONSTRAINT [PK_PaymentSemester]
     PRIMARY KEY CLUSTERED ([Payment_ID], [Semester_ID] ASC);
+GO
+
+-- Creating primary key on [Player_ID], [Category_Id] in table 'PlayerCategory1'
+ALTER TABLE [dbo].[PlayerCategory1]
+ADD CONSTRAINT [PK_PlayerCategory1]
+    PRIMARY KEY CLUSTERED ([Player_ID], [Category_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -362,6 +489,43 @@ ADD CONSTRAINT [FK_OpeningBadge]
 CREATE INDEX [IX_FK_OpeningBadge]
 ON [dbo].[OpeningJeu]
     ([Badge_ID]);
+GO
+
+-- Creating foreign key on [Player_ID] in table 'PlayerCategory1'
+ALTER TABLE [dbo].[PlayerCategory1]
+ADD CONSTRAINT [FK_PlayerCategory1_Player]
+    FOREIGN KEY ([Player_ID])
+    REFERENCES [dbo].[PlayerJeu]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Category_Id] in table 'PlayerCategory1'
+ALTER TABLE [dbo].[PlayerCategory1]
+ADD CONSTRAINT [FK_PlayerCategory1_Category]
+    FOREIGN KEY ([Category_Id])
+    REFERENCES [dbo].[CategorySet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PlayerCategory1_Category'
+CREATE INDEX [IX_FK_PlayerCategory1_Category]
+ON [dbo].[PlayerCategory1]
+    ([Category_Id]);
+GO
+
+-- Creating foreign key on [Player_ID] in table 'TrainingPreferencesSet'
+ALTER TABLE [dbo].[TrainingPreferencesSet]
+ADD CONSTRAINT [FK_PlayerTrainingPreferences]
+    FOREIGN KEY ([Player_ID])
+    REFERENCES [dbo].[PlayerJeu]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PlayerTrainingPreferences'
+CREATE INDEX [IX_FK_PlayerTrainingPreferences]
+ON [dbo].[TrainingPreferencesSet]
+    ([Player_ID]);
 GO
 
 -- --------------------------------------------------

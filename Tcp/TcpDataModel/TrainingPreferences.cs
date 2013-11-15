@@ -12,14 +12,12 @@ namespace TcpDataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class PreferencePeriod
+    public partial class TrainingPreferences
     {
-        public int ID { get; set; }
-        public int beginningHour { get; set; }
-        public int endHour { get; set; }
-        public int beginningMin { get; set; }
-        public int endmin { get; set; }
+        public int Id { get; set; }
         public Days day { get; set; }
+        public int beginning { get; set; }
+        public int end { get; set; }
     
         public virtual Player Player { get; set; }
     }

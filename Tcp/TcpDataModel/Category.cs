@@ -12,15 +12,16 @@ namespace TcpDataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class PreferencePeriod
+    public partial class Category
     {
-        public int ID { get; set; }
-        public int beginningHour { get; set; }
-        public int endHour { get; set; }
-        public int beginningMin { get; set; }
-        public int endmin { get; set; }
-        public Days day { get; set; }
+        public Category()
+        {
+            this.Player = new HashSet<Player>();
+        }
     
-        public virtual Player Player { get; set; }
+        public int Id { get; set; }
+        public PlayerCategory category { get; set; }
+    
+        public virtual ICollection<Player> Player { get; set; }
     }
 }

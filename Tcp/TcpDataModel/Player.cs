@@ -20,6 +20,8 @@ namespace TcpDataModel
             this.PreferencePeriod = new HashSet<PreferencePeriod>();
             this.Booking = new HashSet<Booking>();
             this.Payment = new HashSet<Payment>();
+            this.Category = new HashSet<Category>();
+            this.TrainingPreferences = new HashSet<TrainingPreferences>();
         }
     
         public int ID { get; set; }
@@ -44,5 +46,7 @@ namespace TcpDataModel
         public virtual ICollection<PreferencePeriod> PreferencePeriod { get; set; }
         public virtual ICollection<Booking> Booking { get; set; }
         public virtual ICollection<Payment> Payment { get; set; }
+        public virtual ICollection<Category> Category { get; set; }
+        public virtual ICollection<TrainingPreferences> TrainingPreferences { get; set; }
     }
 }

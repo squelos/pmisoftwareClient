@@ -16,7 +16,10 @@
     <EntitySet Name="OpeningJeu" EntityType="entity.Store.OpeningJeu" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PlayerJeu" EntityType="entity.Store.PlayerJeu" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PreferencePeriodJeu" EntityType="entity.Store.PreferencePeriodJeu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategorySet" EntityType="entity.Store.CategorySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TrainingPreferencesSet" EntityType="entity.Store.TrainingPreferencesSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PaymentSemester" EntityType="entity.Store.PaymentSemester" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PlayerCategory1" EntityType="entity.Store.PlayerCategory1" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="SeasonSemester" Association="entity.Store.SeasonSemester">
       <End Role="Season" EntitySet="SeasonJeu" />
       <End Role="Semester" EntitySet="SemesterJeu" />
@@ -60,6 +63,18 @@
     <AssociationSet Name="OpeningBadge" Association="entity.Store.OpeningBadge">
       <End Role="Opening" EntitySet="OpeningJeu" />
       <End Role="Badge" EntitySet="BadgeJeu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlayerCategory1_Player" Association="entity.Store.FK_PlayerCategory1_Player">
+      <End Role="Player" EntitySet="PlayerJeu" />
+      <End Role="PlayerCategory1" EntitySet="PlayerCategory1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlayerCategory1_Category" Association="entity.Store.FK_PlayerCategory1_Category">
+      <End Role="Category" EntitySet="CategorySet" />
+      <End Role="PlayerCategory1" EntitySet="PlayerCategory1" />
+    </AssociationSet>
+    <AssociationSet Name="PlayerTrainingPreferences" Association="entity.Store.PlayerTrainingPreferences">
+      <End Role="Player" EntitySet="PlayerJeu" />
+      <End Role="TrainingPreferences" EntitySet="TrainingPreferencesSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="SeasonJeu">
@@ -167,6 +182,24 @@
     <Property Name="endHour" Type="int" Nullable="false" />
     <Property Name="beginningMin" Type="int" Nullable="false" />
     <Property Name="endmin" Type="int" Nullable="false" />
+    <Property Name="day" Type="int" Nullable="false" />
+    <Property Name="Player_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategorySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TrainingPreferencesSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="day" Type="int" Nullable="false" />
+    <Property Name="beginning" Type="int" Nullable="false" />
+    <Property Name="end" Type="int" Nullable="false" />
     <Property Name="Player_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PaymentSemester">
@@ -176,6 +209,14 @@
     </Key>
     <Property Name="Payment_ID" Type="int" Nullable="false" />
     <Property Name="Semester_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlayerCategory1">
+    <Key>
+      <PropertyRef Name="Player_ID" />
+      <PropertyRef Name="Category_Id" />
+    </Key>
+    <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="Category_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="SeasonSemester">
     <End Role="Season" Type="entity.Store.SeasonJeu" Multiplicity="1" />
@@ -285,6 +326,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="PlayerTrainingPreferences">
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="1" />
+    <End Role="TrainingPreferences" Type="entity.Store.TrainingPreferencesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TrainingPreferences">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PaymentSemester_Payment">
     <End Role="Payment" Type="entity.Store.PaymentJeu" Multiplicity="1" />
     <End Role="PaymentSemester" Type="entity.Store.PaymentSemester" Multiplicity="*" />
@@ -306,6 +359,30 @@
       </Principal>
       <Dependent Role="PaymentSemester">
         <PropertyRef Name="Semester_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlayerCategory1_Player">
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="1" />
+    <End Role="PlayerCategory1" Type="entity.Store.PlayerCategory1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PlayerCategory1">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlayerCategory1_Category">
+    <End Role="PlayerCategory1" Type="entity.Store.PlayerCategory1" Multiplicity="*" />
+    <End Role="Category" Type="entity.Store.CategorySet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlayerCategory1">
+        <PropertyRef Name="Category_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -363,6 +440,16 @@
           <AssociationSet Name="OpeningBadge" Association="entity.OpeningBadge">
             <End Role="Opening" EntitySet="OpeningJeu" />
             <End Role="Badge" EntitySet="BadgeJeu" />
+          </AssociationSet>
+          <EntitySet Name="CategorySet" EntityType="entity.Category" />
+          <AssociationSet Name="PlayerCategory1" Association="entity.PlayerCategory1">
+            <End Role="Player" EntitySet="PlayerJeu" />
+            <End Role="Category" EntitySet="CategorySet" />
+          </AssociationSet>
+          <EntitySet Name="TrainingPreferencesSet" EntityType="entity.TrainingPreferences" />
+          <AssociationSet Name="PlayerTrainingPreferences" Association="entity.PlayerTrainingPreferences">
+            <End Role="Player" EntitySet="PlayerJeu" />
+            <End Role="TrainingPreferences" EntitySet="TrainingPreferencesSet" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Season">
@@ -476,6 +563,8 @@
           <Property Type="String" Name="passwordHash" Nullable="false" />
           <Property Type="DateTime" Name="lastLogin" Nullable="false" />
           <Property Type="String" Name="licenceNumber" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="entity.PlayerCategory1" FromRole="Player" ToRole="Category" />
+          <NavigationProperty Name="TrainingPreferences" Relationship="entity.PlayerTrainingPreferences" FromRole="Player" ToRole="TrainingPreferences" />
         </EntityType>
         <EntityType Name="PreferencePeriod">
           <Key>
@@ -487,6 +576,7 @@
           <Property Type="Int32" Name="endHour" Nullable="false" />
           <Property Type="Int32" Name="beginningMin" Nullable="false" />
           <Property Type="Int32" Name="endmin" Nullable="false" />
+          <Property Name="day" Type="entity.Days" Nullable="false" />
         </EntityType>
         <EnumType Name="Days">
           <Member Name="Monday" />
@@ -557,6 +647,32 @@
           <Member Name="TennisSchool" />
           <Member Name="Training" />
         </EnumType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category" Type="entity.PlayerCategory" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="entity.PlayerCategory1" FromRole="Category" ToRole="Player" />
+        </EntityType>
+        <Association Name="PlayerCategory1">
+          <End Type="entity.Player" Role="Player" Multiplicity="*" />
+          <End Type="entity.Category" Role="Category" Multiplicity="*" />
+        </Association>
+        <EntityType Name="TrainingPreferences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="day" Type="entity.Days" Nullable="false" />
+          <Property Name="beginning" Type="Int32" Nullable="false" />
+          <Property Name="end" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="entity.PlayerTrainingPreferences" FromRole="TrainingPreferences" ToRole="Player" />
+        </EntityType>
+        <Association Name="PlayerTrainingPreferences">
+          <End Type="entity.Player" Role="Player" Multiplicity="1" />
+          <End Type="entity.TrainingPreferences" Role="TrainingPreferences" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -668,6 +784,25 @@
           <ScalarProperty Name="endHour" ColumnName="endHour" />
           <ScalarProperty Name="beginningMin" ColumnName="beginningMin" />
           <ScalarProperty Name="endmin" ColumnName="endmin" />
+          <ScalarProperty Name="day" ColumnName="day" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategorySet">
+      <EntityTypeMapping TypeName="IsTypeOf(entity.Category)">
+        <MappingFragment StoreEntitySet="CategorySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="category" ColumnName="category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrainingPreferencesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(entity.TrainingPreferences)">
+        <MappingFragment StoreEntitySet="TrainingPreferencesSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="day" ColumnName="day" />
+          <ScalarProperty Name="beginning" ColumnName="beginning" />
+          <ScalarProperty Name="end" ColumnName="end" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -752,6 +887,22 @@
       </EndProperty>
       <EndProperty Name="Opening">
         <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PlayerCategory1" TypeName="entity.PlayerCategory1" StoreEntitySet="PlayerCategory1">
+      <EndProperty Name="Player">
+        <ScalarProperty Name="ID" ColumnName="Player_ID" />
+      </EndProperty>
+      <EndProperty Name="Category">
+        <ScalarProperty Name="Id" ColumnName="Category_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PlayerTrainingPreferences" TypeName="entity.PlayerTrainingPreferences" StoreEntitySet="TrainingPreferencesSet">
+      <EndProperty Name="Player">
+        <ScalarProperty Name="ID" ColumnName="Player_ID" />
+      </EndProperty>
+      <EndProperty Name="TrainingPreferences">
+        <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
