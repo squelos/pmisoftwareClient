@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TcpModernUI.Pages
+namespace TcpModernUI.Pages.reservations
 {
     /// <summary>
-    /// Interaction logic for reservations.xaml
+    /// Interaction logic for visualisation.xaml
     /// </summary>
-    public partial class reservations : UserControl
+    public partial class visualisation : UserControl
     {
-        public reservations()
+        public visualisation()
         {
             InitializeComponent();
         }

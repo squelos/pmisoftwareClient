@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TcpModernUI.Pages.saisons"
+﻿<UserControl x:Class="TcpModernUI.Pages.badges.badges"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,8 +11,8 @@
         <mui:ModernTab Layout="Tab">
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
-                <mui:Link DisplayName="Saisons" />
-                <mui:Link DisplayName="Ajout" />
+                <mui:Link DisplayName="Badges" Source="/Pages/badges/visualisation.xaml"/>
+                <mui:Link DisplayName="Creation" Source="/Pages/badges/creation.xaml"/>
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

@@ -10,11 +10,11 @@
         <mui:LinkGroup DisplayName="welcome">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="home" Source="/Pages/Home.xaml" />
-                <mui:Link DisplayName="Adhérents" Source="/Pages/Adherent.xaml" />
-                <mui:Link DisplayName="Reservations" Source="/Pages/reservations.xaml"/>
-                <mui:Link DisplayName="Terrains" Source="/Pages/terrains.xaml"/>
-                <mui:Link DisplayName="Badges" Source="/Pages/badges.xaml"/>
-                <mui:Link DisplayName="Saisons" Source="/Pages/saisons.xaml"/>
+                <mui:Link DisplayName="Adhérents" Source="/Pages/players/players.xaml" />
+                <mui:Link DisplayName="Reservations" Source="/Pages/reservations/booking.xaml"/>
+                <mui:Link DisplayName="Terrains" Source="/Pages/courts/courts.xaml"/>
+                <mui:Link DisplayName="Badges" Source="/Pages/badges/badges.xaml"/>
+                <mui:Link DisplayName="Saisons" Source="/Pages/seasons/seasons.xaml"/>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="Options" GroupName="settings">

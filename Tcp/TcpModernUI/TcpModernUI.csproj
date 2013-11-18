@@ -83,11 +83,31 @@
       <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\SettingsAppearanceViewModel.cs" />
-    <Page Include="Pages\Adherent.xaml">
+    <Page Include="Pages\badges\badges.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\badges.xaml">
+    <Page Include="Pages\badges\creation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\badges\visualisation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\players\creation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\players\overdue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\players\players.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\players\visualisation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -95,11 +115,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\reservations.xaml">
+    <Page Include="Pages\reservations\recurring.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\saisons.xaml">
+    <Page Include="Pages\reservations\booking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\reservations\visualisation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\seasons\creation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\seasons\seasons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\seasons\visualisation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -107,29 +143,56 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="Pages\Adherent.xaml.cs">
-      <DependentUpon>Adherent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\badges.xaml.cs">
+    <Compile Include="Pages\badges\badges.xaml.cs">
       <DependentUpon>badges.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\badges\creation.xaml.cs">
+      <DependentUpon>creation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\badges\visualisation.xaml.cs">
+      <DependentUpon>visualisation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\players\creation.xaml.cs">
+      <DependentUpon>creation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\players\overdue.xaml.cs">
+      <DependentUpon>overdue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\players\players.xaml.cs">
+      <DependentUpon>players.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\players\visualisation.xaml.cs">
+      <DependentUpon>visualisation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\reservations.xaml.cs">
-      <DependentUpon>reservations.xaml</DependentUpon>
+    <Compile Include="Pages\reservations\recurring.xaml.cs">
+      <DependentUpon>recurring.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\saisons.xaml.cs">
-      <DependentUpon>saisons.xaml</DependentUpon>
+    <Compile Include="Pages\reservations\booking.xaml.cs">
+      <DependentUpon>booking.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\reservations\visualisation.xaml.cs">
+      <DependentUpon>visualisation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\seasons\creation.xaml.cs">
+      <DependentUpon>creation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\seasons\seasons.xaml.cs">
+      <DependentUpon>seasons.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\seasons\visualisation.xaml.cs">
+      <DependentUpon>visualisation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\terrains.xaml.cs">
-      <DependentUpon>terrains.xaml</DependentUpon>
+    <Compile Include="Pages\courts\courts.xaml.cs">
+      <DependentUpon>courts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Page Include="Pages\terrains.xaml">
+    <Page Include="Pages\courts\courts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

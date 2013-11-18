@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TcpModernUI.Pages
+namespace TcpModernUI.Pages.players
 {
     /// <summary>
-    /// Interaction logic for badges.xaml
+    /// Interaction logic for overdue.xaml
     /// </summary>
-    public partial class badges : UserControl
+    public partial class overdue : UserControl
     {
-        public badges()
+        public overdue()
         {
             InitializeComponent();
         }
