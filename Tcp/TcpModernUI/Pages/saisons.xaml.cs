@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TcpModernUI.Pages
 {
     /// <summary>
-    /// Interaction logic for TabPage1.xaml
+    /// Interaction logic for saisons.xaml
     /// </summary>
-    public partial class TabPage1 : UserControl
+    public partial class saisons : UserControl
     {
-        public TabPage1()
+        public saisons()
         {
             InitializeComponent();
         }

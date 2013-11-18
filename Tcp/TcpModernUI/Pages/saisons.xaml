@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TcpModernUI.Pages.TabPage1"
+﻿<UserControl x:Class="TcpModernUI.Pages.saisons"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,8 +11,8 @@
         <mui:ModernTab Layout="Tab">
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
-                <mui:Link DisplayName="Item 1" />
-                <mui:Link DisplayName="Item 2" />
+                <mui:Link DisplayName="Saisons" />
+                <mui:Link DisplayName="Ajout" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

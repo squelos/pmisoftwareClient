@@ -87,7 +87,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\badges.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\reservations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\saisons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,17 +110,26 @@
     <Compile Include="Pages\Adherent.xaml.cs">
       <DependentUpon>Adherent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\badges.xaml.cs">
+      <DependentUpon>badges.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\reservations.xaml.cs">
+      <DependentUpon>reservations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\saisons.xaml.cs">
+      <DependentUpon>saisons.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TabPage1.xaml.cs">
-      <DependentUpon>TabPage1.xaml</DependentUpon>
+    <Compile Include="Pages\terrains.xaml.cs">
+      <DependentUpon>terrains.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Page Include="Pages\TabPage1.xaml">
+    <Page Include="Pages\terrains.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
