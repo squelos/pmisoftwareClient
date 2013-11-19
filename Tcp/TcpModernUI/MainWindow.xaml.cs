@@ -24,6 +24,7 @@ namespace TcpModernUI
         public MainWindow()
         {
             InitializeComponent();
+            
         }
     }
 }
