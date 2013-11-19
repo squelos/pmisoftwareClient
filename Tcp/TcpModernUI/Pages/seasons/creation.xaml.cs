@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TcpDataModel;
+
 
 namespace TcpModernUI.Pages.seasons
 {
@@ -20,9 +22,13 @@ namespace TcpModernUI.Pages.seasons
     /// </summary>
     public partial class creation : UserControl
     {
+        private entityContainer _container = new entityContainer();
+
         public creation()
         {
             InitializeComponent();
+            _container = new entityContainer();
+            
             
         }
     }

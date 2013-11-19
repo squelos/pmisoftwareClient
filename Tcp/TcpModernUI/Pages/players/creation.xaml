@@ -5,13 +5,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="800" MaxWidth="600">
     <Grid Style="{StaticResource ContentRoot}">
-        <ScrollViewer>
-            <StackPanel MinWidth="200">
-                <TextBlock Text="BASIC PAGE" Style="{StaticResource Heading2}" />
-                <TextBlock Text="Content goes here" />
-            </StackPanel>
-        </ScrollViewer>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" MaxWidth="150"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Prénom" HorizontalAlignment="Left" Margin="15,0,0,0" Grid.Row="0" VerticalAlignment="Center"/>
+        <Label Content="Nom" HorizontalAlignment="Left" Margin="15,0,10,0" Grid.Row="1" VerticalAlignment="Center"/>
+        <Label Content="Date de naissance"  HorizontalAlignment="Left"  Margin="15,0,10,0" Grid.Row="2" VerticalAlignment="Center"/>
+        <Label Content="Email" HorizontalAlignment="Left"  Margin="15,0,10,0" Grid.Row="3" VerticalAlignment="Center"/>
+        <Label Content="Rue" HorizontalAlignment="Left"  Margin="15,0,10,0" Grid.Row="4" VerticalAlignment="Center"/>
+        <Label Content="Code postal" HorizontalAlignment="Left"  Margin="15,0,10,0" Grid.Row="5" VerticalAlignment="Center"/>
+        <Label Content="Ville"  HorizontalAlignment="Left"  Margin="15,0,10,0" Grid.Row="6" VerticalAlignment="Center"/>
+        <Label Content="Telephone" HorizontalAlignment="Left"  Margin="15,0,10,0" Grid.Row="7" VerticalAlignment="Center"/>
+        <Label Content="Telephone Mobile" HorizontalAlignment="Left"  Margin="15,0,10,0" Grid.Row="8" VerticalAlignment="Center"/>
+        <Label Content="Balle" HorizontalAlignment="Left"  Margin="15,0,10,0" Grid.Row="9" VerticalAlignment="Center"/>
+        <Label Content="Classement" HorizontalAlignment="Left"  Margin="15,0,10,0" Grid.Row="10" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="10,9,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="10,6,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
     </Grid>
 </UserControl>
