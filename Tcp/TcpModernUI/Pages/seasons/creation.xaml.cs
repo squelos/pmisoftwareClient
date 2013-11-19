@@ -23,6 +23,7 @@ namespace TcpModernUI.Pages.seasons
         public creation()
         {
             InitializeComponent();
+            
         }
     }
 }

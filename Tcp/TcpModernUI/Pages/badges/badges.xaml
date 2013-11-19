@@ -12,7 +12,7 @@
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
                 <mui:Link DisplayName="Badges" Source="/Pages/badges/visualisation.xaml"/>
-                <mui:Link DisplayName="Creation" Source="/Pages/badges/creation.xaml"/>
+                <mui:Link DisplayName="Création" Source="/Pages/badges/creation.xaml"/>
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

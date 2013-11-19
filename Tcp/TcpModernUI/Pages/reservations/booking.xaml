@@ -8,11 +8,11 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
         <!-- TODO: set @SelectedSource -->
-        <mui:ModernTab Layout="Tab">
+        <mui:ModernTab Layout="Tab" SelectedSource="/Pages/reservations/visualisation.xaml">
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
                 <mui:Link DisplayName="Calendrier" Source="/Pages/reservations/visualisation.xaml"/>
-                <mui:Link DisplayName="Recurrentes" Source="/Pages/reservations/recurring.xaml"/>
+                <mui:Link DisplayName="Récurrentes" Source="/Pages/reservations/recurring.xaml"/>
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

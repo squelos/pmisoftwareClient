@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TcpDataModel;
 
 namespace TcpModernUI.Pages.seasons
 {
@@ -20,9 +21,11 @@ namespace TcpModernUI.Pages.seasons
     /// </summary>
     public partial class visualisation : UserControl
     {
+        public List<TcpDataModel.Season> seasons = new List<Season>();
         public visualisation()
         {
             InitializeComponent();
+
         }
     }
 }
