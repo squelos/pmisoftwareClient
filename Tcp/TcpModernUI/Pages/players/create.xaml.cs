@@ -51,7 +51,7 @@ namespace TcpModernUI.Pages.players
             //save
             foreach(var player  in _container.PlayerJeu.Local.ToList())
             {
-                if(player.firstName == "" || player.firstName == "")
+                if(player.firstName == "" || player.lastName == "" || player.firstName == null || player.lastName == null)
                 {
                     _container.PlayerJeu.Remove(player);
                 }

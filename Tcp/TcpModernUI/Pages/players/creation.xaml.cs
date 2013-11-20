@@ -22,17 +22,22 @@ namespace TcpModernUI.Pages.players
     public partial class creation : UserControl
     {
         public TcpDataModel.Player currentPlayer;
-        public entityContainer container = new TcpDataModel.entityContainer();
+        private entityContainer _container = new TcpDataModel.entityContainer();
 
         public creation()
         {
             InitializeComponent();
-            currentPlayer = new Player();    
+            currentPlayer = new Player();
+            System.Windows.Data.CollectionViewSource playerViewSource =
+               ((System.Windows.Data.CollectionViewSource)(this.FindResource("playerViewSource")));
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //save
+            currentPlayer = new Player();
+            //currentPlayer.firstName = 
 
         }
 
