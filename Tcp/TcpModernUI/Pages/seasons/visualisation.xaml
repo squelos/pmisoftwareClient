@@ -8,12 +8,6 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
         <!-- TODO: set @SelectedSource -->
-        <mui:ModernTab Layout="List">
-            <mui:ModernTab.Links>
-                <!-- TODO: set @Source -->
-                <mui:Link DisplayName="Item 1" />
-                <mui:Link DisplayName="Item 2" />
-            </mui:ModernTab.Links>
-        </mui:ModernTab>
+        
     </Grid>
 </UserControl>

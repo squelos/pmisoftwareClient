@@ -12,8 +12,8 @@
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
                 <mui:Link DisplayName="Adhérents" Source="/Pages/players/visualisation.xaml"/>
-                <mui:Link DisplayName="Création" Source="/Pages/players/creation.xaml"/>
-                <mui:Link DisplayName="Impayés" Source="/Pages/players/overdue.xaml"/>
+                <mui:Link DisplayName="Création" Source="/Pages/players/create.xaml"/>
+                <mui:Link DisplayName="Impayés" Source="/Pages/players/creation.xaml"/>
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>
