@@ -24,6 +24,6 @@ namespace TcpDataModel
         public System.DateTime end { get; set; }
     
         public virtual Season Season { get; set; }
-        public virtual ICollection<Payment> Payment { get; set; }
+        public virtual ObservableCollection<Payment> Payment { get; set; }
     }
 }

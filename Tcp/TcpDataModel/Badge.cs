@@ -26,6 +26,6 @@ namespace TcpDataModel
         public bool isMaster { get; set; }
     
         public virtual Player Player { get; set; }
-        public virtual ICollection<Opening> Opening { get; set; }
+        public virtual ObservableCollection<Opening> Opening { get; set; }
     }
 }

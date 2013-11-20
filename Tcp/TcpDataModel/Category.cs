@@ -22,6 +22,6 @@ namespace TcpDataModel
         public int Id { get; set; }
         public PlayerCategory category { get; set; }
     
-        public virtual ICollection<Player> Player { get; set; }
+        public virtual ObservableCollection<Player> Player { get; set; }
     }
 }

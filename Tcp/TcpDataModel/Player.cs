@@ -42,11 +42,11 @@ namespace TcpDataModel
         public System.DateTime lastLogin { get; set; }
         public string licenceNumber { get; set; }
     
-        public virtual ICollection<Badge> Badge { get; set; }
-        public virtual ICollection<PreferencePeriod> PreferencePeriod { get; set; }
-        public virtual ICollection<Booking> Booking { get; set; }
-        public virtual ICollection<Payment> Payment { get; set; }
-        public virtual ICollection<Category> Category { get; set; }
-        public virtual ICollection<TrainingPreferences> TrainingPreferences { get; set; }
+        public virtual ObservableCollection<Badge> Badge { get; set; }
+        public virtual ObservableCollection<PreferencePeriod> PreferencePeriod { get; set; }
+        public virtual ObservableCollection<Booking> Booking { get; set; }
+        public virtual ObservableCollection<Payment> Payment { get; set; }
+        public virtual ObservableCollection<Category> Category { get; set; }
+        public virtual ObservableCollection<TrainingPreferences> TrainingPreferences { get; set; }
     }
 }

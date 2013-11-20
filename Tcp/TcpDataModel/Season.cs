@@ -23,6 +23,6 @@ namespace TcpDataModel
         public System.DateTime start { get; set; }
         public System.DateTime end { get; set; }
     
-        public virtual ICollection<Semester> Semester { get; set; }
+        public virtual ObservableCollection<Semester> Semester { get; set; }
     }
 }

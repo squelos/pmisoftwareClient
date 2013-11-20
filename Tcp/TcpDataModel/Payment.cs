@@ -25,6 +25,6 @@ namespace TcpDataModel
         public System.DateTime date { get; set; }
     
         public virtual Player Player { get; set; }
-        public virtual ICollection<Semester> Semester { get; set; }
+        public virtual ObservableCollection<Semester> Semester { get; set; }
     }
 }
