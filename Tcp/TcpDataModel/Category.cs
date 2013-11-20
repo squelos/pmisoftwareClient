@@ -10,13 +10,13 @@
 namespace TcpDataModel
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Category
     {
         public Category()
         {
-            this.Player = new HashSet<Player>();
+            this.Player = new ObservableCollection<Player>();
         }
     
         public int Id { get; set; }

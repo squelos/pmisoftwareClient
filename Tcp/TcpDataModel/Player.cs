@@ -10,18 +10,18 @@
 namespace TcpDataModel
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Player
     {
         public Player()
         {
-            this.Badge = new HashSet<Badge>();
-            this.PreferencePeriod = new HashSet<PreferencePeriod>();
-            this.Booking = new HashSet<Booking>();
-            this.Payment = new HashSet<Payment>();
-            this.Category = new HashSet<Category>();
-            this.TrainingPreferences = new HashSet<TrainingPreferences>();
+            this.Badge = new ObservableCollection<Badge>();
+            this.PreferencePeriod = new ObservableCollection<PreferencePeriod>();
+            this.Booking = new ObservableCollection<Booking>();
+            this.Payment = new ObservableCollection<Payment>();
+            this.Category = new ObservableCollection<Category>();
+            this.TrainingPreferences = new ObservableCollection<TrainingPreferences>();
         }
     
         public int ID { get; set; }

@@ -10,13 +10,13 @@
 namespace TcpDataModel
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Badge
     {
         public Badge()
         {
-            this.Opening = new HashSet<Opening>();
+            this.Opening = new ObservableCollection<Opening>();
         }
     
         public int ID { get; set; }

@@ -10,13 +10,13 @@
 namespace TcpDataModel
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class BookingAggregation
     {
         public BookingAggregation()
         {
-            this.Booking = new HashSet<Booking>();
+            this.Booking = new ObservableCollection<Booking>();
         }
     
         public int ID { get; set; }

@@ -10,14 +10,14 @@
 namespace TcpDataModel
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Court
     {
         public Court()
         {
-            this.Booking = new HashSet<Booking>();
-            this.Opening = new HashSet<Opening>();
+            this.Booking = new ObservableCollection<Booking>();
+            this.Opening = new ObservableCollection<Opening>();
         }
     
         public int ID { get; set; }
