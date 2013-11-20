@@ -22,7 +22,6 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.8*" MaxWidth="150"/>
@@ -33,6 +32,7 @@
         <Label Content="Prénom" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="0" VerticalAlignment="Center"/>
         <Label Content="Nom" HorizontalAlignment="Left" Margin="15,9,0,10" Grid.Row="1" VerticalAlignment="Center"/>
         <Label Content="Date de naissance"  HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="3" VerticalAlignment="Center"/>
+        <Label Content="License"  HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="4" VerticalAlignment="Center"/>
         <Label Content="Email" HorizontalAlignment="Left"  Margin="15,9,0,10" Grid.Row="2" VerticalAlignment="Center"/>
         <Label Content="Rue" HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
         <Label Content="Code postal" HorizontalAlignment="Left"  Margin="15,9,0,10" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
@@ -44,18 +44,16 @@
         <TextBox x:Name="tbFirstName" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,6,0,6" TextWrapping="Wrap" Text="Prénom" VerticalAlignment="Center" Width="120"/>
         <TextBox x:Name="tbLastName" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="1" TextWrapping="Wrap" Text="Nom" VerticalAlignment="Center" Width="120"/>
         <TextBox x:Name="tbEmail" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="2" TextWrapping="Wrap" Text="Email" VerticalAlignment="Center" Width="120"/>
+        <TextBox x:Name="tbLicense" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="4" TextWrapping="Wrap" Text="License" VerticalAlignment="Center" Width="120"/>
         <TextBox x:Name="tbStreet" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,6,0,6" Grid.Row="0" TextWrapping="Wrap" Text="Rue et numéro" VerticalAlignment="Center" Width="120"/>
         <TextBox x:Name="tbZip" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="1" TextWrapping="Wrap" Text="Code postal" VerticalAlignment="Center" Width="120"/>
         <TextBox x:Name="tbCity" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,6,0,6" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
-        <Calendar x:Name="calendarDoB" Grid.Column="1" HorizontalAlignment="Left" Margin="10,5,0,0" Grid.Row="3" VerticalAlignment="Top" DisplayMode="Decade" FirstDayOfWeek="Monday" Grid.RowSpan="7"/>
         <TextBox x:Name="tbPhone" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="3" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
         <TextBox x:Name="tbPhone2" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,6,0,7" Grid.Row="4" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
         <TextBox x:Name="tbRanking" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,6,0,7" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
-        <Button Content="Créer" Grid.Column="3" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="7" VerticalAlignment="Center" Width="75" Click="Button_Click"/>
-        <Button Content="Annuler" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="7" VerticalAlignment="Center" Width="75" Click="Button_Click_1"/>
+        <Button Content="Créer" Grid.Column="3" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="75" Click="Button_Click"/>
+        <Button Content="Annuler" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="75" Click="Button_Click_1"/>
         <ComboBox x:Name="cbBallLevel" Grid.Column="3" HorizontalAlignment="Left" Margin="10,6,0,7" Grid.Row="6" VerticalAlignment="Center" Width="120"/>
-          
-        
-
+        <DatePicker Grid.Column="1" HorizontalAlignment="Left" Margin="10,14,0,8" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
     </Grid>
 </UserControl>

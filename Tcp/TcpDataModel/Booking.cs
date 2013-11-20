@@ -12,7 +12,7 @@ namespace TcpDataModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class Booking 
+    public partial class Booking
     {
         public int ID { get; set; }
         public string name { get; set; }

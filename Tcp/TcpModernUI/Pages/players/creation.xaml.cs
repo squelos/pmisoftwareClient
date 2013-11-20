@@ -27,7 +27,7 @@ namespace TcpModernUI.Pages.players
         public creation()
         {
             InitializeComponent();
-            currentPlayer = new Player();
+            //currentPlayer = new Player();
             System.Windows.Data.CollectionViewSource playerViewSource =
                ((System.Windows.Data.CollectionViewSource)(this.FindResource("playerViewSource")));
 
@@ -36,7 +36,11 @@ namespace TcpModernUI.Pages.players
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //save
-            currentPlayer = new Player();
+            //currentPlayer = new Player();
+            currentPlayer.firstName = tbFirstName.Text;
+            currentPlayer.lastName = tbLastName.Text;
+            currentPlayer.isEnabled = true;
+            
             //currentPlayer.firstName = 
 
         }
