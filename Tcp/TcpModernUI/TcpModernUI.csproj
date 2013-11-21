@@ -125,10 +125,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\players\create2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\players\creation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,9 +181,6 @@
     </Compile>
     <Compile Include="Pages\badges\visualisation.xaml.cs">
       <DependentUpon>visualisation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\players\create2.xaml.cs">
-      <DependentUpon>create2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\players\creation.xaml.cs">
       <DependentUpon>creation.xaml</DependentUpon>
