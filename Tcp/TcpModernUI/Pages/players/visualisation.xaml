@@ -7,9 +7,9 @@
              xmlns:TcpDataModel="clr-namespace:TcpDataModel;assembly=TcpDataModel" x:Class="TcpModernUI.Pages.adherents.visualisation"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="600" Loaded="UserControl_Loaded">
-    <UserControl.Resources>
-        <CollectionViewSource x:Key="playerViewSource" d:DesignSource="{d:DesignInstance {x:Type TcpDataModel:Player}, CreateList=True}"/>
-    </UserControl.Resources>
+    
 
-    <Grid Style="{StaticResource ContentRoot}" DataContext="{StaticResource playerViewSource}" />
+    <Grid Style="{StaticResource ContentRoot}">
+       
+    </Grid>
 </UserControl>

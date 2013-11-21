@@ -28,8 +28,6 @@ namespace TcpModernUI.Pages.players
         {
             InitializeComponent();
             //currentPlayer = new Player();
-            System.Windows.Data.CollectionViewSource playerViewSource =
-               ((System.Windows.Data.CollectionViewSource)(this.FindResource("playerViewSource")));
 
         }
 

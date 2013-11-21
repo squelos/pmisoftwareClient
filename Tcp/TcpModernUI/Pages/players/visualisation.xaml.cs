@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TcpDataModel;
+using System.Data.Entity;
+using System.Threading;
 
 namespace TcpModernUI.Pages.adherents
 {
@@ -20,6 +23,7 @@ namespace TcpModernUI.Pages.adherents
     /// </summary>
     public partial class visualisation : UserControl
     {
+        private entityContainer _container = new entityContainer();
         public visualisation()
         {
             InitializeComponent();
@@ -27,6 +31,17 @@ namespace TcpModernUI.Pages.adherents
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            Thread thread = new Thread(() =>
+            {
+                System.Windows.Data.CollectionViewSource playerViewSource =
+                    ((System.Windows.Data.CollectionViewSource)(this.FindResource("playerViewSource")));
+
+                _container.PlayerJeu.Load();
+                Dispatcher.BeginInvoke(new ThreadStart(() => { playerViewSource.Source = _container.PlayerJeu.Local; }));
+                
+            });
+            thread.Start();
+            
 
             // Do not load your data at design time.
             // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
@@ -35,13 +50,32 @@ namespace TcpModernUI.Pages.adherents
             // 	System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["Resource Key for CollectionViewSource"];
             // 	myCollectionViewSource.Source = your data
             // }
-            // Do not load your data at design time.
-            // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
-            // {
-            // 	//Load your data here and assign the result to the CollectionViewSource.
-            // 	System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["Resource Key for CollectionViewSource"];
-            // 	myCollectionViewSource.Source = your data
-            // }
+        }
+
+        private void bSave_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(var player in _container.PlayerJeu.Local.ToList() )
+            {
+                player.lastLogin = DateTime.Now;
+                if(player.birthDate.Year < 1900 || player.firstName == null || player.lastName == null)
+                {
+                    _container.PlayerJeu.Remove(player);
+                }
+            }
+            try
+            {
+                _container.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                var lol = _container.GetValidationErrors();
+            }
+            this.playerDataGrid.Items.Refresh();
+        }
+
+        private void bCancel_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

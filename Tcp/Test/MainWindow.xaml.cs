@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TcpModernUI.Pages.players
+namespace Test
 {
     /// <summary>
-    /// Interaction logic for create2.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class create2 : UserControl
+    public partial class MainWindow : Window
     {
-        public create2()
+        public MainWindow()
         {
             InitializeComponent();
         }
