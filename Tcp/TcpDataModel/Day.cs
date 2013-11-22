@@ -12,16 +12,18 @@ namespace TcpDataModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class PaymentMethod
+    public partial class Day
     {
-        public PaymentMethod()
+        public Day()
         {
-            this.Payment = new ObservableCollection<Payment>();
+            this.PreferencePeriod = new ObservableCollection<PreferencePeriod>();
+            this.TrainingPreferences = new ObservableCollection<TrainingPreferences>();
         }
     
         public int Id { get; set; }
-        public string methodName { get; set; }
+        public string name { get; set; }
     
-        public virtual ObservableCollection<Payment> Payment { get; set; }
+        public virtual ObservableCollection<PreferencePeriod> PreferencePeriod { get; set; }
+        public virtual ObservableCollection<TrainingPreferences> TrainingPreferences { get; set; }
     }
 }

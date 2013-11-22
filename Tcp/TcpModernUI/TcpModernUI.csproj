@@ -125,10 +125,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\players\create2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\players\creation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,9 +181,6 @@
     </Compile>
     <Compile Include="Pages\badges\visualisation.xaml.cs">
       <DependentUpon>visualisation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\players\create2.xaml.cs">
-      <DependentUpon>create2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\players\creation.xaml.cs">
       <DependentUpon>creation.xaml</DependentUpon>
@@ -260,14 +253,15 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\TcpDataModel.Player.datasource" />
-    <None Include="Properties\DataSources\TcpDataModel.Season.datasource" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TcpDataModel\TcpDataModel.csproj">
       <Project>{44434e2f-8746-4e8e-bb0c-18afbb314fbd}</Project>
       <Name>TcpDataModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

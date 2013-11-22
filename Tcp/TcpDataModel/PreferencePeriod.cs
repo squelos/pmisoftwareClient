@@ -19,8 +19,8 @@ namespace TcpDataModel
         public int endHour { get; set; }
         public int beginningMin { get; set; }
         public int endmin { get; set; }
-        public Days day { get; set; }
     
         public virtual Player Player { get; set; }
+        public virtual Day Day { get; set; }
     }
 }

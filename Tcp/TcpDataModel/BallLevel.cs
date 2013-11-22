@@ -10,14 +10,18 @@
 namespace TcpDataModel
 {
     using System;
+    using System.Collections.ObjectModel;
     
-    public enum BallLevel : int
+    public partial class BallLevel
     {
-        Blanche = 0,
-        Jaune = 1,
-        Orange = 2,
-        Verte = 3,
-        Rouge = 4,
-        Raquette = 5
+        public BallLevel()
+        {
+            this.Player = new ObservableCollection<Player>();
+        }
+    
+        public int Id { get; set; }
+        public string ballName { get; set; }
+    
+        public virtual ObservableCollection<Player> Player { get; set; }
     }
 }

@@ -20,8 +20,6 @@ namespace TcpDataModel
         }
     
         public int ID { get; set; }
-        public System.DateTime start { get; set; }
-        public System.DateTime end { get; set; }
     
         public virtual ObservableCollection<Semester> Semester { get; set; }
     }

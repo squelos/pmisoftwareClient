@@ -20,11 +20,11 @@ namespace TcpDataModel
         }
     
         public int ID { get; set; }
-        public PaymentMethod method { get; set; }
         public double amount { get; set; }
         public System.DateTime date { get; set; }
     
         public virtual Player Player { get; set; }
         public virtual ObservableCollection<Semester> Semester { get; set; }
+        public virtual PaymentMethod PaymentMethod { get; set; }
     }
 }

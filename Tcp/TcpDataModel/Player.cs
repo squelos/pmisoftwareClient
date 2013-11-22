@@ -28,7 +28,6 @@ namespace TcpDataModel
         public string firstName { get; set; }
         public string lastName { get; set; }
         public System.DateTime birthDate { get; set; }
-        public BallLevel level { get; set; }
         public string ranking { get; set; }
         public string email { get; set; }
         public string street { get; set; }
@@ -36,7 +35,6 @@ namespace TcpDataModel
         public string city { get; set; }
         public string phone1 { get; set; }
         public string phone2 { get; set; }
-        public PlayerStatus status { get; set; }
         public bool isEnabled { get; set; }
         public string passwordHash { get; set; }
         public System.DateTime lastLogin { get; set; }
@@ -48,5 +46,7 @@ namespace TcpDataModel
         public virtual ObservableCollection<Payment> Payment { get; set; }
         public virtual ObservableCollection<Category> Category { get; set; }
         public virtual ObservableCollection<TrainingPreferences> TrainingPreferences { get; set; }
+        public virtual Status Status { get; set; }
+        public virtual BallLevel BallLevel { get; set; }
     }
 }

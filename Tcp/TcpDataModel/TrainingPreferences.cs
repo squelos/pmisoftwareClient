@@ -15,10 +15,10 @@ namespace TcpDataModel
     public partial class TrainingPreferences
     {
         public int Id { get; set; }
-        public Days day { get; set; }
         public int beginning { get; set; }
         public int end { get; set; }
     
         public virtual Player Player { get; set; }
+        public virtual Day Day { get; set; }
     }
 }

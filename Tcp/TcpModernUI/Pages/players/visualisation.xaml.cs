@@ -31,18 +31,6 @@ namespace TcpModernUI.Pages.adherents
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Thread thread = new Thread(() =>
-            {
-                System.Windows.Data.CollectionViewSource playerViewSource =
-                    ((System.Windows.Data.CollectionViewSource)(this.FindResource("playerViewSource")));
-
-                _container.PlayerJeu.Load();
-                Dispatcher.BeginInvoke(new ThreadStart(() => { playerViewSource.Source = _container.PlayerJeu.Local; }));
-                
-            });
-            thread.Start();
-            
-
             // Do not load your data at design time.
             // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             // {
@@ -70,7 +58,6 @@ namespace TcpModernUI.Pages.adherents
             {
                 var lol = _container.GetValidationErrors();
             }
-            this.playerDataGrid.Items.Refresh();
         }
 
         private void bCancel_Click(object sender, RoutedEventArgs e)

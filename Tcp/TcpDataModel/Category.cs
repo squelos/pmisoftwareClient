@@ -20,7 +20,7 @@ namespace TcpDataModel
         }
     
         public int Id { get; set; }
-        public PlayerCategory category { get; set; }
+        public string categoryName { get; set; }
     
         public virtual ObservableCollection<Player> Player { get; set; }
     }

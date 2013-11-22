@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/15/2013 15:16:05
+-- Date Created: 11/22/2013 13:50:59
 -- Generated from EDMX file: C:\Users\squelos\Documents\GitHub\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
 -- --------------------------------------------------
 
@@ -113,9 +113,7 @@ GO
 
 -- Creating table 'SeasonJeu'
 CREATE TABLE [dbo].[SeasonJeu] (
-    [ID] int IDENTITY(1,1) NOT NULL,
-    [start] datetime  NOT NULL,
-    [end] datetime  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL
 );
 GO
 
@@ -131,10 +129,10 @@ GO
 -- Creating table 'PaymentJeu'
 CREATE TABLE [dbo].[PaymentJeu] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [method] int  NOT NULL,
     [amount] float  NOT NULL,
     [date] datetime  NOT NULL,
-    [Player_ID] int  NOT NULL
+    [Player_ID] int  NOT NULL,
+    [PaymentMethod_Id] int  NOT NULL
 );
 GO
 
@@ -151,7 +149,8 @@ GO
 
 -- Creating table 'BookingAggregationJeu'
 CREATE TABLE [dbo].[BookingAggregationJeu] (
-    [ID] int IDENTITY(1,1) NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [name] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -191,7 +190,6 @@ CREATE TABLE [dbo].[PlayerJeu] (
     [firstName] nvarchar(max)  NOT NULL,
     [lastName] nvarchar(max)  NOT NULL,
     [birthDate] datetime  NOT NULL,
-    [level] int  NOT NULL,
     [ranking] nvarchar(max)  NOT NULL,
     [email] nvarchar(max)  NOT NULL,
     [street] nvarchar(max)  NOT NULL,
@@ -199,11 +197,12 @@ CREATE TABLE [dbo].[PlayerJeu] (
     [city] nvarchar(max)  NOT NULL,
     [phone1] nvarchar(max)  NOT NULL,
     [phone2] nvarchar(max)  NOT NULL,
-    [status] int  NOT NULL,
     [isEnabled] bit  NOT NULL,
     [passwordHash] nvarchar(max)  NOT NULL,
     [lastLogin] datetime  NOT NULL,
-    [licenceNumber] nvarchar(max)  NOT NULL
+    [licenceNumber] nvarchar(max)  NOT NULL,
+    [Status_Id] int  NOT NULL,
+    [BallLevel_Id] int  NULL
 );
 GO
 
@@ -214,25 +213,53 @@ CREATE TABLE [dbo].[PreferencePeriodJeu] (
     [endHour] int  NOT NULL,
     [beginningMin] int  NOT NULL,
     [endmin] int  NOT NULL,
-    [day] int  NOT NULL,
-    [Player_ID] int  NOT NULL
+    [Player_ID] int  NOT NULL,
+    [Day_Id] int  NOT NULL
 );
 GO
 
 -- Creating table 'CategorySet'
 CREATE TABLE [dbo].[CategorySet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [category] int  NOT NULL
+    [categoryName] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'TrainingPreferencesSet'
 CREATE TABLE [dbo].[TrainingPreferencesSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [day] int  NOT NULL,
     [beginning] int  NOT NULL,
     [end] int  NOT NULL,
-    [Player_ID] int  NOT NULL
+    [Player_ID] int  NOT NULL,
+    [Day_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'StatusSet'
+CREATE TABLE [dbo].[StatusSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [statusName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'PaymentMethodSet'
+CREATE TABLE [dbo].[PaymentMethodSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [methodName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'DaySet'
+CREATE TABLE [dbo].[DaySet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [name] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'BallLevelSet'
+CREATE TABLE [dbo].[BallLevelSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ballName] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -323,6 +350,30 @@ GO
 -- Creating primary key on [Id] in table 'TrainingPreferencesSet'
 ALTER TABLE [dbo].[TrainingPreferencesSet]
 ADD CONSTRAINT [PK_TrainingPreferencesSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'StatusSet'
+ALTER TABLE [dbo].[StatusSet]
+ADD CONSTRAINT [PK_StatusSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'PaymentMethodSet'
+ALTER TABLE [dbo].[PaymentMethodSet]
+ADD CONSTRAINT [PK_PaymentMethodSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'DaySet'
+ALTER TABLE [dbo].[DaySet]
+ADD CONSTRAINT [PK_DaySet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'BallLevelSet'
+ALTER TABLE [dbo].[BallLevelSet]
+ADD CONSTRAINT [PK_BallLevelSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -526,6 +577,76 @@ ADD CONSTRAINT [FK_PlayerTrainingPreferences]
 CREATE INDEX [IX_FK_PlayerTrainingPreferences]
 ON [dbo].[TrainingPreferencesSet]
     ([Player_ID]);
+GO
+
+-- Creating foreign key on [Status_Id] in table 'PlayerJeu'
+ALTER TABLE [dbo].[PlayerJeu]
+ADD CONSTRAINT [FK_PlayerStatus]
+    FOREIGN KEY ([Status_Id])
+    REFERENCES [dbo].[StatusSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PlayerStatus'
+CREATE INDEX [IX_FK_PlayerStatus]
+ON [dbo].[PlayerJeu]
+    ([Status_Id]);
+GO
+
+-- Creating foreign key on [PaymentMethod_Id] in table 'PaymentJeu'
+ALTER TABLE [dbo].[PaymentJeu]
+ADD CONSTRAINT [FK_PaymentMethodPayment]
+    FOREIGN KEY ([PaymentMethod_Id])
+    REFERENCES [dbo].[PaymentMethodSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PaymentMethodPayment'
+CREATE INDEX [IX_FK_PaymentMethodPayment]
+ON [dbo].[PaymentJeu]
+    ([PaymentMethod_Id]);
+GO
+
+-- Creating foreign key on [Day_Id] in table 'PreferencePeriodJeu'
+ALTER TABLE [dbo].[PreferencePeriodJeu]
+ADD CONSTRAINT [FK_DayPreferencePeriod]
+    FOREIGN KEY ([Day_Id])
+    REFERENCES [dbo].[DaySet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DayPreferencePeriod'
+CREATE INDEX [IX_FK_DayPreferencePeriod]
+ON [dbo].[PreferencePeriodJeu]
+    ([Day_Id]);
+GO
+
+-- Creating foreign key on [Day_Id] in table 'TrainingPreferencesSet'
+ALTER TABLE [dbo].[TrainingPreferencesSet]
+ADD CONSTRAINT [FK_DayTrainingPreferences]
+    FOREIGN KEY ([Day_Id])
+    REFERENCES [dbo].[DaySet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DayTrainingPreferences'
+CREATE INDEX [IX_FK_DayTrainingPreferences]
+ON [dbo].[TrainingPreferencesSet]
+    ([Day_Id]);
+GO
+
+-- Creating foreign key on [BallLevel_Id] in table 'PlayerJeu'
+ALTER TABLE [dbo].[PlayerJeu]
+ADD CONSTRAINT [FK_PlayerBallLevel]
+    FOREIGN KEY ([BallLevel_Id])
+    REFERENCES [dbo].[BallLevelSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PlayerBallLevel'
+CREATE INDEX [IX_FK_PlayerBallLevel]
+ON [dbo].[PlayerJeu]
+    ([BallLevel_Id]);
 GO
 
 -- --------------------------------------------------

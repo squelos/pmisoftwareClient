@@ -20,6 +20,7 @@ namespace TcpDataModel
         }
     
         public int ID { get; set; }
+        public string name { get; set; }
     
         public virtual ObservableCollection<Booking> Booking { get; set; }
     }

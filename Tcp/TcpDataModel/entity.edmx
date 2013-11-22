@@ -18,6 +18,10 @@
     <EntitySet Name="PreferencePeriodJeu" EntityType="entity.Store.PreferencePeriodJeu" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CategorySet" EntityType="entity.Store.CategorySet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TrainingPreferencesSet" EntityType="entity.Store.TrainingPreferencesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StatusSet" EntityType="entity.Store.StatusSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PaymentMethodSet" EntityType="entity.Store.PaymentMethodSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DaySet" EntityType="entity.Store.DaySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BallLevelSet" EntityType="entity.Store.BallLevelSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PaymentSemester" EntityType="entity.Store.PaymentSemester" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PlayerCategory1" EntityType="entity.Store.PlayerCategory1" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="SeasonSemester" Association="entity.Store.SeasonSemester">
@@ -76,14 +80,32 @@
       <End Role="Player" EntitySet="PlayerJeu" />
       <End Role="TrainingPreferences" EntitySet="TrainingPreferencesSet" />
     </AssociationSet>
+    <AssociationSet Name="PlayerStatus" Association="entity.Store.PlayerStatus">
+      <End Role="Player" EntitySet="PlayerJeu" />
+      <End Role="Status" EntitySet="StatusSet" />
+    </AssociationSet>
+    <AssociationSet Name="PaymentMethodPayment" Association="entity.Store.PaymentMethodPayment">
+      <End Role="PaymentMethod" EntitySet="PaymentMethodSet" />
+      <End Role="Payment" EntitySet="PaymentJeu" />
+    </AssociationSet>
+    <AssociationSet Name="DayPreferencePeriod" Association="entity.Store.DayPreferencePeriod">
+      <End Role="Day" EntitySet="DaySet" />
+      <End Role="PreferencePeriod" EntitySet="PreferencePeriodJeu" />
+    </AssociationSet>
+    <AssociationSet Name="DayTrainingPreferences" Association="entity.Store.DayTrainingPreferences">
+      <End Role="Day" EntitySet="DaySet" />
+      <End Role="TrainingPreferences" EntitySet="TrainingPreferencesSet" />
+    </AssociationSet>
+    <AssociationSet Name="PlayerBallLevel" Association="entity.Store.PlayerBallLevel">
+      <End Role="Player" EntitySet="PlayerJeu" />
+      <End Role="BallLevel" EntitySet="BallLevelSet" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="SeasonJeu">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="start" Type="datetime" Nullable="false" />
-    <Property Name="end" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="SemesterJeu">
     <Key>
@@ -99,10 +121,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="method" Type="int" Nullable="false" />
     <Property Name="amount" Type="float" Nullable="false" />
     <Property Name="date" Type="datetime" Nullable="false" />
     <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="PaymentMethod_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="BadgeJeu">
     <Key>
@@ -120,6 +142,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="BookingJeu">
     <Key>
@@ -159,7 +182,6 @@
     <Property Name="firstName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="lastName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="birthDate" Type="datetime" Nullable="false" />
-    <Property Name="level" Type="int" Nullable="false" />
     <Property Name="ranking" Type="nvarchar(max)" Nullable="false" />
     <Property Name="email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="street" Type="nvarchar(max)" Nullable="false" />
@@ -167,11 +189,12 @@
     <Property Name="city" Type="nvarchar(max)" Nullable="false" />
     <Property Name="phone1" Type="nvarchar(max)" Nullable="false" />
     <Property Name="phone2" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="status" Type="int" Nullable="false" />
     <Property Name="isEnabled" Type="bit" Nullable="false" />
     <Property Name="passwordHash" Type="nvarchar(max)" Nullable="false" />
     <Property Name="lastLogin" Type="datetime" Nullable="false" />
     <Property Name="licenceNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status_Id" Type="int" Nullable="false" />
+    <Property Name="BallLevel_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="PreferencePeriodJeu">
     <Key>
@@ -182,25 +205,53 @@
     <Property Name="endHour" Type="int" Nullable="false" />
     <Property Name="beginningMin" Type="int" Nullable="false" />
     <Property Name="endmin" Type="int" Nullable="false" />
-    <Property Name="day" Type="int" Nullable="false" />
     <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="Day_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CategorySet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="category" Type="int" Nullable="false" />
+    <Property Name="categoryName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="TrainingPreferencesSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="day" Type="int" Nullable="false" />
     <Property Name="beginning" Type="int" Nullable="false" />
     <Property Name="end" Type="int" Nullable="false" />
     <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="Day_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StatusSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="statusName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PaymentMethodSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="methodName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DaySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BallLevelSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ballName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PaymentSemester">
     <Key>
@@ -338,6 +389,66 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="PlayerStatus">
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="*" />
+    <End Role="Status" Type="entity.Store.StatusSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="Status_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PaymentMethodPayment">
+    <End Role="PaymentMethod" Type="entity.Store.PaymentMethodSet" Multiplicity="1" />
+    <End Role="Payment" Type="entity.Store.PaymentJeu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentMethod">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="PaymentMethod_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DayPreferencePeriod">
+    <End Role="Day" Type="entity.Store.DaySet" Multiplicity="1" />
+    <End Role="PreferencePeriod" Type="entity.Store.PreferencePeriodJeu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Day">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PreferencePeriod">
+        <PropertyRef Name="Day_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DayTrainingPreferences">
+    <End Role="Day" Type="entity.Store.DaySet" Multiplicity="1" />
+    <End Role="TrainingPreferences" Type="entity.Store.TrainingPreferencesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Day">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrainingPreferences">
+        <PropertyRef Name="Day_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PlayerBallLevel">
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="*" />
+    <End Role="BallLevel" Type="entity.Store.BallLevelSet" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="BallLevel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="BallLevel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PaymentSemester_Payment">
     <End Role="Payment" Type="entity.Store.PaymentJeu" Multiplicity="1" />
     <End Role="PaymentSemester" Type="entity.Store.PaymentSemester" Multiplicity="*" />
@@ -451,6 +562,30 @@
             <End Role="Player" EntitySet="PlayerJeu" />
             <End Role="TrainingPreferences" EntitySet="TrainingPreferencesSet" />
           </AssociationSet>
+          <EntitySet Name="StatusSet" EntityType="entity.Status" />
+          <AssociationSet Name="PlayerStatus" Association="entity.PlayerStatus">
+            <End Role="Player" EntitySet="PlayerJeu" />
+            <End Role="Status" EntitySet="StatusSet" />
+          </AssociationSet>
+          <EntitySet Name="PaymentMethodSet" EntityType="entity.PaymentMethod" />
+          <AssociationSet Name="PaymentMethodPayment" Association="entity.PaymentMethodPayment">
+            <End Role="PaymentMethod" EntitySet="PaymentMethodSet" />
+            <End Role="Payment" EntitySet="PaymentJeu" />
+          </AssociationSet>
+          <EntitySet Name="DaySet" EntityType="entity.Day" />
+          <AssociationSet Name="DayPreferencePeriod" Association="entity.DayPreferencePeriod">
+            <End Role="Day" EntitySet="DaySet" />
+            <End Role="PreferencePeriod" EntitySet="PreferencePeriodJeu" />
+          </AssociationSet>
+          <AssociationSet Name="DayTrainingPreferences" Association="entity.DayTrainingPreferences">
+            <End Role="Day" EntitySet="DaySet" />
+            <End Role="TrainingPreferences" EntitySet="TrainingPreferencesSet" />
+          </AssociationSet>
+          <EntitySet Name="BallLevelSet" EntityType="entity.BallLevel" />
+          <AssociationSet Name="PlayerBallLevel" Association="entity.PlayerBallLevel">
+            <End Role="Player" EntitySet="PlayerJeu" />
+            <End Role="BallLevel" EntitySet="BallLevelSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Season">
           <Key>
@@ -458,8 +593,6 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Semester" Relationship="entity.SeasonSemester" FromRole="Season" ToRole="Semester" />
-          <Property Type="DateTime" Name="start" Nullable="false" />
-          <Property Type="DateTime" Name="end" Nullable="false" />
         </EntityType>
         <EntityType Name="Semester">
           <Key>
@@ -478,9 +611,9 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Player" Relationship="entity.PlayerPayment" FromRole="Payment" ToRole="Player" />
           <NavigationProperty Name="Semester" Relationship="entity.PaymentSemester" FromRole="Payment" ToRole="Semester" />
-          <Property Type="entity.PaymentMethod" Name="method" Nullable="false" />
           <Property Type="Double" Name="amount" Nullable="false" />
           <Property Type="DateTime" Name="date" Nullable="false" />
+          <NavigationProperty Name="PaymentMethod" Relationship="entity.PaymentMethodPayment" FromRole="Payment" ToRole="PaymentMethod" />
         </EntityType>
         <EntityType Name="Badge">
           <Key>
@@ -500,6 +633,7 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Booking" Relationship="entity.BookingAggregationBooking" FromRole="BookingAggregation" ToRole="Booking" />
+          <Property Name="name" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -514,11 +648,6 @@
           <Property Type="DateTime" Name="start" Nullable="false" />
           <Property Type="DateTime" Name="end" Nullable="false" />
         </EntityType>
-        <EnumType Name="PaymentMethod">
-          <Member Name="Check" />
-          <Member Name="Cash" />
-          <Member Name="HolidayVoucher" />
-        </EnumType>
         <EntityType Name="Court">
           <Key>
             <PropertyRef Name="ID" />
@@ -550,7 +679,6 @@
           <Property Type="String" Name="firstName" Nullable="false" />
           <Property Type="String" Name="lastName" Nullable="false" />
           <Property Type="DateTime" Name="birthDate" Nullable="false" />
-          <Property Type="entity.BallLevel" Name="level" Nullable="false" />
           <Property Type="String" Name="ranking" Nullable="false" />
           <Property Type="String" Name="email" Nullable="false" />
           <Property Type="String" Name="street" Nullable="false" />
@@ -558,13 +686,14 @@
           <Property Type="String" Name="city" Nullable="false" />
           <Property Type="String" Name="phone1" Nullable="false" />
           <Property Type="String" Name="phone2" Nullable="false" />
-          <Property Type="entity.PlayerStatus" Name="status" Nullable="false" />
           <Property Type="Boolean" Name="isEnabled" Nullable="false" />
           <Property Type="String" Name="passwordHash" Nullable="false" />
           <Property Type="DateTime" Name="lastLogin" Nullable="false" />
           <Property Type="String" Name="licenceNumber" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="entity.PlayerCategory1" FromRole="Player" ToRole="Category" />
           <NavigationProperty Name="TrainingPreferences" Relationship="entity.PlayerTrainingPreferences" FromRole="Player" ToRole="TrainingPreferences" />
+          <NavigationProperty Name="Status" Relationship="entity.PlayerStatus" FromRole="Player" ToRole="Status" />
+          <NavigationProperty Name="BallLevel" Relationship="entity.PlayerBallLevel" FromRole="Player" ToRole="BallLevel" />
         </EntityType>
         <EntityType Name="PreferencePeriod">
           <Key>
@@ -576,25 +705,8 @@
           <Property Type="Int32" Name="endHour" Nullable="false" />
           <Property Type="Int32" Name="beginningMin" Nullable="false" />
           <Property Type="Int32" Name="endmin" Nullable="false" />
-          <Property Name="day" Type="entity.Days" Nullable="false" />
+          <NavigationProperty Name="Day" Relationship="entity.DayPreferencePeriod" FromRole="PreferencePeriod" ToRole="Day" />
         </EntityType>
-        <EnumType Name="Days">
-          <Member Name="Monday" />
-          <Member Name="Tuesday" />
-          <Member Name="Wednesday" />
-          <Member Name="Thursday" />
-          <Member Name="Friday" />
-          <Member Name="Sunday" />
-          <Member Name="Saturday" />
-        </EnumType>
-        <EnumType Name="BallLevel" >
-          <Member Name="Blanche" />
-          <Member Name="Jaune" />
-          <Member Name="Orange" />
-          <Member Name="Verte" />
-          <Member Name="Rouge" />
-          <Member Name="Raquette" />
-        </EnumType>
         <Association Name="SeasonSemester">
           <End Type="entity.Season" Role="Season" Multiplicity="1" />
           <End Type="entity.Semester" Role="Semester" Multiplicity="*" />
@@ -635,24 +747,12 @@
           <End Type="entity.Opening" Role="Opening" Multiplicity="*" />
           <End Type="entity.Badge" Role="Badge" Multiplicity="1" />
         </Association>
-        <EnumType Name="PlayerStatus">
-          <Member Name="Simple" />
-          <Member Name="ClubMnager" />
-          <Member Name="Admin" />
-        </EnumType>
-        <EnumType Name="PlayerCategory">
-          <Member Name="Hobby" />
-          <Member Name="Competition" />
-          <Member Name="Disabled" />
-          <Member Name="TennisSchool" />
-          <Member Name="Training" />
-        </EnumType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="category" Type="entity.PlayerCategory" Nullable="false" />
+          <Property Name="categoryName" Type="String" Nullable="false" />
           <NavigationProperty Name="Player" Relationship="entity.PlayerCategory1" FromRole="Category" ToRole="Player" />
         </EntityType>
         <Association Name="PlayerCategory1">
@@ -664,14 +764,67 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="day" Type="entity.Days" Nullable="false" />
           <Property Name="beginning" Type="Int32" Nullable="false" />
           <Property Name="end" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Player" Relationship="entity.PlayerTrainingPreferences" FromRole="TrainingPreferences" ToRole="Player" />
+          <NavigationProperty Name="Day" Relationship="entity.DayTrainingPreferences" FromRole="TrainingPreferences" ToRole="Day" />
         </EntityType>
         <Association Name="PlayerTrainingPreferences">
           <End Type="entity.Player" Role="Player" Multiplicity="1" />
           <End Type="entity.TrainingPreferences" Role="TrainingPreferences" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="statusName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="entity.PlayerStatus" FromRole="Status" ToRole="Player" />
+        </EntityType>
+        <Association Name="PlayerStatus">
+          <End Type="entity.Player" Role="Player" Multiplicity="*" />
+          <End Type="entity.Status" Role="Status" Multiplicity="1" />
+        </Association>
+        <EntityType Name="PaymentMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="methodName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Payment" Relationship="entity.PaymentMethodPayment" FromRole="PaymentMethod" ToRole="Payment" />
+        </EntityType>
+        <Association Name="PaymentMethodPayment">
+          <End Type="entity.PaymentMethod" Role="PaymentMethod" Multiplicity="1" />
+          <End Type="entity.Payment" Role="Payment" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Day">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <NavigationProperty Name="PreferencePeriod" Relationship="entity.DayPreferencePeriod" FromRole="Day" ToRole="PreferencePeriod" />
+          <NavigationProperty Name="TrainingPreferences" Relationship="entity.DayTrainingPreferences" FromRole="Day" ToRole="TrainingPreferences" />
+        </EntityType>
+        <Association Name="DayPreferencePeriod">
+          <End Type="entity.Day" Role="Day" Multiplicity="1" />
+          <End Type="entity.PreferencePeriod" Role="PreferencePeriod" Multiplicity="*" />
+        </Association>
+        <Association Name="DayTrainingPreferences">
+          <End Type="entity.Day" Role="Day" Multiplicity="1" />
+          <End Type="entity.TrainingPreferences" Role="TrainingPreferences" Multiplicity="*" />
+        </Association>
+        <EntityType Name="BallLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ballName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="entity.PlayerBallLevel" FromRole="BallLevel" ToRole="Player" />
+        </EntityType>
+        <Association Name="PlayerBallLevel">
+          <End Type="entity.Player" Role="Player" Multiplicity="*" />
+          <End Type="entity.BallLevel" Role="BallLevel" Multiplicity="0..1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -683,8 +836,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(entity.Season)">
         <MappingFragment StoreEntitySet="SeasonJeu">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="start" ColumnName="start" />
-          <ScalarProperty Name="end" ColumnName="end" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -701,7 +852,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(entity.Payment)">
         <MappingFragment StoreEntitySet="PaymentJeu">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="method" ColumnName="method" />
           <ScalarProperty Name="amount" ColumnName="amount" />
           <ScalarProperty Name="date" ColumnName="date" />
         </MappingFragment>
@@ -722,6 +872,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(entity.BookingAggregation)">
         <MappingFragment StoreEntitySet="BookingAggregationJeu">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -760,7 +911,6 @@
           <ScalarProperty Name="firstName" ColumnName="firstName" />
           <ScalarProperty Name="lastName" ColumnName="lastName" />
           <ScalarProperty Name="birthDate" ColumnName="birthDate" />
-          <ScalarProperty Name="level" ColumnName="level" />
           <ScalarProperty Name="ranking" ColumnName="ranking" />
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="street" ColumnName="street" />
@@ -768,7 +918,6 @@
           <ScalarProperty Name="city" ColumnName="city" />
           <ScalarProperty Name="phone1" ColumnName="phone1" />
           <ScalarProperty Name="phone2" ColumnName="phone2" />
-          <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
           <ScalarProperty Name="passwordHash" ColumnName="passwordHash" />
           <ScalarProperty Name="lastLogin" ColumnName="lastLogin" />
@@ -784,7 +933,6 @@
           <ScalarProperty Name="endHour" ColumnName="endHour" />
           <ScalarProperty Name="beginningMin" ColumnName="beginningMin" />
           <ScalarProperty Name="endmin" ColumnName="endmin" />
-          <ScalarProperty Name="day" ColumnName="day" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -792,7 +940,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(entity.Category)">
         <MappingFragment StoreEntitySet="CategorySet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="categoryName" ColumnName="categoryName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -800,9 +948,40 @@
       <EntityTypeMapping TypeName="IsTypeOf(entity.TrainingPreferences)">
         <MappingFragment StoreEntitySet="TrainingPreferencesSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="day" ColumnName="day" />
           <ScalarProperty Name="beginning" ColumnName="beginning" />
           <ScalarProperty Name="end" ColumnName="end" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusSet">
+      <EntityTypeMapping TypeName="IsTypeOf(entity.Status)">
+        <MappingFragment StoreEntitySet="StatusSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="statusName" ColumnName="statusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentMethodSet">
+      <EntityTypeMapping TypeName="IsTypeOf(entity.PaymentMethod)">
+        <MappingFragment StoreEntitySet="PaymentMethodSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="methodName" ColumnName="methodName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DaySet">
+      <EntityTypeMapping TypeName="IsTypeOf(entity.Day)">
+        <MappingFragment StoreEntitySet="DaySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BallLevelSet">
+      <EntityTypeMapping TypeName="IsTypeOf(entity.BallLevel)">
+        <MappingFragment StoreEntitySet="BallLevelSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ballName" ColumnName="ballName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -904,6 +1083,47 @@
       <EndProperty Name="TrainingPreferences">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PlayerStatus" TypeName="entity.PlayerStatus" StoreEntitySet="PlayerJeu">
+      <EndProperty Name="Status">
+        <ScalarProperty Name="Id" ColumnName="Status_Id" />
+      </EndProperty>
+      <EndProperty Name="Player">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PaymentMethodPayment" TypeName="entity.PaymentMethodPayment" StoreEntitySet="PaymentJeu">
+      <EndProperty Name="PaymentMethod">
+        <ScalarProperty Name="Id" ColumnName="PaymentMethod_Id" />
+      </EndProperty>
+      <EndProperty Name="Payment">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DayPreferencePeriod" TypeName="entity.DayPreferencePeriod" StoreEntitySet="PreferencePeriodJeu">
+      <EndProperty Name="Day">
+        <ScalarProperty Name="Id" ColumnName="Day_Id" />
+      </EndProperty>
+      <EndProperty Name="PreferencePeriod">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DayTrainingPreferences" TypeName="entity.DayTrainingPreferences" StoreEntitySet="TrainingPreferencesSet">
+      <EndProperty Name="Day">
+        <ScalarProperty Name="Id" ColumnName="Day_Id" />
+      </EndProperty>
+      <EndProperty Name="TrainingPreferences">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PlayerBallLevel" TypeName="entity.PlayerBallLevel" StoreEntitySet="PlayerJeu">
+      <EndProperty Name="BallLevel">
+        <ScalarProperty Name="Id" ColumnName="BallLevel_Id" />
+      </EndProperty>
+      <EndProperty Name="Player">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="BallLevel_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

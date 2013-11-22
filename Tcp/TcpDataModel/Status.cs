@@ -10,13 +10,18 @@
 namespace TcpDataModel
 {
     using System;
+    using System.Collections.ObjectModel;
     
-    public enum PlayerCategory : int
+    public partial class Status
     {
-        Hobby = 0,
-        Competition = 1,
-        Disabled = 2,
-        TennisSchool = 3,
-        Training = 4
+        public Status()
+        {
+            this.Player = new ObservableCollection<Player>();
+        }
+    
+        public int Id { get; set; }
+        public string statusName { get; set; }
+    
+        public virtual ObservableCollection<Player> Player { get; set; }
     }
 }

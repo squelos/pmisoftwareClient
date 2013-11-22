@@ -37,5 +37,9 @@ namespace TcpDataModel
         public virtual DbSet<PreferencePeriod> PreferencePeriodJeu { get; set; }
         public virtual DbSet<Category> CategorySet { get; set; }
         public virtual DbSet<TrainingPreferences> TrainingPreferencesSet { get; set; }
+        public virtual DbSet<Status> StatusSet { get; set; }
+        public virtual DbSet<PaymentMethod> PaymentMethodSet { get; set; }
+        public virtual DbSet<Day> DaySet { get; set; }
+        public virtual DbSet<BallLevel> BallLevelSet { get; set; }
     }
 }

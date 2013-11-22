@@ -66,7 +66,7 @@
     <Compile Include="Court.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Days.cs">
+    <Compile Include="Day.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="entity.Context.cs">
@@ -96,12 +96,6 @@
     <Compile Include="Player.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="PlayerCategory.cs">
-      <DependentUpon>entity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PlayerStatus.cs">
-      <DependentUpon>entity.tt</DependentUpon>
-    </Compile>
     <Compile Include="PreferencePeriod.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
@@ -110,6 +104,9 @@
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Semester.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Status.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="TrainingPreferences.cs">
