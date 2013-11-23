@@ -1,11 +1,15 @@
-﻿<UserControl x:Class="TcpModernUI.Pages.seasons.creation"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:ViewModels="clr-namespace:TcpModernUI.ViewModels" x:Class="TcpModernUI.Pages.seasons.creation"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.DataContext>
+        <ViewModels:SeasonsViewModel/>
+    </UserControl.DataContext>
     <Grid Style="{StaticResource ContentRoot}" MaxWidth="500" MaxHeight="300">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -16,20 +20,20 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label Content="Nouvelle Saison"  Name="lTitle" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-        <Label Content="Première demie saison" Name="lFirstSemester" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"/>
-        <Label Content="Deuxième demie saison" Name="lSecondSemester" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold"/>
+        <Label Content="Nouvelle Saison"  x:Name="lTitle" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <Label Content="Première demie saison" x:Name="lFirstSemester" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"/>
+        <Label Content="Deuxième demie saison" x:Name="lSecondSemester" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold"/>
         <StackPanel HorizontalAlignment="Stretch" Grid.Row="2"  VerticalAlignment="Stretch" Orientation="Horizontal">
             <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center"/>
-            <DatePicker Margin="10,0,10,0" MaxHeight="30"/>
+            <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding Season.Semester[0].start}"/>
             <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center"/>
-            <DatePicker Margin="10,0,10,0" MaxHeight="30"/>
+            <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding Season.Semester[0].end}"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Stretch" Grid.Row="4"  VerticalAlignment="Stretch" Orientation="Horizontal">
             <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center"/>
-            <DatePicker Margin="10,0,10,0" MaxHeight="30"/>
+            <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding Season.Semester[1].start}"/>
             <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center"/>
-            <DatePicker Margin="10,0,10,0" MaxHeight="30"/>
+            <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding Season.Semester[1].end}"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="6" VerticalAlignment="Stretch" >
             <Button Content="Créer" Margin="10,0,10,0" MaxHeight="25"/>
