@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TcpModernUI.ViewModels
+namespace TcpModernUI.BaseClasses
 {
     public abstract class ViewModelBase : INotifyPropertyChanging, INotifyPropertyChanged
     {

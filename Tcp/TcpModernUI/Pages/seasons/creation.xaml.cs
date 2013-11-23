@@ -22,14 +22,10 @@ namespace TcpModernUI.Pages.seasons
     /// </summary>
     public partial class creation : UserControl
     {
-        private entityContainer _container = new entityContainer();
 
         public creation()
         {
             InitializeComponent();
-            _container = new entityContainer();
-            
-            
         }
     }
 }
