@@ -22,7 +22,6 @@ namespace TcpModernUI.Pages.seasons
     /// </summary>
     public partial class creation : UserControl
     {
-
         public creation()
         {
             InitializeComponent();
