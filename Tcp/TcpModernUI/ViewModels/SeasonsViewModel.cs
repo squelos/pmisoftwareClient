@@ -54,6 +54,7 @@ namespace TcpModernUI.ViewModels
             set
             {
                 _firstSemester = value;
+                
                 RaisePropertyChangedEvent("firstSemester");
             }
         }
@@ -64,6 +65,7 @@ namespace TcpModernUI.ViewModels
             set
             {
                 _secondSemester = value;
+               
                 RaisePropertyChangedEvent("secondSemester");
             }
         }
@@ -75,7 +77,6 @@ namespace TcpModernUI.ViewModels
             {
                 _seasons = value;
                 RaisePropertyChangedEvent("seasons");
-                
             }
         }
 

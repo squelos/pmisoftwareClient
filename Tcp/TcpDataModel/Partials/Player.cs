@@ -25,9 +25,10 @@ namespace TcpDataModel
             licenceNumber = license;
         }
 
-        public Player(DateTime date)
+        public Player(DateTime date, DateTime login)
         {
             birthDate = date;
+            lastLogin = login;
         }
     }
 }

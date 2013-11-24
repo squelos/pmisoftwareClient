@@ -88,9 +88,14 @@
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Partials\Badge.cs" />
+    <Compile Include="Partials\BallLevel.cs" />
+    <Compile Include="Partials\Booking.cs" />
+    <Compile Include="Partials\Payment.cs" />
+    <Compile Include="Partials\PaymentMethod.cs" />
     <Compile Include="Partials\Player.cs" />
     <Compile Include="Partials\Season.cs" />
     <Compile Include="Partials\Semester.cs" />
+    <Compile Include="Partials\Status.cs" />
     <Compile Include="Payment.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
@@ -103,6 +108,7 @@
     <Compile Include="PreferencePeriod.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Season.cs">
       <DependentUpon>entity.tt</DependentUpon>
