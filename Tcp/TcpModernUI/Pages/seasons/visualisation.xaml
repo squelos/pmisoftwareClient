@@ -4,12 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:TcpDataModel="clr-namespace:TcpDataModel;assembly=TcpDataModel" x:Class="TcpModernUI.Pages.seasons.visualisation"
+             xmlns:TcpDataModel="clr-namespace:TcpDataModel;assembly=TcpDataModel" xmlns:ViewModels="clr-namespace:TcpModernUI.ViewModels" x:Class="TcpModernUI.Pages.seasons.visualisation"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500" Loaded="UserControl_Loaded">
-    
+
+    <UserControl.DataContext>
+        <ViewModels:SeasonsViewModel/>
+    </UserControl.DataContext>
+
     <Grid Style="{StaticResource ContentRoot}">
-        <!-- TODO: set @SelectedSource -->
+        <DataGrid HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" AutoGenerateColumns="True" ItemsSource="{Binding Seasons}"/>
+
 
     </Grid>
 </UserControl>

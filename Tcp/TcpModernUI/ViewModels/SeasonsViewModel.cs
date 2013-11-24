@@ -15,22 +15,29 @@ namespace TcpModernUI.ViewModels
 {
     public class SeasonsViewModel : ViewModelBase
     {
+        #region members
         private entityContainer _container = new entityContainer();
-        //private ObservableCollection<Season> _seasons = new ObservableCollection<Season>(); 
+        private ObservableCollection<Season> _seasons = new ObservableCollection<Season>(); 
         private Season _season;
-        private Semester _firstSemester = new Semester();
-        private Semester _secondSemester = new Semester();
+        private Semester _firstSemester;
+        private Semester _secondSemester;
         private ICommand _saveCommand;
+        private ICommand _cancelCommand;
+        
+        #endregion
 
+        #region ctor
         public SeasonsViewModel()
         {
-            _season = new Season();
-            _season.Semester.Add(FirstSemester);
-            _season.Semester.Add(SecondSemester);
-            //_seasons = _container.SeasonJeu.Local;
+           InitialiseSeasons();
             this._saveCommand = new SeasonsSaveCommand(this);
+            _cancelCommand = new SeasonsCancelCommand(this);
+            
+            _seasons = _container.SeasonJeu.Local;
         }
+        #endregion
 
+        #region getters/setters
         public Season Season
         {
             get { return _season; }
@@ -61,30 +68,53 @@ namespace TcpModernUI.ViewModels
             }
         }
 
-        //public ObservableCollection<Season> Seasons
-        //{
-        //    get { return _seasons; }
-        //    set
-        //    {
-        //        _seasons = value;
-        //        RaisePropertyChangedEvent("seasons");
-        //    }
-        //}
-
-         
+        public ObservableCollection<Season> Seasons
+        {
+            get { return _seasons; }
+            set
+            {
+                _seasons = value;
+                RaisePropertyChangedEvent("seasons");
+                
+            }
+        }
 
         public ICommand SaveCommand
         {
             get { return _saveCommand; }
         }
+        public ICommand CancelCommand
+        {
+            get { return _cancelCommand; }
+        }
+        #endregion
 
+
+        #region public methods
         public void Save()
         {
             _container.SeasonJeu.Add(_season);
             _container.SemesterJeu.Add(_firstSemester);
             _container.SemesterJeu.Add(_secondSemester);
             _container.SaveChanges();
+            InitialiseSeasons();
         }
+
+        public void Cancel()
+        {
+            InitialiseSeasons();
+        }
+        #endregion
+
+        #region private methods
+        private void InitialiseSeasons()
+        {
+            FirstSemester = new Semester(DateTime.Now, DateTime.Now);
+            SecondSemester = new Semester(DateTime.Now, DateTime.Now);
+            Season = new Season(_firstSemester, _secondSemester);
+
+        }
+        #endregion
 
 
     }

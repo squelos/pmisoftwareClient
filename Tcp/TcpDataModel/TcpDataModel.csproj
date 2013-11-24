@@ -87,6 +87,10 @@
     <Compile Include="Opening.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Partials\Badge.cs" />
+    <Compile Include="Partials\Player.cs" />
+    <Compile Include="Partials\Season.cs" />
+    <Compile Include="Partials\Semester.cs" />
     <Compile Include="Payment.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
@@ -142,9 +146,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Partials\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

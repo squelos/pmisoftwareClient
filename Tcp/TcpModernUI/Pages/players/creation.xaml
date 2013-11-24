@@ -4,13 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:TcpDataModel="clr-namespace:TcpDataModel;assembly=TcpDataModel" x:Class="TcpModernUI.Pages.players.creation"
+             xmlns:TcpDataModel="clr-namespace:TcpDataModel;assembly=TcpDataModel" xmlns:ViewModels="clr-namespace:TcpModernUI.ViewModels" x:Class="TcpModernUI.Pages.players.creation"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800" Loaded="UserControl_Loaded">
-    <UserControl.Resources>
-        <CollectionViewSource x:Key="playerViewSource" d:DesignSource="{d:DesignInstance {x:Type TcpDataModel:Player}, CreateList=True}"/>
-    </UserControl.Resources>
-    <Grid Style="{StaticResource ContentRoot}" MaxWidth="1000" DataContext="{StaticResource playerViewSource}">
+             d:DesignHeight="500" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <ViewModels:PlayersViewModel/>
+    </UserControl.DataContext>
+    <Grid Style="{StaticResource ContentRoot}" MaxWidth="1000">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -41,19 +41,19 @@
         <Label Content="Telephone Mobile" HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center"/>
         <Label Content="Balle" HorizontalAlignment="Left"  Margin="15,9,0,10" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center"/>
         <Label Content="Classement" HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"/>
-        <TextBox x:Name="tbFirstName" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,6,0,6" TextWrapping="Wrap" Text="Prénom" VerticalAlignment="Center" Width="120"/>
-        <TextBox x:Name="tbLastName" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="1" TextWrapping="Wrap" Text="Nom" VerticalAlignment="Center" Width="120"/>
-        <TextBox x:Name="tbEmail" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="2" TextWrapping="Wrap" Text="Email" VerticalAlignment="Center" Width="120"/>
-        <TextBox x:Name="tbLicense" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="4" TextWrapping="Wrap" Text="License" VerticalAlignment="Center" Width="120"/>
-        <TextBox x:Name="tbStreet" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,6,0,6" Grid.Row="0" TextWrapping="Wrap" Text="Rue et numéro" VerticalAlignment="Center" Width="120"/>
-        <TextBox x:Name="tbZip" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="1" TextWrapping="Wrap" Text="Code postal" VerticalAlignment="Center" Width="120"/>
-        <TextBox x:Name="tbCity" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,6,0,6" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
-        <TextBox x:Name="tbPhone" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="3" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
-        <TextBox x:Name="tbPhone2" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,6,0,7" Grid.Row="4" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
-        <TextBox x:Name="tbRanking" Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,6,0,7" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
-        <Button Content="Créer" Grid.Column="3" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="75" Click="Button_Click"/>
-        <Button Content="Annuler" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="75" Click="Button_Click_1"/>
-        <ComboBox x:Name="cbBallLevel" Grid.Column="3" HorizontalAlignment="Left" Margin="10,6,0,7" Grid.Row="6" VerticalAlignment="Center" Width="120"/>
-        <DatePicker Grid.Column="1" HorizontalAlignment="Left" Margin="10,14,0,8" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
+        <TextBox Text="{Binding CurrentPlayer.firstName}"  Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,6,0,6" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <TextBox Text="{Binding CurrentPlayer.lastName}"  Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <TextBox Text="{Binding CurrentPlayer.email}"  Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <TextBox Text="{Binding CurrentPlayer.licenceNumber}"  Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <TextBox Text="{Binding CurrentPlayer.street}"  Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,6,0,6" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <TextBox Text="{Binding CurrentPlayer.zipCode}"  Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <TextBox Text="{Binding CurrentPlayer.city}"  Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,6,0,6" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <TextBox Text="{Binding CurrentPlayer.phone1}"  Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,7,0,6" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <TextBox Text="{Binding CurrentPlayer.phone2}"  Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,6,0,7" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <TextBox Text="{Binding CurrentPlayer.ranking}"  Grid.Column="3" HorizontalAlignment="Left" Height="22" Margin="10,6,0,7" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <Button Command="{Binding SaveCommand}" Content="Créer" Grid.Column="3" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="75" />
+        <Button Command="{Binding CancelCommand}" Content="Annuler" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="75" />
+        <ComboBox ItemsSource="{Binding BallLevels}" SelectedValue="{Binding CurrentPlayer.BallLevel}" Grid.Column="3" HorizontalAlignment="Left" Margin="10,6,0,7" Grid.Row="6" VerticalAlignment="Center" Width="120"/>
+        <DatePicker SelectedDate="{Binding CurrentPlayer.birthDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,14,0,8" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
     </Grid>
 </UserControl>
