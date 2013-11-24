@@ -25,7 +25,7 @@
         <Label Content="Deuxième demie saison" x:Name="lSecondSemester" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold"/>
         <StackPanel HorizontalAlignment="Stretch" Grid.Row="2"  VerticalAlignment="Stretch" Orientation="Horizontal">
             <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center"/>
-            <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding Season.Semester[0].start}"/>
+            <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding Season.Semester[0].start}" SelectedDateFormat="Short"/>
             <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center"/>
             <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding Season.Semester[0].end}"/>
         </StackPanel>
@@ -37,7 +37,7 @@
         </StackPanel>
         <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="6" VerticalAlignment="Stretch" >
             <Button Content="Créer" Command="{Binding SaveCommand}" Margin="10,0,10,0" MaxHeight="25"/>
-            <Button Content="Annuler" Margin="10,0,10,0" MaxHeight="25"/>
+            <Button Content="Annuler" Command="{Binding CancelCommand}"  Margin="10,0,10,0" MaxHeight="25"/>
         </StackPanel>
 
 

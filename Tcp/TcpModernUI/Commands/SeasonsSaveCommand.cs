@@ -16,10 +16,12 @@ namespace TcpModernUI.Commands
         {
             _seasonsViewModel = vm;
         }
+
         public bool CanExecute(object parameter)
         {
+            return (_seasonsViewModel.FirstSemester.start.ToString() != _seasonsViewModel.FirstSemester.end.ToString() 
+                && _seasonsViewModel.SecondSemester.start.ToString() != _seasonsViewModel.SecondSemester.end.ToString());
             
-            return true;
         }
 
         public void Execute(object parameter)

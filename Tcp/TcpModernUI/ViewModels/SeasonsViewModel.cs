@@ -18,17 +18,17 @@ namespace TcpModernUI.ViewModels
         private entityContainer _container = new entityContainer();
         //private ObservableCollection<Season> _seasons = new ObservableCollection<Season>(); 
         private Season _season;
-        private Semester _firstSemester = new Semester();
-        private Semester _secondSemester = new Semester();
+        private Semester _firstSemester;
+        private Semester _secondSemester;
         private ICommand _saveCommand;
+        private ICommand _cancelCommand;
+
 
         public SeasonsViewModel()
         {
-            _season = new Season();
-            _season.Semester.Add(FirstSemester);
-            _season.Semester.Add(SecondSemester);
-            //_seasons = _container.SeasonJeu.Local;
+           InitialiseSeasons();
             this._saveCommand = new SeasonsSaveCommand(this);
+            _cancelCommand = new SeasonsCancelCommand(this);
         }
 
         public Season Season
@@ -71,12 +71,16 @@ namespace TcpModernUI.ViewModels
         //    }
         //}
 
-         
-
         public ICommand SaveCommand
         {
             get { return _saveCommand; }
         }
+        public ICommand CancelCommand
+        {
+            get { return _cancelCommand; }
+        }
+
+
 
         public void Save()
         {
@@ -84,6 +88,21 @@ namespace TcpModernUI.ViewModels
             _container.SemesterJeu.Add(_firstSemester);
             _container.SemesterJeu.Add(_secondSemester);
             _container.SaveChanges();
+            InitialiseSeasons();
+        }
+
+        public void Cancel()
+        {
+            InitialiseSeasons();
+        }
+
+        private void InitialiseSeasons()
+        {
+            FirstSemester = new Semester(DateTime.Now, DateTime.Now);
+            SecondSemester = new Semester(DateTime.Now, DateTime.Now);
+            Season = new Season(_firstSemester, _secondSemester);
+            //_seasons = _container.SeasonJeu.Local;
+
         }
 
 
