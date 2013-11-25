@@ -21,7 +21,7 @@ namespace TcpModernUI.Commands
 
         public bool CanExecute(object parameter)
         {
-            //return true;
+            return true;
             
             return (_seasonsViewModel.FirstSemester.start.ToString() != _seasonsViewModel.FirstSemester.end.ToString()
                     && _seasonsViewModel.SecondSemester.start.ToString() != _seasonsViewModel.SecondSemester.end.ToString());

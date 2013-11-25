@@ -6,36 +6,41 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:ViewModels="clr-namespace:TcpModernUI.ViewModels" x:Class="TcpModernUI.Pages.seasons.creation"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500">
+             d:DesignHeight="400" d:DesignWidth="600">
     <UserControl.DataContext>
         <ViewModels:SeasonsViewModel/>
     </UserControl.DataContext>
-    <Grid Style="{StaticResource ContentRoot}" MaxWidth="500" MaxHeight="300">
+    <Grid Style="{StaticResource ContentRoot}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Content="Nouvelle Saison"  x:Name="lTitle" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-        <Label Content="Première demie saison" x:Name="lFirstSemester" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"/>
-        <Label Content="Deuxième demie saison" x:Name="lSecondSemester" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold"/>
-        <StackPanel HorizontalAlignment="Stretch" Grid.Row="2"  VerticalAlignment="Stretch" Orientation="Horizontal">
+        <Label Content="Nouvelle Saison"  x:Name="lTitle" HorizontalAlignment="Left" Margin="20,6,0,7" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <Label Content="Première demie saison" x:Name="lFirstSemester" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"/>
+        <Label Content="Deuxième demie saison" x:Name="lSecondSemester" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold"/>
+        <StackPanel HorizontalAlignment="Stretch" Grid.Row="2"  VerticalAlignment="Stretch" Orientation="Horizontal" Margin="0,10,0,10" >
             <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center"/>
             <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding FirstSemester.start, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
             <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center"/>
             <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding FirstSemester.end, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Stretch" Grid.Row="4"  VerticalAlignment="Stretch" Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Stretch" Grid.Row="4" Margin="0,10,0,10" VerticalAlignment="Stretch" Orientation="Horizontal">
             <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center"/>
             <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding SecondSemester.start, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center"/>
             <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding SecondSemester.end, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="6" VerticalAlignment="Stretch" >
+        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="6" VerticalAlignment="Stretch"  >
             <Button Content="Créer" Command="{Binding SaveCommand}" Margin="10,0,10,0" MaxHeight="25"/>
             <Button Content="Annuler" Command="{Binding CancelCommand}"  Margin="10,0,10,0" MaxHeight="25"/>
         </StackPanel>

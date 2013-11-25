@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TcpModernUI.Pages
+namespace TcpModernUI.Pages.courts
 {
     /// <summary>
-    /// Interaction logic for terrains.xaml
+    /// Interaction logic for courts.xaml
     /// </summary>
-    public partial class terrains : UserControl
+    public partial class courts : UserControl
     {
-        public terrains()
+        public courts()
         {
             InitializeComponent();
         }
