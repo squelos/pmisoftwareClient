@@ -8,24 +8,22 @@ using TcpModernUI.ViewModels;
 
 namespace TcpModernUI.Commands
 {
-    class PlayerSaveCommand : ICommand
+    public class BadgeSaveCommand : ICommand
     {
-        private PlayersViewModel _vm;
+        private BadgesViewModel _vm;
 
-        public PlayerSaveCommand(PlayersViewModel vm)
+        public BadgeSaveCommand(BadgesViewModel vm)
         {
             _vm = vm;
         }
-
         public bool CanExecute(object parameter)
         {
             return true;
-
         }
 
         public void Execute(object parameter)
         {
-            _vm.Save();
+           _vm.Save();
         }
 
         public event EventHandler CanExecuteChanged;

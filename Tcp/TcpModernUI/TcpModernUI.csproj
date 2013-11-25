@@ -87,6 +87,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BaseClasses\ViewModelBase.cs" />
+    <Compile Include="Commands\BadgeSaveCommand.cs" />
     <Compile Include="Commands\PlayerCancelCommand.cs" />
     <Compile Include="Commands\PlayerSaveCommand.cs" />
     <Compile Include="Commands\SeasonsCancelCommand.cs" />
