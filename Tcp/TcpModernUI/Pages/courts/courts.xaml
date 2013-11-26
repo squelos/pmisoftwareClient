@@ -8,11 +8,11 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
         <!-- TODO: set @SelectedSource -->
-        <mui:ModernTab Layout="Tab">
+        <mui:ModernTab Layout="Tab" SelectedSource="/Pages/courts/courtCreation.xaml">
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
                 <mui:Link DisplayName="Courts" />
-                <mui:Link DisplayName="Création" />
+                <mui:Link DisplayName="Création"  Source="/Pages/courts/courtCreation.xaml"/>
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

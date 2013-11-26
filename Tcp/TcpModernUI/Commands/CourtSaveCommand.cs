@@ -24,7 +24,7 @@ namespace TcpModernUI.Commands
 
         public void Execute(object parameter)
         {
-            
+            _vm.Save();
         }
 
         public event EventHandler CanExecuteChanged;
