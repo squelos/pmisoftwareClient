@@ -105,6 +105,9 @@
     <Compile Include="Commands\PlayerSaveCommand.cs" />
     <Compile Include="Commands\SeasonsCancelCommand.cs" />
     <Compile Include="Commands\SeasonsSaveCommand.cs" />
+    <Compile Include="Pages\courts\courtCreation.xaml.cs">
+      <DependentUpon>courtCreation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\courts\courts.xaml.cs">
       <DependentUpon>courts.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\badges\visualisation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\courts\courtCreation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

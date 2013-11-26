@@ -16,18 +16,23 @@ namespace TcpModernUI.ViewModels
 {
     public class BadgesViewModel : ViewModelBase
     {
+        #region members
         private entityContainer _container = new entityContainer();
         private ObservableCollection<Badge> _badges = new ObservableCollection<Badge>();
         private ICommand _saveCommand;
         private Badge _badge;
+        #endregion
 
+        #region ctor
         public BadgesViewModel()
         {
             _saveCommand = new BadgeSaveCommand(this);
-            _badges = _container.BadgeJeu.Local;
+            _badges = new ObservableCollection<Badge>(_container.BadgeJeu);
             InitialiseBadges();
         }
+        #endregion
 
+        #region getters/setters
         public Badge CurrentBadge
         {
             get { return _badge; }
@@ -52,14 +57,19 @@ namespace TcpModernUI.ViewModels
                 RaisePropertyChangedEvent("badges");
             }
         }
+        #endregion
 
+
+        #region public methods
         public void Save()
         {
             _container.BadgeJeu.Add(_badge);
             _container.SaveChanges();
             InitialiseBadges();
         }
+        #endregion
 
+        #region privates
         private void InitialiseBadges()
         {
             _badge = new Badge();
@@ -67,7 +77,6 @@ namespace TcpModernUI.ViewModels
             _badge.isMaster = false;
             CurrentBadge = _badge;
         }
-
-        
+        #endregion
     }
 }

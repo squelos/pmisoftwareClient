@@ -79,10 +79,8 @@ namespace TcpModernUI.ViewModels
         #endregion
 
         #region public methods
-
         public void Save()
         {
-            
             _container.PlayerJeu.Add(CurrentPlayer);
             _container.SaveChanges();
             InitializePlayers();
@@ -94,17 +92,13 @@ namespace TcpModernUI.ViewModels
         }
         #endregion
 
-
         #region private methods
         private void  InitializePlayers()
         {
             CurrentPlayer = new Player(DateTime.Now, DateTime.Now) ;
             CurrentPlayer.isEnabled = true;
             CurrentPlayer.passwordHash = "00000";
-            
-
         }
-
         #endregion
 
     }

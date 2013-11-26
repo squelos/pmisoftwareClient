@@ -54,7 +54,6 @@ namespace TcpModernUI.ViewModels
             set
             {
                 _firstSemester = value;
-                
                 RaisePropertyChangedEvent("firstSemester");
             }
         }
@@ -65,7 +64,6 @@ namespace TcpModernUI.ViewModels
             set
             {
                 _secondSemester = value;
-               
                 RaisePropertyChangedEvent("secondSemester");
             }
         }
@@ -90,7 +88,6 @@ namespace TcpModernUI.ViewModels
         }
         #endregion
 
-
         #region public methods
         public void Save()
         {
@@ -113,7 +110,6 @@ namespace TcpModernUI.ViewModels
             FirstSemester = new Semester(DateTime.Now, DateTime.Now);
             SecondSemester = new Semester(DateTime.Now, DateTime.Now);
             Season = new Season(_firstSemester, _secondSemester);
-
         }
         #endregion
 

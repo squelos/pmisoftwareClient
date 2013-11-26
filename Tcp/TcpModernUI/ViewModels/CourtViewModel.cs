@@ -25,7 +25,6 @@ namespace TcpModernUI.ViewModels
         public CourtViewModel()
         {
             _saveCommand = new CourtSaveCommand(this);
-            
             _courts = new ObservableCollection<Court>(_container.CourtJeu);
         }
         #endregion
@@ -41,6 +40,12 @@ namespace TcpModernUI.ViewModels
                 RaisePropertyChangedEvent("currentCourt");
             }
         }
+
+        public ObservableCollection<Court> Courts
+        {
+            get { return _courts; }
+        }
+
 
         public ICommand SaveCommand
         {
