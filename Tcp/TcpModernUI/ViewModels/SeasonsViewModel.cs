@@ -17,7 +17,7 @@ namespace TcpModernUI.ViewModels
     {
         #region members
         private entityContainer _container = new entityContainer();
-        private ObservableCollection<Season> _seasons = new ObservableCollection<Season>(); 
+        private ObservableCollection<Season> _seasons;
         private Season _season;
         private Semester _firstSemester;
         private Semester _secondSemester;
@@ -30,10 +30,10 @@ namespace TcpModernUI.ViewModels
         public SeasonsViewModel()
         {
            InitialiseSeasons();
-            this._saveCommand = new SeasonsSaveCommand(this);
+            _saveCommand = new SeasonsSaveCommand(this);
             _cancelCommand = new SeasonsCancelCommand(this);
             
-            _seasons = _container.SeasonJeu.Local;
+            _seasons = new ObservableCollection<Season>(_container.SeasonJeu);
         }
         #endregion
 

@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TcpDataModel;
 using TcpDataModel.Annotations;
+using TcpModernUI.BaseClasses;
 using TcpModernUI.Commands;
 
 namespace TcpModernUI.ViewModels
 {
-    public class BadgesViewModel : INotifyPropertyChanged
+    public class BadgesViewModel : ViewModelBase
     {
         private entityContainer _container = new entityContainer();
         private ObservableCollection<Badge> _badges = new ObservableCollection<Badge>();
@@ -33,7 +34,7 @@ namespace TcpModernUI.ViewModels
             set
             {
                 _badge = value;
-                OnPropertyChanged();
+               RaisePropertyChangedEvent("currentBadge");
             }
         }
 
@@ -48,7 +49,7 @@ namespace TcpModernUI.ViewModels
             set
             {
                 _badges = value;
-                OnPropertyChanged();
+                RaisePropertyChangedEvent("badges");
             }
         }
 
@@ -67,13 +68,6 @@ namespace TcpModernUI.ViewModels
             CurrentBadge = _badge;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
     }
 }

@@ -16,7 +16,7 @@ namespace TcpModernUI.ViewModels
         #region members
         private entityContainer _container = new entityContainer();
         private Player _player;
-        private ObservableCollection<Player> _players = new ObservableCollection<Player>();
+        private ObservableCollection<Player> _players;
         private List<BallLevel> _ballLevels;
         private List<Status> _statuses;
         private ICommand _saveCommand;
@@ -26,7 +26,7 @@ namespace TcpModernUI.ViewModels
         #region ctor
         public PlayersViewModel()
         {
-            _players = _container.PlayerJeu.Local;
+            _players = new ObservableCollection<Player>(_container.PlayerJeu);
             _ballLevels = (from a in _container.BallLevelSet select a).ToList();
             _statuses = (from a in _container.StatusSet select a).ToList(); 
             _saveCommand = new PlayerSaveCommand(this);

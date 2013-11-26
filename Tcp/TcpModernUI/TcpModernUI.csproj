@@ -100,6 +100,7 @@
     </Compile>
     <Compile Include="BaseClasses\ViewModelBase.cs" />
     <Compile Include="Commands\BadgeSaveCommand.cs" />
+    <Compile Include="Commands\CourtSaveCommand.cs" />
     <Compile Include="Commands\PlayerCancelCommand.cs" />
     <Compile Include="Commands\PlayerSaveCommand.cs" />
     <Compile Include="Commands\SeasonsCancelCommand.cs" />
@@ -108,6 +109,7 @@
       <DependentUpon>courts.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BadgesViewModel.cs" />
+    <Compile Include="ViewModels\CourtViewModel.cs" />
     <Compile Include="ViewModels\PlayersViewModel.cs" />
     <Compile Include="ViewModels\SeasonsViewModel.cs" />
     <Page Include="Assets\TcpTheme.xaml">
