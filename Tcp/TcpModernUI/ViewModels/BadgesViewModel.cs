@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -28,6 +29,18 @@ namespace TcpModernUI.ViewModels
         {
             _saveCommand = new BadgeSaveCommand(this);
             _badges = new ObservableCollection<Badge>(_container.BadgeJeu);
+            _badges.CollectionChanged += (sender, args) =>
+            {
+                if (args.Action == NotifyCollectionChangedAction.Remove)
+                {
+                    foreach (var old in args.OldItems)
+                    {
+                        _container.BadgeJeu.Remove(old as Badge);
+                    }
+                }
+                RaisePropertyChangedEvent("badges");
+                
+            };
             InitialiseBadges();
         }
         #endregion
@@ -63,6 +76,7 @@ namespace TcpModernUI.ViewModels
         #region public methods
         public void Save()
         {
+            _badges.Add(_badge);
             _container.BadgeJeu.Add(_badge);
             _container.SaveChanges();
             InitialiseBadges();

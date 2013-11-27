@@ -150,10 +150,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\badges\visualisation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\courts\courtCreation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,9 +211,6 @@
     </Compile>
     <Compile Include="Pages\badges\creation.xaml.cs">
       <DependentUpon>creation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\badges\visualisation.xaml.cs">
-      <DependentUpon>visualisation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\players\creation.xaml.cs">
       <DependentUpon>creation.xaml</DependentUpon>
@@ -283,7 +276,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\TcpDataModel.Season.datasource" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TcpDataModel\TcpDataModel.csproj">
@@ -291,7 +283,9 @@
       <Name>TcpDataModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
