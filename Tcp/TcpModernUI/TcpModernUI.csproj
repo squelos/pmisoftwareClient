@@ -111,6 +111,9 @@
     <Compile Include="Pages\courts\courts.xaml.cs">
       <DependentUpon>courts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\seasons\SplitPage1.xaml.cs">
+      <DependentUpon>SplitPage1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BadgesViewModel.cs" />
     <Compile Include="ViewModels\CourtViewModel.cs" />
     <Compile Include="ViewModels\PlayersViewModel.cs" />
@@ -198,7 +201,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\seasons\visualisation.xaml">
+    <Page Include="Pages\seasons\SplitPage1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -241,9 +244,6 @@
     </Compile>
     <Compile Include="Pages\seasons\seasons.xaml.cs">
       <DependentUpon>seasons.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\seasons\visualisation.xaml.cs">
-      <DependentUpon>visualisation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>

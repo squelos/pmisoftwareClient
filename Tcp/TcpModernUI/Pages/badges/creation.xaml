@@ -7,7 +7,6 @@
              xmlns:ViewModels="clr-namespace:TcpModernUI.ViewModels" x:Class="TcpModernUI.Pages.badges.creation"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
-    
     <UserControl.DataContext>
         <ViewModels:BadgesViewModel/>
     </UserControl.DataContext>
@@ -20,7 +19,7 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Margin="{StaticResource SplitLeft}">
-            <DataGrid x:Name="badgesDataGrid" AutoGenerateColumns="False" CanUserDeleteRows="True" EnableRowVirtualization="True" Height="Auto" ItemsSource="{Binding Badges}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="Auto">
+            <DataGrid x:Name="badgesDataGrid" AutoGenerateColumns="False" CanUserDeleteRows="True" EnableRowVirtualization="True" Height="Auto"  ItemsSource="{Binding Badges}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="Auto">
                 <DataGrid.Columns>
                     <DataGridTextColumn  IsReadOnly="True" x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
                     <DataGridCheckBoxColumn x:Name="isEnabledColumn" Binding="{Binding isEnabled}" Header="Activé" Width="SizeToHeader"/>
