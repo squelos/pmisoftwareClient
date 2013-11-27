@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using TcpDataModel;
-using TcpDataModel.Annotations;
 using TcpModernUI.BaseClasses;
-using TcpModernUI.Commands;
+using RelayCommand = FirstFloor.ModernUI.Presentation.RelayCommand;
 
 namespace TcpModernUI.ViewModels
 {
@@ -20,17 +12,20 @@ namespace TcpModernUI.ViewModels
         #region members
         private entityContainer _container = new entityContainer();
         private ObservableCollection<Badge> _badges = new ObservableCollection<Badge>();
-        private ICommand _saveCommand;
-        private ICommand _updateCommand;
+        private RelayCommand _saveCommand;
+        private RelayCommand _updateCommand;
+        private RelayCommand _cancelCommand;
         private Badge _badge;
         #endregion
 
         #region ctor
         public BadgesViewModel()
         {
-            _saveCommand = new BadgeSaveCommand(this);
-            _updateCommand = new BadgesUpdateCommand(this);
+            _saveCommand = new RelayCommand(o => Save());
+            _updateCommand = new RelayCommand(o => Update());
+            _cancelCommand = new RelayCommand(o => Cancel());
             _badges = new ObservableCollection<Badge>(_container.BadgeJeu);
+
             _badges.CollectionChanged += (sender, args) =>
             {
                 if (args.Action == NotifyCollectionChangedAction.Remove)
@@ -68,6 +63,11 @@ namespace TcpModernUI.ViewModels
             get { return _updateCommand; }
         }
 
+        public RelayCommand CancelCommand
+        {
+            get { return _cancelCommand; }
+        }
+
         public ObservableCollection<Badge> Badges
         {
             get { return _badges; }
@@ -92,6 +92,13 @@ namespace TcpModernUI.ViewModels
         {
             _container.SaveChanges();
             InitialiseBadges();
+        }
+
+        public void Cancel()
+        {
+            _container = new entityContainer();
+            CurrentBadge = new Badge();
+            RaisePropertyChangedEvent("container");
         }
         #endregion
 

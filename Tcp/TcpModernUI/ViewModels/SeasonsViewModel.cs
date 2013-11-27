@@ -9,7 +9,7 @@ using System.Windows.Input;
 using FirstFloor.ModernUI.Presentation;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
-using TcpModernUI.Commands;
+
 
 namespace TcpModernUI.ViewModels
 {
@@ -21,8 +21,8 @@ namespace TcpModernUI.ViewModels
         private Season _season;
         private Semester _firstSemester;
         private Semester _secondSemester;
-        private ICommand _saveCommand;
-        private ICommand _cancelCommand;
+        private RelayCommand _saveCommand;
+        private RelayCommand _cancelCommand;
         
         #endregion
 
@@ -30,8 +30,8 @@ namespace TcpModernUI.ViewModels
         public SeasonsViewModel()
         {
            InitialiseSeasons();
-            _saveCommand = new SeasonsSaveCommand(this);
-            _cancelCommand = new SeasonsCancelCommand(this);
+            _saveCommand = new RelayCommand(o => Save());
+            _cancelCommand = new RelayCommand(o => Cancel());
             
             _seasons = new ObservableCollection<Season>(_container.SeasonJeu);
         }

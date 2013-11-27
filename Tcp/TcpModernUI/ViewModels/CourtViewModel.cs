@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
-using TcpModernUI.Commands;
+
 
 namespace TcpModernUI.ViewModels
 {
@@ -18,13 +13,13 @@ namespace TcpModernUI.ViewModels
         private entityContainer _container = new entityContainer();
         private ObservableCollection<Court> _courts = new ObservableCollection<Court>();
         private Court _currentCourt;
-        private ICommand _saveCommand;
+        private RelayCommand _saveCommand;
         #endregion
 
         #region ctor
         public CourtViewModel()
         {
-            _saveCommand = new CourtSaveCommand(this);
+            _saveCommand = new RelayCommand(() => Save());
             _courts = new ObservableCollection<Court>(_container.CourtJeu);
             Initialise();
         }

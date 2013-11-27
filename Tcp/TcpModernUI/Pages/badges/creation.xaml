@@ -34,8 +34,8 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Grid.Row="1" FlowDirection="RightToLeft" Orientation="Horizontal">
-                    <Button MaxHeight="25" Margin="10,0,10,0" Content="Créer" Command="{Binding SaveCommand}"/>
-                    <Button MaxHeight="25" Content="Annuler"/>
+                    <Button MaxHeight="25" Margin="10,0,10,0" Content="Créer" Command="{Binding UpdateCommand}"/>
+                    <Button MaxHeight="25" Content="Annuler" Command="{Binding CancelCommand}"/>
                 </StackPanel>
                 
             </Grid>
@@ -60,7 +60,7 @@
                 <CheckBox IsChecked="{Binding CurrentBadge.isMaster}" Content="Badge Maître" Grid.Column="0" HorizontalAlignment="Left" Margin="10,10,10,9" Grid.Row="1" Width="Auto" Height="Auto"/>
                 <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Column="1" HorizontalAlignment="Stretch"  Grid.Row="2"  VerticalAlignment="Stretch" Margin="0,10,0,10" >
                     <Button MaxHeight="25" Margin="10,0,10,0" Content="Créer" Command="{Binding SaveCommand}"/>
-                    <Button MaxHeight="25" Content="Annuler"/>
+                    <Button MaxHeight="25" Content="Annuler" Command="{Binding CancelCommand}"/>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

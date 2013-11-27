@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
-using TcpModernUI.Commands;
+
 
 namespace TcpModernUI.ViewModels
 {
@@ -19,8 +18,8 @@ namespace TcpModernUI.ViewModels
         private ObservableCollection<Player> _players;
         private List<BallLevel> _ballLevels;
         private List<Status> _statuses;
-        private ICommand _saveCommand;
-        private ICommand _cancelCommand;
+        private RelayCommand _saveCommand;
+        private RelayCommand _cancelCommand;
         #endregion
 
         #region ctor
@@ -29,8 +28,8 @@ namespace TcpModernUI.ViewModels
             _players = new ObservableCollection<Player>(_container.PlayerJeu);
             _ballLevels = (from a in _container.BallLevelSet select a).ToList();
             _statuses = (from a in _container.StatusSet select a).ToList(); 
-            _saveCommand = new PlayerSaveCommand(this);
-            _cancelCommand = new PlayerCancelCommand(this);
+            _saveCommand = new RelayCommand(Save);
+            _cancelCommand = new RelayCommand(Cancel);
             InitializePlayers();
         }
         #endregion
