@@ -19,15 +19,26 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Margin="{StaticResource SplitLeft}">
-            <DataGrid x:Name="badgesDataGrid" AutoGenerateColumns="False" CanUserDeleteRows="True" EnableRowVirtualization="True" Height="Auto"  ItemsSource="{Binding Badges}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="Auto">
-                <DataGrid.Columns>
-                    <DataGridTextColumn  IsReadOnly="True" x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
-                    <DataGridCheckBoxColumn x:Name="isEnabledColumn" Binding="{Binding isEnabled}" Header="Activé" Width="SizeToHeader"/>
-                    <DataGridCheckBoxColumn x:Name="isMasterColumn" Binding="{Binding isMaster}" Header="Maître" Width="SizeToHeader"/>
-                    <DataGridTextColumn x:Name="numberColumn" Binding="{Binding number}" Header="Numéro" Width="SizeToHeader"/>
-                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Player.firstName}" Header="Joueur" Width="SizeToHeader"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <DataGrid Grid.Row="0" x:Name="badgesDataGrid" AutoGenerateColumns="False" CanUserDeleteRows="True" EnableRowVirtualization="True" Height="Auto"  ItemsSource="{Binding Badges}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="Auto">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn  IsReadOnly="True" x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
+                        <DataGridCheckBoxColumn x:Name="isEnabledColumn" Binding="{Binding isEnabled}" Header="Activé" Width="SizeToHeader"/>
+                        <DataGridCheckBoxColumn x:Name="isMasterColumn" Binding="{Binding isMaster}" Header="Maître" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="numberColumn" Binding="{Binding number}" Header="Numéro" Width="SizeToHeader"/>
+                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Player.firstName}" Header="Joueur" Width="SizeToHeader"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Grid.Row="1" FlowDirection="RightToLeft" Orientation="Horizontal">
+                    <Button MaxHeight="25" Margin="10,0,10,0" Content="Créer" Command="{Binding SaveCommand}"/>
+                    <Button MaxHeight="25" Content="Annuler"/>
+                </StackPanel>
+                
+            </Grid>
 
         </ScrollViewer>
         <GridSplitter Grid.Column="1" />

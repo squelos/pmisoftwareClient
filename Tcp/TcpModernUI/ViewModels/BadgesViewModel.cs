@@ -21,6 +21,7 @@ namespace TcpModernUI.ViewModels
         private entityContainer _container = new entityContainer();
         private ObservableCollection<Badge> _badges = new ObservableCollection<Badge>();
         private ICommand _saveCommand;
+        private ICommand _updateCommand;
         private Badge _badge;
         #endregion
 
@@ -28,6 +29,7 @@ namespace TcpModernUI.ViewModels
         public BadgesViewModel()
         {
             _saveCommand = new BadgeSaveCommand(this);
+            _updateCommand = new BadgesUpdateCommand(this);
             _badges = new ObservableCollection<Badge>(_container.BadgeJeu);
             _badges.CollectionChanged += (sender, args) =>
             {
@@ -61,6 +63,11 @@ namespace TcpModernUI.ViewModels
             get { return _saveCommand; }
         }
 
+        public ICommand UpdateCommand
+        {
+            get { return _updateCommand; }
+        }
+
         public ObservableCollection<Badge> Badges
         {
             get { return _badges; }
@@ -78,6 +85,11 @@ namespace TcpModernUI.ViewModels
         {
             _badges.Add(_badge);
             _container.BadgeJeu.Add(_badge);
+            Update();
+        }
+
+        public void Update()
+        {
             _container.SaveChanges();
             InitialiseBadges();
         }
@@ -92,5 +104,7 @@ namespace TcpModernUI.ViewModels
             CurrentBadge = _badge;
         }
         #endregion
+
+        
     }
 }
