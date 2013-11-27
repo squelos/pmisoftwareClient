@@ -13,7 +13,7 @@
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="2"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ScrollViewer Margin="{StaticResource SplitLeft}">
