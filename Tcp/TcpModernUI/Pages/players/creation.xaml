@@ -18,7 +18,30 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ScrollViewer Margin="{StaticResource SplitLeft}">
-
+            <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0"></StackPanel>
+                <DataGrid AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" Grid.Row="1"
+                          ItemsSource="{Binding Players}" RowDetailsVisibilityMode="VisibleWhenSelected">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding lastName}" Header="Nom"/>
+                        <DataGridTextColumn Binding="{Binding firstName}" Header="Prénom"/>
+                        <DataGridTextColumn Binding="{Binding email}" Header="Email"/>
+                        <DataGridTextColumn Binding="{Binding phone1}" Header="Telephone"/>
+                        <DataGridTextColumn Binding="{Binding phone2}" Header="Tel. portable"/>
+                        <DataGridTextColumn Binding="{Binding licenceNumber}" Header="License"/>
+                        <DataGridComboBoxColumn ItemsSource="{Binding Statuses}" SelectedValueBinding="{Binding Status}" Header="Status"/>
+                        <DataGridCheckBoxColumn Binding="{Binding isEnabled}" Header="Etat"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Grid.Row="2">
+                    
+                </StackPanel>
+            </Grid>
         </ScrollViewer>
         <GridSplitter Grid.Column="1" />
         <ScrollViewer Grid.Column="2 " Margin="{StaticResource SplitRight}">

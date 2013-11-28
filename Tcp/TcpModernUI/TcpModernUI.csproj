@@ -181,10 +181,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\players\visualisation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,10 +190,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\reservations\booking.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\reservations\visualisation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,9 +224,6 @@
     <Compile Include="Pages\players\players.xaml.cs">
       <DependentUpon>players.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\players\visualisation.xaml.cs">
-      <DependentUpon>visualisation.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -243,9 +232,6 @@
     </Compile>
     <Compile Include="Pages\reservations\booking.xaml.cs">
       <DependentUpon>booking.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\reservations\visualisation.xaml.cs">
-      <DependentUpon>visualisation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\seasons\creation.xaml.cs">
       <DependentUpon>creation.xaml</DependentUpon>

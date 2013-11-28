@@ -18,9 +18,13 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Margin="{StaticResource SplitLeft}">
-
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition ></RowDefinition>
+            </Grid.RowDefinitions>
+        </Grid>
         </ScrollViewer>
-        <GridSplitter Grid.Column="1" />
+        <GridSplitter Grid.Column="1"/>
         <ScrollViewer Grid.Column="2 " Margin="{StaticResource SplitRight}">
             <Grid >
                 <Grid.RowDefinitions>
