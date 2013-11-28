@@ -35,8 +35,8 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Grid.Row="1" FlowDirection="RightToLeft" Orientation="Horizontal">
-                    <Button MaxHeight="25" Margin="10,0,10,0" Content="Enregistrer" Command="{Binding UpdateCommand}"/>
-                    <Button MaxHeight="25" Content="Annuler" Command="{Binding CancelCommand}"/>
+                    <Button  Margin="10,0,10,0" Content="Enregistrer" Command="{Binding UpdateCommand}"/>
+                    <Button  Content="Annuler" Command="{Binding CancelCommand}"/>
                 </StackPanel>
                 
             </Grid>

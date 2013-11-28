@@ -8,11 +8,10 @@
              d:DesignHeight="300" d:DesignWidth="500">
     <Grid Style="{StaticResource ContentRoot}">
         <!-- TODO: set @SelectedSource -->
-        <mui:ModernTab Layout="Tab" SelectedSource="/Pages/players/visualisation.xaml">
+        <mui:ModernTab Layout="Tab" SelectedSource="/Pages/players/creationPlayers.xaml">
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
-                <mui:Link DisplayName="Adhérents" Source="/Pages/players/visualisation.xaml"/>
-                <mui:Link DisplayName="Création" Source="/Pages/players/creation.xaml"/>
+                <mui:Link DisplayName="Adhérents" Source="/Pages/players/creationPlayers.xaml"/>
                 <mui:Link DisplayName="Impayés" Source="/Pages/players/overdue.xaml"/>
             </mui:ModernTab.Links>
         </mui:ModernTab>

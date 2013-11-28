@@ -157,7 +157,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\badges\creation.xaml">
+    <Page Include="Pages\badges\creationBadges.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,7 +169,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\players\creation.xaml">
+    <Page Include="Pages\players\creationPlayers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,7 +193,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\seasons\creation.xaml">
+    <Page Include="Pages\seasons\creationSeasons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -212,11 +212,11 @@
     <Compile Include="Pages\badges\badges.xaml.cs">
       <DependentUpon>badges.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\badges\creation.xaml.cs">
-      <DependentUpon>creation.xaml</DependentUpon>
+    <Compile Include="Pages\badges\creationBadges.xaml.cs">
+      <DependentUpon>creationBadges.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\players\creation.xaml.cs">
-      <DependentUpon>creation.xaml</DependentUpon>
+    <Compile Include="Pages\players\creationPlayers.xaml.cs">
+      <DependentUpon>creationPlayers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\players\overdue.xaml.cs">
       <DependentUpon>overdue.xaml</DependentUpon>
@@ -233,8 +233,8 @@
     <Compile Include="Pages\reservations\booking.xaml.cs">
       <DependentUpon>booking.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\seasons\creation.xaml.cs">
-      <DependentUpon>creation.xaml</DependentUpon>
+    <Compile Include="Pages\seasons\creationSeasons.xaml.cs">
+      <DependentUpon>creationSeasons.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\seasons\seasons.xaml.cs">
       <DependentUpon>seasons.xaml</DependentUpon>
