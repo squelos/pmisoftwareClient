@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
@@ -20,16 +21,31 @@ namespace TcpModernUI.ViewModels
         private List<Status> _statuses;
         private RelayCommand _saveCommand;
         private RelayCommand _cancelCommand;
+        private RelayCommand _updateCommand;
         #endregion
 
         #region ctor
         public PlayersViewModel()
         {
             _players = new ObservableCollection<Player>(_container.PlayerJeu);
+
+            _players.CollectionChanged += (sender, args) =>
+            {
+                if (args.Action == NotifyCollectionChangedAction.Remove)
+                {
+                    foreach (var old in args.OldItems)
+                    {
+                        _container.PlayerJeu.Remove(old as Player);
+                    }
+                }
+                RaisePropertyChangedEvent("players");
+
+            };
             _ballLevels = (from a in _container.BallLevelSet select a).ToList();
             _statuses = (from a in _container.StatusSet select a).ToList(); 
             _saveCommand = new RelayCommand(Save);
             _cancelCommand = new RelayCommand(Cancel);
+            _updateCommand = new RelayCommand(Update);
             InitializePlayers();
         }
         #endregion
@@ -75,6 +91,11 @@ namespace TcpModernUI.ViewModels
         {
             get { return _cancelCommand; }
         }
+
+        public ICommand UpdateCommand
+        {
+            get { return _updateCommand; }
+        }
         #endregion
 
         #region public methods
@@ -87,7 +108,14 @@ namespace TcpModernUI.ViewModels
 
         public void Cancel()
         {
-            
+            _container = new entityContainer();
+            InitializePlayers();
+            RaisePropertyChangedEvent("container");
+        }
+
+        public void Update()
+        {
+            _container.SaveChanges();
         }
         #endregion
 

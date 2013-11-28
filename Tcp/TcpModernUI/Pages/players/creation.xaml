@@ -25,7 +25,7 @@
                   <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0"></StackPanel>
-                <DataGrid AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" Grid.Row="1"
+                <DataGrid AutoGenerateColumns="False"  CanUserDeleteRows="True" CanUserAddRows="False" Grid.Row="1"
                           ItemsSource="{Binding Players}" RowDetailsVisibilityMode="VisibleWhenSelected">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding lastName}" Header="Nom"/>
@@ -34,12 +34,13 @@
                         <DataGridTextColumn Binding="{Binding phone1}" Header="Telephone"/>
                         <DataGridTextColumn Binding="{Binding phone2}" Header="Tel. portable"/>
                         <DataGridTextColumn Binding="{Binding licenceNumber}" Header="License"/>
-                        <DataGridComboBoxColumn ItemsSource="{Binding Statuses}" SelectedValueBinding="{Binding Status}" Header="Status"/>
+                        <DataGridTextColumn  IsReadOnly="True" Binding="{Binding Status}" Header="Status"/>
                         <DataGridCheckBoxColumn Binding="{Binding isEnabled}" Header="Etat"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <StackPanel Grid.Row="2">
-                    
+                <StackPanel Grid.Row="2" Orientation="Horizontal" FlowDirection="RightToLeft">
+                    <Button Command="{Binding CancelCommand}" Content="Annuler" HorizontalAlignment="Center" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" />
+                    <Button Command="{Binding UpdateCommand}" Content="Enregistrer" HorizontalAlignment="Center" Margin="10,10,10,10"  VerticalAlignment="Center" Width="Auto" />
                 </StackPanel>
             </Grid>
         </ScrollViewer>

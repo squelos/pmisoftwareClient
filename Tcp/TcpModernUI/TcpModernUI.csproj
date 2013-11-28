@@ -270,6 +270,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TcpModernUI.ViewModels.PlayersViewModel.datasource" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TcpDataModel\TcpDataModel.csproj">
@@ -277,9 +278,7 @@
       <Name>TcpDataModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
