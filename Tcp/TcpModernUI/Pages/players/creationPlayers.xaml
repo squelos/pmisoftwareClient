@@ -10,6 +10,18 @@
              d:DesignHeight="500" d:DesignWidth="1109.184">
     <UserControl.Resources>
         <Converters:BoolInverterConverter x:Key="BoolInverterConverter"/>
+        <Storyboard x:Key="OnCollapsed1">
+        	<PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="scrollViewer">
+        		<EasingPointKeyFrame KeyTime="0" Value="0.5,0.5"/>
+        	</PointAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="scrollViewer">
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="-339">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<CircleEase EasingMode="EaseIn"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
     <UserControl.DataContext>
         <ViewModels:PlayersViewModel/>
@@ -50,7 +62,15 @@
         <GridSplitter Grid.Column="1" />
         <StackPanel Grid.Column="2">
             <Expander x:Name="expanderNew" Header="Nouveau" Grid.Column="2" IsExpanded="True">
-                <ScrollViewer>
+                <ScrollViewer x:Name="scrollViewer">
+                	<ScrollViewer.RenderTransform>
+                		<TransformGroup>
+                			<ScaleTransform/>
+                			<SkewTransform/>
+                			<RotateTransform/>
+                			<TranslateTransform/>
+                		</TransformGroup>
+                	</ScrollViewer.RenderTransform>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
