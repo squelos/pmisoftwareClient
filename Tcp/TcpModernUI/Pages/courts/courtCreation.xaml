@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:ViewModels="clr-namespace:TcpModernUI.ViewModels" x:Class="TcpModernUI.Pages.courts.courtCreation"
+             xmlns:ViewModels="clr-namespace:TcpModernUI.ViewModel" x:Class="TcpModernUI.Pages.courts.courtCreation"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="800">
     <UserControl.DataContext>
@@ -18,11 +18,13 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Margin="{StaticResource SplitLeft}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition ></RowDefinition>
-            </Grid.RowDefinitions>
-        </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+            </Grid>
         </ScrollViewer>
         <GridSplitter Grid.Column="1"/>
         <ScrollViewer Grid.Column="2 " Margin="{StaticResource SplitRight}">
@@ -47,7 +49,7 @@
             </Grid>
         </ScrollViewer>
     </Grid>
-    
-    
-    
+
+
+
 </UserControl>

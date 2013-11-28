@@ -11,7 +11,7 @@ using TcpDataModel;
 using TcpModernUI.BaseClasses;
 
 
-namespace TcpModernUI.ViewModels
+namespace TcpModernUI.ViewModel
 {
     public class SeasonsViewModel : ViewModelBase
     {
@@ -23,6 +23,7 @@ namespace TcpModernUI.ViewModels
         private Semester _secondSemester;
         private RelayCommand _saveCommand;
         private RelayCommand _cancelCommand;
+        private RelayCommand _updateCommand;
         
         #endregion
 
@@ -32,6 +33,7 @@ namespace TcpModernUI.ViewModels
            InitialiseSeasons();
             _saveCommand = new RelayCommand(o => Save());
             _cancelCommand = new RelayCommand(o => Cancel());
+            _updateCommand = new RelayCommand(o => Update());
             
             _seasons = new ObservableCollection<Season>(_container.SeasonJeu);
         }
@@ -86,6 +88,11 @@ namespace TcpModernUI.ViewModels
         {
             get { return _cancelCommand; }
         }
+
+        public ICommand UpdateCommand
+        {
+            get { return _updateCommand; }
+        }
         #endregion
 
         #region public methods
@@ -100,7 +107,14 @@ namespace TcpModernUI.ViewModels
 
         public void Cancel()
         {
+            _container = new entityContainer();
             InitialiseSeasons();
+            RaisePropertyChangedEvent("container");
+        }
+
+        public void Update()
+        {
+            _container.SaveChanges();
         }
         #endregion
 

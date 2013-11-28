@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:ViewModels="clr-namespace:TcpModernUI.ViewModels" x:Class="TcpModernUI.Pages.badges.creation"
+             xmlns:ViewModels="clr-namespace:TcpModernUI.ViewModel" x:Class="TcpModernUI.Pages.badges.creation"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.DataContext>

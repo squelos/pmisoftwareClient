@@ -4,18 +4,19 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
+using FirstFloor.ModernUI.Presentation;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
 
 
-namespace TcpModernUI.ViewModels
+namespace TcpModernUI.ViewModel
 {
     public class PlayersViewModel : ViewModelBase
     {
         #region members
         private entityContainer _container = new entityContainer();
         private Player _player;
+        private Player _selectedPlayer;
         private ObservableCollection<Player> _players;
         private List<BallLevel> _ballLevels;
         private List<Status> _statuses;
@@ -43,14 +44,24 @@ namespace TcpModernUI.ViewModels
             };
             _ballLevels = (from a in _container.BallLevelSet select a).ToList();
             _statuses = (from a in _container.StatusSet select a).ToList(); 
-            _saveCommand = new RelayCommand(Save);
-            _cancelCommand = new RelayCommand(Cancel);
-            _updateCommand = new RelayCommand(Update);
+            _saveCommand = new RelayCommand(o => Save());
+            _cancelCommand = new RelayCommand(o => Cancel());
+            _updateCommand = new RelayCommand(o=> Update());
             InitializePlayers();
         }
         #endregion
 
         #region getters/setters
+
+        public Player SelectedPlayer
+        {
+            get { return _selectedPlayer; }
+            set
+            {
+                _selectedPlayer = value;
+                RaisePropertyChangedEvent("selectedPlayer");
+            }
+        }
 
         public Player CurrentPlayer
         {

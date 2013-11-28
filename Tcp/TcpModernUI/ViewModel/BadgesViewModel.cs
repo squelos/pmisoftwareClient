@@ -5,7 +5,7 @@ using TcpDataModel;
 using TcpModernUI.BaseClasses;
 using RelayCommand = FirstFloor.ModernUI.Presentation.RelayCommand;
 
-namespace TcpModernUI.ViewModels
+namespace TcpModernUI.ViewModel
 {
     public class BadgesViewModel : ViewModelBase
     {
@@ -85,13 +85,14 @@ namespace TcpModernUI.ViewModels
         {
             _badges.Add(_badge);
             _container.BadgeJeu.Add(_badge);
+            InitialiseBadges();
             Update();
         }
 
         public void Update()
         {
             _container.SaveChanges();
-            InitialiseBadges();
+            //InitialiseBadges();
         }
 
         public void Cancel()

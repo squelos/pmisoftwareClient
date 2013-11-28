@@ -8,15 +8,29 @@
     </ResourceDictionary.MergedDictionaries>
 
     <!-- specify the accent color (optional) -->
-    <Color x:Key="AccentColor">#fa6800</Color>
+    <Color x:Key="AccentColor">#E96D15</Color>
 
     <!-- custom theme resources-->
     <Rectangle x:Key="WindowBackgroundContent" x:Shared="false">
         <Rectangle.Fill>
-            <LinearGradientBrush EndPoint="0,1" Opacity=".2">
+            <LinearGradientBrush EndPoint="0,1" Opacity=".15">
                 <GradientStop Offset="0" Color="Transparent" />
                 <GradientStop Offset="1" Color="{DynamicResource AccentColor}" />
             </LinearGradientBrush>
         </Rectangle.Fill>
     </Rectangle>
+    <SolidColorBrush x:Key="ScrollBarBackground" Color="#00FFFFFF"/>
+    <SolidColorBrush x:Key="ScrollBarThumbBackground" Color="White"/>
+    <SolidColorBrush x:Key="ScrollBarThumbBackgroundDragging" Color="#FFCCCCCC"/>
+    <SolidColorBrush x:Key="ScrollBarThumbBackgroundHover" Color="#FFDDDDDD"/>
+    <SolidColorBrush x:Key="ScrollBarThumbBorder" Color="#FFCCCCCC"/>
+    <SolidColorBrush x:Key="ScrollBarThumbForeground" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ScrollBarThumbForegroundDragging" Color="#00FFFFFF"/>
+    <SolidColorBrush x:Key="ScrollBarThumbForegroundHover" Color="#00FFFFFF"/>
+
+
+    <!--<SolidColorBrush x:Key="ScrollBarThumbForegroundHover" Color="#00FFFFFF"/>-->
+    <SolidColorBrush x:Key="DataGridGridLines" Color="#00E69D69"/>
+    
+    
 </ResourceDictionary>
