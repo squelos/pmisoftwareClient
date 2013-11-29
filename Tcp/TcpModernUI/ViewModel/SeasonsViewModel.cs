@@ -30,6 +30,7 @@ namespace TcpModernUI.ViewModel
             _saveCommand = new RelayCommand(Save);
             _cancelCommand = new RelayCommand(Cancel);
             _updateCommand = new RelayCommand(Update);
+            _seasons = new ObservableCollection<Season>(_container.SeasonJeu);
 
             _seasons.CollectionChanged += (sender, args) =>
             {

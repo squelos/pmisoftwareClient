@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow xmlns:players="clr-namespace:TcpModernUI.Pages.players"  xmlns:badges="clr-namespace:TcpModernUI.Pages.badges"  x:Class="TcpModernUI.MainWindow"
+﻿<Controls:MetroWindow xmlns:seasons="clr-namespace:TcpModernUI.Pages.seasons"  xmlns:Pages="clr-namespace:TcpModernUI.Pages"  xmlns:courts="clr-namespace:TcpModernUI.Pages.courts"  xmlns:players="clr-namespace:TcpModernUI.Pages.players"  xmlns:badges="clr-namespace:TcpModernUI.Pages.badges"  x:Class="TcpModernUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,7 +12,7 @@
         </TabItem>
         <TabItem Header="Adhérents">
             <Grid>
-                <players:creation />
+                <players:creation/>
             </Grid>
         </TabItem>
         <TabItem Header="Réservations">
@@ -22,14 +22,18 @@
         </TabItem>
         <TabItem Header="Terrains">
             <Grid>
-                
+                <courts:court />
             </Grid>
         </TabItem>
         <TabItem Header="Badges">
-            
+            <Grid>
+                <badges:creation />  
+            </Grid>
         </TabItem>
         <TabItem Header="Saisons">
-            <Grid></Grid>
+            <Grid>
+                <seasons:creation />
+            </Grid>
         </TabItem>
     </Controls:MetroAnimatedSingleRowTabControl>
 
