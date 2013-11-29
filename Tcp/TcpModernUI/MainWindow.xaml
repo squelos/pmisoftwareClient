@@ -1,4 +1,5 @@
-﻿<Controls:MetroWindow xmlns:seasons="clr-namespace:TcpModernUI.Pages.seasons"  xmlns:Pages="clr-namespace:TcpModernUI.Pages"  xmlns:courts="clr-namespace:TcpModernUI.Pages.courts"  xmlns:players="clr-namespace:TcpModernUI.Pages.players"  xmlns:badges="clr-namespace:TcpModernUI.Pages.badges"  x:Class="TcpModernUI.MainWindow"
+﻿<Controls:MetroWindow xmlns:seasons="clr-namespace:TcpModernUI.Pages.seasons"  
+        xmlns:Pages="clr-namespace:TcpModernUI.Pages"  xmlns:courts="clr-namespace:TcpModernUI.Pages.courts"  xmlns:players="clr-namespace:TcpModernUI.Pages.players"  xmlns:badges="clr-namespace:TcpModernUI.Pages.badges"  x:Class="TcpModernUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

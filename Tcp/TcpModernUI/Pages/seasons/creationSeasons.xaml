@@ -51,7 +51,7 @@
                     <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding SecondSemester.end, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="6" VerticalAlignment="Stretch"  >
-                    <Button Content="Créer" Command="{Binding SaveCommand}" Margin="10,0,10,0" MaxHeight="25"/>
+                    <Button Content="Créer" Style="{DynamicResource MetroFlatButton}" Command="{Binding SaveCommand}" Margin="10,0,10,0" MaxHeight="25"/>
                     <Button Content="Annuler" Command="{Binding CancelCommand}"  Margin="10,0,10,0" MaxHeight="25"/>
                 </StackPanel>
 
