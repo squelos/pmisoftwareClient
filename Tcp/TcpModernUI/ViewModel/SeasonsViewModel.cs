@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -34,6 +35,19 @@ namespace TcpModernUI.ViewModel
             _saveCommand = new RelayCommand(o => Save());
             _cancelCommand = new RelayCommand(o => Cancel());
             _updateCommand = new RelayCommand(o => Update());
+
+            _seasons.CollectionChanged += (sender, args) =>
+            {
+                if (args.Action == NotifyCollectionChangedAction.Remove)
+                {
+                    foreach (var old in args.OldItems)
+                    {
+                        _container.SeasonJeu.Remove(old as Season);
+                    }
+                }
+                RaisePropertyChangedEvent("seasons");
+
+            };
             
             _seasons = new ObservableCollection<Season>(_container.SeasonJeu);
         }

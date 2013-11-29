@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows.Input;
 using FirstFloor.ModernUI.Presentation;
 using TcpDataModel;
@@ -24,6 +25,19 @@ namespace TcpModernUI.ViewModel
             _saveCommand = new RelayCommand(o => Save());
             _cancelCommand = new RelayCommand(o => Cancel());
             _updateCommand = new RelayCommand(o=>Update());
+
+            _courts.CollectionChanged += (sender, args) =>
+            {
+                if (args.Action == NotifyCollectionChangedAction.Remove)
+                {
+                    foreach (var old in args.OldItems)
+                    {
+                        _container.CourtJeu.Remove(old as Court);
+                    }
+                }
+                RaisePropertyChangedEvent("courts");
+
+            };
             _courts = new ObservableCollection<Court>(_container.CourtJeu);
             Initialise();
         }

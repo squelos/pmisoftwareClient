@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="entity.Season" Width="1.5" PointX="3.625" PointY="1.375" />
         <EntityTypeShape EntityType="entity.Semester" Width="1.5" PointX="5.5" PointY="1.375" />
         <EntityTypeShape EntityType="entity.Payment" Width="1.5" PointX="5.5" PointY="3.875" />
-        <EntityTypeShape EntityType="entity.Badge" Width="1.5" PointX="10.5" PointY="7.875" />
+        <EntityTypeShape EntityType="entity.Badge" Width="1.5" PointX="10.75" PointY="8.125" />
         <EntityTypeShape EntityType="entity.BookingAggregation" Width="1.5" PointX="10.75" PointY="1.125" />
         <EntityTypeShape EntityType="entity.Booking" Width="1.5" PointX="10.75" PointY="3.25" />
         <EntityTypeShape EntityType="entity.Court" Width="1.5" PointX="12.75" PointY="2.125" />

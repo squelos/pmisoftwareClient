@@ -42,6 +42,13 @@ namespace TcpModernUI.Pages.players
             // }
         }
 
-       
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var dataGrid = sender as DataGrid;
+            if (dataGrid != null && dataGrid.SelectedItems.Count == 1)
+            {
+                expanderModif.IsExpanded = true;
+            }
+        }
     }
 }
