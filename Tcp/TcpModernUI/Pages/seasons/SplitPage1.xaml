@@ -17,8 +17,11 @@
            
         </ScrollViewer>
         <GridSplitter Grid.Column="1" />
-        <ScrollViewer Grid.Column="2 " Margin="{StaticResource SplitRight}">
+        <StackPanel>
             
-        </ScrollViewer>
+        </StackPanel>
+            
+
+        
     </Grid>
 </UserControl>

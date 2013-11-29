@@ -108,6 +108,22 @@
     <Compile Include="ViewModel\MasterViewModel.cs" />
     <Compile Include="ViewModel\PlayersViewModel.cs" />
     <Compile Include="ViewModel\SeasonsViewModel.cs" />
+    <Page Include="Assets\BaseLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\Fonts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\Orange.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\TcpTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
