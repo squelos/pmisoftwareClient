@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
-        <TabControl VerticalContentAlignment="Center" >
+        <TabControl VerticalContentAlignment="Center"  TabStripPlacement="Left">
             <TabItem Content="Test" Header="Test"/>
             <TabItem Header="Test 2"/>
             <TabItem/>
