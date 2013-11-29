@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ViewModels="clr-namespace:TcpModernUI.ViewModel"
              xmlns:Converters="clr-namespace:TcpModernUI.Converters"
-             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              x:Class="TcpModernUI.Pages.players.creation"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="1109.184">
@@ -28,7 +27,7 @@
         <ViewModels:PlayersViewModel/>
     </UserControl.DataContext>
 
-    <Grid Style="{StaticResource ContentRoot}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2"/>

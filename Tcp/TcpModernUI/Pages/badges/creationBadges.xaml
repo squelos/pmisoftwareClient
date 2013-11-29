@@ -1,24 +1,23 @@
-﻿<UserControl
+﻿<UserControl Name="CreationBadgeControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:ViewModels="clr-namespace:TcpModernUI.ViewModel" x:Class="TcpModernUI.Pages.badges.creation"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.DataContext>
-        <ViewModels:BadgesViewModel/>
+        <ViewModels:BadgesViewModel/> 
     </UserControl.DataContext>
 
-    <Grid Style="{StaticResource ContentRoot}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ScrollViewer Margin="{StaticResource SplitLeft}">
+        <ScrollViewer>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -43,7 +42,7 @@
 
         </ScrollViewer>
         <GridSplitter Grid.Column="1" />
-        <ScrollViewer Grid.Column="2 " Margin="{StaticResource SplitRight}">
+        <ScrollViewer Grid.Column="2 ">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

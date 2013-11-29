@@ -55,15 +55,24 @@
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\packages\ModernUI.WPF.1.0.5\lib\net45\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WPF45">
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\net45\GalaSoft.MvvmLight.Extras.WPF45.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.WPF45">
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\net45\GalaSoft.MvvmLight.WPF45.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.0.11.0.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.0.11.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -94,20 +103,13 @@
     <Compile Include="Pages\courts\courts.xaml.cs">
       <DependentUpon>courts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\seasons\BasicPage1.xaml.cs">
-      <DependentUpon>BasicPage1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\seasons\ListPage1.xaml.cs">
-      <DependentUpon>ListPage1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\seasons\SplitPage1.xaml.cs">
-      <DependentUpon>SplitPage1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\BadgesViewModel.cs" />
     <Compile Include="ViewModel\CourtViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MasterViewModel.cs" />
     <Compile Include="ViewModel\PlayersViewModel.cs" />
     <Compile Include="ViewModel\SeasonsViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Assets\BaseLight.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -136,21 +138,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Content\About.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Compile Include="Content\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Content\SettingsAppearance.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Compile Include="Content\SettingsAppearance.xaml.cs">
-      <DependentUpon>SettingsAppearance.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\SettingsAppearanceViewModel.cs" />
     <Page Include="Pages\badges\badges.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,14 +155,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\players\creationPlayers.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\seasons\BasicPage1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\seasons\ListPage1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,14 +183,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\seasons\seasons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\seasons\SplitPage1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,9 +215,6 @@
     </Compile>
     <Compile Include="Pages\seasons\seasons.xaml.cs">
       <DependentUpon>seasons.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

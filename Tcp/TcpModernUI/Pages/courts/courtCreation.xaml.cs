@@ -18,9 +18,9 @@ namespace TcpModernUI.Pages.courts
     /// <summary>
     /// Interaction logic for courtCreation.xaml
     /// </summary>
-    public partial class courtCreation : UserControl
+    public partial class court : UserControl
     {
-        public courtCreation()
+        public court()
         {
             InitializeComponent();
         }

@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpDataModel", "TcpDataMode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpModernUI", "TcpModernUI\TcpModernUI.csproj", "{CD8116C4-313D-4D10-849D-A93046844279}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpMahApps", "TcpMahApps\TcpMahApps.csproj", "{A42EE362-86B9-4376-B9C9-B6E67621FC59}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{CD8116C4-313D-4D10-849D-A93046844279}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD8116C4-313D-4D10-849D-A93046844279}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD8116C4-313D-4D10-849D-A93046844279}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A42EE362-86B9-4376-B9C9-B6E67621FC59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A42EE362-86B9-4376-B9C9-B6E67621FC59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A42EE362-86B9-4376-B9C9-B6E67621FC59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A42EE362-86B9-4376-B9C9-B6E67621FC59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

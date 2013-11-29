@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using FirstFloor.ModernUI.Presentation;
+using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
 
@@ -32,9 +27,9 @@ namespace TcpModernUI.ViewModel
         public SeasonsViewModel()
         {
            InitialiseSeasons();
-            _saveCommand = new RelayCommand(o => Save());
-            _cancelCommand = new RelayCommand(o => Cancel());
-            _updateCommand = new RelayCommand(o => Update());
+            _saveCommand = new RelayCommand(Save);
+            _cancelCommand = new RelayCommand(Cancel);
+            _updateCommand = new RelayCommand(Update);
 
             _seasons.CollectionChanged += (sender, args) =>
             {

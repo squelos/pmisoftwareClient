@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
-using FirstFloor.ModernUI.Presentation;
+using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
 
@@ -44,9 +44,9 @@ namespace TcpModernUI.ViewModel
             };
             _ballLevels = (from a in _container.BallLevelSet select a).ToList();
             _statuses = (from a in _container.StatusSet select a).ToList(); 
-            _saveCommand = new RelayCommand(o => Save());
-            _cancelCommand = new RelayCommand(o => Cancel());
-            _updateCommand = new RelayCommand(o=> Update());
+            _saveCommand = new RelayCommand(Save);
+            _cancelCommand = new RelayCommand(Cancel);
+            _updateCommand = new RelayCommand(Update);
             InitializePlayers();
         }
         #endregion

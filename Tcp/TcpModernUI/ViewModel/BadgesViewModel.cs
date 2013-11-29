@@ -1,9 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
-using RelayCommand = FirstFloor.ModernUI.Presentation.RelayCommand;
+
 
 namespace TcpModernUI.ViewModel
 {
@@ -21,9 +22,9 @@ namespace TcpModernUI.ViewModel
         #region ctor
         public BadgesViewModel()
         {
-            _saveCommand = new RelayCommand(o => Save());
-            _updateCommand = new RelayCommand(o => Update());
-            _cancelCommand = new RelayCommand(o => Cancel());
+            _saveCommand = new RelayCommand(Save);
+            _updateCommand = new RelayCommand(Update);
+            _cancelCommand = new RelayCommand(Cancel);
             _badges = new ObservableCollection<Badge>(_container.BadgeJeu);
 
             _badges.CollectionChanged += (sender, args) =>

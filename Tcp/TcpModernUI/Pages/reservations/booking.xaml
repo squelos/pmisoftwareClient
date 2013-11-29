@@ -3,17 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Style="{StaticResource ContentRoot}">
-        <!-- TODO: set @SelectedSource -->
-        <mui:ModernTab Layout="Tab" SelectedSource="/Pages/reservations/visualisation.xaml">
-            <mui:ModernTab.Links>
-                <!-- TODO: set @Source -->
-                <mui:Link DisplayName="Calendrier" Source="/Pages/reservations/visualisation.xaml"/>
-                <mui:Link DisplayName="Récurrentes" Source="/Pages/reservations/recurring.xaml"/>
-            </mui:ModernTab.Links>
-        </mui:ModernTab>
+    <Grid>
+        <controls:MetroAnimatedSingleRowTabControl TabStripPlacement="Top">
+            <TabItem Header="Calendrier">
+                
+            </TabItem>
+            <TabItem Header="Récurrentes">
+
+            </TabItem>
+        </controls:MetroAnimatedSingleRowTabControl>
+
     </Grid>
 </UserControl>

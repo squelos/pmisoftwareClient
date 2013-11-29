@@ -24,7 +24,5 @@ namespace TcpModernUI.Pages.badges
         {
             InitializeComponent();
         }
-
-    
     }
 }
