@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 namespace TcpModernUI.Utility
 {
     public sealed class Delegator
@@ -22,6 +23,12 @@ namespace TcpModernUI.Utility
 
         #region members
         private UIElement _element;
+        #endregion
+
+        #region getters/setters
+        public bool Access
+        { get { return _element.Dispatcher.CheckAccess(); } }
+
         #endregion
 
         #region publicmethods

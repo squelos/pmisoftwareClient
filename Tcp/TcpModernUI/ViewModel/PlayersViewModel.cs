@@ -7,6 +7,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
+using System.Threading.Tasks;
 
 
 namespace TcpModernUI.ViewModel
@@ -28,7 +29,7 @@ namespace TcpModernUI.ViewModel
         #region ctor
         public PlayersViewModel()
         {
-           // var a = new Task(() => )
+           // var b = new Task(() => { });
             _players = new ObservableCollection<Player>(_container.PlayerJeu);
 
             _players.CollectionChanged += (sender, args) =>

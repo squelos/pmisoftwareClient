@@ -11,14 +11,31 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="2"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <ScrollViewer>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <DataGrid AutoGenerateColumns="False" Grid.Row="0" ItemsSource="{Binding Seasons}" CanUserAddRows="False" 
+                          CanUserDeleteRows="True">
+                    <DataGrid.Columns>
+                        
+                    </DataGrid.Columns>
+                    
+                </DataGrid>
 
+                <StackPanel Grid.Row="1" FlowDirection="RightToLeft" Orientation="Horizontal">
+                    <Button  Margin="10,0,10,0" Content="Enregistrer" Command="{Binding UpdateCommand}"/>
+                    <Button  Content="Annuler" Command="{Binding CancelCommand}"/>
+                </StackPanel>
+            </Grid>
         </ScrollViewer>
-        <GridSplitter Grid.Column="1" />
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <ScrollViewer Grid.Column="2">
             <Grid >
                 <Grid.ColumnDefinitions>
@@ -51,8 +68,8 @@
                     <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding SecondSemester.end, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="6" VerticalAlignment="Stretch"  >
-                    <Button Content="Créer" Style="{DynamicResource MetroFlatButton}" Command="{Binding SaveCommand}" Margin="10,0,10,0" MaxHeight="25"/>
-                    <Button Content="Annuler" Command="{Binding CancelCommand}"  Margin="10,0,10,0" MaxHeight="25"/>
+                    <Button Content="Créer" Style="{DynamicResource MetroFlatButton}" Command="{Binding SaveCommand}" Margin="10,0,10,0" />
+                    <Button Content="Annuler" Command="{Binding CancelCommand}"   />
                 </StackPanel>
 
 

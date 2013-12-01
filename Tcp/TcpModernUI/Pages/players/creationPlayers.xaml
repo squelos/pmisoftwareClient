@@ -29,9 +29,9 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="2"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
 
         </Grid.ColumnDefinitions>
         <ScrollViewer >
@@ -54,8 +54,8 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Grid.Row="2" Orientation="Horizontal" FlowDirection="RightToLeft">
-                    <Button Command="{Binding UpdateCommand}" Content="Enregistrer" HorizontalAlignment="Center" Margin="10,10,10,10"  VerticalAlignment="Center" Width="Auto" />
-                    <Button Command="{Binding CancelCommand}" Content="Annuler" HorizontalAlignment="Center" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" />
+                    <Button Command="{Binding UpdateCommand}" Content="Enregistrer" HorizontalAlignment="Center" Margin="10,0,10,0"   VerticalAlignment="Center" Width="Auto" />
+                    <Button Command="{Binding CancelCommand}" Content="Annuler" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" />
                 </StackPanel>
             </Grid>
         </ScrollViewer>
@@ -118,8 +118,8 @@
                         <TextBox Text="{Binding CurrentPlayer.phone2}"  Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" />
                         <TextBox Text="{Binding CurrentPlayer.ranking}"  Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="5" MinWidth="80"  TextWrapping="Wrap" VerticalAlignment="Center" />
                         <StackPanel Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="8" Orientation="Horizontal">
-                            <Button Command="{Binding CancelCommand}" Content="Annuler" HorizontalAlignment="Center" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" />
-                            <Button Command="{Binding SaveCommand}" Content="Créer" HorizontalAlignment="Center" Margin="10,10,10,10"  VerticalAlignment="Center" Width="Auto" />
+                            <Button Command="{Binding CancelCommand}" Content="Annuler" HorizontalAlignment="Center" Margin="10,0,10,0"  VerticalAlignment="Center" Width="Auto" />
+                            <Button Command="{Binding SaveCommand}" Content="Créer" HorizontalAlignment="Center"   VerticalAlignment="Center" Width="Auto" />
                         </StackPanel>
                         <ComboBox ItemsSource="{Binding BallLevels}" SelectedValue="{Binding CurrentPlayer.BallLevel}" Grid.Column="3" HorizontalAlignment="Stretch" Margin="10,6,10,7" Grid.Row="6" VerticalAlignment="Center" SelectedIndex="0"/>
                         <DatePicker SelectedDate="{Binding CurrentPlayer.birthDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,10,0" Grid.Row="3" VerticalAlignment="Center" Width="Auto"/>
@@ -175,8 +175,8 @@
                         <TextBox Text="{Binding SelectedPlayer.phone2}"  Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" />
                         <TextBox Text="{Binding SelectedPlayer.ranking}"  Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="5" MinWidth="80"  TextWrapping="Wrap" VerticalAlignment="Center" />
                         <StackPanel Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="8" Orientation="Horizontal">
-                            <Button Command="{Binding CancelCommand}" Content="Annuler" HorizontalAlignment="Center" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" />
-                            <Button Command="{Binding UpdateCommand}" Content="Enregistrer" HorizontalAlignment="Center" Margin="10,10,10,10"  VerticalAlignment="Center" Width="Auto" />
+                            <Button Command="{Binding CancelCommand}" Content="Annuler" HorizontalAlignment="Center" Margin="10,0,10,0"  VerticalAlignment="Center" Width="Auto" />
+                            <Button Command="{Binding UpdateCommand}" Content="Enregistrer" HorizontalAlignment="Center"   VerticalAlignment="Center" Width="Auto" />
                         </StackPanel>
                         <ComboBox ItemsSource="{Binding BallLevels}" SelectedValue="{Binding SelectedPlayer.BallLevel}" Grid.Column="3" HorizontalAlignment="Stretch" Margin="10,6,10,7" Grid.Row="6" VerticalAlignment="Center" SelectedIndex="0"/>
                         <DatePicker SelectedDate="{Binding SelectedPlayer.birthDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,10,0" Grid.Row="3" VerticalAlignment="Center" Width="Auto"/>

@@ -26,6 +26,7 @@ namespace TcpModernUI.ViewModel
             _cancelCommand = new RelayCommand(Cancel);
             _updateCommand = new RelayCommand(Update);
 
+            _courts = new ObservableCollection<Court>(_container.CourtJeu);
             _courts.CollectionChanged += (sender, args) =>
             {
                 if (args.Action == NotifyCollectionChangedAction.Remove)
@@ -38,7 +39,7 @@ namespace TcpModernUI.ViewModel
                 RaisePropertyChangedEvent("courts");
 
             };
-            _courts = new ObservableCollection<Court>(_container.CourtJeu);
+            
             Initialise();
         }
         #endregion

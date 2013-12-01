@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TcpModernUI.Utility;
 
 namespace TcpModernUI.BaseClasses
 {
@@ -38,6 +39,7 @@ namespace TcpModernUI.BaseClasses
         /// <param name="propertyName">The name of the changed property.</param>
         public virtual void RaisePropertyChangedEvent(string propertyName)
         {
+            
             // Exit if changes ignored
             if (IgnorePropertyChangeEvents) return;
 
