@@ -8,11 +8,17 @@ namespace TcpDataModel
 {
     public partial class Season
     {
-        public Season(Semester first, Semester second):this()
-    {
+        public Semester FirstSemester
+        { get { return Semester[0]; } }
 
-        this.Semester.Add(first);
-        this.Semester.Add(second);
-    }
+        public Semester SecondSemester
+        { get { return Semester[1]; } }
+        public Season(Semester first, Semester second)
+            : this()
+        {
+
+            this.Semester.Add(first);
+            this.Semester.Add(second);
+        }
     }
 }

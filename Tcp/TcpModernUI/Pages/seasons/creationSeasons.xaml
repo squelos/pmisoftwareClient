@@ -24,9 +24,13 @@
                 <DataGrid AutoGenerateColumns="False" Grid.Row="0" ItemsSource="{Binding Seasons}" CanUserAddRows="False" 
                           CanUserDeleteRows="True">
                     <DataGrid.Columns>
-                        
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID"/>
+                        <DataGridTextColumn Binding="{Binding FirstSemester.start, StringFormat='\{0:d\}'}"  Header="Début " />
+                        <DataGridTextColumn Binding="{Binding FirstSemester.end, StringFormat='\{0:d\}'}"  Header="Fin"/>
+                        <DataGridTextColumn Binding="{Binding SecondSemester.start, StringFormat='\{0:d\}'}" Header="Début"/>
+                        <DataGridTextColumn Binding="{Binding SecondSemester.end, StringFormat='\{0:d\}'}"  Header="Fin"/>
                     </DataGrid.Columns>
-                    
+
                 </DataGrid>
 
                 <StackPanel Grid.Row="1" FlowDirection="RightToLeft" Orientation="Horizontal">
@@ -76,5 +80,5 @@
             </Grid>
         </ScrollViewer>
     </Grid>
-   
+
 </UserControl>
