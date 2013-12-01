@@ -33,9 +33,21 @@
 
                 </DataGrid>
 
-                <StackPanel Grid.Row="1" FlowDirection="RightToLeft" Orientation="Horizontal">
-                    <Button  Margin="10,0,10,0" Content="Enregistrer" Command="{Binding UpdateCommand}"/>
-                    <Button  Content="Annuler" Command="{Binding CancelCommand}"/>
+                <StackPanel HorizontalAlignment="Right" Grid.Row="1" FlowDirection="LeftToRight" Orientation="Horizontal">
+                    <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="50" Width="50" Command="{Binding CancelCommand}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="50" Width="50" Command="{Binding UpdateCommand}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_check}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
                 </StackPanel>
             </Grid>
         </ScrollViewer>
@@ -71,11 +83,22 @@
                     <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center"/>
                     <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding SecondSemester.end, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
-                <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="6" VerticalAlignment="Stretch"  >
-                    <Button Content="Créer" Style="{DynamicResource MetroFlatButton}" Command="{Binding SaveCommand}" Margin="10,0,10,0" />
-                    <Button Content="Annuler" Command="{Binding CancelCommand}"   />
+                <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="0" HorizontalAlignment="Right"  Grid.Row="5"  VerticalAlignment="Stretch" Margin="0,10,0,10" >
+                    <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="50" Width="50"  Command="{Binding CancelCommand}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button  Style="{DynamicResource MetroCircleButtonStyle}"  Height="50" Width="50"   Command="{Binding SaveCommand}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
                 </StackPanel>
-
 
             </Grid>
         </ScrollViewer>

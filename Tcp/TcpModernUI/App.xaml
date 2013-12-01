@@ -11,8 +11,7 @@
                 <ResourceDictionary Source="Assets/Colors.xaml" />
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
-                
-            </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary.MergedDictionaries>
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:TcpModernUI.ViewModel" />
 
         </ResourceDictionary>
