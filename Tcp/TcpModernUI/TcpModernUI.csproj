@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\squelos\Dropbox\Projet PMI\Logiciel\</PublishUrl>
+    <PublishUrl>C:\Users\gera\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -113,9 +113,6 @@
     <Compile Include="Pages\courts\courtCreation.xaml.cs">
       <DependentUpon>courtCreation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\courts\courts.xaml.cs">
-      <DependentUpon>courts.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Utility\Delegator.cs" />
     <Compile Include="ViewModel\BadgesViewModel.cs" />
     <Compile Include="ViewModel\CourtViewModel.cs" />
@@ -152,10 +149,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\badges\badges.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\badges\creationBadges.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,19 +157,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\courts\courts.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\players\creationPlayers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\players\overdue.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\players\players.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,13 +181,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\seasons\seasons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Compile Include="Pages\badges\badges.xaml.cs">
-      <DependentUpon>badges.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\badges\creationBadges.xaml.cs">
       <DependentUpon>creationBadges.xaml</DependentUpon>
     </Compile>
@@ -211,9 +189,6 @@
     </Compile>
     <Compile Include="Pages\players\overdue.xaml.cs">
       <DependentUpon>overdue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\players\players.xaml.cs">
-      <DependentUpon>players.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -227,10 +202,11 @@
     <Compile Include="Pages\seasons\creationSeasons.xaml.cs">
       <DependentUpon>creationSeasons.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\seasons\seasons.xaml.cs">
-      <DependentUpon>seasons.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TcpDataModel\TcpDataModel.csproj">
@@ -259,6 +235,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TcpModernUI.ViewModels.PlayersViewModel.datasource" />
+    <None Include="Resources\Entypo.ttf" />
     <None Include="TcpModernUI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -267,7 +244,9 @@
       <Name>TcpDataModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Entypo-license.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
