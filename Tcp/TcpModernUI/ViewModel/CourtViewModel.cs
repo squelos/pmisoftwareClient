@@ -83,12 +83,14 @@ namespace TcpModernUI.ViewModel
         {
             _container.CourtJeu.Add(_currentCourt);
             _container.SaveChanges();
+            _courts.Add(_currentCourt);
             Initialise();
         }
 
         public void Cancel()
         {
             _container = new entityContainer();
+            _courts = new ObservableCollection<Court>(_container.CourtJeu);
             Initialise();
             RaisePropertyChangedEvent("container");
         }

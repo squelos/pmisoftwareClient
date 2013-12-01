@@ -116,6 +116,7 @@
     <Compile Include="Pages\courts\courts.xaml.cs">
       <DependentUpon>courts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Delegator.cs" />
     <Compile Include="ViewModel\BadgesViewModel.cs" />
     <Compile Include="ViewModel\CourtViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using TcpModernUI.Utility;
 
 namespace TcpModernUI
 {
@@ -10,7 +11,8 @@ namespace TcpModernUI
         public MainWindow()
         {
             InitializeComponent();
-            
+            Delegator delegator = Delegator.Instance;
+            delegator.Register(this);
         }
     }
 }

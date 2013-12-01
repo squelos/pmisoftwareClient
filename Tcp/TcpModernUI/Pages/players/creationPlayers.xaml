@@ -59,8 +59,10 @@
                 </StackPanel>
             </Grid>
         </ScrollViewer>
-        <GridSplitter Grid.Column="1" />
-        
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ShowsPreview="True">
+           
+        </GridSplitter>
+
         <StackPanel Grid.Column="2">
             <Expander x:Name="expanderNew" Header="Nouveau" Grid.Column="2" IsExpanded="True">
                 <ScrollViewer x:Name="scrollViewer">

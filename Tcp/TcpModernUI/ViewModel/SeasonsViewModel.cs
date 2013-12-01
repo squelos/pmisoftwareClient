@@ -112,12 +112,14 @@ namespace TcpModernUI.ViewModel
             _container.SemesterJeu.Add(_firstSemester);
             _container.SemesterJeu.Add(_secondSemester);
             _container.SaveChanges();
+            _seasons.Add(_season);
             InitialiseSeasons();
         }
 
         public void Cancel()
         {
             _container = new entityContainer();
+            _seasons = new ObservableCollection<TcpDataModel.Season>(_container.SeasonJeu);
             InitialiseSeasons();
             RaisePropertyChangedEvent("container");
         }

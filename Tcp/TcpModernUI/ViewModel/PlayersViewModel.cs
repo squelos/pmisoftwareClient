@@ -28,6 +28,7 @@ namespace TcpModernUI.ViewModel
         #region ctor
         public PlayersViewModel()
         {
+           // var a = new Task(() => )
             _players = new ObservableCollection<Player>(_container.PlayerJeu);
 
             _players.CollectionChanged += (sender, args) =>
@@ -112,7 +113,9 @@ namespace TcpModernUI.ViewModel
         #region public methods
         public void Save()
         {
+            _players.Add(_player);
             _container.PlayerJeu.Add(CurrentPlayer);
+            RaisePropertyChangedEvent("container");
             _container.SaveChanges();
             InitializePlayers();
         }
@@ -120,6 +123,7 @@ namespace TcpModernUI.ViewModel
         public void Cancel()
         {
             _container = new entityContainer();
+            _players = new ObservableCollection<Player>(_container.PlayerJeu);
             InitializePlayers();
             RaisePropertyChangedEvent("container");
         }

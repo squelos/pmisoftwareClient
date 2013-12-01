@@ -84,8 +84,8 @@ namespace TcpModernUI.ViewModel
         #region public methods
         public void Save()
         {
-            _badges.Add(_badge);
             _container.BadgeJeu.Add(_badge);
+            _badges.Add(_badge);
             InitialiseBadges();
             Update();
         }
@@ -100,6 +100,7 @@ namespace TcpModernUI.ViewModel
         {
             _container = new entityContainer();
             CurrentBadge = new Badge();
+            _badges = new ObservableCollection<Badge>(_container.BadgeJeu);
             RaisePropertyChangedEvent("container");
         }
         #endregion
