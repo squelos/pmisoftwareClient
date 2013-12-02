@@ -6,15 +6,15 @@
     <!-- Theme Base Colors -->
 
     <!--ACCENT COLORS-->
-    <Color x:Key="HighlightColor">#FA8533</Color>
+    <Color x:Key="HighlightColor">#FF6900</Color>
     <!--80%-->
-    <Color x:Key="AccentColor">#CDFA8533</Color>
+    <Color x:Key="AccentColor">#CDFF6900</Color>
     <!--60%-->
-    <Color x:Key="AccentColor2">#99FA8533</Color>
+    <Color x:Key="AccentColor2">#99FF6900</Color>
     <!--40%-->
-    <Color x:Key="AccentColor3">#66FA8533</Color>
+    <Color x:Key="AccentColor3">#66FF6900</Color>
     <!--20%-->
-    <Color x:Key="AccentColor4">#32FA8533</Color>
+    <Color x:Key="AccentColor4">#32FF6900</Color>
 
     <!--BASE COLORS-->
     <Color x:Key="BlackColor">#FF000000</Color>
@@ -59,6 +59,7 @@
     <SolidColorBrush x:Key="DisabledWhiteBrush" Color="{DynamicResource WhiteColor}" />
 
     <SolidColorBrush x:Key="TransparentWhiteBrush" Color="#00FFFFFF"/>
+    
     <SolidColorBrush x:Key="SemiTransparentWhiteBrush" Color="#55FFFFFF"/>
     <SolidColorBrush x:Key="ControlsDisabledBrush" Color="#A5FFFFFF" />
 
@@ -163,5 +164,14 @@
     <SolidColorBrush x:Key="{x:Static SystemColors.MenuTextBrushKey}" Color="{StaticResource BlackColor}" />
 
     <Color x:Key="MenuShadowColor">#FF000000</Color>
+    <Style TargetType="GridSplitter">
+        <Setter Property="Background" Value="#CDFF9439"></Setter>
+    </Style>
+    <Style TargetType="Label">
+        <!--<Setter Property="FontWeight" Value="Bold"></Setter>-->
+        <Setter Property="FontSize" Value="14"></Setter>
+    </Style>
+    
+    
 
 </ResourceDictionary>
