@@ -10,6 +10,7 @@
     <UserControl.DataContext>
         <ViewModels:BadgesViewModel/> 
     </UserControl.DataContext>
+    
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -17,6 +18,7 @@
             <ColumnDefinition Width="3"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
+        <Controls:Flyout></Controls:Flyout>
 
         <ScrollViewer Margin="10">
             <Grid>

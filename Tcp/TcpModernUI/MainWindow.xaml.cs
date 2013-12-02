@@ -10,9 +10,7 @@ namespace TcpModernUI
     {
         public MainWindow()
         {
-            InitializeComponent();
-            Delegator delegator = Delegator.Instance;
-            delegator.Register(this);
+            
         }
     }
 }
