@@ -30,7 +30,7 @@
         </TabItem>
         <TabItem Header="Badges">
             <Grid>
-                <badges:creation />  
+                <badges:creationBadges />  
             </Grid>
         </TabItem>
         <TabItem Header="Saisons">

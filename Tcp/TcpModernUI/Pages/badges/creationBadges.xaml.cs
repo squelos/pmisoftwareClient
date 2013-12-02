@@ -12,15 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TcpModernUI.BaseClasses;
 
 namespace TcpModernUI.Pages.badges
 {
     /// <summary>
     /// Interaction logic for creation.xaml
     /// </summary>
-    public partial class creation : UserControl
+    public partial class creationBadges 
     {
-        public creation()
+        public creationBadges()
         {
             InitializeComponent();
         }
