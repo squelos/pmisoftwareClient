@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Windows.Data;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
@@ -18,6 +19,7 @@ namespace TcpModernUI.ViewModel
         private entityContainer _container = new entityContainer();
         private Player _player;
         private Player _selectedPlayer;
+        private CollectionViewSource _playersViewSource;
         private ObservableCollection<Player> _players;
         private List<BallLevel> _ballLevels;
         private List<Status> _statuses;
@@ -31,6 +33,8 @@ namespace TcpModernUI.ViewModel
         {
            // var b = new Task(() => { });
             _players = new ObservableCollection<Player>(_container.PlayerJeu);
+            _playersViewSource = new CollectionViewSource() {Source = _players};
+            
 
             _players.CollectionChanged += (sender, args) =>
             {

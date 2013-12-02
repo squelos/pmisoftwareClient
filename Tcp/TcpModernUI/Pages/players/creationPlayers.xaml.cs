@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 using TcpDataModel;
 
 namespace TcpModernUI.Pages.players
@@ -19,10 +20,8 @@ namespace TcpModernUI.Pages.players
     /// <summary>
     /// Interaction logic for creation.xaml
     /// </summary>
-    public partial class creation : UserControl
+    public partial class creation 
     {
-     
-
         public creation()
         {
             InitializeComponent();
@@ -33,7 +32,7 @@ namespace TcpModernUI.Pages.players
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
 
-          
+
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -44,5 +43,16 @@ namespace TcpModernUI.Pages.players
                 expanderModif.IsExpanded = true;
             }
         }
+
+        private void ClickBadges(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ClickBookings(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
+
 }

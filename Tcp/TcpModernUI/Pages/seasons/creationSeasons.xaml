@@ -15,7 +15,7 @@
             <ColumnDefinition Width="2"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <ScrollViewer>
+        <ScrollViewer Margin="10,10,10,8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -44,7 +44,7 @@
                     <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="50" Width="50" Command="{Binding UpdateCommand}">
                         <Rectangle Width="20" Height="20">
                             <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_check}" />
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
                             </Rectangle.Fill>
                         </Rectangle>
                     </Button>
@@ -94,7 +94,7 @@
                     <Button  Style="{DynamicResource MetroCircleButtonStyle}"  Height="50" Width="50"   Command="{Binding SaveCommand}">
                         <Rectangle Width="20" Height="20">
                             <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
                             </Rectangle.Fill>
                         </Rectangle>
                     </Button>

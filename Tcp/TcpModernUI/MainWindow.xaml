@@ -7,6 +7,8 @@
         Title="Tennis Club Portois"  MinWidth="650" MinHeight="650" ShowTitleBar="True" ShowIconOnTitleBar="True"
                       
                   Width="1366" Height="768">
+
+   
     <Controls:MetroAnimatedSingleRowTabControl TabStripPlacement="Top">
         <TabItem Header="Accueil">
             <Grid></Grid>

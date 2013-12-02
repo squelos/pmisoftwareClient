@@ -28,6 +28,7 @@
         <ViewModels:PlayersViewModel/>
     </UserControl.DataContext>
 
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -36,7 +37,7 @@
 
         </Grid.ColumnDefinitions>
         <ScrollViewer >
-            <Grid>
+            <Grid Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -65,7 +66,7 @@
                     <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="50" Width="50" Command="{Binding UpdateCommand}">
                         <Rectangle Width="20" Height="20">
                             <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_check}" />
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
                             </Rectangle.Fill>
                         </Rectangle>
                     </Button>
@@ -77,6 +78,22 @@
         </GridSplitter>
 
         <StackPanel Grid.Column="2">
+            <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
+                <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="50" Width="50" Click="ClickBadges" >
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_key}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
+                <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="50" Width="50"  Click="ClickBookings">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_calendar}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
+            </StackPanel>
             <Expander x:Name="expanderNew" Header="Nouveau" Grid.Column="2" IsExpanded="True">
                 <ScrollViewer x:Name="scrollViewer">
                 	<ScrollViewer.RenderTransform>
@@ -162,7 +179,7 @@
                             <Button  Style="{DynamicResource MetroCircleButtonStyle}"  Height="50" Width="50"   Command="{Binding SaveCommand}">
                                 <Rectangle Width="20" Height="20">
                                     <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
@@ -251,7 +268,7 @@
                             <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="50" Width="50" Command="{Binding UpdateCommand}">
                                 <Rectangle Width="20" Height="20">
                                     <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_check}" />
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
