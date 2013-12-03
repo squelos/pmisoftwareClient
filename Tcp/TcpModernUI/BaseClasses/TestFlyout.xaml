@@ -1,0 +1,24 @@
+﻿<Controls:MetroWindow
+    x:Class="TcpModernUI.BaseClasses.TestFlyout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Tennis Club Portois" MinWidth="650" MinHeight="650" ShowTitleBar="True" ShowIconOnTitleBar="True"
+    Width="1366" Height="768">
+
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout x:Name="settingsFlyout" Width="500" Header="Settings" Position="Right">
+                <Label Content="Test" />
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+
+    <Grid>
+        <Button x:Name="but" MinWidth="90"
+                Margin="2"
+                Click="Show"
+                Content="Show 1" />
+    </Grid>
+
+</Controls:MetroWindow>

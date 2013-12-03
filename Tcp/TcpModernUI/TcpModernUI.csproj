@@ -109,10 +109,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BaseClasses\CustomUserControl.cs" />
-    <Compile Include="BaseClasses\Flyer.xaml.cs">
-      <DependentUpon>Flyer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="BaseClasses\ViewModelBase.cs" />
+    <Compile Include="BaseClasses\TestFlyout.xaml.cs">
+      <DependentUpon>TestFlyout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BoolInverterConverter.cs" />
     <Compile Include="Pages\courts\courtCreation.xaml.cs">
       <DependentUpon>courtCreation.xaml</DependentUpon>
@@ -145,9 +145,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BaseClasses\Flyer.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="BaseClasses\TestFlyout.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

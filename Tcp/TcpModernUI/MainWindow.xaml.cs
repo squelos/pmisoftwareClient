@@ -1,4 +1,6 @@
-﻿using MahApps.Metro.Controls;
+﻿using System.Windows;
+using MahApps.Metro.Controls;
+using TcpModernUI.BaseClasses;
 using TcpModernUI.Utility;
 
 namespace TcpModernUI
@@ -11,6 +13,11 @@ namespace TcpModernUI
         public MainWindow()
         {
             
+        }
+
+        private void LaunchFlyoutDemo(object sender, RoutedEventArgs e)
+        {
+            new TestFlyout().Show();
         }
     }
 }
