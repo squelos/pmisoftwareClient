@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,10 +16,17 @@ namespace TcpModernUI.BaseClasses
         private entityContainer _container = new entityContainer();
         #endregion
 
+        #region errorEvents
+        public delegate void EntityValidationHandler(object sender, DbEntityValidationException e);
+
+        public event EntityValidationHandler ValidationErrorsChanged;
+
+        #endregion
+
         protected entityContainer Container
         {
-             get { return _container; }
-            
+            get { return _container; }
+
         }
 
         #region INotifyPropertyChanging Members
@@ -46,7 +54,14 @@ namespace TcpModernUI.BaseClasses
 
         protected void CommitChanges()
         {
-            _container.SaveChanges();
+            try
+            {
+                _container.SaveChanges();
+            }
+            catch (DbEntityValidationException validationException)
+            {
+                RaiseValidationErrorsEvent(validationException);
+            }
         }
 
         protected void ResetContainer()
@@ -88,6 +103,15 @@ namespace TcpModernUI.BaseClasses
             // Raise event
             var e = new PropertyChangingEventArgs(propertyName);
             PropertyChanging(this, e);
+        }
+
+        public void RaiseValidationErrorsEvent(DbEntityValidationException validationException)
+        {
+            if (IgnorePropertyChangeEvents) return;
+
+            if (ValidationErrorsChanged == null) return;
+
+            ValidationErrorsChanged(this, validationException);
         }
 
         #endregion

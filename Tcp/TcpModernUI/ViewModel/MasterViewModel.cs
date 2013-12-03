@@ -11,10 +11,10 @@ namespace TcpModernUI.ViewModel
     {
         #region members
 
-        private BadgesViewModel _badgesvm = new BadgesViewModel();
-        private CourtViewModel _courtvm = new CourtViewModel();
-        private PlayersViewModel _playersvm = new PlayersViewModel();
-        private SeasonsViewModel _seasonsvm = new SeasonsViewModel();
+        private BadgesViewModel _badgesvm;
+        private CourtViewModel _courtvm;
+        private PlayersViewModel _playersvm;
+        private SeasonsViewModel _seasonsvm;
         
         #endregion
 
@@ -22,9 +22,18 @@ namespace TcpModernUI.ViewModel
         #region ctor
         public MasterViewModel()
         {
-            
+            _badgesvm = new BadgesViewModel();
+            _badgesvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+            _courtvm = new CourtViewModel();
+            _courtvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+            _playersvm = new PlayersViewModel();
+            _playersvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+            _seasonsvm = new SeasonsViewModel();
+            _seasonsvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
         }
         #endregion
+
+        
 
         #region props
 

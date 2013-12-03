@@ -1,33 +1,21 @@
-﻿<Controls:MetroWindow xmlns:seasons="clr-namespace:TcpModernUI.Pages.seasons"
-                      xmlns:Pages="clr-namespace:TcpModernUI.Pages"
-                      xmlns:courts="clr-namespace:TcpModernUI.Pages.courts"
-                      xmlns:players="clr-namespace:TcpModernUI.Pages.players"
-                      xmlns:badges="clr-namespace:TcpModernUI.Pages.badges"
-                      xmlns:Converters="clr-namespace:TcpModernUI.Converters"
+﻿<Controls:MetroWindow xmlns:Converters="clr-namespace:TcpModernUI.Converters"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-
                       xmlns:ViewModel="clr-namespace:TcpModernUI.ViewModel" x:Class="TcpModernUI.MainWindow"
-
                       Title="Tennis Club Portois" MinWidth="650" MinHeight="650" ShowTitleBar="True"
                       ShowIconOnTitleBar="True"
-
                       Width="1366" Height="768">
-    
-
 
     <Window.Resources>
-        <Converters:BoolInverterConverter x:Key="BoolInverterConverter"/>
+        <Converters:BoolInverterConverter x:Key="BoolInverterConverter" />
     </Window.Resources>
-    
+    <Controls:MetroWindow.DataContext>
+        <ViewModel:MasterViewModel />
+    </Controls:MetroWindow.DataContext>
+
     <Controls:MetroWindow.WindowCommands>
         <Controls:WindowCommands>
-
-            <Controls:WindowCommands.DataContext>
-                <ViewModel:MasterViewModel />
-            </Controls:WindowCommands.DataContext>
-
             <Button Click="LaunchFlyoutDemo" Content="Flyout Demo" />
 
         </Controls:WindowCommands>
@@ -38,44 +26,48 @@
             <Grid />
         </TabItem>
         <TabItem Header="Adhérents">
-            <TabItem.DataContext>
-                <ViewModel:PlayersViewModel/>
-            </TabItem.DataContext>
+
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="3" />
+                    <ColumnDefinition Width="Auto" />
 
                 </Grid.ColumnDefinitions>
-                <ScrollViewer >
+                <ScrollViewer>
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"/>
-                        <DataGrid AutoGenerateColumns="False"   CanUserDeleteRows="True" CanUserAddRows="False" Grid.Row="1"
-					ItemsSource="{Binding Players}" RowDetailsVisibilityMode="VisibleWhenSelected" SelectedValue="{Binding SelectedPlayer}" SelectionChanged="PlayerDataGrid_SelectionChanged">
+                        <StackPanel Grid.Row="0" />
+                        <DataGrid AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False"
+                                  Grid.Row="1"
+                                  ItemsSource="{Binding PlayersViewModel.Players}" RowDetailsVisibilityMode="VisibleWhenSelected"
+                                  SelectedValue="{Binding PlayersViewModel.SelectedPlayer}"
+                                  SelectionChanged="PlayerDataGrid_SelectionChanged">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding lastName}" Header="Nom"/>
-                                <DataGridTextColumn Binding="{Binding firstName}" Header="Prénom"/>
-                                <DataGridTextColumn Binding="{Binding email}" Header="Email"/>
-                                <DataGridTextColumn Binding="{Binding phone1}" Header="Telephone"/>
-                                <DataGridTextColumn  IsReadOnly="True" Binding="{Binding Status}" Header="Status"/>
-                                <DataGridCheckBoxColumn Binding="{Binding isEnabled}" Header="Etat"/>
+                                <DataGridTextColumn Binding="{Binding lastName}" Header="Nom" />
+                                <DataGridTextColumn Binding="{Binding firstName}" Header="Prénom" />
+                                <DataGridTextColumn Binding="{Binding email}" Header="Email" />
+                                <DataGridTextColumn Binding="{Binding phone1}" Header="Telephone" />
+                                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Status}" Header="Status" />
+                                <DataGridCheckBoxColumn Binding="{Binding isEnabled}" Header="Etat" />
                             </DataGrid.Columns>
                         </DataGrid>
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" FlowDirection="LeftToRight" HorizontalAlignment="Right">
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Command="{Binding CancelCommand}">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" FlowDirection="LeftToRight"
+                                    HorizontalAlignment="Right">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding PlayersViewModel.CancelCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Command="{Binding UpdateCommand}">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding PlayersViewModel.UpdateCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
@@ -85,20 +77,21 @@
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
-                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ShowsPreview="True">
-
-                </GridSplitter>
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                              ShowsPreview="True" />
 
                 <StackPanel Grid.Column="2">
-                    <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
-                        <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Click="PLayerClickBadges" >
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                        <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                Click="PLayerClickBadges">
                             <Rectangle Width="12" Height="12">
                                 <Rectangle.Fill>
                                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_key}" />
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
-                        <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"  Click="PlayerClickBookings">
+                        <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                Click="PlayerClickBookings">
                             <Rectangle Width="12" Height="12">
                                 <Rectangle.Fill>
                                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_calendar}" />
@@ -110,85 +103,125 @@
                         <ScrollViewer x:Name="scrollViewer">
                             <ScrollViewer.RenderTransform>
                                 <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
+                                    <ScaleTransform />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
                                 </TransformGroup>
                             </ScrollViewer.RenderTransform>
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="150"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" MinWidth="150" />
                                 </Grid.ColumnDefinitions>
-                                <Label Content="Prénom" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="0" VerticalAlignment="Center"/>
-                                <Label Content="Nom" HorizontalAlignment="Left" Margin="15,10,0,10" Grid.Row="1" VerticalAlignment="Center"/>
-                                <Label Content="Date de naissance"  HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="3" VerticalAlignment="Center"/>
-                                <Label Content="License"  HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="4" VerticalAlignment="Center"/>
-                                <Label Content="Status"  HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="5" VerticalAlignment="Center"/>
-                                <Label Content="Email" HorizontalAlignment="Left"  Margin="15,9,0,10" Grid.Row="2" VerticalAlignment="Center"/>
-                                <Label Content="Rue" HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
-                                <Label Content="Code postal" HorizontalAlignment="Left"  Margin="15,9,0,10" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
-                                <Label Content="Ville"  HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
-                                <Label Content="Telephone" HorizontalAlignment="Left"  Margin="15,9,0,10" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
-                                <Label Content="Telephone Mobile" HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center"/>
-                                <Label Content="Balle" HorizontalAlignment="Left"  Margin="15,9,0,10" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center"/>
-                                <Label Content="Classement" HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding CurrentPlayer.firstName}"
-                                 Controls:TextboxHelper.Watermark="Prénom" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding CurrentPlayer.lastName}" 
-                                 Controls:TextboxHelper.Watermark="Nom" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <TextBox Text="{Binding CurrentPlayer.email}" 
-                                 Controls:TextboxHelper.Watermark="test@email.com" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding CurrentPlayer.licenceNumber}" 
-                                 Controls:TextboxHelper.Watermark="2457814" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,0,10,0" Grid.Row="5" VerticalAlignment="Center" ItemsSource="{Binding Statuses}" DisplayMemberPath="" SelectedIndex="0" SelectedValue="{Binding CurrentPlayer.Status}"  />
-                                <TextBox Text="{Binding CurrentPlayer.street}"
-                                 Controls:TextboxHelper.Watermark="1 rue de la gare" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding CurrentPlayer.zipCode}"
-                                 Controls:TextboxHelper.Watermark="75000" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <TextBox Text="{Binding CurrentPlayer.city}"
-                                 Controls:TextboxHelper.Watermark="Paris" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <TextBox Text="{Binding CurrentPlayer.phone1}"
-                                 Controls:TextboxHelper.Watermark="038758478" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <TextBox Text="{Binding CurrentPlayer.phone2}"
-                                 Controls:TextboxHelper.Watermark="078957845" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <TextBox Text="{Binding CurrentPlayer.ranking}"
-                                 Controls:TextboxHelper.Watermark="15/2" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="5" MinWidth="80"  TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <Label Content="Prénom" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="0"
+                                       VerticalAlignment="Center" />
+                                <Label Content="Nom" HorizontalAlignment="Left" Margin="15,10,0,10" Grid.Row="1"
+                                       VerticalAlignment="Center" />
+                                <Label Content="Date de naissance" HorizontalAlignment="Left" Margin="15,10,0,9"
+                                       Grid.Row="3" VerticalAlignment="Center" />
+                                <Label Content="License" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="4"
+                                       VerticalAlignment="Center" />
+                                <Label Content="Status" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="5"
+                                       VerticalAlignment="Center" />
+                                <Label Content="Email" HorizontalAlignment="Left" Margin="15,9,0,10" Grid.Row="2"
+                                       VerticalAlignment="Center" />
+                                <Label Content="Rue" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="0"
+                                       Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Code postal" HorizontalAlignment="Left" Margin="15,9,0,10" Grid.Row="1"
+                                       Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Ville" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="2"
+                                       Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Telephone" HorizontalAlignment="Left" Margin="15,9,0,10" Grid.Row="3"
+                                       Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Telephone Mobile" HorizontalAlignment="Left" Margin="15,10,0,9"
+                                       Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Balle" HorizontalAlignment="Left" Margin="15,9,0,10" Grid.Row="6"
+                                       Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Classement" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="5"
+                                       Grid.Column="2" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.firstName}"
+                                         Controls:TextboxHelper.Watermark="Prénom"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.lastName}"
+                                         Controls:TextboxHelper.Watermark="Nom"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.email}"
+                                         Controls:TextboxHelper.Watermark="test@email.com"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.licenceNumber}"
+                                         Controls:TextboxHelper.Watermark="2457814"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,0,10,0" Grid.Row="5"
+                                          VerticalAlignment="Center" ItemsSource="{Binding PlayersViewModel.Statuses}"
+                                          DisplayMemberPath="" SelectedIndex="0"
+                                          SelectedValue="{Binding PlayersViewModel.CurrentPlayer.Status}" />
+                                <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.street}"
+                                         Controls:TextboxHelper.Watermark="1 rue de la gare"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.zipCode}"
+                                         Controls:TextboxHelper.Watermark="75000"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.city}"
+                                         Controls:TextboxHelper.Watermark="Paris"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.phone1}"
+                                         Controls:TextboxHelper.Watermark="038758478"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.phone2}"
+                                         Controls:TextboxHelper.Watermark="078957845"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.ranking}"
+                                         Controls:TextboxHelper.Watermark="15/2"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="5" MinWidth="80" TextWrapping="Wrap" VerticalAlignment="Center" />
 
-                                <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="3" HorizontalAlignment="Right"  Grid.Row="7"  VerticalAlignment="Stretch" Margin="0,10,0,10" >
-                                    <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"  Command="{Binding CancelCommand}">
+                                <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="3"
+                                            HorizontalAlignment="Right" Grid.Row="7" VerticalAlignment="Stretch"
+                                            Margin="0,10,0,10">
+                                    <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                            Command="{Binding PlayersViewModel.CancelCommand}">
                                         <Rectangle Width="12" Height="12">
                                             <Rectangle.Fill>
                                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
                                             </Rectangle.Fill>
                                         </Rectangle>
                                     </Button>
-                                    <Button  Style="{DynamicResource MetroCircleButtonStyle}"  Height="35" Width="35"   Command="{Binding SaveCommand}">
+                                    <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                            Command="{Binding PlayersViewModel.SaveCommand}">
                                         <Rectangle Width="12" Height="12">
                                             <Rectangle.Fill>
                                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
@@ -196,88 +229,132 @@
                                         </Rectangle>
                                     </Button>
                                 </StackPanel>
-                                <ComboBox ItemsSource="{Binding BallLevels}" SelectedValue="{Binding CurrentPlayer.BallLevel}" Grid.Column="3" HorizontalAlignment="Stretch" Margin="10,6,10,7" Grid.Row="6" VerticalAlignment="Center" SelectedIndex="0"/>
-                                <DatePicker SelectedDate="{Binding CurrentPlayer.birthDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,10,0" Grid.Row="3" VerticalAlignment="Center" Width="Auto"/>
+                                <ComboBox ItemsSource="{Binding PlayersViewModel.BallLevels}"
+                                          SelectedValue="{Binding PlayersViewModel.CurrentPlayer.BallLevel}" Grid.Column="3"
+                                          HorizontalAlignment="Stretch" Margin="10,6,10,7" Grid.Row="6"
+                                          VerticalAlignment="Center" SelectedIndex="0" />
+                                <DatePicker SelectedDate="{Binding PlayersViewModel.CurrentPlayer.birthDate}" Grid.Column="1"
+                                            HorizontalAlignment="Left" Margin="10,0,10,0" Grid.Row="3"
+                                            VerticalAlignment="Center" Width="Auto" />
 
 
                             </Grid>
                         </ScrollViewer>
 
                     </Expander>
-                    <Expander x:Name="expanderModif"  Header="Modification" IsExpanded="{Binding IsExpanded, Converter={StaticResource BoolInverterConverter}, ElementName=expanderNew}">
+                    <Expander x:Name="expanderModif" Header="Modification"
+                              IsExpanded="{Binding IsExpanded, Converter={StaticResource BoolInverterConverter}, ElementName=expanderNew}">
                         <ScrollViewer>
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="150"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" MinWidth="150" />
                                 </Grid.ColumnDefinitions>
-                                <Label Content="Prénom" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="0" VerticalAlignment="Center"/>
-                                <Label Content="Nom" HorizontalAlignment="Left" Margin="15,10,0,10" Grid.Row="1" VerticalAlignment="Center"/>
-                                <Label Content="Date de naissance"  HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="3" VerticalAlignment="Center"/>
-                                <Label Content="License"  HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="4" VerticalAlignment="Center"/>
-                                <Label Content="Status"  HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="5" VerticalAlignment="Center"/>
-                                <Label Content="Email" HorizontalAlignment="Left"  Margin="15,9,0,10" Grid.Row="2" VerticalAlignment="Center"/>
-                                <Label Content="Rue" HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
-                                <Label Content="Code postal" HorizontalAlignment="Left"  Margin="15,9,0,10" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
-                                <Label Content="Ville"  HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
-                                <Label Content="Telephone" HorizontalAlignment="Left"  Margin="15,9,0,10" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
-                                <Label Content="Telephone Mobile" HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center"/>
-                                <Label Content="Balle" HorizontalAlignment="Left"  Margin="15,9,0,10" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center"/>
-                                <Label Content="Classement" HorizontalAlignment="Left"  Margin="15,10,0,9" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding SelectedPlayer.firstName}"
-                                 Controls:TextboxHelper.Watermark="Prénom" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding SelectedPlayer.lastName}"
-                                 Controls:TextboxHelper.Watermark="Nom" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <TextBox Text="{Binding SelectedPlayer.email}" 
-                                 Controls:TextboxHelper.Watermark="test@email.com" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding SelectedPlayer.licenceNumber}"
-                                 Controls:TextboxHelper.Watermark="1234856" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,0,10,0" Grid.Row="5" VerticalAlignment="Center" ItemsSource="{Binding Statuses}" DisplayMemberPath="" SelectedIndex="0" SelectedValue="{Binding SelectedPlayer.Status}"  />
-                                <TextBox Text="{Binding SelectedPlayer.street}" 
-                                 Controls:TextboxHelper.Watermark="1 rue de la gare" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding SelectedPlayer.zipCode}"
-                                 Controls:TextboxHelper.Watermark="75000" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <TextBox Text="{Binding SelectedPlayer.city}"
-                                 Controls:TextboxHelper.Watermark="Ville" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <TextBox Text="{Binding SelectedPlayer.phone1}"
-                                 Controls:TextboxHelper.Watermark="0123456789" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <TextBox Text="{Binding SelectedPlayer.phone2}"
-                                 Controls:TextboxHelper.Watermark="9874563120" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <TextBox Text="{Binding SelectedPlayer.ranking}" 
-                                 Controls:TextboxHelper.Watermark="NC" Controls:TextboxHelper.ClearTextButton="True" 
-                                 Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0" Grid.Row="5" MinWidth="80"  TextWrapping="Wrap" VerticalAlignment="Center" />
-                                <StackPanel Grid.Column="3"  Grid.Row="8" Orientation="Horizontal">
-                                    <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Command="{Binding CancelCommand}">
+                                <Label Content="Prénom" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="0"
+                                       VerticalAlignment="Center" />
+                                <Label Content="Nom" HorizontalAlignment="Left" Margin="15,10,0,10" Grid.Row="1"
+                                       VerticalAlignment="Center" />
+                                <Label Content="Date de naissance" HorizontalAlignment="Left" Margin="15,10,0,9"
+                                       Grid.Row="3" VerticalAlignment="Center" />
+                                <Label Content="License" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="4"
+                                       VerticalAlignment="Center" />
+                                <Label Content="Status" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="5"
+                                       VerticalAlignment="Center" />
+                                <Label Content="Email" HorizontalAlignment="Left" Margin="15,9,0,10" Grid.Row="2"
+                                       VerticalAlignment="Center" />
+                                <Label Content="Rue" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="0"
+                                       Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Code postal" HorizontalAlignment="Left" Margin="15,9,0,10" Grid.Row="1"
+                                       Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Ville" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="2"
+                                       Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Telephone" HorizontalAlignment="Left" Margin="15,9,0,10" Grid.Row="3"
+                                       Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Telephone Mobile" HorizontalAlignment="Left" Margin="15,10,0,9"
+                                       Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Balle" HorizontalAlignment="Left" Margin="15,9,0,10" Grid.Row="6"
+                                       Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Classement" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="5"
+                                       Grid.Column="2" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.firstName}"
+                                         Controls:TextboxHelper.Watermark="Prénom"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.lastName}"
+                                         Controls:TextboxHelper.Watermark="Nom"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.email}"
+                                         Controls:TextboxHelper.Watermark="test@email.com"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.licenceNumber}"
+                                         Controls:TextboxHelper.Watermark="1234856"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,0,10,0" Grid.Row="5"
+                                          VerticalAlignment="Center" ItemsSource="{Binding PlayersViewModel.Statuses}"
+                                          DisplayMemberPath="" SelectedIndex="0"
+                                          SelectedValue="{Binding PlayersViewModel.SelectedPlayer.Status}" />
+                                <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.street}"
+                                         Controls:TextboxHelper.Watermark="1 rue de la gare"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.zipCode}"
+                                         Controls:TextboxHelper.Watermark="75000"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.city}"
+                                         Controls:TextboxHelper.Watermark="Ville"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.phone1}"
+                                         Controls:TextboxHelper.Watermark="0123456789"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.phone2}"
+                                         Controls:TextboxHelper.Watermark="9874563120"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.ranking}"
+                                         Controls:TextboxHelper.Watermark="NC"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="5" MinWidth="80" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <StackPanel Grid.Column="3" Grid.Row="8" Orientation="Horizontal">
+                                    <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                            Command="{Binding PlayersViewModel.CancelCommand}">
                                         <Rectangle Width="12" Height="12">
                                             <Rectangle.Fill>
                                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
                                             </Rectangle.Fill>
                                         </Rectangle>
                                     </Button>
-                                    <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Command="{Binding UpdateCommand}">
+                                    <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                            Command="{Binding PlayersViewModel.UpdateCommand}">
                                         <Rectangle Width="12" Height="12">
                                             <Rectangle.Fill>
                                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
@@ -285,10 +362,13 @@
                                         </Rectangle>
                                     </Button>
                                 </StackPanel>
-                                <ComboBox ItemsSource="{Binding BallLevels}" SelectedValue="{Binding SelectedPlayer.BallLevel}" Grid.Column="3" HorizontalAlignment="Stretch" Margin="10,6,10,7" Grid.Row="6" VerticalAlignment="Center" SelectedIndex="0"/>
-                                <DatePicker SelectedDate="{Binding SelectedPlayer.birthDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,10,0" Grid.Row="3" VerticalAlignment="Center" Width="Auto"/>
-
-
+                                <ComboBox ItemsSource="{Binding PlayersViewModel.BallLevels}"
+                                          SelectedValue="{Binding PlayersViewModel.SelectedPlayer.BallLevel}" Grid.Column="3"
+                                          HorizontalAlignment="Stretch" Margin="10,6,10,7" Grid.Row="6"
+                                          VerticalAlignment="Center" SelectedIndex="0" />
+                                <DatePicker SelectedDate="{Binding PlayersViewModel.SelectedPlayer.birthDate}" Grid.Column="1"
+                                            HorizontalAlignment="Left" Margin="10,0,10,0" Grid.Row="3"
+                                            VerticalAlignment="Center" Width="Auto" />
                             </Grid>
                         </ScrollViewer>
                     </Expander>
@@ -301,39 +381,41 @@
             <Grid />
         </TabItem>
         <TabItem Header="Terrains">
-            <TabItem.DataContext>
-                <ViewModel:CourtViewModel/>
-            </TabItem.DataContext>
-            <Grid >
+            
+            <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="3" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <ScrollViewer Margin="10">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <DataGrid Grid.Row="0"  ItemsSource="{Binding Courts}" CanUserDeleteRows="True" CanUserAddRows="False"
-                          AutoGenerateColumns="False">
+                        <DataGrid Grid.Row="0" ItemsSource="{Binding CourtViewModel.Courts}" CanUserDeleteRows="True"
+                                  CanUserAddRows="False"
+                                  AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding number }" Header="Numéro"/>
-                                <DataGridCheckBoxColumn  Binding="{Binding isCovered}"  Header="Couvert"/>
+                                <DataGridTextColumn Binding="{Binding number }" Header="Numéro" />
+                                <DataGridCheckBoxColumn Binding="{Binding isCovered}" Header="Couvert" />
                             </DataGrid.Columns>
                         </DataGrid>
 
-                        <StackPanel HorizontalAlignment="Right" Grid.Row="1" FlowDirection="LeftToRight" Orientation="Horizontal">
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Command="{Binding CancelCommand}">
+                        <StackPanel HorizontalAlignment="Right" Grid.Row="1" FlowDirection="LeftToRight"
+                                    Orientation="Horizontal">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding CourtViewModel.CancelCommand}">
                                 <Rectangle Width="13" Height="13">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Command="{Binding UpdateCommand}">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding CourtViewModel.UpdateCommand}">
                                 <Rectangle Width="13" Height="13">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
@@ -343,29 +425,35 @@
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
-                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                 <ScrollViewer Grid.Column="2">
-                    <Grid >
+                    <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Label Content="Numéro" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top"/>
-                        <Controls:ToggleSwitch OnLabel="Couvert" OffLabel="Extérieur" IsChecked="{Binding CurrentCourt.isCovered}" HorizontalAlignment="Left" Margin="10,10,10,10" Grid.Row="1" VerticalAlignment="Top" Width="145"/>
-                        <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1" HorizontalAlignment="Right"  Grid.Row="2"  VerticalAlignment="Stretch" Margin="0,10,0,10" >
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"  Command="{Binding CancelCommand}">
+                        <Label Content="Numéro" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" />
+                        <Controls:ToggleSwitch OnLabel="Couvert" OffLabel="Extérieur"
+                                               IsChecked="{Binding CourtViewModel.CurrentCourt.isCovered}" HorizontalAlignment="Left"
+                                               Margin="10,10,10,10" Grid.Row="1" VerticalAlignment="Top" Width="145" />
+                        <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1"
+                                    HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Stretch"
+                                    Margin="0,10,0,10">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding CourtViewModel.CancelCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}"  Height="35" Width="35"   Command="{Binding SaveCommand}">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding CourtViewModel.SaveCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
@@ -373,49 +461,59 @@
                                 </Rectangle>
                             </Button>
                         </StackPanel>
-                        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10,10,10,10" TextWrapping="Wrap" Text="{Binding CurrentCourt.number}" VerticalAlignment="Top" Width="Auto" MinWidth="120"/>
+                        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10,10,10,10"
+                                 TextWrapping="Wrap" Text="{Binding CourtViewModel.CurrentCourt.number}" VerticalAlignment="Top"
+                                 Width="Auto" MinWidth="120" />
 
                     </Grid>
                 </ScrollViewer>
             </Grid>
         </TabItem>
         <TabItem Header="Badges">
-            <TabItem.DataContext>
-                <ViewModel:BadgesViewModel/>
-            </TabItem.DataContext>
+            
             <Grid>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="3" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <ScrollViewer Margin="10">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <DataGrid Grid.Row="0" x:Name="badgesDataGrid" AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False"
-                          EnableRowVirtualization="True" Height="Auto"  ItemsSource="{Binding Badges}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="Auto">
+                        <DataGrid Grid.Row="0" x:Name="badgesDataGrid" AutoGenerateColumns="False"
+                                  CanUserDeleteRows="True" CanUserAddRows="False"
+                                  EnableRowVirtualization="True" Height="Auto" ItemsSource="{Binding BadgesViewModel.Badges}"
+                                  RowDetailsVisibilityMode="VisibleWhenSelected" Width="Auto">
                             <DataGrid.Columns>
-                                <DataGridTextColumn  IsReadOnly="True" x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
-                                <DataGridCheckBoxColumn x:Name="isEnabledColumn" Binding="{Binding isEnabled}" Header="Activé" Width="SizeToHeader"/>
-                                <DataGridCheckBoxColumn x:Name="isMasterColumn" Binding="{Binding isMaster}" Header="Maître" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="numberColumn" Binding="{Binding number}" Header="Numéro" Width="SizeToHeader"/>
-                                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Player.firstName}" Header="Joueur" Width="SizeToHeader"></DataGridTextColumn>
+                                <DataGridTextColumn IsReadOnly="True" x:Name="iDColumn" Binding="{Binding ID}"
+                                                    Header="ID" Width="SizeToHeader" />
+                                <DataGridCheckBoxColumn x:Name="isEnabledColumn" Binding="{Binding isEnabled}"
+                                                        Header="Activé" Width="SizeToHeader" />
+                                <DataGridCheckBoxColumn x:Name="isMasterColumn" Binding="{Binding isMaster}"
+                                                        Header="Maître" Width="SizeToHeader" />
+                                <DataGridTextColumn x:Name="numberColumn" Binding="{Binding number}" Header="Numéro"
+                                                    Width="SizeToHeader" />
+                                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Player.firstName}"
+                                                    Header="Joueur" Width="SizeToHeader" />
                             </DataGrid.Columns>
                         </DataGrid>
-                        <StackPanel HorizontalAlignment="Right" Grid.Row="1" FlowDirection="LeftToRight" Orientation="Horizontal">
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Command="{Binding CancelCommand}">
+                        <StackPanel HorizontalAlignment="Right" Grid.Row="1" FlowDirection="LeftToRight"
+                                    Orientation="Horizontal">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding BadgesViewModel.CancelCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Command="{Binding UpdateCommand}">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding BadgesViewModel.UpdateCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
@@ -426,82 +524,98 @@
                     </Grid>
 
                 </ScrollViewer>
-                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                 <ScrollViewer Grid.Column="2 ">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Label Content="Identifiant" HorizontalAlignment="Left" Margin="10,7,0,8" VerticalAlignment="Center" Height="Auto" Width="Auto"/>
-                        <TextBox Text="{Binding CurrentBadge.number}" Grid.Column="1" HorizontalAlignment="Stretch" Height="22" Margin="10,5,10,4" TextWrapping="Wrap"  VerticalAlignment="Center" />
-                        <Controls:ToggleSwitch  OnLabel="Activé" OffLabel="Désactivé" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" IsChecked="{Binding CurrentBadge.isEnabled}" Width="145"/>
-                        <Controls:ToggleSwitch OnLabel="Maître" OffLabel="Normal" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="1" IsChecked="{Binding CurrentBadge.isMaster}" Width="140"/>
+                        <Label Content="Identifiant" HorizontalAlignment="Left" Margin="10,7,0,8"
+                               VerticalAlignment="Center" Height="Auto" Width="Auto" />
+                        <TextBox Text="{Binding BadgesViewModel.CurrentBadge.number}" Grid.Column="1" HorizontalAlignment="Stretch"
+                                 Height="22" Margin="10,5,10,4" TextWrapping="Wrap" VerticalAlignment="Center" />
+                        <Controls:ToggleSwitch OnLabel="Activé" OffLabel="Désactivé" Grid.Column="1"
+                                               HorizontalAlignment="Left" Grid.Row="1"
+                                               IsChecked="{Binding BadgesViewModel.CurrentBadge.isEnabled}" Width="145" />
+                        <Controls:ToggleSwitch OnLabel="Maître" OffLabel="Normal" Grid.Column="0"
+                                               HorizontalAlignment="Left" Grid.Row="1"
+                                               IsChecked="{Binding BadgesViewModel.CurrentBadge.isMaster}" Width="140" />
 
-                        <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1" HorizontalAlignment="Right"  Grid.Row="2"  VerticalAlignment="Stretch" Margin="0,10,0,10" >
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"  Command="{Binding CancelCommand}">
+                        <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1"
+                                    HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Stretch"
+                                    Margin="0,10,0,10">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding BadgesViewModel.CancelCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}"  Height="35" Width="35"   Command="{Binding SaveCommand}">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding BadgesViewModel.SaveCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
-                            
+
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
             </Grid>
         </TabItem>
         <TabItem Header="Saisons">
-            <TabItem.DataContext>
-                <ViewModel:SeasonsViewModel/>
-            </TabItem.DataContext>
+           
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="3" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <ScrollViewer Margin="10,10,10,8">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <DataGrid AutoGenerateColumns="False" Grid.Row="0" ItemsSource="{Binding Seasons}" CanUserAddRows="False" 
-                          CanUserDeleteRows="True">
+                        <DataGrid AutoGenerateColumns="False" Grid.Row="0" ItemsSource="{Binding SeasonsViewModel.Seasons}"
+                                  CanUserAddRows="False"
+                                  CanUserDeleteRows="True">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding ID}" Header="ID"/>
-                                <DataGridTextColumn Binding="{Binding FirstSemester.start, StringFormat='\{0:d\}'}"  Header="Début " />
-                                <DataGridTextColumn Binding="{Binding FirstSemester.end, StringFormat='\{0:d\}'}"  Header="Fin"/>
-                                <DataGridTextColumn Binding="{Binding SecondSemester.start, StringFormat='\{0:d\}'}" Header="Début"/>
-                                <DataGridTextColumn Binding="{Binding SecondSemester.end, StringFormat='\{0:d\}'}"  Header="Fin"/>
+                                <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
+                                <DataGridTextColumn Binding="{Binding FirstSemester.start, StringFormat='\{0:d\}'}"
+                                                    Header="Début " />
+                                <DataGridTextColumn Binding="{Binding FirstSemester.end, StringFormat='\{0:d\}'}"
+                                                    Header="Fin" />
+                                <DataGridTextColumn Binding="{Binding SecondSemester.start, StringFormat='\{0:d\}'}"
+                                                    Header="Début" />
+                                <DataGridTextColumn Binding="{Binding SecondSemester.end, StringFormat='\{0:d\}'}"
+                                                    Header="Fin" />
                             </DataGrid.Columns>
 
                         </DataGrid>
 
-                        <StackPanel HorizontalAlignment="Right" Grid.Row="1" FlowDirection="LeftToRight" Orientation="Horizontal">
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Command="{Binding CancelCommand}">
+                        <StackPanel HorizontalAlignment="Right" Grid.Row="1" FlowDirection="LeftToRight"
+                                    Orientation="Horizontal">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding SeasonsViewModel.CancelCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Command="{Binding UpdateCommand}">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding SeasonsViewModel.UpdateCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
@@ -511,47 +625,61 @@
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
-                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                 <ScrollViewer Grid.Column="2">
-                    <Grid >
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Label Content="Nouvelle Saison"  x:Name="lTitle" HorizontalAlignment="Left" Margin="20,6,0,7" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                        <Label Content="Première demie saison" x:Name="lFirstSemester" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"/>
-                        <Label Content="Deuxième demie saison" x:Name="lSecondSemester" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold"/>
-                        <StackPanel HorizontalAlignment="Stretch" Grid.Row="2"  VerticalAlignment="Stretch" Orientation="Horizontal" Margin="0,10,0,10" >
-                            <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center"/>
-                            <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding FirstSemester.start, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
-                            <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center"/>
-                            <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding FirstSemester.end, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Content="Nouvelle Saison" x:Name="lTitle" HorizontalAlignment="Left" Margin="20,6,0,7"
+                               VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
+                        <Label Content="Première demie saison" x:Name="lFirstSemester" HorizontalAlignment="Left"
+                               Margin="10,10,0,10" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" />
+                        <Label Content="Deuxième demie saison" x:Name="lSecondSemester" HorizontalAlignment="Left"
+                               Margin="10,10,0,10" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold" />
+                        <StackPanel HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"
+                                    Orientation="Horizontal" Margin="0,10,0,10">
+                            <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center" />
+                            <DatePicker Margin="10,0,10,0" MaxHeight="30"
+                                        SelectedDate="{Binding SeasonsViewModel.FirstSemester.start, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedDateFormat="Short" />
+                            <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center" />
+                            <DatePicker Margin="10,0,10,0" MaxHeight="30"
+                                        SelectedDate="{Binding SeasonsViewModel.FirstSemester.end, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
-                        <StackPanel HorizontalAlignment="Stretch" Grid.Row="4" Margin="0,10,0,10" VerticalAlignment="Stretch" Orientation="Horizontal">
-                            <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center"/>
-                            <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding SecondSemester.start, UpdateSourceTrigger=PropertyChanged}"/>
-                            <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center"/>
-                            <DatePicker Margin="10,0,10,0" MaxHeight="30" SelectedDate="{Binding SecondSemester.end, UpdateSourceTrigger=PropertyChanged}"/>
+                        <StackPanel HorizontalAlignment="Stretch" Grid.Row="4" Margin="0,10,0,10"
+                                    VerticalAlignment="Stretch" Orientation="Horizontal">
+                            <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center" />
+                            <DatePicker Margin="10,0,10,0" MaxHeight="30"
+                                        SelectedDate="{Binding SeasonsViewModel.SecondSemester.start, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center" />
+                            <DatePicker Margin="10,0,10,0" MaxHeight="30"
+                                        SelectedDate="{Binding SeasonsViewModel.SecondSemester.end, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="0" HorizontalAlignment="Right"  Grid.Row="5"  VerticalAlignment="Stretch" Margin="0,10,0,10" >
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"  Command="{Binding CancelCommand}">
+                        <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="0"
+                                    HorizontalAlignment="Right" Grid.Row="5" VerticalAlignment="Stretch"
+                                    Margin="0,10,0,10">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding SeasonsViewModel.CancelCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
-                            <Button  Style="{DynamicResource MetroCircleButtonStyle}"  Height="35" Width="35"   Command="{Binding SaveCommand}">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding SeasonsViewModel.SaveCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
