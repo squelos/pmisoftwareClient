@@ -114,6 +114,9 @@
       <DependentUpon>TestFlyout.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolInverterConverter.cs" />
+    <Compile Include="BrowserWindow.xaml.cs">
+      <DependentUpon>BrowserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\courts\courtCreation.xaml.cs">
       <DependentUpon>courtCreation.xaml</DependentUpon>
     </Compile>
@@ -146,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BaseClasses\TestFlyout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BrowserWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

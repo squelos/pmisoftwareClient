@@ -36,7 +36,6 @@ namespace TcpModernUI.ViewModel
                     }
                 }
                 RaisePropertyChangedEvent("courts");
-
             };
             
             Initialise();

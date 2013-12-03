@@ -11,15 +11,25 @@
         <Converters:BoolInverterConverter x:Key="BoolInverterConverter" />
     </Window.Resources>
     <Controls:MetroWindow.DataContext>
-        <ViewModel:MasterViewModel />
+        <ViewModel:MasterViewModel ValidationErrorsChanged="ViewModelBase_OnValidationErrorsChanged"/>
     </Controls:MetroWindow.DataContext>
 
     <Controls:MetroWindow.WindowCommands>
         <Controls:WindowCommands>
-            <Button Click="LaunchFlyoutDemo" Content="Flyout Demo" />
+            <Button Click="LaunchFlyoutDemo" Content="Site internet" />
 
         </Controls:WindowCommands>
     </Controls:MetroWindow.WindowCommands>
+    
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout x:Name="playerBadge" Position="Right">
+                <Grid>
+                    
+                </Grid>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
 
     <Controls:MetroAnimatedSingleRowTabControl TabStripPlacement="Top">
         <TabItem Header="Accueil">

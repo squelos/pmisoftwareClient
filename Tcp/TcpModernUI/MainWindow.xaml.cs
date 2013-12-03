@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Data.Entity.Validation;
+using System.Linq;
+using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using MahApps.Metro.Controls;
 using TcpModernUI.BaseClasses;
@@ -18,7 +21,8 @@ namespace TcpModernUI
 
         private void LaunchFlyoutDemo(object sender, RoutedEventArgs e)
         {
-            new TestFlyout().Show();
+            BrowserWindow win = new BrowserWindow();
+            win.Show();
         }
 
         private void PlayerDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -39,5 +43,22 @@ namespace TcpModernUI
         {
 
         }
+
+        private void ViewModelBase_OnValidationErrorsChanged(object sender, DbEntityValidationException e)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (var entry in e.EntityValidationErrors)
+            {
+                builder.AppendLine(entry.Entry.State + " : " + entry.Entry.Entity);
+                foreach (var VARIABLE in entry.ValidationErrors)
+                {
+                    builder.AppendLine(VARIABLE.ErrorMessage);
+                }
+            }
+            this.ShowMessageAsync("Erreur de validation", builder.ToString(),
+                MahApps.Metro.Controls.MessageDialogStyle.Affirmative);
+        }
+
+       
     }
 }

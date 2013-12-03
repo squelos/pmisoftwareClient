@@ -1,0 +1,14 @@
+﻿<Controls:MetroWindow 
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      x:Class="TcpModernUI.BrowserWindow"
+                      Title="Réservations" MinWidth="650" MinHeight="650" ShowTitleBar="True"
+                      ShowIconOnTitleBar="True"
+                      Width="1366" Height="768" Loaded="MetroWindow_Loaded">
+    <StackPanel>
+        <Label Content="Bite"></Label>
+        <WebBrowser x:Name="Browser"  Width="800" Height="600" />
+    </StackPanel>
+
+</Controls:MetroWindow>
