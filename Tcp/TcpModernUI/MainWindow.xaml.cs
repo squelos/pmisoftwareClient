@@ -36,12 +36,12 @@ namespace TcpModernUI
 
         private void PLayerClickBadges(object sender, RoutedEventArgs e)
         {
-
+            ToggleFlyout(0);
         }
 
         private void PlayerClickBookings(object sender, RoutedEventArgs e)
         {
-
+            ToggleFlyout(1);
         }
 
         private void ViewModelBase_OnValidationErrorsChanged(object sender, DbEntityValidationException e)
@@ -57,6 +57,17 @@ namespace TcpModernUI
             }
             this.ShowMessageAsync("Erreur de validation", builder.ToString(),
                 MahApps.Metro.Controls.MessageDialogStyle.Affirmative);
+        }
+
+        private void ToggleFlyout(int index)
+        {
+            var flyout = this.Flyouts.Items[index] as Flyout;
+            if (flyout == null)
+            {
+                return;
+            }
+
+            flyout.IsOpen = !flyout.IsOpen;
         }
 
        
