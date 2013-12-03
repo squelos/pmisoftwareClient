@@ -12,7 +12,6 @@ namespace TcpModernUI.ViewModel
     public class SeasonsViewModel : ViewModelBase
     {
         #region members
-        private entityContainer _container = new entityContainer();
         private ObservableCollection<Season> _seasons;
         private Season _season;
         private Semester _firstSemester;
@@ -30,7 +29,7 @@ namespace TcpModernUI.ViewModel
             _saveCommand = new RelayCommand(Save);
             _cancelCommand = new RelayCommand(Cancel);
             _updateCommand = new RelayCommand(Update);
-            _seasons = new ObservableCollection<Season>(_container.SeasonJeu);
+            _seasons = new ObservableCollection<Season>(Container.SeasonJeu);
 
             _seasons.CollectionChanged += (sender, args) =>
             {
@@ -38,14 +37,14 @@ namespace TcpModernUI.ViewModel
                 {
                     foreach (var old in args.OldItems)
                     {
-                        _container.SeasonJeu.Remove(old as Season);
+                        Container.SeasonJeu.Remove(old as Season);
                     }
                 }
                 RaisePropertyChangedEvent("seasons");
 
             };
-            
-            _seasons = new ObservableCollection<Season>(_container.SeasonJeu);
+
+            _seasons = new ObservableCollection<Season>(Container.SeasonJeu);
         }
         #endregion
 
@@ -108,25 +107,25 @@ namespace TcpModernUI.ViewModel
         #region public methods
         public void Save()
         {
-            _container.SeasonJeu.Add(_season);
-            _container.SemesterJeu.Add(_firstSemester);
-            _container.SemesterJeu.Add(_secondSemester);
-            _container.SaveChanges();
+            Container.SeasonJeu.Add(_season);
+            Container.SemesterJeu.Add(_firstSemester);
+            Container.SemesterJeu.Add(_secondSemester);
+            CommitChanges();
             _seasons.Add(_season);
             InitialiseSeasons();
         }
 
         public void Cancel()
         {
-            _container = new entityContainer();
-            _seasons = new ObservableCollection<TcpDataModel.Season>(_container.SeasonJeu);
+            ResetContainer();
+            _seasons = new ObservableCollection<TcpDataModel.Season>(Container.SeasonJeu);
             InitialiseSeasons();
             RaisePropertyChangedEvent("container");
         }
 
         public void Update()
         {
-            _container.SaveChanges();
+            CommitChanges();
         }
         #endregion
 

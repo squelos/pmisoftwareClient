@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/22/2013 13:50:59
+-- Date Created: 12/03/2013 10:23:10
 -- Generated from EDMX file: C:\Users\squelos\Documents\GitHub\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
 -- --------------------------------------------------
 
@@ -59,6 +59,21 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PlayerTrainingPreferences]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TrainingPreferencesSet] DROP CONSTRAINT [FK_PlayerTrainingPreferences];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerStatus]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlayerJeu] DROP CONSTRAINT [FK_PlayerStatus];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentMethodPayment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentJeu] DROP CONSTRAINT [FK_PaymentMethodPayment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DayPreferencePeriod]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PreferencePeriodJeu] DROP CONSTRAINT [FK_DayPreferencePeriod];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DayTrainingPreferences]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TrainingPreferencesSet] DROP CONSTRAINT [FK_DayTrainingPreferences];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerBallLevel]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlayerJeu] DROP CONSTRAINT [FK_PlayerBallLevel];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -99,6 +114,18 @@ IF OBJECT_ID(N'[dbo].[CategorySet]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[TrainingPreferencesSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TrainingPreferencesSet];
+GO
+IF OBJECT_ID(N'[dbo].[StatusSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StatusSet];
+GO
+IF OBJECT_ID(N'[dbo].[PaymentMethodSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PaymentMethodSet];
+GO
+IF OBJECT_ID(N'[dbo].[DaySet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DaySet];
+GO
+IF OBJECT_ID(N'[dbo].[BallLevelSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BallLevelSet];
 GO
 IF OBJECT_ID(N'[dbo].[PaymentSemester]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PaymentSemester];

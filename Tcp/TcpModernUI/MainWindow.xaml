@@ -459,7 +459,7 @@
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
-                            <Button Content="Button" Width="75"/>
+                            
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>

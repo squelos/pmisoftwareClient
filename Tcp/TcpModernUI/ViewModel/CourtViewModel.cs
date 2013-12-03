@@ -11,7 +11,6 @@ namespace TcpModernUI.ViewModel
     public class CourtViewModel : ViewModelBase
     {
         #region members
-        private entityContainer _container = new entityContainer();
         private ObservableCollection<Court> _courts = new ObservableCollection<Court>();
         private Court _currentCourt;
         private RelayCommand _saveCommand;
@@ -26,14 +25,14 @@ namespace TcpModernUI.ViewModel
             _cancelCommand = new RelayCommand(Cancel);
             _updateCommand = new RelayCommand(Update);
 
-            _courts = new ObservableCollection<Court>(_container.CourtJeu);
+            _courts = new ObservableCollection<Court>(Container.CourtJeu);
             _courts.CollectionChanged += (sender, args) =>
             {
                 if (args.Action == NotifyCollectionChangedAction.Remove)
                 {
                     foreach (var old in args.OldItems)
                     {
-                        _container.CourtJeu.Remove(old as Court);
+                        Container.CourtJeu.Remove(old as Court);
                     }
                 }
                 RaisePropertyChangedEvent("courts");
@@ -82,23 +81,23 @@ namespace TcpModernUI.ViewModel
 
         public void Save()
         {
-            _container.CourtJeu.Add(_currentCourt);
-            _container.SaveChanges();
+            Container.CourtJeu.Add(_currentCourt);
+            CommitChanges();
             _courts.Add(_currentCourt);
             Initialise();
         }
 
         public void Cancel()
         {
-            _container = new entityContainer();
-            _courts = new ObservableCollection<Court>(_container.CourtJeu);
+            ResetContainer();
+            _courts = new ObservableCollection<Court>(Container.CourtJeu);
             Initialise();
             RaisePropertyChangedEvent("container");
         }
 
         public void Update()
         {
-            _container.SaveChanges();
+            CommitChanges();
         }
             
         #endregion

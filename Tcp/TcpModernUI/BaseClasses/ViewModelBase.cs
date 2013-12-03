@@ -4,12 +4,23 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TcpDataModel;
 using TcpModernUI.Utility;
 
 namespace TcpModernUI.BaseClasses
 {
     public abstract class ViewModelBase : INotifyPropertyChanging, INotifyPropertyChanged
     {
+        #region members
+        private entityContainer _container = new entityContainer();
+        #endregion
+
+        protected entityContainer Container
+        {
+             get { return _container; }
+            
+        }
+
         #region INotifyPropertyChanging Members
 
         public event PropertyChangingEventHandler PropertyChanging;
@@ -33,13 +44,24 @@ namespace TcpModernUI.BaseClasses
 
         #region Public Methods
 
+        protected void CommitChanges()
+        {
+            _container.SaveChanges();
+        }
+
+        protected void ResetContainer()
+        {
+            _container = new entityContainer();
+            RaisePropertyChangedEvent("container");
+        }
+
         /// <summary>
         /// Raises the PropertyChanged event.
         /// </summary>
         /// <param name="propertyName">The name of the changed property.</param>
         public virtual void RaisePropertyChangedEvent(string propertyName)
         {
-            
+
             // Exit if changes ignored
             if (IgnorePropertyChangeEvents) return;
 

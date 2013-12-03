@@ -16,7 +16,6 @@ namespace TcpModernUI.ViewModel
     public class PlayersViewModel : ViewModelBase
     {
         #region members
-        private entityContainer _container = new entityContainer();
         private Player _player;
         private Player _selectedPlayer;
         private CollectionViewSource _playersViewSource;
@@ -32,7 +31,7 @@ namespace TcpModernUI.ViewModel
         public PlayersViewModel()
         {
            // var b = new Task(() => { });
-            _players = new ObservableCollection<Player>(_container.PlayerJeu);
+            _players = new ObservableCollection<Player>(Container.PlayerJeu);
             _playersViewSource = new CollectionViewSource() {Source = _players};
             
 
@@ -42,21 +41,19 @@ namespace TcpModernUI.ViewModel
                 {
                     foreach (var old in args.OldItems)
                     {
-                        _container.PlayerJeu.Remove(old as Player);
+                        Container.PlayerJeu.Remove(old as Player);
                     }
                 }
                 RaisePropertyChangedEvent("players");
-
             };
-            _ballLevels = (from a in _container.BallLevelSet select a).ToList();
-            _statuses = (from a in _container.StatusSet select a).ToList(); 
+            _ballLevels = (from a in Container.BallLevelSet select a).ToList();
+            _statuses = (from a in Container.StatusSet select a).ToList(); 
             _saveCommand = new RelayCommand(Save);
             _cancelCommand = new RelayCommand(Cancel);
             _updateCommand = new RelayCommand(Update);
             InitializePlayers();
         }
         #endregion
-
         #region getters/setters
 
         public Player SelectedPlayer
@@ -119,23 +116,23 @@ namespace TcpModernUI.ViewModel
         public void Save()
         {
             _players.Add(_player);
-            _container.PlayerJeu.Add(CurrentPlayer);
+            Container.PlayerJeu.Add(CurrentPlayer);
             RaisePropertyChangedEvent("container");
-            _container.SaveChanges();
+           CommitChanges();
             InitializePlayers();
         }
 
         public void Cancel()
         {
-            _container = new entityContainer();
-            _players = new ObservableCollection<Player>(_container.PlayerJeu);
+            ResetContainer();
+            _players = new ObservableCollection<Player>(Container.PlayerJeu);
             InitializePlayers();
             RaisePropertyChangedEvent("container");
         }
 
         public void Update()
         {
-            _container.SaveChanges();
+            CommitChanges();
         }
         #endregion
 
@@ -146,6 +143,7 @@ namespace TcpModernUI.ViewModel
             CurrentPlayer.isEnabled = true;
             CurrentPlayer.passwordHash = "00000";
         }
+
         #endregion
 
     }

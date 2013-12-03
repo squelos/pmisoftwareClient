@@ -11,7 +11,7 @@ namespace TcpModernUI.ViewModel
     public class BadgesViewModel : ViewModelBase
     {
         #region members
-        private entityContainer _container = new entityContainer();
+       
         private ObservableCollection<Badge> _badges = new ObservableCollection<Badge>();
         private RelayCommand _saveCommand;
         private RelayCommand _updateCommand;
@@ -25,7 +25,7 @@ namespace TcpModernUI.ViewModel
             _saveCommand = new RelayCommand(Save);
             _updateCommand = new RelayCommand(Update);
             _cancelCommand = new RelayCommand(Cancel);
-            _badges = new ObservableCollection<Badge>(_container.BadgeJeu);
+            _badges = new ObservableCollection<Badge>(Container.BadgeJeu);
 
             _badges.CollectionChanged += (sender, args) =>
             {
@@ -33,7 +33,7 @@ namespace TcpModernUI.ViewModel
                 {
                     foreach (var old in args.OldItems)
                     {
-                        _container.BadgeJeu.Remove(old as Badge);
+                        Container.BadgeJeu.Remove(old as Badge);
                     }
                 }
                 RaisePropertyChangedEvent("badges");
@@ -84,7 +84,7 @@ namespace TcpModernUI.ViewModel
         #region public methods
         public void Save()
         {
-            _container.BadgeJeu.Add(_badge);
+            Container.BadgeJeu.Add(_badge);
             _badges.Add(_badge);
             InitialiseBadges();
             Update();
@@ -92,15 +92,15 @@ namespace TcpModernUI.ViewModel
 
         public void Update()
         {
-            _container.SaveChanges();
+            CommitChanges();
             //InitialiseBadges();
         }
 
         public void Cancel()
         {
-            _container = new entityContainer();
+            ResetContainer();
             CurrentBadge = new Badge();
-            _badges = new ObservableCollection<Badge>(_container.BadgeJeu);
+            _badges = new ObservableCollection<Badge>(Container.BadgeJeu);
             RaisePropertyChangedEvent("container");
         }
         #endregion
