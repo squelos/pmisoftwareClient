@@ -109,6 +109,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BaseClasses\CustomUserControl.cs" />
+    <Compile Include="BaseClasses\Flyer.xaml.cs">
+      <DependentUpon>Flyer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BaseClasses\ViewModelBase.cs" />
     <Compile Include="Converters\BoolInverterConverter.cs" />
     <Compile Include="Pages\courts\courtCreation.xaml.cs">
@@ -139,6 +142,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Assets\TcpTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BaseClasses\Flyer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
