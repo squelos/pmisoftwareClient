@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Data.Entity.Validation;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TcpDataModel;
-using TcpModernUI.Utility;
 
 namespace TcpModernUI.BaseClasses
 {
@@ -52,16 +46,18 @@ namespace TcpModernUI.BaseClasses
 
         #region Public Methods
 
-        protected void CommitChanges()
+        protected bool CommitChanges()
         {
             try
             {
                 _container.SaveChanges();
+                return true;
             }
             catch (DbEntityValidationException validationException)
             {
                 RaiseValidationErrorsEvent(validationException);
             }
+           return false;
         }
 
         protected void ResetContainer()
@@ -76,7 +72,6 @@ namespace TcpModernUI.BaseClasses
         /// <param name="propertyName">The name of the changed property.</param>
         public virtual void RaisePropertyChangedEvent(string propertyName)
         {
-
             // Exit if changes ignored
             if (IgnorePropertyChangeEvents) return;
 
@@ -113,7 +108,6 @@ namespace TcpModernUI.BaseClasses
 
             ValidationErrorsChanged(this, validationException);
         }
-
         #endregion
     }
 }

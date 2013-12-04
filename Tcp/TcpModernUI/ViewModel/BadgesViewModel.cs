@@ -11,12 +11,13 @@ namespace TcpModernUI.ViewModel
     public class BadgesViewModel : ViewModelBase
     {
         #region members
-       
+
         private ObservableCollection<Badge> _badges = new ObservableCollection<Badge>();
         private RelayCommand _saveCommand;
         private RelayCommand _updateCommand;
         private RelayCommand _cancelCommand;
         private Badge _badge;
+
         #endregion
 
         #region ctor

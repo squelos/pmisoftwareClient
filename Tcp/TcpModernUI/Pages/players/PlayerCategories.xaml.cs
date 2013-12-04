@@ -3,11 +3,11 @@
 namespace TcpModernUI.Pages.players
 {
     /// <summary>
-    /// Interaction logic for PlayerBookings.xaml
+    /// Interaction logic for PlayerCategories.xaml
     /// </summary>
-    public partial class PlayerBookings : UserControl
+    public partial class PlayerCategories : UserControl
     {
-        public PlayerBookings()
+        public PlayerCategories()
         {
             InitializeComponent();
         }

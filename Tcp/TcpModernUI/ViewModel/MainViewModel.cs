@@ -1,4 +1,4 @@
-using GalaSoft.MvvmLight;
+using TcpModernUI.BaseClasses;
 
 namespace TcpModernUI.ViewModel
 {
@@ -16,19 +16,64 @@ namespace TcpModernUI.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
+
+        #region members
+        private BadgesViewModel _badgesvm;
+        private CourtViewModel _courtvm;
+        private PlayersViewModel _playersvm;
+        private SeasonsViewModel _seasonsvm;
+        #endregion
+
+
+        #region ctor
         public MainViewModel()
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            _badgesvm = new BadgesViewModel();
+            _badgesvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+            _badgesvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("badgesvm");
+            _badgesvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("badgesvm");
+            
+            _courtvm = new CourtViewModel();
+            _courtvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+            _courtvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("courtsvm");
+            _courtvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("courtsvm");
+
+            _playersvm = new PlayersViewModel();
+            _playersvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+            _playersvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("playersvm");
+            _playersvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("playersvm");
+            
+            _seasonsvm = new SeasonsViewModel();
+            _seasonsvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+            _seasonsvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("seasonsvm");
+            _seasonsvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("seasonsvm");
         }
+        #endregion
+
+        
+
+        #region props
+
+        public BadgesViewModel BadgesViewModel
+        {
+            get { return _badgesvm; }
+        }
+
+        public CourtViewModel CourtViewModel
+        {
+            get { return _courtvm; }
+        }
+
+        public PlayersViewModel PlayersViewModel
+        {
+            get { return _playersvm; }
+        }
+
+        public SeasonsViewModel SeasonsViewModel
+        {
+            get { return _seasonsvm; }
+        }
+
+        #endregion
     }
 }

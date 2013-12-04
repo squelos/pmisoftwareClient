@@ -5,14 +5,22 @@
                       xmlns:ViewModel="clr-namespace:TcpModernUI.ViewModel" x:Class="TcpModernUI.MainWindow"
                       Title="Tennis Club Portois" MinWidth="650" MinHeight="650" ShowTitleBar="True"
                       ShowIconOnTitleBar="True"
-                      Width="1366" Height="768">
-
+                      Width="1366" Height="768" DataContext="{Binding Source={StaticResource Locator }, Path=Main}" Loaded="MetroWindow_Loaded" >
     <Window.Resources>
         <Converters:BoolInverterConverter x:Key="BoolInverterConverter" />
     </Window.Resources>
-    <Controls:MetroWindow.DataContext>
-        <ViewModel:MasterViewModel ValidationErrorsChanged="ViewModelBase_OnValidationErrorsChanged"/>
-    </Controls:MetroWindow.DataContext>
+    <!--<Controls:MetroWindow.DataContext>
+        
+        <ViewModel:MasterViewModel ValidationErrorsChanged="ViewModelBase_OnValidationErrorsChanged"></ViewModel:MasterViewModel>
+        --><!--<Binding Mode="OneWay" Path="Main" ValidationErrorsChanged=""  Source="{StaticResource Locator}"/>--><!--
+    </Controls:MetroWindow.DataContext>-->
+    <!--DataContext="{Binding Source={StaticResource Locator}, Path=Main}"-->
+
+
+
+
+
+
 
     <Controls:MetroWindow.WindowCommands>
         <Controls:WindowCommands>
@@ -20,7 +28,7 @@
 
         </Controls:WindowCommands>
     </Controls:MetroWindow.WindowCommands>
-    
+
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
             <Controls:Flyout x:Name="playerBadge" Position="Right">
@@ -30,22 +38,27 @@
             </Controls:Flyout>
             <Controls:Flyout x:Name="playerBookings" Position="Right">
                 <Grid>
-                    
+                    <players:PlayerBookings />
                 </Grid>
             </Controls:Flyout>
             <Controls:Flyout x:Name="playerTime" Position="Right">
                 <Grid>
-
+                    <players:PlayerTime />
                 </Grid>
             </Controls:Flyout>
             <Controls:Flyout x:Name="playerTraining" Position="Right">
                 <Grid>
-
+                    <players:PlayerTraining />
                 </Grid>
             </Controls:Flyout>
             <Controls:Flyout x:Name="playerPayment" Position="Right">
                 <Grid>
-
+                    <players:PlayerPayment />
+                </Grid>
+            </Controls:Flyout>
+            <Controls:Flyout x:Name="playerCategories" Position="Right">
+                <Grid>
+                    <players:PlayerCategories />
                 </Grid>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
@@ -56,13 +69,11 @@
             <Grid />
         </TabItem>
         <TabItem Header="Adhérents">
-
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="3" />
                     <ColumnDefinition Width="Auto" />
-
                 </Grid.ColumnDefinitions>
                 <ScrollViewer>
                     <Grid Margin="10">
@@ -112,7 +123,7 @@
 
                 <StackPanel Grid.Column="2">
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                        <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                        <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" ToolTip="Badges"
                                 Click="PLayerClickBadges">
                             <Rectangle Width="12" Height="12">
                                 <Rectangle.Fill>
@@ -120,11 +131,35 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
-                        <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                        <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" ToolTip="Réservations"
                                 Click="PlayerClickBookings">
                             <Rectangle Width="12" Height="12">
                                 <Rectangle.Fill>
                                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_calendar}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" ToolTip="Préférences de réservation"
+                                Click="PlayerClickPrefBooking">
+                            <Rectangle Width="12" Height="12">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_clock}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" ToolTip="Horaires d'entraînement"
+                                Click="PlayerClickTraining">
+                            <Rectangle Width="12" Height="12">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_trophy}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" ToolTip="Catégories"
+                                Click="PlayerClickCategories">
+                            <Rectangle Width="12" Height="12">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_lines_horizontal_4}" />
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
@@ -243,7 +278,7 @@
                                             HorizontalAlignment="Right" Grid.Row="7" VerticalAlignment="Stretch"
                                             Margin="0,10,0,10">
                                     <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                            Command="{Binding PlayersViewModel.CancelCommand}">
+                                            Command="{Binding PlayersViewModel.CancelCommand}" ToolTip="Annuler">
                                         <Rectangle Width="12" Height="12">
                                             <Rectangle.Fill>
                                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
@@ -251,7 +286,7 @@
                                         </Rectangle>
                                     </Button>
                                     <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                            Command="{Binding PlayersViewModel.SaveCommand}">
+                                            Command="{Binding PlayersViewModel.SaveCommand}" ToolTip="Ajout">
                                         <Rectangle Width="12" Height="12">
                                             <Rectangle.Fill>
                                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
@@ -266,8 +301,6 @@
                                 <DatePicker SelectedDate="{Binding PlayersViewModel.CurrentPlayer.birthDate}" Grid.Column="1"
                                             HorizontalAlignment="Left" Margin="10,0,10,0" Grid.Row="3"
                                             VerticalAlignment="Center" Width="Auto" />
-
-
                             </Grid>
                         </ScrollViewer>
 
@@ -411,7 +444,7 @@
             <Grid />
         </TabItem>
         <TabItem Header="Terrains">
-            
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -500,7 +533,7 @@
             </Grid>
         </TabItem>
         <TabItem Header="Badges">
-            
+
             <Grid>
 
                 <Grid.ColumnDefinitions>
@@ -604,7 +637,7 @@
             </Grid>
         </TabItem>
         <TabItem Header="Saisons">
-           
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />

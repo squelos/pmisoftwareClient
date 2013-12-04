@@ -8,7 +8,6 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
-using System.Threading.Tasks;
 
 
 namespace TcpModernUI.ViewModel
@@ -115,11 +114,15 @@ namespace TcpModernUI.ViewModel
         #region public methods
         public void Save()
         {
-            _players.Add(_player);
+            //
             Container.PlayerJeu.Add(CurrentPlayer);
             RaisePropertyChangedEvent("container");
-           CommitChanges();
-            InitializePlayers();
+            if (CommitChanges())
+            {
+                InitializePlayers();
+                _players.Add(_player);
+            }
+            
         }
 
         public void Cancel()

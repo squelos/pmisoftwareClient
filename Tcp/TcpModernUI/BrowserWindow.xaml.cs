@@ -1,11 +1,5 @@
-﻿using System.Data.Entity.Validation;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using MahApps.Metro.Controls;
-using TcpModernUI.BaseClasses;
-using TcpModernUI.Utility;
 
 namespace TcpModernUI
 {
@@ -17,16 +11,12 @@ namespace TcpModernUI
         public BrowserWindow()
         {
             InitializeComponent();
-            
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             //    this.Browser.Navigate("http://172.17.100.1/max/dev/");
             this.Browser.Navigate("http://www.google.fr");
-            
         }
-
-       
     }
 }

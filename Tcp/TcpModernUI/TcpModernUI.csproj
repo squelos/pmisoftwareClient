@@ -128,6 +128,9 @@
     <Compile Include="Pages\players\PlayerBookings.xaml.cs">
       <DependentUpon>PlayerBookings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\players\PlayerCategories.xaml.cs">
+      <DependentUpon>PlayerCategories.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\players\PlayerPayment.xaml.cs">
       <DependentUpon>PlayerPayment.xaml</DependentUpon>
     </Compile>
@@ -137,7 +140,6 @@
     <Compile Include="Pages\players\PlayerTraining.xaml.cs">
       <DependentUpon>PlayerTraining.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utility\Delegator.cs" />
     <Compile Include="ViewModel\BadgesViewModel.cs" />
     <Compile Include="ViewModel\CourtViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -145,6 +147,10 @@
     <Compile Include="ViewModel\PlayersViewModel.cs" />
     <Compile Include="ViewModel\SeasonsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="Assets\BaseDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\BaseLight.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -206,6 +212,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\players\PlayerBookings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\players\PlayerCategories.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

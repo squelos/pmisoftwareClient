@@ -1,11 +1,10 @@
 ﻿using System.Data.Entity.Validation;
-using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using MahApps.Metro.Controls;
-using TcpModernUI.BaseClasses;
-using TcpModernUI.Utility;
+using TcpModernUI.ViewModel;
+
 
 namespace TcpModernUI
 {
@@ -16,7 +15,7 @@ namespace TcpModernUI
     {
         public MainWindow()
         {
-            
+           
         }
 
         private void LaunchFlyoutDemo(object sender, RoutedEventArgs e)
@@ -42,6 +41,21 @@ namespace TcpModernUI
         private void PlayerClickBookings(object sender, RoutedEventArgs e)
         {
             ToggleFlyout(1);
+        }
+
+        private void PlayerClickPrefBooking(object sender, RoutedEventArgs e)
+        {
+            ToggleFlyout(2);
+        }
+
+        private void PlayerClickTraining(object sender, RoutedEventArgs e)
+        {
+            ToggleFlyout(3);
+        }
+
+        private void PlayerClickCategories(object sender, RoutedEventArgs e)
+        {
+            ToggleFlyout(4);
         }
 
         private void ViewModelBase_OnValidationErrorsChanged(object sender, DbEntityValidationException e)
@@ -70,6 +84,13 @@ namespace TcpModernUI
             flyout.IsOpen = !flyout.IsOpen;
         }
 
-       
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var dataContext = DataContext;
+            var mainViewModel = dataContext as MainViewModel;
+            if (mainViewModel != null)
+                mainViewModel.ValidationErrorsChanged +=
+                    (o, exception) => ViewModelBase_OnValidationErrorsChanged(o, exception);
+        }
     }
 }
