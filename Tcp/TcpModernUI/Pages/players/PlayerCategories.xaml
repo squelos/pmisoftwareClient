@@ -14,9 +14,17 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="19*"/>
-            <RowDefinition Height="131*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Label Content="Catégories" Grid.Row="0"></Label>
+        <Label Content="{Binding PlayersViewModel.SelectedPlayer}" Grid.Row="1"></Label>
+        <ListBox Grid.Row="2" ItemsSource="{Binding PlayersViewModel.SelectedPlayer.Category}" DisplayMemberPath="categoryName" MouseDoubleClick="Control1_OnMouseDoubleClick" />
+        <ListBox Grid.Row="3" ItemsSource="{Binding PlayersViewModel.Categories}" DisplayMemberPath="categoryName" MouseDoubleClick="Control_OnMouseDoubleClick"/>
+     
 
     </Grid>
 </UserControl>

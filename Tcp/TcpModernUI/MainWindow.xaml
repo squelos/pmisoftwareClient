@@ -51,16 +51,17 @@
                     <players:PlayerTraining />
                 </Grid>
             </Controls:Flyout>
-            <Controls:Flyout x:Name="playerPayment" Position="Right">
-                <Grid>
-                    <players:PlayerPayment />
-                </Grid>
-            </Controls:Flyout>
             <Controls:Flyout x:Name="playerCategories" Position="Right">
                 <Grid>
                     <players:PlayerCategories />
                 </Grid>
             </Controls:Flyout>
+            <Controls:Flyout x:Name="playerPayment" Position="Right">
+                <Grid>
+                    <players:PlayerPayment />
+                </Grid>
+            </Controls:Flyout>
+            
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 

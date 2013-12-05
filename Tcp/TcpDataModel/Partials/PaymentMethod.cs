@@ -8,6 +8,9 @@ namespace TcpDataModel
 {
     public partial class PaymentMethod
     {
-
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

@@ -15,5 +15,10 @@ namespace TcpDataModel
             isMaster = master;
             hash = id;
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

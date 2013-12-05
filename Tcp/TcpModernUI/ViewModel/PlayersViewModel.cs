@@ -24,6 +24,7 @@ namespace TcpModernUI.ViewModel
         private RelayCommand _saveCommand;
         private RelayCommand _cancelCommand;
         private RelayCommand _updateCommand;
+        private List<Category> _categories;
         #endregion
 
         #region ctor
@@ -43,16 +44,25 @@ namespace TcpModernUI.ViewModel
                         Container.PlayerJeu.Remove(old as Player);
                     }
                 }
+                //else if (args.Action == NotifyCollectionChangedAction.Add)
+                //{
+                //    foreach (var newItem in args.NewItems)
+                //    {
+                //        Container.PlayerJeu.Add(newItem as Player);
+                //    }
+                //}
                 RaisePropertyChangedEvent("players");
             };
             _ballLevels = (from a in Container.BallLevelSet select a).ToList();
-            _statuses = (from a in Container.StatusSet select a).ToList(); 
+            _statuses = (from a in Container.StatusSet select a).ToList();
+            _categories = (from a in Container.CategorySet select a).ToList();
             _saveCommand = new RelayCommand(Save);
             _cancelCommand = new RelayCommand(Cancel);
             _updateCommand = new RelayCommand(Update);
             InitializePlayers();
         }
         #endregion
+
         #region getters/setters
 
         public Player SelectedPlayer
@@ -63,6 +73,11 @@ namespace TcpModernUI.ViewModel
                 _selectedPlayer = value;
                 RaisePropertyChangedEvent("selectedPlayer");
             }
+        }
+
+        public List<Category> Categories
+        {
+            get { return _categories; }
         }
 
         public Player CurrentPlayer
@@ -114,13 +129,15 @@ namespace TcpModernUI.ViewModel
         #region public methods
         public void Save()
         {
-            //
             Container.PlayerJeu.Add(CurrentPlayer);
-            RaisePropertyChangedEvent("container");
+            
+            //RaisePropertyChangedEvent("container");
             if (CommitChanges())
             {
+                Players.Add(CurrentPlayer);
                 InitializePlayers();
-                _players.Add(_player);
+                //Players = _players;
+                //_players.Add(_player);
             }
             
         }
@@ -129,6 +146,7 @@ namespace TcpModernUI.ViewModel
         {
             ResetContainer();
             _players = new ObservableCollection<Player>(Container.PlayerJeu);
+            SelectedPlayer = null;
             InitializePlayers();
             RaisePropertyChangedEvent("container");
         }

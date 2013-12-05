@@ -30,5 +30,10 @@ namespace TcpDataModel
             birthDate = date;
             lastLogin = login;
         }
+
+        public override string ToString()
+        {
+            return firstName + " " + lastName;
+        }
     }
 }

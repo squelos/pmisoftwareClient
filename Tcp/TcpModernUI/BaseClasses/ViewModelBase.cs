@@ -51,6 +51,7 @@ namespace TcpModernUI.BaseClasses
             try
             {
                 _container.SaveChanges();
+                RaisePropertyChangedEvent("container");
                 return true;
             }
             catch (DbEntityValidationException validationException)
