@@ -17,15 +17,15 @@ namespace TcpModernUI.Pages.players
         private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //add here
-            //var dataContext = DataContext;
-            //var mainViewModel = dataContext as MainViewModel;
-            //mainViewModel.PlayersViewModel.SelectedPlayer.Category.Add(e);
+            var dataContext = DataContext;
+            var mainViewModel = dataContext as MainViewModel;
+           // mainViewModel.PlayersViewModel.SelectedPlayer.Category.Add(sender);
         }
 
         private void Control1_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             // remove here
-            throw new System.NotImplementedException();
+            // throw new System.NotImplementedException();
         }
     }
 }
