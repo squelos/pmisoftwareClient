@@ -119,6 +119,15 @@
     <Compile Include="BrowserWindow.xaml.cs">
       <DependentUpon>BrowserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\badges\creationBadges.xaml.cs">
+      <DependentUpon>creationBadges.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\courts\courtCreation.xaml.cs">
+      <DependentUpon>courtCreation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\players\creationPlayers.xaml.cs">
+      <DependentUpon>creationPlayers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\players\PlayerBadges.xaml.cs">
       <DependentUpon>PlayerBadges.xaml</DependentUpon>
     </Compile>
@@ -136,6 +145,9 @@
     </Compile>
     <Compile Include="Pages\players\PlayerTraining.xaml.cs">
       <DependentUpon>PlayerTraining.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\seasons\creationSeasons.xaml.cs">
+      <DependentUpon>creationSeasons.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BadgesViewModel.cs" />
     <Compile Include="ViewModel\CourtViewModel.cs" />
@@ -184,7 +196,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\badges\creationBadges.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\courts\courtCreation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\players\creationPlayers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -216,6 +240,10 @@
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Page Include="Pages\seasons\creationSeasons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -261,10 +289,7 @@
     <Content Include="Resources\Entypo-license.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\badges\" />
-    <Folder Include="Pages\courts\" />
     <Folder Include="Pages\reservations\" />
-    <Folder Include="Pages\seasons\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
