@@ -756,6 +756,9 @@
                 </ScrollViewer>
             </Grid>
         </TabItem>
+        <TabItem Header="Impayés">
+            <DataGrid />
+        </TabItem>
     </Controls:MetroAnimatedSingleRowTabControl>
 
 </Controls:MetroWindow>

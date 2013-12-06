@@ -19,6 +19,7 @@ namespace TcpModernUI.ViewModel
         private Player _selectedPlayer;
         private CollectionViewSource _playersViewSource;
         private ObservableCollection<Player> _players;
+        private CollectionViewSource _unpaidPlayers; 
         private List<BallLevel> _ballLevels;
         private List<Status> _statuses;
         private RelayCommand _saveCommand;
@@ -32,6 +33,7 @@ namespace TcpModernUI.ViewModel
         {
            // var b = new Task(() => { });
             _players = new ObservableCollection<Player>(Container.PlayerJeu);
+            _unpaidPlayers = new CollectionViewSource();
             _playersViewSource = new CollectionViewSource() {Source = _players};
             
 
@@ -136,8 +138,7 @@ namespace TcpModernUI.ViewModel
             {
                 Players.Add(CurrentPlayer);
                 InitializePlayers();
-                //Players = _players;
-                //_players.Add(_player);
+            
             }
             
         }
