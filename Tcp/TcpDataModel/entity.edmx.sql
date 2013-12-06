@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/06/2013 16:23:37
+-- Date Created: 12/06/2013 22:29:42
 -- Generated from EDMX file: C:\Users\squelos\Documents\GitHub\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
 -- --------------------------------------------------
 
@@ -143,7 +143,9 @@ GO
 
 -- Creating table 'SeasonJeu'
 CREATE TABLE [dbo].[SeasonJeu] (
-    [ID] int IDENTITY(1,1) NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Semester1_ID] int  NOT NULL,
+    [Semester2_ID] int  NOT NULL
 );
 GO
 
@@ -151,8 +153,7 @@ GO
 CREATE TABLE [dbo].[SemesterJeu] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [start] datetime  NOT NULL,
-    [end] datetime  NOT NULL,
-    [Season_ID] int  NOT NULL
+    [end] datetime  NOT NULL
 );
 GO
 
@@ -426,18 +427,18 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Season_ID] in table 'SemesterJeu'
-ALTER TABLE [dbo].[SemesterJeu]
-ADD CONSTRAINT [FK_SeasonSemester]
-    FOREIGN KEY ([Season_ID])
-    REFERENCES [dbo].[SeasonJeu]
+-- Creating foreign key on [Semester1_ID] in table 'SeasonJeu'
+ALTER TABLE [dbo].[SeasonJeu]
+ADD CONSTRAINT [FK_SeasonSemester1]
+    FOREIGN KEY ([Semester1_ID])
+    REFERENCES [dbo].[SemesterJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_SeasonSemester'
-CREATE INDEX [IX_FK_SeasonSemester]
-ON [dbo].[SemesterJeu]
-    ([Season_ID]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_SeasonSemester1'
+CREATE INDEX [IX_FK_SeasonSemester1]
+ON [dbo].[SeasonJeu]
+    ([Semester1_ID]);
 GO
 
 -- Creating foreign key on [BookingAggregation_ID] in table 'BookingJeu'
@@ -684,16 +685,30 @@ GO
 
 -- Creating foreign key on [Player2_ID] in table 'BookingJeu'
 ALTER TABLE [dbo].[BookingJeu]
-ADD CONSTRAINT [FK_BookingPlayer]
+ADD CONSTRAINT [FK_BookingPlayer2]
     FOREIGN KEY ([Player2_ID])
     REFERENCES [dbo].[PlayerJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_BookingPlayer'
-CREATE INDEX [IX_FK_BookingPlayer]
+-- Creating non-clustered index for FOREIGN KEY 'FK_BookingPlayer2'
+CREATE INDEX [IX_FK_BookingPlayer2]
 ON [dbo].[BookingJeu]
     ([Player2_ID]);
+GO
+
+-- Creating foreign key on [Semester2_ID] in table 'SeasonJeu'
+ALTER TABLE [dbo].[SeasonJeu]
+ADD CONSTRAINT [FK_SeasonSemester2]
+    FOREIGN KEY ([Semester2_ID])
+    REFERENCES [dbo].[SemesterJeu]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SeasonSemester2'
+CREATE INDEX [IX_FK_SeasonSemester2]
+ON [dbo].[SeasonJeu]
+    ([Semester2_ID]);
 GO
 
 -- --------------------------------------------------

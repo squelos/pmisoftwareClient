@@ -9,7 +9,7 @@ namespace TcpDataModel
     public partial class Player
     {
         public Player(String first, String last, DateTime birth, String rank, string mail,
-            string street, string zip, string city, string phone, string phone2, string hash, string license) : this()
+            string street, string zip, string city, string phone, string phone2, string hash, string license, string log) : this()
         {
             firstName = first;
             lastName = last;
@@ -23,6 +23,7 @@ namespace TcpDataModel
             this.phone2 = phone2;
             passwordHash = hash;
             licenceNumber = license;
+            login = log;
         }
 
         public Player(DateTime date, DateTime login)

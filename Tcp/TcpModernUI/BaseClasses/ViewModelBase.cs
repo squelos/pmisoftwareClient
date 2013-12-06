@@ -13,7 +13,10 @@ namespace TcpModernUI.BaseClasses
         #region errorEvents
         public delegate void EntityValidationHandler(object sender, DbEntityValidationException e);
 
+        public delegate void CustomErrorHandler(object sender, string e);
+
         public event EntityValidationHandler ValidationErrorsChanged;
+        public event CustomErrorHandler CustomErrorsChanged;
 
         #endregion
 
@@ -108,6 +111,15 @@ namespace TcpModernUI.BaseClasses
             if (ValidationErrorsChanged == null) return;
 
             ValidationErrorsChanged(this, validationException);
+        }
+
+        public void RaiseCustomError(string message)
+        {
+            if (IgnorePropertyChangeEvents) return;
+
+            if (CustomErrorsChanged == null) return;
+
+            CustomErrorsChanged(this, message);
         }
         #endregion
     }

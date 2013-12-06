@@ -90,8 +90,19 @@ namespace TcpModernUI
             var dataContext = DataContext;
             var mainViewModel = dataContext as MainViewModel;
             if (mainViewModel != null)
+            {
                 mainViewModel.ValidationErrorsChanged +=
                     (o, exception) => ViewModelBase_OnValidationErrorsChanged(o, exception);
+                mainViewModel.CustomErrorsChanged += (o, s) => ViewModelBase_CustomErrorsChanged(o, s);
+            }
+
+
+        }
+
+        private void ViewModelBase_CustomErrorsChanged(object sender, string s)
+        {
+            this.ShowMessageAsync("Erreur de validation", s,
+                MahApps.Metro.Controls.MessageDialogStyle.Affirmative);
         }
     }
 }

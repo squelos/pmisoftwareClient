@@ -14,13 +14,9 @@ namespace TcpDataModel
     
     public partial class Season
     {
-        public Season()
-        {
-            this.Semester = new ObservableCollection<Semester>();
-        }
-    
         public int ID { get; set; }
     
-        public virtual ObservableCollection<Semester> Semester { get; set; }
+        public virtual Semester Semester1 { get; set; }
+        public virtual Semester Semester2 { get; set; }
     }
 }

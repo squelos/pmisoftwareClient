@@ -25,5 +25,6 @@ namespace TcpDataModel
     
         public virtual Season Season { get; set; }
         public virtual ObservableCollection<Payment> Payment { get; set; }
+        public virtual Season Season1 { get; set; }
     }
 }

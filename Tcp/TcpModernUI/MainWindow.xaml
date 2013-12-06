@@ -8,11 +8,14 @@
                       Width="1366" Height="768" DataContext="{Binding Source={StaticResource Locator }, Path=Main}" Loaded="MetroWindow_Loaded" >
     <Window.Resources>
         <Converters:BoolInverterConverter x:Key="BoolInverterConverter" />
+
     </Window.Resources>
     <!--<Controls:MetroWindow.DataContext>
         
         <ViewModel:MasterViewModel ValidationErrorsChanged="ViewModelBase_OnValidationErrorsChanged"></ViewModel:MasterViewModel>
-        --><!--<Binding Mode="OneWay" Path="Main" ValidationErrorsChanged=""  Source="{StaticResource Locator}"/>--><!--
+        -->
+    <!--<Binding Mode="OneWay" Path="Main" ValidationErrorsChanged=""  Source="{StaticResource Locator}"/>-->
+    <!--
     </Controls:MetroWindow.DataContext>-->
     <!--DataContext="{Binding Source={StaticResource Locator}, Path=Main}"-->
 
@@ -61,7 +64,7 @@
                     <players:PlayerPayment />
                 </Grid>
             </Controls:Flyout>
-            
+
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
@@ -204,6 +207,8 @@
                                        VerticalAlignment="Center" />
                                 <Label Content="Status" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="5"
                                        VerticalAlignment="Center" />
+                                <Label Content="Login" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="6"
+                                       VerticalAlignment="Center" />
                                 <Label Content="Email" HorizontalAlignment="Left" Margin="15,9,0,10" Grid.Row="2"
                                        VerticalAlignment="Center" />
                                 <Label Content="Rue" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="0"
@@ -244,6 +249,11 @@
                                           VerticalAlignment="Center" ItemsSource="{Binding PlayersViewModel.Statuses}"
                                           DisplayMemberPath="" SelectedIndex="0"
                                           SelectedValue="{Binding PlayersViewModel.CurrentPlayer.Status}" />
+                                <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.login}"
+                                         Controls:TextboxHelper.Watermark="test@email.com"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Center" />
                                 <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.street}"
                                          Controls:TextboxHelper.Watermark="1 rue de la gare"
                                          Controls:TextboxHelper.ClearTextButton="True"
@@ -354,6 +364,8 @@
                                        Grid.Column="2" VerticalAlignment="Center" />
                                 <Label Content="Classement" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="5"
                                        Grid.Column="2" VerticalAlignment="Center" />
+                                <Label Content="Login" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="6"
+                                       VerticalAlignment="Center" />
                                 <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.firstName}"
                                          Controls:TextboxHelper.Watermark="Prénom"
                                          Controls:TextboxHelper.ClearTextButton="True"
@@ -364,6 +376,11 @@
                                          Controls:TextboxHelper.ClearTextButton="True"
                                          Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
                                          Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.login}"
+                                         Controls:TextboxHelper.Watermark="test@email.com"
+                                         Controls:TextboxHelper.ClearTextButton="True"
+                                         Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
+                                         Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Center" />
                                 <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.email}"
                                          Controls:TextboxHelper.Watermark="test@email.com"
                                          Controls:TextboxHelper.ClearTextButton="True"
@@ -757,7 +774,18 @@
             </Grid>
         </TabItem>
         <TabItem Header="Impayés">
-            <DataGrid />
+            <DataGrid  ItemsSource="{Binding PlayersViewModel.Unpaid}" SelectedValue="{Binding PlayersViewModel.SelectedPlayer}"
+                       AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding lastName}" Header="Nom" />
+                    <DataGridTextColumn Binding="{Binding firstName}" Header="Prénom" />
+                    <DataGridTextColumn Binding="{Binding email}" Header="Email" />
+                    <DataGridTextColumn Binding="{Binding phone1}" Header="Telephone" />
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Status}" Header="Status" />
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Payment/Semester/end}"></DataGridTextColumn>
+                    <DataGridCheckBoxColumn Binding="{Binding isEnabled}" Header="Etat" />
+                </DataGrid.Columns>
+            </DataGrid>
         </TabItem>
     </Controls:MetroAnimatedSingleRowTabControl>
 

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -20,7 +22,7 @@ namespace TcpModernUI.ViewModel
         private Player _selectedPlayer;
         private CollectionViewSource _playersViewSource;
         private ObservableCollection<Player> _players;
-        private CollectionViewSource _unpaidPlayers; 
+        private ObservableCollection<Player> _unpaidPlayers;
         private List<BallLevel> _ballLevels;
         private List<Status> _statuses;
         private RelayCommand _saveCommand;
@@ -32,24 +34,16 @@ namespace TcpModernUI.ViewModel
         #region ctor
         public PlayersViewModel()
         {
-           // var b = new Task(() => { });
+            // var b = new Task(() => { });
             _players = new ObservableCollection<Player>(Container.PlayerJeu);
-            _unpaidPlayers = new CollectionViewSource();
-            //_unpaidPlayers.Source = (from e in Container.PlayerJeu select e);
-            //_unpaidPlayers.View.Filter = o =>
-            //                             {
-            //                                 Player p = o as Player;
-            //                                 if (p.Payment.Count() == 0) return false;
-            //                                 if (from b in p.Payment select b.Semester.Last().end < DateTime.Now)
-            //                                 {
-            //                                     return true;
-            //                                 }
-            //                             };
-            _playersViewSource = new CollectionViewSource() {Source = _players};
+            _unpaidPlayers = new ObservableCollection<Player>(Container.PlayerJeu);
             
+            _playersViewSource = new CollectionViewSource() { Source = _players };
+
 
             _players.CollectionChanged += (sender, args) =>
             {
+                Unpaid = new ObservableCollection<Player>(Container.PlayerJeu.Where(player => player.Payment.Last().Semester.Last().end < DateTime.Now));
                 if (args.Action == NotifyCollectionChangedAction.Remove)
                 {
                     foreach (var old in args.OldItems)
@@ -113,6 +107,17 @@ namespace TcpModernUI.ViewModel
             }
         }
 
+        public ObservableCollection<Player> Unpaid
+        {
+            get { return _unpaidPlayers; }
+            set
+            {
+                
+                _unpaidPlayers = value;
+                RaisePropertyChangedEvent("unpaid");
+            }
+        }
+
         public List<BallLevel> BallLevels
         {
             get { return _ballLevels; }
@@ -142,16 +147,22 @@ namespace TcpModernUI.ViewModel
         #region public methods
         public void Save()
         {
+            if (Players.Count(player => player.login.ToLower() == CurrentPlayer.login.ToLower()) != 0)
+            {
+
+                RaiseCustomError("Login déjà existant");
+                return;
+            }
             Container.PlayerJeu.Add(CurrentPlayer);
-            
+
             //RaisePropertyChangedEvent("container");
             if (CommitChanges())
             {
                 Players.Add(CurrentPlayer);
                 InitializePlayers();
-            
+
             }
-            
+
         }
 
         public void Cancel()
@@ -170,9 +181,9 @@ namespace TcpModernUI.ViewModel
         #endregion
 
         #region private methods
-        private void  InitializePlayers()
+        private void InitializePlayers()
         {
-            CurrentPlayer = new Player(DateTime.Now, DateTime.Now) ;
+            CurrentPlayer = new Player(DateTime.Now, DateTime.Now);
             CurrentPlayer.isEnabled = true;
             CurrentPlayer.passwordHash = "00000";
         }

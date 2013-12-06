@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace TcpDataModel
 {
-    public partial class Season
+    public partial class Court
     {
 
-        public Season(Semester first, Semester second)
+        public Court(string num, bool covered) : this()
         {
-            this.Semester1 = first;
-            this.Semester2 = second;
+            this.number = num;
+            this.isCovered = covered;
         }
-
-      
-
-       
     }
 }

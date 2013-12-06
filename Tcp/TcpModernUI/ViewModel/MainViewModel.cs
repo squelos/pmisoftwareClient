@@ -30,21 +30,25 @@ namespace TcpModernUI.ViewModel
         {
             _badgesvm = new BadgesViewModel();
             _badgesvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+            _badgesvm.CustomErrorsChanged += (sender, s) => RaiseCustomError(s);
             _badgesvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("badgesvm");
             _badgesvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("badgesvm");
             
             _courtvm = new CourtViewModel();
             _courtvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+            _courtvm.CustomErrorsChanged += (sender, s) => RaiseCustomError(s);
             _courtvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("courtsvm");
             _courtvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("courtsvm");
 
             _playersvm = new PlayersViewModel();
             _playersvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+            _playersvm.CustomErrorsChanged += (sender, s) => RaiseCustomError(s);
             _playersvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("playersvm");
             _playersvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("playersvm");
             
             _seasonsvm = new SeasonsViewModel();
             _seasonsvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+            _seasonsvm.CustomErrorsChanged += (sender, s) => RaiseCustomError(s);
             _seasonsvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("seasonsvm");
             _seasonsvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("seasonsvm");
         }

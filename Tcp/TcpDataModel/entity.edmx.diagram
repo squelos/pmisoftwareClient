@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1a932b47b9f34da6a29968e675ba7f26" Name="Diagram1" >
-        <EntityTypeShape EntityType="entity.Season" Width="1.5" PointX="3.625" PointY="1.375" />
+        <EntityTypeShape EntityType="entity.Season" Width="1.5" PointX="3" PointY="1.5" />
         <EntityTypeShape EntityType="entity.Semester" Width="1.5" PointX="5.5" PointY="1.375" />
         <EntityTypeShape EntityType="entity.Payment" Width="1.5" PointX="5.5" PointY="3.875" />
         <EntityTypeShape EntityType="entity.Badge" Width="1.5" PointX="10.75" PointY="8.125" />
@@ -15,7 +15,7 @@
         <EntityTypeShape EntityType="entity.Opening" Width="1.5" PointX="12.75" PointY="4.75" />
         <EntityTypeShape EntityType="entity.Player" Width="1.5" PointX="8" PointY="4.125" />
         <EntityTypeShape EntityType="entity.PreferencePeriod" Width="1.5" PointX="3.25" PointY="5.625" />
-        <AssociationConnector Association="entity.SeasonSemester" />
+        <AssociationConnector Association="entity.SeasonSemester1" />
         <AssociationConnector Association="entity.BookingAggregationBooking" />
         <AssociationConnector Association="entity.BookingCourt" />
         <AssociationConnector Association="entity.CourtOpening" />
@@ -38,7 +38,8 @@
         <AssociationConnector Association="entity.DayTrainingPreferences" />
         <EntityTypeShape EntityType="entity.BallLevel" Width="1.5" PointX="7.625" PointY="10.25" />
         <AssociationConnector Association="entity.PlayerBallLevel" />
-        <AssociationConnector Association="entity.BookingPlayer" />
+        <AssociationConnector Association="entity.BookingPlayer2" />
+        <AssociationConnector Association="entity.SeasonSemester2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
