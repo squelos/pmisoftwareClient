@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/03/2013 10:23:10
+-- Date Created: 12/06/2013 16:23:37
 -- Generated from EDMX file: C:\Users\squelos\Documents\GitHub\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
 -- --------------------------------------------------
 
@@ -73,6 +73,9 @@ IF OBJECT_ID(N'[dbo].[FK_DayTrainingPreferences]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_PlayerBallLevel]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PlayerJeu] DROP CONSTRAINT [FK_PlayerBallLevel];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BookingPlayer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingPlayer];
 GO
 
 -- --------------------------------------------------
@@ -188,16 +191,18 @@ CREATE TABLE [dbo].[BookingJeu] (
     [isSpecial] bit  NOT NULL,
     [start] datetime  NOT NULL,
     [end] datetime  NOT NULL,
+    [creationDate] datetime  NOT NULL,
     [BookingAggregation_ID] int  NULL,
     [Court_ID] int  NOT NULL,
-    [Player_ID] int  NOT NULL
+    [Player1_ID] int  NOT NULL,
+    [Player2_ID] int  NULL
 );
 GO
 
 -- Creating table 'CourtJeu'
 CREATE TABLE [dbo].[CourtJeu] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [number] int  NOT NULL,
+    [number] nvarchar(max)  NOT NULL,
     [isCovered] bit  NOT NULL
 );
 GO
@@ -223,11 +228,12 @@ CREATE TABLE [dbo].[PlayerJeu] (
     [zipCode] nvarchar(max)  NOT NULL,
     [city] nvarchar(max)  NOT NULL,
     [phone1] nvarchar(max)  NOT NULL,
-    [phone2] nvarchar(max)  NOT NULL,
+    [phone2] nvarchar(max)  NULL,
     [isEnabled] bit  NOT NULL,
     [passwordHash] nvarchar(max)  NOT NULL,
     [lastLogin] datetime  NOT NULL,
-    [licenceNumber] nvarchar(max)  NOT NULL,
+    [licenceNumber] nvarchar(max)  NULL,
+    [login] nvarchar(max)  NOT NULL,
     [Status_Id] int  NOT NULL,
     [BallLevel_Id] int  NULL
 );
@@ -504,10 +510,10 @@ ON [dbo].[PreferencePeriodJeu]
     ([Player_ID]);
 GO
 
--- Creating foreign key on [Player_ID] in table 'BookingJeu'
+-- Creating foreign key on [Player1_ID] in table 'BookingJeu'
 ALTER TABLE [dbo].[BookingJeu]
 ADD CONSTRAINT [FK_PlayerBooking]
-    FOREIGN KEY ([Player_ID])
+    FOREIGN KEY ([Player1_ID])
     REFERENCES [dbo].[PlayerJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -515,7 +521,7 @@ ADD CONSTRAINT [FK_PlayerBooking]
 -- Creating non-clustered index for FOREIGN KEY 'FK_PlayerBooking'
 CREATE INDEX [IX_FK_PlayerBooking]
 ON [dbo].[BookingJeu]
-    ([Player_ID]);
+    ([Player1_ID]);
 GO
 
 -- Creating foreign key on [Player_ID] in table 'PaymentJeu'
@@ -674,6 +680,20 @@ ADD CONSTRAINT [FK_PlayerBallLevel]
 CREATE INDEX [IX_FK_PlayerBallLevel]
 ON [dbo].[PlayerJeu]
     ([BallLevel_Id]);
+GO
+
+-- Creating foreign key on [Player2_ID] in table 'BookingJeu'
+ALTER TABLE [dbo].[BookingJeu]
+ADD CONSTRAINT [FK_BookingPlayer]
+    FOREIGN KEY ([Player2_ID])
+    REFERENCES [dbo].[PlayerJeu]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_BookingPlayer'
+CREATE INDEX [IX_FK_BookingPlayer]
+ON [dbo].[BookingJeu]
+    ([Player2_ID]);
 GO
 
 -- --------------------------------------------------

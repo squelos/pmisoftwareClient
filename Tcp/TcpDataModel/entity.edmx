@@ -100,6 +100,10 @@
       <End Role="Player" EntitySet="PlayerJeu" />
       <End Role="BallLevel" EntitySet="BallLevelSet" />
     </AssociationSet>
+    <AssociationSet Name="BookingPlayer" Association="entity.Store.BookingPlayer">
+      <End Role="Booking" EntitySet="BookingJeu" />
+      <End Role="Player" EntitySet="PlayerJeu" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="SeasonJeu">
     <Key>
@@ -153,16 +157,18 @@
     <Property Name="isSpecial" Type="bit" Nullable="false" />
     <Property Name="start" Type="datetime" Nullable="false" />
     <Property Name="end" Type="datetime" Nullable="false" />
+    <Property Name="creationDate" Type="datetime" Nullable="false" />
     <Property Name="BookingAggregation_ID" Type="int" Nullable="true" />
     <Property Name="Court_ID" Type="int" Nullable="false" />
-    <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="Player1_ID" Type="int" Nullable="false" />
+    <Property Name="Player2_ID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="CourtJeu">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="number" Type="int" Nullable="false" />
+    <Property Name="number" Type="nvarchar(max)" Nullable="false" />
     <Property Name="isCovered" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="OpeningJeu">
@@ -188,11 +194,12 @@
     <Property Name="zipCode" Type="nvarchar(max)" Nullable="false" />
     <Property Name="city" Type="nvarchar(max)" Nullable="false" />
     <Property Name="phone1" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="phone2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="phone2" Type="nvarchar(max)" Nullable="true" />
     <Property Name="isEnabled" Type="bit" Nullable="false" />
     <Property Name="passwordHash" Type="nvarchar(max)" Nullable="false" />
     <Property Name="lastLogin" Type="datetime" Nullable="false" />
-    <Property Name="licenceNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="licenceNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="login" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Status_Id" Type="int" Nullable="false" />
     <Property Name="BallLevel_Id" Type="int" Nullable="true" />
   </EntityType>
@@ -349,7 +356,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Booking">
-        <PropertyRef Name="Player_ID" />
+        <PropertyRef Name="Player1_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -446,6 +453,18 @@
       </Principal>
       <Dependent Role="Player">
         <PropertyRef Name="BallLevel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BookingPlayer">
+    <End Role="Booking" Type="entity.Store.BookingJeu" Multiplicity="*" />
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="Player2_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -586,6 +605,10 @@
             <End Role="Player" EntitySet="PlayerJeu" />
             <End Role="BallLevel" EntitySet="BallLevelSet" />
           </AssociationSet>
+          <AssociationSet Name="BookingPlayer" Association="entity.BookingPlayer">
+            <End Role="Booking" EntitySet="BookingJeu" />
+            <End Role="Player" EntitySet="PlayerJeu" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Season">
           <Key>
@@ -642,11 +665,13 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="BookingAggregation" Relationship="entity.BookingAggregationBooking" FromRole="Booking" ToRole="BookingAggregation" />
           <NavigationProperty Name="Court" Relationship="entity.BookingCourt" FromRole="Booking" ToRole="Court" />
-          <NavigationProperty Name="Player" Relationship="entity.PlayerBooking" FromRole="Booking" ToRole="Player" />
+          <NavigationProperty Name="Player1" Relationship="entity.PlayerBooking" FromRole="Booking" ToRole="Player" />
           <Property Type="String" Name="name" Nullable="false" />
           <Property Type="Boolean" Name="isSpecial" Nullable="false" />
           <Property Type="DateTime" Name="start" Nullable="false" />
           <Property Type="DateTime" Name="end" Nullable="false" />
+          <Property Name="creationDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Player2" Relationship="entity.BookingPlayer" FromRole="Booking" ToRole="Player" />
         </EntityType>
         <EntityType Name="Court">
           <Key>
@@ -655,7 +680,7 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Booking" Relationship="entity.BookingCourt" FromRole="Court" ToRole="Booking" />
           <NavigationProperty Name="Opening" Relationship="entity.CourtOpening" FromRole="Court" ToRole="Opening" />
-          <Property Type="Int32" Name="number" Nullable="false" />
+          <Property Type="String" Name="number" Nullable="false" />
           <Property Type="Boolean" Name="isCovered" Nullable="false" />
         </EntityType>
         <EntityType Name="Opening">
@@ -685,15 +710,17 @@
           <Property Type="String" Name="zipCode" Nullable="false" />
           <Property Type="String" Name="city" Nullable="false" />
           <Property Type="String" Name="phone1" Nullable="false" />
-          <Property Type="String" Name="phone2" Nullable="false" />
+          <Property Type="String" Name="phone2" Nullable="true" />
           <Property Type="Boolean" Name="isEnabled" Nullable="false" />
           <Property Type="String" Name="passwordHash" Nullable="false" />
           <Property Type="DateTime" Name="lastLogin" Nullable="false" />
-          <Property Type="String" Name="licenceNumber" Nullable="false" />
+          <Property Type="String" Name="licenceNumber" Nullable="true" />
           <NavigationProperty Name="Category" Relationship="entity.PlayerCategory1" FromRole="Player" ToRole="Category" />
           <NavigationProperty Name="TrainingPreferences" Relationship="entity.PlayerTrainingPreferences" FromRole="Player" ToRole="TrainingPreferences" />
           <NavigationProperty Name="Status" Relationship="entity.PlayerStatus" FromRole="Player" ToRole="Status" />
           <NavigationProperty Name="BallLevel" Relationship="entity.PlayerBallLevel" FromRole="Player" ToRole="BallLevel" />
+          <NavigationProperty Name="Booking1" Relationship="entity.BookingPlayer" FromRole="Player" ToRole="Booking" />
+          <Property Name="login" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="PreferencePeriod">
           <Key>
@@ -826,6 +853,10 @@
           <End Type="entity.Player" Role="Player" Multiplicity="*" />
           <End Type="entity.BallLevel" Role="BallLevel" Multiplicity="0..1" />
         </Association>
+        <Association Name="BookingPlayer">
+          <End Type="entity.Booking" Role="Booking" Multiplicity="*" />
+          <End Type="entity.Player" Role="Player" Multiplicity="0..1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -884,6 +915,7 @@
           <ScalarProperty Name="isSpecial" ColumnName="isSpecial" />
           <ScalarProperty Name="start" ColumnName="start" />
           <ScalarProperty Name="end" ColumnName="end" />
+          <ScalarProperty Name="creationDate" ColumnName="creationDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -922,6 +954,7 @@
           <ScalarProperty Name="passwordHash" ColumnName="passwordHash" />
           <ScalarProperty Name="lastLogin" ColumnName="lastLogin" />
           <ScalarProperty Name="licenceNumber" ColumnName="licenceNumber" />
+          <ScalarProperty Name="login" ColumnName="login" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1038,7 +1071,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="PlayerBooking" TypeName="entity.PlayerBooking" StoreEntitySet="BookingJeu">
       <EndProperty Name="Player">
-        <ScalarProperty Name="ID" ColumnName="Player_ID" />
+        <ScalarProperty Name="ID" ColumnName="Player1_ID" />
       </EndProperty>
       <EndProperty Name="Booking">
         <ScalarProperty Name="ID" ColumnName="ID" />
@@ -1124,6 +1157,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="BallLevel_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BookingPlayer" TypeName="entity.BookingPlayer" StoreEntitySet="BookingJeu">
+      <EndProperty Name="Player">
+        <ScalarProperty Name="ID" ColumnName="Player2_ID" />
+      </EndProperty>
+      <EndProperty Name="Booking">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="Player2_ID" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

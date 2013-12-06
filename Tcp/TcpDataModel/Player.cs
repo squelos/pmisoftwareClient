@@ -22,6 +22,7 @@ namespace TcpDataModel
             this.Payment = new ObservableCollection<Payment>();
             this.Category = new ObservableCollection<Category>();
             this.TrainingPreferences = new ObservableCollection<TrainingPreferences>();
+            this.Booking1 = new ObservableCollection<Booking>();
         }
     
         public int ID { get; set; }
@@ -39,6 +40,7 @@ namespace TcpDataModel
         public string passwordHash { get; set; }
         public System.DateTime lastLogin { get; set; }
         public string licenceNumber { get; set; }
+        public string login { get; set; }
     
         public virtual ObservableCollection<Badge> Badge { get; set; }
         public virtual ObservableCollection<PreferencePeriod> PreferencePeriod { get; set; }
@@ -48,5 +50,6 @@ namespace TcpDataModel
         public virtual ObservableCollection<TrainingPreferences> TrainingPreferences { get; set; }
         public virtual Status Status { get; set; }
         public virtual BallLevel BallLevel { get; set; }
+        public virtual ObservableCollection<Booking> Booking1 { get; set; }
     }
 }

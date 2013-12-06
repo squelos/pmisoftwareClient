@@ -21,7 +21,7 @@ namespace TcpDataModel
         }
     
         public int ID { get; set; }
-        public int number { get; set; }
+        public string number { get; set; }
         public bool isCovered { get; set; }
     
         public virtual ObservableCollection<Booking> Booking { get; set; }

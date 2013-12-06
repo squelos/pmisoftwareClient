@@ -9,8 +9,8 @@
         <EntityTypeShape EntityType="entity.Semester" Width="1.5" PointX="5.5" PointY="1.375" />
         <EntityTypeShape EntityType="entity.Payment" Width="1.5" PointX="5.5" PointY="3.875" />
         <EntityTypeShape EntityType="entity.Badge" Width="1.5" PointX="10.75" PointY="8.125" />
-        <EntityTypeShape EntityType="entity.BookingAggregation" Width="1.5" PointX="10.75" PointY="1.125" />
-        <EntityTypeShape EntityType="entity.Booking" Width="1.5" PointX="10.75" PointY="3.25" />
+        <EntityTypeShape EntityType="entity.BookingAggregation" Width="1.5" PointX="10.625" PointY="0.75" />
+        <EntityTypeShape EntityType="entity.Booking" Width="1.5" PointX="10.75" PointY="2.875" />
         <EntityTypeShape EntityType="entity.Court" Width="1.5" PointX="12.75" PointY="2.125" />
         <EntityTypeShape EntityType="entity.Opening" Width="1.5" PointX="12.75" PointY="4.75" />
         <EntityTypeShape EntityType="entity.Player" Width="1.5" PointX="8" PointY="4.125" />
@@ -38,6 +38,7 @@
         <AssociationConnector Association="entity.DayTrainingPreferences" />
         <EntityTypeShape EntityType="entity.BallLevel" Width="1.5" PointX="7.625" PointY="10.25" />
         <AssociationConnector Association="entity.PlayerBallLevel" />
+        <AssociationConnector Association="entity.BookingPlayer" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

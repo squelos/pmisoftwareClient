@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
@@ -34,6 +35,16 @@ namespace TcpModernUI.ViewModel
            // var b = new Task(() => { });
             _players = new ObservableCollection<Player>(Container.PlayerJeu);
             _unpaidPlayers = new CollectionViewSource();
+            //_unpaidPlayers.Source = (from e in Container.PlayerJeu select e);
+            //_unpaidPlayers.View.Filter = o =>
+            //                             {
+            //                                 Player p = o as Player;
+            //                                 if (p.Payment.Count() == 0) return false;
+            //                                 if (from b in p.Payment select b.Semester.Last().end < DateTime.Now)
+            //                                 {
+            //                                     return true;
+            //                                 }
+            //                             };
             _playersViewSource = new CollectionViewSource() {Source = _players};
             
 

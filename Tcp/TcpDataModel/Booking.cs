@@ -19,9 +19,11 @@ namespace TcpDataModel
         public bool isSpecial { get; set; }
         public System.DateTime start { get; set; }
         public System.DateTime end { get; set; }
+        public System.DateTime creationDate { get; set; }
     
         public virtual BookingAggregation BookingAggregation { get; set; }
         public virtual Court Court { get; set; }
-        public virtual Player Player { get; set; }
+        public virtual Player Player1 { get; set; }
+        public virtual Player Player2 { get; set; }
     }
 }
