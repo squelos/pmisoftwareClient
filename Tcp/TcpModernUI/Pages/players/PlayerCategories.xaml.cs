@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
+using TcpDataModel;
 using TcpModernUI.ViewModel;
 
 namespace TcpModernUI.Pages.players
@@ -9,23 +10,43 @@ namespace TcpModernUI.Pages.players
     /// </summary>
     public partial class PlayerCategories : UserControl
     {
+        private MainViewModel viewModel;
         public PlayerCategories()
         {
             InitializeComponent();
+            var dataContext = DataContext;
+             viewModel = dataContext as MainViewModel;
         }
 
         private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //add here
-            var dataContext = DataContext;
-            var mainViewModel = dataContext as MainViewModel;
-           // mainViewModel.PlayersViewModel.SelectedPlayer.Category.Add(sender);
+            if (!CheckSelectedPlayer()) return;
+            Category cat = listCats.SelectedValue as Category;
+
+            if (!viewModel.PlayersViewModel.SelectedPlayer.Category.Contains(cat))
+            {
+                viewModel.PlayersViewModel.SelectedPlayer.Category.Add(cat);
+                viewModel.PlayersViewModel.RaisePropertyChangedEvent("category");
+            }
+            
         }
 
         private void Control1_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             // remove here
+            if (!CheckSelectedPlayer()) return;
+            Category cat = listCats.SelectedValue as Category;
+
+            viewModel.PlayersViewModel.SelectedPlayer.Category.Remove(cat);
+            viewModel.PlayersViewModel.RaisePropertyChangedEvent("category");
             // throw new System.NotImplementedException();
+        }
+
+        private bool CheckSelectedPlayer()
+        {
+
+            return viewModel.PlayersViewModel.SelectedPlayer != null;
         }
     }
 }

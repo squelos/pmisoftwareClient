@@ -55,6 +55,7 @@ namespace TcpModernUI
 
         private void PlayerClickCategories(object sender, RoutedEventArgs e)
         {
+            
             ToggleFlyout(4);
         }
 
