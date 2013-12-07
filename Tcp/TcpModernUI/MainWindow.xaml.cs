@@ -3,6 +3,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using MahApps.Metro.Controls;
+using TcpModernUI.BaseClasses;
 using TcpModernUI.ViewModel;
 
 
@@ -13,6 +14,8 @@ namespace TcpModernUI
     /// </summary>
     public partial class MainWindow
     {
+        private CustomDispatcher _dispatcher;
+
         public MainWindow()
         {
            
@@ -87,6 +90,9 @@ namespace TcpModernUI
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            _dispatcher = CustomDispatcher.Instance;
+            _dispatcher.RegisterUI(this);
+
             var dataContext = DataContext;
             var mainViewModel = dataContext as MainViewModel;
             if (mainViewModel != null)

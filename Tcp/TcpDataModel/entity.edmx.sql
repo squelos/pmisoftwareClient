@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/06/2013 22:29:42
+-- Date Created: 12/08/2013 03:58:18
 -- Generated from EDMX file: C:\Users\squelos\Documents\GitHub\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
 -- --------------------------------------------------
 
@@ -17,8 +17,8 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_SeasonSemester]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SemesterJeu] DROP CONSTRAINT [FK_SeasonSemester];
+IF OBJECT_ID(N'[dbo].[FK_SeasonSemester1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SemesterJeu] DROP CONSTRAINT [FK_SeasonSemester1];
 GO
 IF OBJECT_ID(N'[dbo].[FK_BookingAggregationBooking]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingAggregationBooking];
@@ -74,8 +74,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PlayerBallLevel]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PlayerJeu] DROP CONSTRAINT [FK_PlayerBallLevel];
 GO
-IF OBJECT_ID(N'[dbo].[FK_BookingPlayer]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingPlayer];
+IF OBJECT_ID(N'[dbo].[FK_BookingPlayer2]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingPlayer2];
 GO
 
 -- --------------------------------------------------
@@ -143,9 +143,7 @@ GO
 
 -- Creating table 'SeasonJeu'
 CREATE TABLE [dbo].[SeasonJeu] (
-    [ID] int IDENTITY(1,1) NOT NULL,
-    [Semester1_ID] int  NOT NULL,
-    [Semester2_ID] int  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL
 );
 GO
 
@@ -153,7 +151,8 @@ GO
 CREATE TABLE [dbo].[SemesterJeu] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [start] datetime  NOT NULL,
-    [end] datetime  NOT NULL
+    [end] datetime  NOT NULL,
+    [Season_ID] int  NULL
 );
 GO
 
@@ -304,8 +303,8 @@ CREATE TABLE [dbo].[PaymentSemester] (
 );
 GO
 
--- Creating table 'PlayerCategory1'
-CREATE TABLE [dbo].[PlayerCategory1] (
+-- Creating table 'PlayerCategory'
+CREATE TABLE [dbo].[PlayerCategory] (
     [Player_ID] int  NOT NULL,
     [Category_Id] int  NOT NULL
 );
@@ -417,29 +416,15 @@ ADD CONSTRAINT [PK_PaymentSemester]
     PRIMARY KEY CLUSTERED ([Payment_ID], [Semester_ID] ASC);
 GO
 
--- Creating primary key on [Player_ID], [Category_Id] in table 'PlayerCategory1'
-ALTER TABLE [dbo].[PlayerCategory1]
-ADD CONSTRAINT [PK_PlayerCategory1]
+-- Creating primary key on [Player_ID], [Category_Id] in table 'PlayerCategory'
+ALTER TABLE [dbo].[PlayerCategory]
+ADD CONSTRAINT [PK_PlayerCategory]
     PRIMARY KEY CLUSTERED ([Player_ID], [Category_Id] ASC);
 GO
 
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [Semester1_ID] in table 'SeasonJeu'
-ALTER TABLE [dbo].[SeasonJeu]
-ADD CONSTRAINT [FK_SeasonSemester1]
-    FOREIGN KEY ([Semester1_ID])
-    REFERENCES [dbo].[SemesterJeu]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_SeasonSemester1'
-CREATE INDEX [IX_FK_SeasonSemester1]
-ON [dbo].[SeasonJeu]
-    ([Semester1_ID]);
-GO
 
 -- Creating foreign key on [BookingAggregation_ID] in table 'BookingJeu'
 ALTER TABLE [dbo].[BookingJeu]
@@ -576,26 +561,26 @@ ON [dbo].[OpeningJeu]
     ([Badge_ID]);
 GO
 
--- Creating foreign key on [Player_ID] in table 'PlayerCategory1'
-ALTER TABLE [dbo].[PlayerCategory1]
-ADD CONSTRAINT [FK_PlayerCategory1_Player]
+-- Creating foreign key on [Player_ID] in table 'PlayerCategory'
+ALTER TABLE [dbo].[PlayerCategory]
+ADD CONSTRAINT [FK_PlayerCategory_Player]
     FOREIGN KEY ([Player_ID])
     REFERENCES [dbo].[PlayerJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Category_Id] in table 'PlayerCategory1'
-ALTER TABLE [dbo].[PlayerCategory1]
-ADD CONSTRAINT [FK_PlayerCategory1_Category]
+-- Creating foreign key on [Category_Id] in table 'PlayerCategory'
+ALTER TABLE [dbo].[PlayerCategory]
+ADD CONSTRAINT [FK_PlayerCategory_Category]
     FOREIGN KEY ([Category_Id])
     REFERENCES [dbo].[CategorySet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_PlayerCategory1_Category'
-CREATE INDEX [IX_FK_PlayerCategory1_Category]
-ON [dbo].[PlayerCategory1]
+-- Creating non-clustered index for FOREIGN KEY 'FK_PlayerCategory_Category'
+CREATE INDEX [IX_FK_PlayerCategory_Category]
+ON [dbo].[PlayerCategory]
     ([Category_Id]);
 GO
 
@@ -697,18 +682,18 @@ ON [dbo].[BookingJeu]
     ([Player2_ID]);
 GO
 
--- Creating foreign key on [Semester2_ID] in table 'SeasonJeu'
-ALTER TABLE [dbo].[SeasonJeu]
-ADD CONSTRAINT [FK_SeasonSemester2]
-    FOREIGN KEY ([Semester2_ID])
-    REFERENCES [dbo].[SemesterJeu]
+-- Creating foreign key on [Season_ID] in table 'SemesterJeu'
+ALTER TABLE [dbo].[SemesterJeu]
+ADD CONSTRAINT [FK_SeasonSemester]
+    FOREIGN KEY ([Season_ID])
+    REFERENCES [dbo].[SeasonJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_SeasonSemester2'
-CREATE INDEX [IX_FK_SeasonSemester2]
-ON [dbo].[SeasonJeu]
-    ([Semester2_ID]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_SeasonSemester'
+CREATE INDEX [IX_FK_SeasonSemester]
+ON [dbo].[SemesterJeu]
+    ([Season_ID]);
 GO
 
 -- --------------------------------------------------

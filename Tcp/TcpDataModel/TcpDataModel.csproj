@@ -90,6 +90,7 @@
     <Compile Include="Partials\Badge.cs" />
     <Compile Include="Partials\BallLevel.cs" />
     <Compile Include="Partials\Booking.cs" />
+    <Compile Include="Partials\Court.cs" />
     <Compile Include="Partials\Payment.cs" />
     <Compile Include="Partials\PaymentMethod.cs" />
     <Compile Include="Partials\Player.cs" />

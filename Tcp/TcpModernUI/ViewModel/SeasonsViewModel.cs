@@ -118,7 +118,7 @@ namespace TcpModernUI.ViewModel
         public void Cancel()
         {
             ResetContainer();
-            _seasons = new ObservableCollection<TcpDataModel.Season>(Container.SeasonJeu);
+            _seasons = new ObservableCollection<Season>(Container.SeasonJeu);
             InitialiseSeasons();
             RaisePropertyChangedEvent("container");
         }

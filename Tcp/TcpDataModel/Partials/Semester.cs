@@ -8,10 +8,10 @@ namespace TcpDataModel
 {
     public partial class Semester
     {
-        public Semester(DateTime start, DateTime end):this()
+        public Semester(DateTime startDateTime, DateTime endDateTime)
         {
-            this.start = start;
-            this.end = end;
+            this.start = startDateTime;
+            this.end = endDateTime;
         }
     }
 }
