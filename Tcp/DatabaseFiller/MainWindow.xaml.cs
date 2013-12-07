@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,7 +46,7 @@ namespace DatabaseFiller
             createBookings();
             createPayments();
             createTraining();
-
+            AssignBadges();
 
             _container.SaveChanges();
         }
@@ -62,6 +64,11 @@ namespace DatabaseFiller
             badges.Add(new Badge(7353634, false, false));
             badges.Add(new Badge(2353556, false, true));
             badges.Add(new Badge(353534245, true, false));
+
+            for (int i = 0; i < 200; i++)
+            {
+                badges.Add(new Badge(GetRandom(1000, 900000),true, false));
+            }
             _container.BadgeJeu.AddRange(badges);
             _container.SaveChanges();
         }
@@ -74,12 +81,14 @@ namespace DatabaseFiller
             courts.Add(new Court("Intérieur 1", true));
             courts.Add(new Court("Extérieur 3", false));
             _container.CourtJeu.AddRange(courts);
+            _container.SaveChanges();
         }
 
         private void createSeasons()
         {
             List<Season> seasons = new List<Season>();
             List<Semester> semesters = new List<Semester>();
+            Semester sem;
             semesters.Add(new Semester(DateTime.Now.AddMonths(-12), DateTime.Now.AddMonths(-11)));
             semesters.Add(new Semester(DateTime.Now.AddMonths(-10), DateTime.Now.AddMonths(-9)));
 
@@ -101,15 +110,30 @@ namespace DatabaseFiller
 
 
 
-            seasons.Add(new Season(semesters[0], semesters[1]));
-            seasons.Add(new Season(semesters[2], semesters[3]));
-            seasons.Add(new Season(semesters[4], semesters[5]));
-            seasons.Add(new Season(semesters[6], semesters[7]));
-            seasons.Add(new Season(semesters[8], semesters[9]));
-            seasons.Add(new Season(semesters[10], semesters[11]));
 
-            _container.SemesterJeu.AddRange(semesters);
+            Season sea;
+            for (int i = 0; i < 12; i++)
+            {
+                sea = new Season();
+                sea.Semester1.Add(semesters[i]);
+                sea.Semester1.Add(semesters[i+1]);
+                //semesters[i + 1].Season1 = sea;
+               // semesters[i].Season1 = sea;
+                seasons.Add(sea);
+                i++;
+            }
+            
+            //seasons.Add(new Season(semesters[0], semesters[1]));
+            
+            //seasons.Add(new Season(semesters[2], semesters[3]));
+            //seasons.Add(new Season(semesters[4], semesters[5]));
+            //seasons.Add(new Season(semesters[6], semesters[7]));
+            //seasons.Add(new Season(semesters[8], semesters[9]));
+            //seasons.Add(new Season(semesters[10], semesters[11]));
+
+            //_container.SemesterJeu.AddRange(semesters);
             _container.SeasonJeu.AddRange(seasons);
+            _container.SaveChanges();
 
 
         }
@@ -166,45 +190,136 @@ namespace DatabaseFiller
                     GetRandom(100000000, 900000000).ToString(), GetRandom(100000000, 900000000).ToString(), "00000",
                     GetRandom(100000000, 900000000).ToString(),
                     prenoms[GetRandom(0, 13)] + "." + noms[GetRandom(0, 14)] + i + "@gmail.com");
+                player.lastLogin = DateTime.Now;
                 player.BallLevel = ballLevels[GetRandom(0, 9)];
                 player.Status = statuses[GetRandom(0, 2)];
                 player.Category.Add(categories[GetRandom(0,3)]);
 
                 players.Add(player);
             }
-           
-          
+
+            _container.PlayerJeu.AddRange(players);
+            _container.SaveChanges();
+
 
         }
 
         private void createBookings()
         {
 
+            List<Player> players = new List<Player>(_container.PlayerJeu);
+            List<Court> courts = new List<Court>(_container.CourtJeu);
+            List<Booking> bookings = new List<Booking>();
+            Booking booking;
 
             for(int i = 0; i < 600;i++)
             {
-                
+                booking = new Booking();
+                booking.Court = courts[GetRandom(0, courts.Count - 1)];
+                booking.Player1 = players[GetRandom(0, players.Count - 1)];
+                booking.Player2 = players[GetRandom(0, players.Count - 1)];
+                booking.name = i.ToString();
+                booking.isSpecial = false;
+                booking.start = DateTime.Now.AddDays(GetRandom(-200, 100)).AddHours(GetRandom(-5, 5));
+                booking.end = booking.start.AddHours(1);
+                booking.creationDate = booking.start.AddDays(-7);
+                bookings.Add(booking);
             }
+
+            _container.BookingJeu.AddRange(bookings);
+            _container.SaveChanges();
         }
 
         private void createPayments()
         {
+            List<Player> players = new List<Player>(_container.PlayerJeu);
+            List<Semester> semesters = new List<Semester>(_container.SemesterJeu);
+            List<PaymentMethod> methods = new List<PaymentMethod>(_container.PaymentMethodSet);
+            List<Payment> payments = new List<Payment>();
+            Payment payment;
 
+            for (int i = 0; i < 80; i++)
+            {
+                payment = new Payment();
+                payment.Player = players[GetRandom(0, players.Count - 1)];
+                payment.date = DateTime.Now.AddMonths(GetRandom(-20, 0));
+                payment.amount = GetRandom(10, 200);
+                payment.PaymentMethod = methods[GetRandom(0, 2)];
+                payment.Semester = new ObservableCollection<Semester> {semesters[GetRandom(0, semesters.Count - 1)]};
+                payments.Add(payment);
+            }
+
+            _container.PaymentJeu.AddRange(payments);
+            _container.SaveChanges();
         }
 
         private void createTraining()
         {
+            List<Player> players = new List<Player>(_container.PlayerJeu);
+            List<Day> days = new List<Day>(_container.DaySet);
+            List<TrainingPreferences> preferenceses = new List<TrainingPreferences>(_container.TrainingPreferencesSet);
+            TrainingPreferences pref;
 
+            foreach (var player in players)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    pref = new TrainingPreferences();
+                    pref.Day = days[GetRandom(0, 6)];
+                    pref.beginning = GetRandom(8, 23);
+                    pref.end = pref.beginning + GetRandom(1, 4);
+                    
+                    player.TrainingPreferences.Add(pref);
+                }
+            }
+
+            _container.SaveChanges();
         }
 
         private void createBookingPrefs()
         {
+            List<Player> players = new List<Player>(_container.PlayerJeu);
+            List<Day> days = new List<Day>(_container.DaySet);
+            List<PreferencePeriod> pref = new List<PreferencePeriod>(_container.PreferencePeriodJeu);
+            PreferencePeriod p;
+
+            foreach (var player in players)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    p = new PreferencePeriod();
+                    p.Day = days[GetRandom(0, 6)];
+                    p.beginningHour = GetRandom(16, 23);
+                    p.endHour = p.beginningHour + GetRandom(1, 3);
+                    p.beginningMin = 30;
+                    p.endmin = 0;
+                    
+                    player.PreferencePeriod.Add(p);
+                }
+
+            }
+
+            _container.SaveChanges();
 
         }
 
         private int GetRandom(int min, int max)
         {
             return rand.Next(min, max);
+        }
+
+        private void AssignBadges()
+        {
+            List<Badge> badges = new List<Badge>(_container.BadgeJeu);
+            List<Player> players = new List<Player>(_container.PlayerJeu);
+
+            foreach (var badge in badges)
+            {
+                badge.Player = players[GetRandom(0, players.Count)];
+            }
+
+
+            _container.SaveChanges();
         }
 
         #region static

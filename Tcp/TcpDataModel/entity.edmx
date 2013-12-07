@@ -104,18 +104,12 @@
       <End Role="Booking" EntitySet="BookingJeu" />
       <End Role="Player" EntitySet="PlayerJeu" />
     </AssociationSet>
-    <AssociationSet Name="SeasonSemester2" Association="entity.Store.SeasonSemester2">
-      <End Role="Season" EntitySet="SeasonJeu" />
-      <End Role="Semester" EntitySet="SemesterJeu" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="SeasonJeu">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Semester1_ID" Type="int" Nullable="false" />
-    <Property Name="Semester2_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SemesterJeu">
     <Key>
@@ -124,6 +118,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="start" Type="datetime" Nullable="false" />
     <Property Name="end" Type="datetime" Nullable="false" />
+    <Property Name="Season_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PaymentJeu">
     <Key>
@@ -282,14 +277,14 @@
     <Property Name="Category_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="SeasonSemester1">
-    <End Role="Season" Type="entity.Store.SeasonJeu" Multiplicity="*" />
-    <End Role="Semester" Type="entity.Store.SemesterJeu" Multiplicity="1" />
+    <End Role="Season" Type="entity.Store.SeasonJeu" Multiplicity="1" />
+    <End Role="Semester" Type="entity.Store.SemesterJeu" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Semester">
+      <Principal Role="Season">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Season">
-        <PropertyRef Name="Semester1_ID" />
+      <Dependent Role="Semester">
+        <PropertyRef Name="Season_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -473,18 +468,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="SeasonSemester2">
-    <End Role="Season" Type="entity.Store.SeasonJeu" Multiplicity="*" />
-    <End Role="Semester" Type="entity.Store.SemesterJeu" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Semester">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Season">
-        <PropertyRef Name="Semester2_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PaymentSemester_Payment">
     <End Role="Payment" Type="entity.Store.PaymentJeu" Multiplicity="1" />
     <End Role="PaymentSemester" Type="entity.Store.PaymentSemester" Multiplicity="*" />
@@ -626,10 +609,6 @@
             <End Role="Booking" EntitySet="BookingJeu" />
             <End Role="Player" EntitySet="PlayerJeu" />
           </AssociationSet>
-          <AssociationSet Name="SeasonSemester2" Association="entity.SeasonSemester2">
-            <End Role="Season" EntitySet="SeasonJeu" />
-            <End Role="Semester" EntitySet="SemesterJeu" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Season">
           <Key>
@@ -637,18 +616,16 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Semester1" Relationship="entity.SeasonSemester1" FromRole="Season" ToRole="Semester" />
-          <NavigationProperty Name="Semester2" Relationship="entity.SeasonSemester2" FromRole="Season" ToRole="Semester" />
         </EntityType>
         <EntityType Name="Semester">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Season" Relationship="entity.SeasonSemester1" FromRole="Semester" ToRole="Season" />
           <NavigationProperty Name="Payment" Relationship="entity.PaymentSemester" FromRole="Semester" ToRole="Payment" />
           <Property Type="DateTime" Name="start" Nullable="false" />
           <Property Type="DateTime" Name="end" Nullable="false" />
-          <NavigationProperty Name="Season1" Relationship="entity.SeasonSemester2" FromRole="Semester" ToRole="Season" />
+          <NavigationProperty Name="Season" Relationship="entity.SeasonSemester1" FromRole="Semester" ToRole="Season" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -759,7 +736,7 @@
         </EntityType>
         <Association Name="SeasonSemester1">
           <End Type="entity.Season" Role="Season" Multiplicity="1" />
-          <End Type="entity.Semester" Role="Semester" Multiplicity="1" />
+          <End Type="entity.Semester" Role="Semester" Multiplicity="*" />
         </Association>
         <Association Name="BookingAggregationBooking">
           <End Type="entity.BookingAggregation" Role="BookingAggregation" Multiplicity="0..1" />
@@ -879,10 +856,6 @@
         <Association Name="BookingPlayer2">
           <End Type="entity.Booking" Role="Booking" Multiplicity="*" />
           <End Type="entity.Player" Role="Player" Multiplicity="0..1" />
-        </Association>
-        <Association Name="SeasonSemester2">
-          <End Type="entity.Season" Role="Season" Multiplicity="1" />
-          <End Type="entity.Semester" Role="Semester" Multiplicity="1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1045,11 +1018,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="SeasonSemester1" TypeName="entity.SeasonSemester1" StoreEntitySet="SeasonJeu">
-      <EndProperty Name="Semester">
-        <ScalarProperty Name="ID" ColumnName="Semester1_ID" />
-      </EndProperty>
+    <AssociationSetMapping Name="SeasonSemester1" TypeName="entity.SeasonSemester1" StoreEntitySet="SemesterJeu">
       <EndProperty Name="Season">
+        <ScalarProperty Name="ID" ColumnName="Season_ID" />
+      </EndProperty>
+      <EndProperty Name="Semester">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
@@ -1193,14 +1166,6 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="Player2_ID" IsNull="false" />
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="SeasonSemester2" TypeName="entity.SeasonSemester2" StoreEntitySet="SeasonJeu">
-      <EndProperty Name="Semester">
-        <ScalarProperty Name="ID" ColumnName="Semester2_ID" />
-      </EndProperty>
-      <EndProperty Name="Season">
-        <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
