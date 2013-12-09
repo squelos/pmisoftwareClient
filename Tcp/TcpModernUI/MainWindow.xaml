@@ -71,9 +71,8 @@
         <!--Adhérents-->
         <TabItem Header="Adhérents">
             <DockPanel>
-                <StackPanel Height="Auto" DockPanel.Dock="Left">
-                    <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight"
-                                HorizontalAlignment="Right">
+                    <StackPanel Orientation="Vertical" FlowDirection="RightToLeft"
+                                HorizontalAlignment="Right" >
                         <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
                                 Command="{Binding PlayersViewModel.CancelCommand}">
                             <Rectangle Width="12" Height="12">
@@ -91,7 +90,6 @@
                             </Rectangle>
                         </Button>
                     </StackPanel>
-                    <ScrollViewer>
                         <DataGrid AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False"
                               ItemsSource="{Binding PlayersViewModel.Players}"
                               RowDetailsVisibilityMode="VisibleWhenSelected"
@@ -106,8 +104,7 @@
                                 <DataGridCheckBoxColumn Binding="{Binding isEnabled}" Header="Etat" />
                             </DataGrid.Columns>
                         </DataGrid>
-                    </ScrollViewer>
-                </StackPanel>
+                
 
                 <GridSplitter DockPanel.Dock="Left" Width="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                               ShowsPreview="True" />
@@ -440,98 +437,7 @@
                 </StackPanel>
             </DockPanel>
         </TabItem>
-        <!--Terrains-->
-        <TabItem Header="Terrains">
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="3" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <ScrollViewer Margin="10">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <DataGrid Grid.Row="0" ItemsSource="{Binding CourtViewModel.Courts}" CanUserDeleteRows="True"
-                                  CanUserAddRows="False"
-                                  AutoGenerateColumns="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding number }" Header="Numéro" />
-                                <DataGridCheckBoxColumn Binding="{Binding isCovered}" Header="Couvert" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-
-                        <StackPanel HorizontalAlignment="Right" Grid.Row="1" FlowDirection="LeftToRight"
-                                    Orientation="Horizontal">
-                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                    Command="{Binding CourtViewModel.CancelCommand}">
-                                <Rectangle Width="13" Height="13">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </Button>
-                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                    Command="{Binding CourtViewModel.UpdateCommand}">
-                                <Rectangle Width="13" Height="13">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                </ScrollViewer>
-                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                <ScrollViewer Grid.Column="2">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Numéro" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" />
-                        <Controls:ToggleSwitch OnLabel="Couvert" OffLabel="Extérieur"
-                                               IsChecked="{Binding CourtViewModel.CurrentCourt.isCovered}"
-                                               HorizontalAlignment="Left"
-                                               Margin="10,10,10,10" Grid.Row="1" VerticalAlignment="Top" Width="145" />
-                        <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1"
-                                    HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Stretch"
-                                    Margin="0,10,0,10">
-                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                    Command="{Binding CourtViewModel.CancelCommand}">
-                                <Rectangle Width="12" Height="12">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </Button>
-                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                    Command="{Binding CourtViewModel.SaveCommand}">
-                                <Rectangle Width="12" Height="12">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </Button>
-                        </StackPanel>
-                        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10,10,10,10"
-                                 TextWrapping="Wrap" Text="{Binding CourtViewModel.CurrentCourt.number}"
-                                 VerticalAlignment="Top"
-                                 Width="Auto" MinWidth="120" />
-
-                    </Grid>
-                </ScrollViewer>
-            </Grid>
-        </TabItem>
+        <!--Badges-->
         <TabItem Header="Badges">
 
             <DockPanel>
@@ -680,7 +586,30 @@
                     </TabItem>
 
                 </Controls:MetroAnimatedSingleRowTabControl>
+            </DockPanel>
+        </TabItem>
+       
+        <!--Impayés-->
+        <TabItem Header="Impayés">
+            <DockPanel>
+                <DataGrid DockPanel.Dock="Left" ItemsSource="{Binding PlayersViewModel.Unpaid}"
+                          SelectedValue="{Binding PlayersViewModel.SelectedPlayer}"
+                          AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding lastName}" Header="Nom" />
+                        <DataGridTextColumn Binding="{Binding firstName}" Header="Prénom" />
+                        <DataGridTextColumn Binding="{Binding email}" Header="Email" />
+                        <DataGridTextColumn Binding="{Binding phone1}" Header="Telephone" />
+                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Status}" Header="Status" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel DockPanel.Dock="Left">
+                    <Controls:MetroAnimatedSingleRowTabControl>
 
+                        <TabItem Header="Paiements" />
+                        <TabItem Header="Ajout de paiement" />
+                    </Controls:MetroAnimatedSingleRowTabControl>
+                </StackPanel>
             </DockPanel>
         </TabItem>
         <!--Saisons-->
@@ -803,28 +732,97 @@
                 </ScrollViewer>
             </Grid>
         </TabItem>
-        <!--Impayés-->
-        <TabItem Header="Impayés">
-            <DockPanel>
-                <DataGrid DockPanel.Dock="Left" ItemsSource="{Binding PlayersViewModel.Unpaid}"
-                          SelectedValue="{Binding PlayersViewModel.SelectedPlayer}"
-                          AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding lastName}" Header="Nom" />
-                        <DataGridTextColumn Binding="{Binding firstName}" Header="Prénom" />
-                        <DataGridTextColumn Binding="{Binding email}" Header="Email" />
-                        <DataGridTextColumn Binding="{Binding phone1}" Header="Telephone" />
-                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Status}" Header="Status" />
-                    </DataGrid.Columns>
-                </DataGrid>
-                <StackPanel DockPanel.Dock="Left">
-                    <Controls:MetroAnimatedSingleRowTabControl>
+        <!--Terrains-->
+        <TabItem Header="Terrains">
 
-                        <TabItem Header="Paiements" />
-                        <TabItem Header="Ajout de paiement" />
-                    </Controls:MetroAnimatedSingleRowTabControl>
-                </StackPanel>
-            </DockPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="3" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <ScrollViewer Margin="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <DataGrid Grid.Row="0" ItemsSource="{Binding CourtViewModel.Courts}" CanUserDeleteRows="True"
+                                  CanUserAddRows="False"
+                                  AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding number }" Header="Numéro" />
+                                <DataGridCheckBoxColumn Binding="{Binding isCovered}" Header="Couvert" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <StackPanel HorizontalAlignment="Right" Grid.Row="1" FlowDirection="LeftToRight"
+                                    Orientation="Horizontal">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding CourtViewModel.CancelCommand}">
+                                <Rectangle Width="13" Height="13">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Button>
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding CourtViewModel.UpdateCommand}">
+                                <Rectangle Width="13" Height="13">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                <ScrollViewer Grid.Column="2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Numéro" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" />
+                        <Controls:ToggleSwitch OnLabel="Couvert" OffLabel="Extérieur"
+                                               IsChecked="{Binding CourtViewModel.CurrentCourt.isCovered}"
+                                               HorizontalAlignment="Left"
+                                               Margin="10,10,10,10" Grid.Row="1" VerticalAlignment="Top" Width="145" />
+                        <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1"
+                                    HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Stretch"
+                                    Margin="0,10,0,10">
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding CourtViewModel.CancelCommand}">
+                                <Rectangle Width="12" Height="12">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Button>
+                            <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                    Command="{Binding CourtViewModel.SaveCommand}">
+                                <Rectangle Width="12" Height="12">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Button>
+                        </StackPanel>
+                        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10,10,10,10"
+                                 TextWrapping="Wrap" Text="{Binding CourtViewModel.CurrentCourt.number}"
+                                 VerticalAlignment="Top"
+                                 Width="Auto" MinWidth="120" />
+
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
         </TabItem>
     </Controls:MetroAnimatedSingleRowTabControl>
 

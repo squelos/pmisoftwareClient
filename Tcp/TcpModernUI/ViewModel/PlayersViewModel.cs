@@ -40,42 +40,36 @@ namespace TcpModernUI.ViewModel
 
         public PlayersViewModel()
         {
-            Task fillPlayersTask = new Task(() =>
-                                            {
-                                                _players =
-                                                    new ObservableCollection<Player>(Container.PlayerJeu.ToList());
-                                                _players.CollectionChanged += (sender, args) =>
-                                                {
-                                                    if (args.Action == NotifyCollectionChangedAction.Remove)
-                                                    {
-                                                        foreach (var old in args.OldItems)
-                                                        {
-                                                            Container.PlayerJeu.Remove(old as Player);
-                                                             CustomDispatcher.Instance.BeginInvoke(()=>Unpaid.Remove(old as Player));
-                                                        }
-                                                    }
-                                                    else if (args.Action == NotifyCollectionChangedAction.Add)
-                                                    {
-                                                        foreach (Player p in args.OldItems)
-                                                        {
-                                                            if (p.Payment.Count() == 0 ||
-                                                                p.Payment.Last().Semester.Last().end < DateTime.Now)
-                                                            {
-                                                                CustomDispatcher.Instance.BeginInvoke(()=> Unpaid.Add(p));
-                                                                
-                                                            }
-                                                        }
-                                                    }
+            _players =
+                new ObservableCollection<Player>(Container.PlayerJeu.ToList());
 
-                                                    RaisePropertyChangedEvent("players");
-                                                };
-                                            });
-            //_players = new ObservableCollection<Player>(Container.PlayerJeu.ToList());
-
-
-            Task t = fillPlayersTask.ContinueWith(task =>
+            _players.CollectionChanged += (sender, args) =>
+                                          {
+                                              if (args.Action == NotifyCollectionChangedAction.Remove)
+                                              {
+                                                  foreach (var old in args.OldItems)
                                                   {
-                                                     
+                                                      Container.PlayerJeu.Remove(old as Player);
+                                                      CustomDispatcher.Instance.BeginInvoke(
+                                                          () => Unpaid.Remove(old as Player));
+                                                  }
+                                              }
+                                              else if (args.Action == NotifyCollectionChangedAction.Add)
+                                              {
+                                                  foreach (Player p in args.OldItems)
+                                                  {
+                                                      if (p.Payment.Count() == 0 ||
+                                                          p.Payment.Last().Semester.Last().end < DateTime.Now)
+                                                      {
+                                                          CustomDispatcher.Instance.BeginInvoke(() => Unpaid.Add(p));
+                                                      }
+                                                  }
+                                              }
+                                              RaisePropertyChangedEvent("players");
+                                          };
+
+            Task t = new Task(() =>
+                                                  {
                                                       foreach (Player player in Players)
                                                       {
                                                           if (player.Payment.Count() == 0 ||
@@ -87,11 +81,8 @@ namespace TcpModernUI.ViewModel
                                                           }
                                                       }
                                                   });
+            t.Start();
 
-
-
-            fillPlayersTask.Start();
-           
             _ballLevels = (from a in Container.BallLevelSet select a).ToList();
             _statuses = (from a in Container.StatusSet select a).ToList();
             _categories = (from a in Container.CategorySet select a).ToList();
@@ -110,8 +101,12 @@ namespace TcpModernUI.ViewModel
             get { return _selectedPlayer; }
             set
             {
-                _selectedPlayer = value;
-                RaisePropertyChangedEvent("selectedPlayer");
+                Task t = new Task(() =>
+                                  {
+                                      _selectedPlayer = value;
+                                      RaisePropertyChangedEvent("selectedPlayer");
+                                  });
+                t.Start();
             }
         }
 
@@ -219,9 +214,13 @@ namespace TcpModernUI.ViewModel
 
         private void InitializePlayers()
         {
-            CurrentPlayer = new Player(DateTime.Now, DateTime.Now);
-            CurrentPlayer.isEnabled = true;
-            CurrentPlayer.passwordHash = "00000";
+            Task t = new Task(() =>
+                              {
+                                  CurrentPlayer = new Player(DateTime.Now, DateTime.Now);
+                                  CurrentPlayer.isEnabled = true;
+                                  CurrentPlayer.passwordHash = "00000";
+                              });
+            t.Start();
         }
 
         #endregion
