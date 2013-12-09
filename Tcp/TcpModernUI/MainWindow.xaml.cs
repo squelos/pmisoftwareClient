@@ -18,7 +18,8 @@ namespace TcpModernUI
 
         public MainWindow()
         {
-           
+            _dispatcher = CustomDispatcher.Instance;
+            _dispatcher.RegisterUI(this);
         }
 
         private void LaunchFlyoutDemo(object sender, RoutedEventArgs e)

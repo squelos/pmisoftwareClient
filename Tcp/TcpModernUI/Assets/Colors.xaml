@@ -46,7 +46,7 @@
     <SolidColorBrush x:Key="FlyoutBackgroundBrush" Color="{DynamicResource FlyoutBackgroundColor}" />
 
     <!-- UNIVERSAL CONTROL BRUSHES -->
-    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{DynamicResource WhiteColor}"/>
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{DynamicResource WhiteColor}" />
     <SolidColorBrush x:Key="WhiteBrush" Color="{DynamicResource WhiteColor}" />
     <SolidColorBrush x:Key="BlackBrush" Color="{DynamicResource BlackColor}" />
     <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource BlackColor}" />
@@ -58,29 +58,29 @@
     <SolidColorBrush x:Key="HighlightBrush" Color="{DynamicResource HighlightColor}" />
     <SolidColorBrush x:Key="DisabledWhiteBrush" Color="{DynamicResource WhiteColor}" />
 
-    <SolidColorBrush x:Key="TransparentWhiteBrush" Color="#00FFFFFF"/>
-    
-    <SolidColorBrush x:Key="SemiTransparentWhiteBrush" Color="#55FFFFFF"/>
+    <SolidColorBrush x:Key="TransparentWhiteBrush" Color="#00FFFFFF" />
+
+    <SolidColorBrush x:Key="SemiTransparentWhiteBrush" Color="#55FFFFFF" />
     <SolidColorBrush x:Key="ControlsDisabledBrush" Color="#A5FFFFFF" />
 
-    <SolidColorBrush x:Key="AccentColorBrush" Color="{DynamicResource AccentColor}"/>
-    <SolidColorBrush x:Key="AccentColorBrush2" Color="{DynamicResource AccentColor2}"/>
-    <SolidColorBrush x:Key="AccentColorBrush3" Color="{DynamicResource AccentColor3}"/>
-    <SolidColorBrush x:Key="AccentColorBrush4" Color="{DynamicResource AccentColor4}"/>
+    <SolidColorBrush x:Key="AccentColorBrush" Color="{DynamicResource AccentColor}" />
+    <SolidColorBrush x:Key="AccentColorBrush2" Color="{DynamicResource AccentColor2}" />
+    <SolidColorBrush x:Key="AccentColorBrush3" Color="{DynamicResource AccentColor3}" />
+    <SolidColorBrush x:Key="AccentColorBrush4" Color="{DynamicResource AccentColor4}" />
 
-    
-    <SolidColorBrush x:Key="GrayBrush1" Color="{DynamicResource Gray1}"/>
-    <SolidColorBrush x:Key="GrayBrush2" Color="{DynamicResource Gray2}"/>
-    <SolidColorBrush x:Key="GrayBrush3" Color="{DynamicResource Gray3}"/>
-    <SolidColorBrush x:Key="GrayBrush4" Color="{DynamicResource Gray4}"/>
-    <SolidColorBrush x:Key="GrayBrush5" Color="{DynamicResource Gray5}"/>
-    <SolidColorBrush x:Key="GrayBrush6" Color="{DynamicResource Gray6}"/>
-    <SolidColorBrush x:Key="GrayBrush7" Color="{DynamicResource Gray7}"/>
-    <SolidColorBrush x:Key="GrayBrush8" Color="{DynamicResource Gray8}"/>
-    <SolidColorBrush x:Key="GrayBrush9" Color="{DynamicResource Gray9}"/>
-    <SolidColorBrush x:Key="GrayBrush10" Color="{DynamicResource Gray10}"/>
 
-    
+    <SolidColorBrush x:Key="GrayBrush1" Color="{DynamicResource Gray1}" />
+    <SolidColorBrush x:Key="GrayBrush2" Color="{DynamicResource Gray2}" />
+    <SolidColorBrush x:Key="GrayBrush3" Color="{DynamicResource Gray3}" />
+    <SolidColorBrush x:Key="GrayBrush4" Color="{DynamicResource Gray4}" />
+    <SolidColorBrush x:Key="GrayBrush5" Color="{DynamicResource Gray5}" />
+    <SolidColorBrush x:Key="GrayBrush6" Color="{DynamicResource Gray6}" />
+    <SolidColorBrush x:Key="GrayBrush7" Color="{DynamicResource Gray7}" />
+    <SolidColorBrush x:Key="GrayBrush8" Color="{DynamicResource Gray8}" />
+    <SolidColorBrush x:Key="GrayBrush9" Color="{DynamicResource Gray9}" />
+    <SolidColorBrush x:Key="GrayBrush10" Color="{DynamicResource Gray10}" />
+
+
     <SolidColorBrush x:Key="TextBoxBorderBrush" Color="{DynamicResource Gray6}" />
     <SolidColorBrush x:Key="ControlBorderBrush" Color="{DynamicResource Gray6}" />
     <SolidColorBrush x:Key="TextBoxMouseOverInnerBorderBrush" Color="{DynamicResource BlackColor}" />
@@ -95,8 +95,8 @@
     <SolidColorBrush x:Key="CheckBoxBrush" Color="{DynamicResource Gray2}" />
     <SolidColorBrush x:Key="CheckBoxMouseOverBrush" Color="{DynamicResource Gray1}" />
     <LinearGradientBrush x:Key="CheckBoxBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="{DynamicResource Gray7}" Offset="0"/>
-        <GradientStop Color="{DynamicResource WhiteColor}" Offset="1"/>
+        <GradientStop Color="{DynamicResource Gray7}" Offset="0" />
+        <GradientStop Color="{DynamicResource WhiteColor}" Offset="1" />
     </LinearGradientBrush>
 
     <SolidColorBrush x:Key="MenuItemDisabledBrush" Color="{DynamicResource Gray3}" />
@@ -106,22 +106,22 @@
     <SolidColorBrush x:Key="ComboBoxPopupBrush" Color="{DynamicResource Gray4}" />
 
     <LinearGradientBrush x:Key="ProgressBrush" EndPoint="0.001,0.5" StartPoint="1.002,0.5">
-        <GradientStop Color="{DynamicResource HighlightColor}" Offset="0"/>
-        <GradientStop Color="{DynamicResource AccentColor3}" Offset="1"/>
+        <GradientStop Color="{DynamicResource HighlightColor}" Offset="0" />
+        <GradientStop Color="{DynamicResource AccentColor3}" Offset="1" />
     </LinearGradientBrush>
 
-    <DropShadowEffect x:Key="DropShadowBrush" Direction="330" Opacity="0.3" ShadowDepth="0" BlurRadius="6"/>
+    <DropShadowEffect x:Key="DropShadowBrush" Direction="330" Opacity="0.3" ShadowDepth="0" BlurRadius="6" />
 
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{DynamicResource WhiteColor}" />
-    <SolidColorBrush x:Key="SeperatorBrush" Color="#FFC4C4C5"/>
-    
-    <SolidColorBrush x:Key="FlatButtonBackgroundBrush" Color="#D5D5D5"/>
-    <SolidColorBrush x:Key="FlatButtonForegroundBrush" Color="#222222"/>
-    <SolidColorBrush x:Key="FlatButtonPressedBackgroundBrush" Color="#222222"/>
-    <SolidColorBrush x:Key="FlatButtonPressedForegroundBrush" Color="White"/>
+    <SolidColorBrush x:Key="SeperatorBrush" Color="#FFC4C4C5" />
+
+    <SolidColorBrush x:Key="FlatButtonBackgroundBrush" Color="#D5D5D5" />
+    <SolidColorBrush x:Key="FlatButtonForegroundBrush" Color="#222222" />
+    <SolidColorBrush x:Key="FlatButtonPressedBackgroundBrush" Color="#222222" />
+    <SolidColorBrush x:Key="FlatButtonPressedForegroundBrush" Color="White" />
 
     <!-- CONTROL VALIDATION BRUSHES -->
-    <SolidColorBrush x:Key="ControlsValidationBrush" Color="#FFDB000C"/>
+    <SolidColorBrush x:Key="ControlsValidationBrush" Color="#FFDB000C" />
     <SolidColorBrush x:Key="ValidationBrush1" Color="#052A2E31" />
     <SolidColorBrush x:Key="ValidationBrush2" Color="#152A2E31" />
     <SolidColorBrush x:Key="ValidationBrush3" Color="#252A2E31" />
@@ -136,7 +136,7 @@
     <SolidColorBrush x:Key="ValidationSummaryFillColor1" Color="#59F7D8DB" />
     <SolidColorBrush x:Key="ValidationSummaryFillColor2" Color="#FFF7D8DB" />
     <!-- validation text foreground always white -->
-    <SolidColorBrush x:Key="ValidationTextBrush" Color="White"/>
+    <SolidColorBrush x:Key="ValidationTextBrush" Color="White" />
 
     <!-- WPF default colors -->
     <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="{DynamicResource WhiteColor}" />
@@ -165,13 +165,28 @@
 
     <Color x:Key="MenuShadowColor">#FF000000</Color>
     <Style TargetType="GridSplitter">
-        <Setter Property="Background" Value="#CDFF9439"></Setter>
+        <Setter Property="Background" Value="#CDFF9439" />
     </Style>
     <Style TargetType="Label">
         <!--<Setter Property="FontWeight" Value="Bold"></Setter>-->
-        <Setter Property="FontSize" Value="14"></Setter>
+        <Setter Property="FontSize" Value="14" />
     </Style>
-    
-    
+
+    <Style x:Key="VerticalSeparatorStyle"
+           TargetType="Separator">
+        <Setter Property="Margin" Value="6,0,6,0" />
+        <Setter Property="LayoutTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <RotateTransform Angle="90" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
 </ResourceDictionary>

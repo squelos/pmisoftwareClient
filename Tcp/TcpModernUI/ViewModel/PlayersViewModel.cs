@@ -4,11 +4,14 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.QualityTools.Testing.Fakes;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
 
@@ -36,19 +39,45 @@ namespace TcpModernUI.ViewModel
         {
             // var b = new Task(() => { });
             _players = new ObservableCollection<Player>(Container.PlayerJeu);
-            _unpaidPlayers = new ObservableCollection<Player>(Container.PlayerJeu);
-            
-            _playersViewSource = new CollectionViewSource() { Source = _players };
+            _unpaidPlayers = new ObservableCollection<Player>();
+
+            Task t = new Task(() =>
+            {
+                foreach (Player player in Players)
+                {
+                    if (player.Payment.Count() == 0 || player.Payment.Last().Semester.Last().end < DateTime.Now)
+                    {
+                        CustomDispatcher.Instance.BeginInvoke(() => Unpaid.Add(player) );
+                        //Unpaid.Add(player);
+                    }
+                }
+            });
+            //    (_players.Where(player => player.Payment.Count() == 0 || player.Payment.Last().Semester.Last().end < DateTime.Now)));
+            t.Start();
+            //  Task t  = new Task(() => Unpaid = new ObservableCollection<Player>
+            //    (_players));
+            //t.Start();
 
 
             _players.CollectionChanged += (sender, args) =>
             {
-                Unpaid = new ObservableCollection<Player>(Container.PlayerJeu.Where(player => player.Payment.Last().Semester.Last().end < DateTime.Now));
+                
                 if (args.Action == NotifyCollectionChangedAction.Remove)
                 {
                     foreach (var old in args.OldItems)
                     {
                         Container.PlayerJeu.Remove(old as Player);
+                        Unpaid.Remove(old as Player);
+                    }
+                }
+                else if (args.Action == NotifyCollectionChangedAction.Add)
+                {
+                    foreach (Player p in args.OldItems)
+                    {
+                        if (p.Payment.Count() == 0 || p.Payment.Last().Semester.Last().end < DateTime.Now)
+                        {
+                            Unpaid.Add(p);
+                        }
                     }
                 }
                 //else if (args.Action == NotifyCollectionChangedAction.Add)

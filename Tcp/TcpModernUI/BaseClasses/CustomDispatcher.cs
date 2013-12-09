@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace TcpModernUI.BaseClasses
 {
@@ -47,6 +48,11 @@ namespace TcpModernUI.BaseClasses
                 return true;
             }
 
+        }
+
+        public void BeginInvoke(Action action)
+        {
+            _uiElement.Dispatcher.BeginInvoke(DispatcherPriority.Background, action);
         }
         #endregion
     }
