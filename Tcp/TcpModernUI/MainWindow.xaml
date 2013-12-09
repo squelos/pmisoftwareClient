@@ -71,8 +71,8 @@
         <!--Adhérents-->
         <TabItem Header="Adhérents">
             <DockPanel>
-                    <StackPanel Orientation="Vertical" FlowDirection="RightToLeft"
-                                HorizontalAlignment="Right" >
+               <DockPanel Dock="Left">
+                     <StackPanel Orientation="Horizontal"  DockPanel.Dock="Top" HorizontalAlignment="Right">
                         <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
                                 Command="{Binding PlayersViewModel.CancelCommand}">
                             <Rectangle Width="12" Height="12">
@@ -85,28 +85,29 @@
                                 Command="{Binding PlayersViewModel.UpdateCommand}">
                             <Rectangle Width="12" Height="12">
                                 <Rectangle.Fill>
-                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
-                    </StackPanel>
-                        <DataGrid AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False"
+                </StackPanel>
+                <DataGrid  AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False"
                               ItemsSource="{Binding PlayersViewModel.Players}"
                               RowDetailsVisibilityMode="VisibleWhenSelected"
                               SelectedValue="{Binding PlayersViewModel.SelectedPlayer}"
                               SelectionChanged="PlayerDataGrid_SelectionChanged">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding lastName}" Header="Nom" />
-                                <DataGridTextColumn Binding="{Binding firstName}" Header="Prénom" />
-                                <DataGridTextColumn Binding="{Binding email}" Header="Email" />
-                                <DataGridTextColumn Binding="{Binding phone1}" Header="Telephone" />
-                                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Status}" Header="Status" />
-                                <DataGridCheckBoxColumn Binding="{Binding isEnabled}" Header="Etat" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-                
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding lastName}" Header="Nom" />
+                            <DataGridTextColumn Binding="{Binding firstName}" Header="Prénom" />
+                            <DataGridTextColumn Binding="{Binding email}" Header="Email" />
+                            <DataGridTextColumn Binding="{Binding phone1}" Header="Telephone" />
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Status}" Header="Status" />
+                            <DataGridCheckBoxColumn Binding="{Binding isEnabled}" Header="Etat" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
 
-                <GridSplitter DockPanel.Dock="Left" Width="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+
+                <GridSplitter DockPanel.Dock="Left" Width="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3,3,3,3"
                               ShowsPreview="True" />
 
                 <StackPanel DockPanel.Dock="Right">
