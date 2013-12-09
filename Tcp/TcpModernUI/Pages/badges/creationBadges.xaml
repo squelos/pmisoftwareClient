@@ -48,14 +48,14 @@
                     <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Command="{Binding CancelCommand}">
                         <Rectangle Width="12" Height="12">
                             <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cancel}" />
                             </Rectangle.Fill>
                         </Rectangle>
                     </Button>
                     <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35" Command="{Binding UpdateCommand}">
                         <Rectangle Width="12" Height="12">
                             <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
                             </Rectangle.Fill>
                         </Rectangle>
                     </Button>
@@ -85,14 +85,14 @@
                     <Button  Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"  Command="{Binding CancelCommand}">
                         <Rectangle Width="12" Height="12">
                             <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cancel}" />
                             </Rectangle.Fill>
                         </Rectangle>
                     </Button>
                     <Button  Style="{DynamicResource MetroCircleButtonStyle}"  Height="35" Width="35"   Command="{Binding SaveCommand}">
                         <Rectangle Width="12" Height="12">
                             <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new}" />
                             </Rectangle.Fill>
                         </Rectangle>
                     </Button>
