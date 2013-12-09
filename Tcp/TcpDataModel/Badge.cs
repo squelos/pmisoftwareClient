@@ -20,7 +20,7 @@ namespace TcpDataModel
         }
     
         public int ID { get; set; }
-        public int number { get; set; }
+        public long number { get; set; }
         public int hash { get; set; }
         public bool isEnabled { get; set; }
         public bool isMaster { get; set; }

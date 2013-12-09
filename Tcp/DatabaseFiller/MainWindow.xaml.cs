@@ -31,6 +31,8 @@ namespace DatabaseFiller
         public MainWindow()
         {
             InitializeComponent();
+            _container.Configuration.AutoDetectChangesEnabled = false;
+            _container.Configuration.ValidateOnSaveEnabled = false;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -38,13 +40,13 @@ namespace DatabaseFiller
             Task t = new Task(Wrapper);
             t.Start();
 
-          
+
         }
 
         private void Wrapper()
         {
             CreateBallLevels();
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart) (() => prog.Value = 1));
+            Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 1));
             CreateCategories();
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 2));
             CreateDays();
@@ -91,7 +93,7 @@ namespace DatabaseFiller
 
             for (int i = 0; i < 200; i++)
             {
-                badges.Add(new Badge(GetRandom(1000, 900000),true, false));
+                badges.Add(new Badge(GetBadgeNumber(), true, false));
             }
             _container.BadgeJeu.AddRange(badges);
             _container.SaveChanges();
@@ -131,24 +133,20 @@ namespace DatabaseFiller
             semesters.Add(new Semester(DateTime.Now.AddMonths(8), DateTime.Now.AddMonths(9)));
             semesters.Add(new Semester(DateTime.Now.AddMonths(10), DateTime.Now.AddMonths(11)));
 
-
-
-
-
             Season sea;
             for (int i = 0; i < 12; i++)
             {
-                sea = new Season(semesters[i],semesters[i+1]);
+                sea = new Season(semesters[i], semesters[i + 1]);
                 //sea.Semester1.Add(semesters[i]);
                 //sea.Semester1.Add(semesters[i+1]);
                 //semesters[i + 1].Season1 = sea;
-               // semesters[i].Season1 = sea;
+                // semesters[i].Season1 = sea;
                 seasons.Add(sea);
                 i++;
             }
-            
+
             //seasons.Add(new Season(semesters[0], semesters[1]));
-            
+
             //seasons.Add(new Season(semesters[2], semesters[3]));
             //seasons.Add(new Season(semesters[4], semesters[5]));
             //seasons.Add(new Season(semesters[6], semesters[7]));
@@ -206,10 +204,12 @@ namespace DatabaseFiller
 
             for (int i = 0; i < 300; i++)
             {
-                Player player = new Player(prenoms[GetRandom(0, 13)], noms[GetRandom(0, 14)],
+                int p = GetRandom(0, prenoms.Count);
+                int n = GetRandom(0, noms.Count);
+                Player player = new Player(prenoms[p], noms[n],
                     DateTime.Now.AddYears(GetRandom(-50, -10)),
-                    "30/" + GetRandom(1, 5), prenoms[GetRandom(0, 13)] + "." + noms[GetRandom(0, 14)] + "@gmail.com",
-                    GetRandom(1, 120).ToString() + listRue[GetRandom(0, 14)], cp[GetRandom(0, 14)],
+                    "30/" + GetRandom(1, 5), prenoms[p] + "." + noms[n] + "@gmail.com",
+                    GetRandom(1, 120).ToString() + " " + listRue[GetRandom(0, 14)], cp[GetRandom(0, 14)],
                     listVilles[GetRandom(0, 6)],
                     GetRandom(100000000, 900000000).ToString(), GetRandom(100000000, 900000000).ToString(), "00000",
                     GetRandom(100000000, 900000000).ToString(),
@@ -217,15 +217,13 @@ namespace DatabaseFiller
                 player.lastLogin = DateTime.Now;
                 player.BallLevel = ballLevels[GetRandom(0, 9)];
                 player.Status = statuses[GetRandom(0, 2)];
-                player.Category.Add(categories[GetRandom(0,3)]);
+                player.Category.Add(categories[GetRandom(0, 3)]);
 
                 players.Add(player);
             }
 
             _container.PlayerJeu.AddRange(players);
             _container.SaveChanges();
-
-
         }
 
         private void createBookings()
@@ -236,7 +234,7 @@ namespace DatabaseFiller
             List<Booking> bookings = new List<Booking>();
             Booking booking;
 
-            for(int i = 0; i < 600;i++)
+            for (int i = 0; i < 600; i++)
             {
                 booking = new Booking();
                 booking.Court = courts[GetRandom(0, courts.Count - 1)];
@@ -269,7 +267,7 @@ namespace DatabaseFiller
                 payment.date = DateTime.Now.AddMonths(GetRandom(-20, 0));
                 payment.amount = GetRandom(10, 200);
                 payment.PaymentMethod = methods[GetRandom(0, 2)];
-                payment.Semester = new ObservableCollection<Semester> {semesters[GetRandom(0, semesters.Count - 1)]};
+                payment.Semester = new ObservableCollection<Semester> { semesters[GetRandom(0, semesters.Count - 1)] };
                 payments.Add(payment);
             }
 
@@ -292,7 +290,7 @@ namespace DatabaseFiller
                     pref.Day = days[GetRandom(0, 6)];
                     pref.beginning = GetRandom(8, 23);
                     pref.end = pref.beginning + GetRandom(1, 4);
-                    
+
                     player.TrainingPreferences.Add(pref);
                 }
             }
@@ -317,7 +315,7 @@ namespace DatabaseFiller
                     p.endHour = p.beginningHour + GetRandom(1, 3);
                     p.beginningMin = 30;
                     p.endmin = 0;
-                    
+
                     player.PreferencePeriod.Add(p);
                 }
 
@@ -331,6 +329,13 @@ namespace DatabaseFiller
         {
             return rand.Next(min, max);
         }
+
+        private Int64 GetBadgeNumber()
+        {
+            return (long)(rand.NextDouble() * 100000000);
+        }
+
+
 
         private void AssignBadges()
         {

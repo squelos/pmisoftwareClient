@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/08/2013 03:58:18
+-- Date Created: 12/09/2013 09:45:35
 -- Generated from EDMX file: C:\Users\squelos\Documents\GitHub\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
 -- --------------------------------------------------
 
@@ -17,9 +17,6 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_SeasonSemester1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SemesterJeu] DROP CONSTRAINT [FK_SeasonSemester1];
-GO
 IF OBJECT_ID(N'[dbo].[FK_BookingAggregationBooking]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingAggregationBooking];
 GO
@@ -50,11 +47,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_OpeningBadge]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[OpeningJeu] DROP CONSTRAINT [FK_OpeningBadge];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PlayerCategory1_Player]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlayerCategory1] DROP CONSTRAINT [FK_PlayerCategory1_Player];
+IF OBJECT_ID(N'[dbo].[FK_PlayerCategory_Player]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlayerCategory] DROP CONSTRAINT [FK_PlayerCategory_Player];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PlayerCategory1_Category]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlayerCategory1] DROP CONSTRAINT [FK_PlayerCategory1_Category];
+IF OBJECT_ID(N'[dbo].[FK_PlayerCategory_Category]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlayerCategory] DROP CONSTRAINT [FK_PlayerCategory_Category];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PlayerTrainingPreferences]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TrainingPreferencesSet] DROP CONSTRAINT [FK_PlayerTrainingPreferences];
@@ -76,6 +73,9 @@ IF OBJECT_ID(N'[dbo].[FK_PlayerBallLevel]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_BookingPlayer2]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingPlayer2];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SeasonSemester]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SemesterJeu] DROP CONSTRAINT [FK_SeasonSemester];
 GO
 
 -- --------------------------------------------------
@@ -133,8 +133,8 @@ GO
 IF OBJECT_ID(N'[dbo].[PaymentSemester]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PaymentSemester];
 GO
-IF OBJECT_ID(N'[dbo].[PlayerCategory1]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PlayerCategory1];
+IF OBJECT_ID(N'[dbo].[PlayerCategory]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PlayerCategory];
 GO
 
 -- --------------------------------------------------
@@ -169,7 +169,7 @@ GO
 -- Creating table 'BadgeJeu'
 CREATE TABLE [dbo].[BadgeJeu] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [number] int  NOT NULL,
+    [number] bigint  NOT NULL,
     [hash] int  NOT NULL,
     [isEnabled] bit  NOT NULL,
     [isMaster] bit  NOT NULL,

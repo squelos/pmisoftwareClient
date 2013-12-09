@@ -33,7 +33,8 @@ namespace TcpModernUI
             var dataGrid = sender as DataGrid;
             if (dataGrid != null && dataGrid.SelectedItems.Count == 1)
             {
-                expanderModif.IsExpanded = true;
+                this.playerModif.IsSelected = true;
+                
             }
         }
 

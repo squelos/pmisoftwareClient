@@ -21,74 +21,77 @@ namespace TcpModernUI.ViewModel
     public class PlayersViewModel : ViewModelBase
     {
         #region members
+
         private Player _player;
         private Player _selectedPlayer;
         private CollectionViewSource _playersViewSource;
         private ObservableCollection<Player> _players;
-        private ObservableCollection<Player> _unpaidPlayers;
+        private ObservableCollection<Player> _unpaidPlayers = new ObservableCollection<Player>();
         private List<BallLevel> _ballLevels;
         private List<Status> _statuses;
         private RelayCommand _saveCommand;
         private RelayCommand _cancelCommand;
         private RelayCommand _updateCommand;
         private List<Category> _categories;
+
         #endregion
 
         #region ctor
+
         public PlayersViewModel()
         {
-            // var b = new Task(() => { });
-            _players = new ObservableCollection<Player>(Container.PlayerJeu);
-            _unpaidPlayers = new ObservableCollection<Player>();
+            Task fillPlayersTask = new Task(() =>
+                                            {
+                                                _players =
+                                                    new ObservableCollection<Player>(Container.PlayerJeu.ToList());
+                                                _players.CollectionChanged += (sender, args) =>
+                                                {
+                                                    if (args.Action == NotifyCollectionChangedAction.Remove)
+                                                    {
+                                                        foreach (var old in args.OldItems)
+                                                        {
+                                                            Container.PlayerJeu.Remove(old as Player);
+                                                             CustomDispatcher.Instance.BeginInvoke(()=>Unpaid.Remove(old as Player));
+                                                        }
+                                                    }
+                                                    else if (args.Action == NotifyCollectionChangedAction.Add)
+                                                    {
+                                                        foreach (Player p in args.OldItems)
+                                                        {
+                                                            if (p.Payment.Count() == 0 ||
+                                                                p.Payment.Last().Semester.Last().end < DateTime.Now)
+                                                            {
+                                                                CustomDispatcher.Instance.BeginInvoke(()=> Unpaid.Add(p));
+                                                                
+                                                            }
+                                                        }
+                                                    }
 
-            Task t = new Task(() =>
-            {
-                foreach (Player player in Players)
-                {
-                    if (player.Payment.Count() == 0 || player.Payment.Last().Semester.Last().end < DateTime.Now)
-                    {
-                        CustomDispatcher.Instance.BeginInvoke(() => Unpaid.Add(player) );
-                        //Unpaid.Add(player);
-                    }
-                }
-            });
-            //    (_players.Where(player => player.Payment.Count() == 0 || player.Payment.Last().Semester.Last().end < DateTime.Now)));
-            t.Start();
-            //  Task t  = new Task(() => Unpaid = new ObservableCollection<Player>
-            //    (_players));
-            //t.Start();
+                                                    RaisePropertyChangedEvent("players");
+                                                };
+                                            });
+            //_players = new ObservableCollection<Player>(Container.PlayerJeu.ToList());
 
 
-            _players.CollectionChanged += (sender, args) =>
-            {
-                
-                if (args.Action == NotifyCollectionChangedAction.Remove)
-                {
-                    foreach (var old in args.OldItems)
-                    {
-                        Container.PlayerJeu.Remove(old as Player);
-                        Unpaid.Remove(old as Player);
-                    }
-                }
-                else if (args.Action == NotifyCollectionChangedAction.Add)
-                {
-                    foreach (Player p in args.OldItems)
-                    {
-                        if (p.Payment.Count() == 0 || p.Payment.Last().Semester.Last().end < DateTime.Now)
-                        {
-                            Unpaid.Add(p);
-                        }
-                    }
-                }
-                //else if (args.Action == NotifyCollectionChangedAction.Add)
-                //{
-                //    foreach (var newItem in args.NewItems)
-                //    {
-                //        Container.PlayerJeu.Add(newItem as Player);
-                //    }
-                //}
-                RaisePropertyChangedEvent("players");
-            };
+            Task t = fillPlayersTask.ContinueWith(task =>
+                                                  {
+                                                     
+                                                      foreach (Player player in Players)
+                                                      {
+                                                          if (player.Payment.Count() == 0 ||
+                                                              player.Payment.Last().Semester.Last().end < DateTime.Now)
+                                                          {
+                                                              CustomDispatcher.Instance.BeginInvoke(
+                                                                  () => Unpaid.Add(player));
+                                                              //Unpaid.Add(player);
+                                                          }
+                                                      }
+                                                  });
+
+
+
+            fillPlayersTask.Start();
+           
             _ballLevels = (from a in Container.BallLevelSet select a).ToList();
             _statuses = (from a in Container.StatusSet select a).ToList();
             _categories = (from a in Container.CategorySet select a).ToList();
@@ -97,6 +100,7 @@ namespace TcpModernUI.ViewModel
             _updateCommand = new RelayCommand(Update);
             InitializePlayers();
         }
+
         #endregion
 
         #region getters/setters
@@ -141,7 +145,6 @@ namespace TcpModernUI.ViewModel
             get { return _unpaidPlayers; }
             set
             {
-                
                 _unpaidPlayers = value;
                 RaisePropertyChangedEvent("unpaid");
             }
@@ -171,16 +174,20 @@ namespace TcpModernUI.ViewModel
         {
             get { return _updateCommand; }
         }
+
         #endregion
 
         #region public methods
+
         public void Save()
         {
-            if (Players.Count(player => player.login.ToLower() == CurrentPlayer.login.ToLower()) != 0)
+            if (CurrentPlayer.login != null)
             {
-
-                RaiseCustomError("Login déjà existant");
-                return;
+                if (Players.Count(player => player.login.ToLower() == CurrentPlayer.login.ToLower()) != 0)
+                {
+                    RaiseCustomError("Login déjà existant");
+                    return;
+                }
             }
             Container.PlayerJeu.Add(CurrentPlayer);
 
@@ -189,9 +196,7 @@ namespace TcpModernUI.ViewModel
             {
                 Players.Add(CurrentPlayer);
                 InitializePlayers();
-
             }
-
         }
 
         public void Cancel()
@@ -207,9 +212,11 @@ namespace TcpModernUI.ViewModel
         {
             CommitChanges();
         }
+
         #endregion
 
         #region private methods
+
         private void InitializePlayers()
         {
             CurrentPlayer = new Player(DateTime.Now, DateTime.Now);
@@ -218,6 +225,5 @@ namespace TcpModernUI.ViewModel
         }
 
         #endregion
-
     }
 }

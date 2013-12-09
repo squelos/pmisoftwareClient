@@ -135,7 +135,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="number" Type="int" Nullable="false" />
+    <Property Name="number" Type="bigint" Nullable="false" />
     <Property Name="hash" Type="int" Nullable="false" />
     <Property Name="isEnabled" Type="bit" Nullable="false" />
     <Property Name="isMaster" Type="bit" Nullable="false" />
@@ -645,7 +645,7 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Player" Relationship="entity.BadgePlayer" FromRole="Badge" ToRole="Player" />
           <NavigationProperty Name="Opening" Relationship="entity.OpeningBadge" FromRole="Badge" ToRole="Opening" />
-          <Property Type="Int32" Name="number" Nullable="false" />
+          <Property Type="Int64" Name="number" Nullable="false" />
           <Property Type="Int32" Name="hash" Nullable="false" />
           <Property Type="Boolean" Name="isEnabled" Nullable="false" />
           <Property Type="Boolean" Name="isMaster" Nullable="false" />
@@ -1166,7 +1166,7 @@
       <EndProperty Name="Semester">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
-            <Condition ColumnName="Season_ID" IsNull="false" />
+      <Condition ColumnName="Season_ID" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
