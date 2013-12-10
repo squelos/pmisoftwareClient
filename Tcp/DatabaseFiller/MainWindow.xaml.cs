@@ -27,12 +27,11 @@ namespace DatabaseFiller
     {
 
         Random rand = new Random();
-        private entityContainer _container = new entityContainer();
+        // private entityContainer _container = new entityContainer();
         public MainWindow()
         {
             InitializeComponent();
-            _container.Configuration.AutoDetectChangesEnabled = false;
-            _container.Configuration.ValidateOnSaveEnabled = false;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -73,7 +72,7 @@ namespace DatabaseFiller
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 90));
             AssignBadges(pAssignBadges);
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 100));
-            _container.SaveChanges();
+
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 0));
         }
 
@@ -83,189 +82,226 @@ namespace DatabaseFiller
 
         private void createBadges(ProgressBar bar)
         {
-            List<Badge> badges = new List<Badge>();
-            badges.Add(new Badge(24245252, true, false));
-            badges.Add(new Badge(835623535, false, false));
-            badges.Add(new Badge(13535356, true, true));
-            badges.Add(new Badge(7353634, false, false));
-            badges.Add(new Badge(2353556, false, true));
-            badges.Add(new Badge(353534245, true, false));
-
-            for (int i = 0; i < 200; i++)
+            using (entityContainer container = new entityContainer())
             {
-                badges.Add(new Badge(GetBadgeNumber(), true, false));
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart) (() => bar.Value = i/200*100));
+                container.Configuration.AutoDetectChangesEnabled = false;
+
+                List<Badge> badges = new List<Badge>();
+                badges.Add(new Badge(24245252, true, false));
+                badges.Add(new Badge(835623535, false, false));
+                badges.Add(new Badge(13535356, true, true));
+                badges.Add(new Badge(7353634, false, false));
+                badges.Add(new Badge(2353556, false, true));
+                badges.Add(new Badge(353534245, true, false));
+
+                for (int i = 0; i < 200; i++)
+                {
+                    badges.Add(new Badge(GetBadgeNumber(), true, false));
+                    bar.Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = i / 200 * 100));
+                }
+                container.BadgeJeu.AddRange(badges);
+                container.SaveChanges();
+
             }
-            
-            _container.BadgeJeu.AddRange(badges);
-            _container.SaveChanges();
+
+
         }
 
         private void createTerrains()
         {
-            List<Court> courts = new List<Court>();
-            courts.Add(new Court("terrain 1", true));
-            courts.Add(new Court("terrain 2", false));
-            courts.Add(new Court("Intérieur 1", true));
-            courts.Add(new Court("Extérieur 3", false));
-            _container.CourtJeu.AddRange(courts);
-            _container.SaveChanges();
+            using (entityContainer container = new entityContainer())
+            {
+                container.Configuration.AutoDetectChangesEnabled = false;
+                List<Court> courts = new List<Court>();
+                courts.Add(new Court("terrain 1", true));
+                courts.Add(new Court("terrain 2", false));
+                courts.Add(new Court("Intérieur 1", true));
+                courts.Add(new Court("Extérieur 3", false));
+                container.CourtJeu.AddRange(courts);
+                container.SaveChanges();
+            }
         }
 
         private void createSeasons(ProgressBar bar)
         {
-            List<Season> seasons = new List<Season>();
-            List<Semester> semesters = new List<Semester>();
-            Semester sem;
-            semesters.Add(new Semester(DateTime.Now.AddMonths(-12), DateTime.Now.AddMonths(-11)));
-            semesters.Add(new Semester(DateTime.Now.AddMonths(-10), DateTime.Now.AddMonths(-9)));
-
-            semesters.Add(new Semester(DateTime.Now.AddMonths(-8), DateTime.Now.AddMonths(-7)));
-            semesters.Add(new Semester(DateTime.Now.AddMonths(-6), DateTime.Now.AddMonths(-5)));
-
-            semesters.Add(new Semester(DateTime.Now.AddMonths(-4), DateTime.Now.AddMonths(-3)));
-            semesters.Add(new Semester(DateTime.Now.AddMonths(-2), DateTime.Now.AddMonths(-1)));
-
-            semesters.Add(new Semester(DateTime.Now.AddMonths(0), DateTime.Now.AddMonths(1)));
-            semesters.Add(new Semester(DateTime.Now.AddMonths(2), DateTime.Now.AddMonths(3)));
-
-            semesters.Add(new Semester(DateTime.Now.AddMonths(4), DateTime.Now.AddMonths(5)));
-            semesters.Add(new Semester(DateTime.Now.AddMonths(6), DateTime.Now.AddMonths(7)));
-
-            semesters.Add(new Semester(DateTime.Now.AddMonths(8), DateTime.Now.AddMonths(9)));
-            semesters.Add(new Semester(DateTime.Now.AddMonths(10), DateTime.Now.AddMonths(11)));
-
-            semesters.Add(new Semester(DateTime.Now.AddMonths(-6), DateTime.Now.AddMonths(1)));
-            semesters.Add(new Semester(DateTime.Now.AddMonths(2), DateTime.Now.AddMonths(3)));
-
-            Season sea;
-            for (int i = 0; i < 12; i++)
+            using (entityContainer container = new entityContainer())
             {
-                sea = new Season(semesters[i], semesters[i + 1]);
-                //sea.Semester1.Add(semesters[i]);
-                //sea.Semester1.Add(semesters[i+1]);
-                //semesters[i + 1].Season1 = sea;
-                // semesters[i].Season1 = sea;
-                seasons.Add(sea);
-                i++;
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = i / 12 * 100));
+                container.Configuration.AutoDetectChangesEnabled = false;
+
+                List<Season> seasons = new List<Season>();
+                List<Semester> semesters = new List<Semester>();
+                Semester sem;
+                semesters.Add(new Semester(DateTime.Now.AddMonths(-12), DateTime.Now.AddMonths(-11)));
+                semesters.Add(new Semester(DateTime.Now.AddMonths(-10), DateTime.Now.AddMonths(-9)));
+
+                semesters.Add(new Semester(DateTime.Now.AddMonths(-8), DateTime.Now.AddMonths(-7)));
+                semesters.Add(new Semester(DateTime.Now.AddMonths(-6), DateTime.Now.AddMonths(-5)));
+
+                semesters.Add(new Semester(DateTime.Now.AddMonths(-4), DateTime.Now.AddMonths(-3)));
+                semesters.Add(new Semester(DateTime.Now.AddMonths(-2), DateTime.Now.AddMonths(-1)));
+
+                semesters.Add(new Semester(DateTime.Now.AddMonths(0), DateTime.Now.AddMonths(1)));
+                semesters.Add(new Semester(DateTime.Now.AddMonths(2), DateTime.Now.AddMonths(3)));
+
+                semesters.Add(new Semester(DateTime.Now.AddMonths(4), DateTime.Now.AddMonths(5)));
+                semesters.Add(new Semester(DateTime.Now.AddMonths(6), DateTime.Now.AddMonths(7)));
+
+                semesters.Add(new Semester(DateTime.Now.AddMonths(8), DateTime.Now.AddMonths(9)));
+                semesters.Add(new Semester(DateTime.Now.AddMonths(10), DateTime.Now.AddMonths(11)));
+
+                semesters.Add(new Semester(DateTime.Now.AddMonths(-6), DateTime.Now.AddMonths(1)));
+                semesters.Add(new Semester(DateTime.Now.AddMonths(2), DateTime.Now.AddMonths(3)));
+
+                Season sea;
+                for (int i = 0; i < 12; i++)
+                {
+                    sea = new Season(semesters[i], semesters[i + 1]);
+                    //sea.Semester1.Add(semesters[i]);
+                    //sea.Semester1.Add(semesters[i+1]);
+                    //semesters[i + 1].Season1 = sea;
+                    // semesters[i].Season1 = sea;
+                    seasons.Add(sea);
+                    i++;
+                    bar.Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = i / 12 * 100));
+                }
+
+                //seasons.Add(new Season(semesters[0], semesters[1]));
+
+                //seasons.Add(new Season(semesters[2], semesters[3]));
+                //seasons.Add(new Season(semesters[4], semesters[5]));
+                //seasons.Add(new Season(semesters[6], semesters[7]));
+                //seasons.Add(new Season(semesters[8], semesters[9]));
+                //seasons.Add(new Season(semesters[10], semesters[11]));
+
+                //_container.SemesterJeu.AddRange(semesters);
+                container.SeasonJeu.AddRange(seasons);
+                container.SaveChanges();
             }
-
-            //seasons.Add(new Season(semesters[0], semesters[1]));
-
-            //seasons.Add(new Season(semesters[2], semesters[3]));
-            //seasons.Add(new Season(semesters[4], semesters[5]));
-            //seasons.Add(new Season(semesters[6], semesters[7]));
-            //seasons.Add(new Season(semesters[8], semesters[9]));
-            //seasons.Add(new Season(semesters[10], semesters[11]));
-
-            //_container.SemesterJeu.AddRange(semesters);
-            _container.SeasonJeu.AddRange(seasons);
-            _container.SaveChanges();
-
 
         }
 
         private void createPlayers(ProgressBar bar)
         {
-            List<Player> players = new List<Player>();
-
-            List<string> prenoms = new List<string>(new[]
+            using (entityContainer container = new entityContainer())
             {
-                "Christopher", "luke", "Nathan", "Olivier", "Frederic", 
-                "Manon","Louise","Sarah","Emma","Lea","Enzo",
-                "Camille","Gabriel","Ethan", "Abraham","Hodiya ","Hédèr ",
-                "Laviv",  "Achebèl ","Èliêzèr  ","Èlnatane ","Guil","Néhèmia",
-                "Brendan","Alan","Allan","Brice","Bryan","Erwann",
-                "Fiacre","Gael","Nigel","Nelly","Nolann","Rohan",
-                "Gwladys","Goulwen","Tangi","Gwendoline","Rowena","Roween",
-            });
-            //14
+                container.Configuration.AutoDetectChangesEnabled = false;
+                List<Player> players = new List<Player>();
 
-            List<string> noms = new List<string>(new[]
-            {
-                "Tremblay", "Gagnon", "Roy","Côté", "Bouchard","Gauthier","Morin",
-                "Lavoie","Fortin","Gagné","Ouellet","Pelletier","Bélanger","Lévesque","Bergeron",
-                "Bernard","Schmitt","Martin","Klein","Byche","Simon","Michel","Jacob",
-                "Mayer","Meyer","Koch","Wolf","Wolff","Kirsch","Raymond","Guyot",
-                "Hamm","Scherer","Grosse","Marx","Thiel","Rodriguez","Tritz","Robert",
-                "Beck","Philippe","Weiss","Ricard","Picard","Husson","Lefort","Barthel",
-            });
-            //15
-            List<string> cp = new List<string>(new[]
-            {
-                "01067", "01445", "01454 ","01465 ", "01468","01558 ","01609 ",
-                "01616 ","01621","01631","01662","01683 ","09376 ","09456 ","09526 "
-            });
-            //15
-            List<string> listRue = new List<string>(new[]
-            {
-                "Rue de l'eglise", "Place de l'eglise", "Grande Rue ","Rue du moulin ", "Place de la mairie","Rue du chateau ","Rue des ecoles ",
-                "Rue de la gare ","Rue de la mairie","rue principale","Rue secondaire","Rue des acacias ","Rue de la fontaine ","Rue Pasteur ","Rue des juifs "
-            });
-            //15
-            List<string> listVilles = new List<string>(new[]
-            {
-                "Paris", "Nancy", "Metz ","Longwy", "Luxembourg","Montreal","Quebec"
-                , "Montpellier", "Aix"
-                
-            });
-            //7
+                List<string> prenoms = new List<string>(new[]
+                                                        {
+                                                            "Christopher", "luke", "Nathan", "Olivier", "Frederic",
+                                                            "Manon", "Louise", "Sarah", "Emma", "Lea", "Enzo",
+                                                            "Camille", "Gabriel", "Ethan", "Abraham", "Hodiya ",
+                                                            "Hédèr ",
+                                                            "Laviv", "Achebèl ", "Èliêzèr  ", "Èlnatane ", "Guil",
+                                                            "Néhèmia",
+                                                            "Brendan", "Alan", "Allan", "Brice", "Bryan", "Erwann",
+                                                            "Fiacre", "Gael", "Nigel", "Nelly", "Nolann", "Rohan",
+                                                            "Gwladys", "Goulwen", "Tangi", "Gwendoline", "Rowena",
+                                                            "Roween",
+                                                        });
+                //14
 
-            List<BallLevel> ballLevels = new List<BallLevel>(_container.BallLevelSet);
-            List<Category> categories = new List<Category>(_container.CategorySet);
-            List<Status> statuses = new List<Status>(_container.StatusSet);
+                List<string> noms = new List<string>(new[]
+                                                     {
+                                                         "Tremblay", "Gagnon", "Roy", "Côté", "Bouchard", "Gauthier",
+                                                         "Morin",
+                                                         "Lavoie", "Fortin", "Gagné", "Ouellet", "Pelletier", "Bélanger",
+                                                         "Lévesque", "Bergeron",
+                                                         "Bernard", "Schmitt", "Martin", "Klein", "Byche", "Simon",
+                                                         "Michel", "Jacob",
+                                                         "Mayer", "Meyer", "Koch", "Wolf", "Wolff", "Kirsch", "Raymond",
+                                                         "Guyot",
+                                                         "Hamm", "Scherer", "Grosse", "Marx", "Thiel", "Rodriguez",
+                                                         "Tritz", "Robert",
+                                                         "Beck", "Philippe", "Weiss", "Ricard", "Picard", "Husson",
+                                                         "Lefort", "Barthel",
+                                                     });
+                //15
+                List<string> cp = new List<string>(new[]
+                                                   {
+                                                       "01067", "01445", "01454 ", "01465 ", "01468", "01558 ", "01609 ",
+                                                       "01616 ", "01621", "01631", "01662", "01683 ", "09376 ", "09456 ",
+                                                       "09526 "
+                                                   });
+                //15
+                List<string> listRue = new List<string>(new[]
+                                                        {
+                                                            "Rue de l'eglise", "Place de l'eglise", "Grande Rue ",
+                                                            "Rue du moulin ", "Place de la mairie", "Rue du chateau ",
+                                                            "Rue des ecoles ",
+                                                            "Rue de la gare ", "Rue de la mairie", "rue principale",
+                                                            "Rue secondaire", "Rue des acacias ", "Rue de la fontaine ",
+                                                            "Rue Pasteur ", "Rue des juifs "
+                                                        });
+                //15
+                List<string> listVilles = new List<string>(new[]
+                                                           {
+                                                               "Paris", "Nancy", "Metz ", "Longwy", "Luxembourg",
+                                                               "Montreal", "Quebec"
+                                                               , "Montpellier", "Aix"
+
+                                                           });
+                //7
+
+                List<BallLevel> ballLevels = new List<BallLevel>(container.BallLevelSet);
+                List<Category> categories = new List<Category>(container.CategorySet);
+                List<Status> statuses = new List<Status>(container.StatusSet);
 
 
-            for (int i = 0; i < 600; i++)
-            {
-                int p = GetRandom(0, prenoms.Count);
-                int n = GetRandom(0, noms.Count);
-                Player player = new Player(prenoms[p], noms[n],
-                    DateTime.Now.AddYears(GetRandom(-50, -10)),
-                    "30/" + GetRandom(1, 5), prenoms[p] + "." + noms[n] + "@gmail.com",
-                    GetRandom(1, 120).ToString() + " " + listRue[GetRandom(0, 14)], cp[GetRandom(0, 14)],
-                    listVilles[GetRandom(0, listVilles.Count)],
-                    GetRandom(100000000, 900000000).ToString(), GetRandom(100000000, 900000000).ToString(), "00000",
-                    GetRandom(100000000, 900000000).ToString(),
-                    prenoms[p] + "." + noms[n] + i + "@gmail.com");
-                player.lastLogin = DateTime.Now;
-                player.BallLevel = ballLevels[GetRandom(0, 9)];
-                player.Status = statuses[GetRandom(0, 2)];
-                player.Category.Add(categories[GetRandom(0, 3)]);
+                for (int i = 0; i < 600; i++)
+                {
+                    int p = GetRandom(0, prenoms.Count);
+                    int n = GetRandom(0, noms.Count);
+                    Player player = new Player(prenoms[p], noms[n],
+                        DateTime.Now.AddYears(GetRandom(-50, -10)),
+                        "30/" + GetRandom(1, 5), prenoms[p] + "." + noms[n] + "@gmail.com",
+                        GetRandom(1, 120).ToString() + " " + listRue[GetRandom(0, 14)], cp[GetRandom(0, 14)],
+                        listVilles[GetRandom(0, listVilles.Count)],
+                        GetRandom(100000000, 900000000).ToString(), GetRandom(100000000, 900000000).ToString(), "00000",
+                        GetRandom(100000000, 900000000).ToString(),
+                        prenoms[p] + "." + noms[n] + i + "@gmail.com");
+                    player.lastLogin = DateTime.Now;
+                    player.BallLevel = ballLevels[GetRandom(0, 9)];
+                    player.Status = statuses[GetRandom(0, 2)];
+                    player.Category.Add(categories[GetRandom(0, 3)]);
 
-                players.Add(player);
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = i / 600 * 100));
+                    players.Add(player);
+                    bar.Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = i / 600 * 100));
+                }
+
+                container.PlayerJeu.AddRange(players);
+                container.SaveChanges();
             }
-
-            _container.PlayerJeu.AddRange(players);
-            _container.SaveChanges();
         }
 
         private void createBookings(ProgressBar bar)
         {
-
-            List<Player> players = new List<Player>(_container.PlayerJeu);
-            List<Court> courts = new List<Court>(_container.CourtJeu);
-            List<Booking> bookings = new List<Booking>();
-            Booking booking;
-
-            for (int i = 0; i < 5000; i++)
+            using (entityContainer container = new entityContainer())
             {
-                booking = new Booking();
-                booking.Court = courts[GetRandom(0, courts.Count - 1)];
-                booking.Player1 = players[GetRandom(0, players.Count - 1)];
-                booking.Player2 = players[GetRandom(0, players.Count - 1)];
-                booking.name = i.ToString();
-                booking.isSpecial = false;
-                booking.start = DateTime.Now.AddDays(GetRandom(-200, 100)).AddHours(GetRandom(-5, 5));
-                booking.end = booking.start.AddHours(1);
-                booking.creationDate = booking.start.AddDays(GetRandom(-20, -4));
-                bookings.Add(booking);
-            }
+                container.Configuration.AutoDetectChangesEnabled = false;
+                List<Player> players = new List<Player>(container.PlayerJeu);
+                List<Court> courts = new List<Court>(container.CourtJeu);
+                List<Booking> bookings = new List<Booking>();
+                Booking booking;
 
-            _container.BookingJeu.AddRange(bookings);
-            _container.SaveChanges();
+                for (int i = 0; i < 5000; i++)
+                {
+                    booking = new Booking();
+                    booking.Court = courts[GetRandom(0, courts.Count - 1)];
+                    booking.Player1 = players[GetRandom(0, players.Count - 1)];
+                    booking.Player2 = players[GetRandom(0, players.Count - 1)];
+                    booking.name = i.ToString();
+                    booking.isSpecial = false;
+                    booking.start = DateTime.Now.AddDays(GetRandom(-200, 100)).AddHours(GetRandom(-5, 5));
+                    booking.end = booking.start.AddHours(1);
+                    booking.creationDate = booking.start.AddDays(GetRandom(-20, -4));
+                    bookings.Add(booking);
+                }
+
+                container.BookingJeu.AddRange(bookings);
+                container.SaveChanges();
+            }
         }
 
         private void createPayments(ProgressBar bar)
@@ -273,10 +309,10 @@ namespace DatabaseFiller
 
             using (entityContainer container = new entityContainer())
             {
-
-                List<Player> players = new List<Player>(_container.PlayerJeu);
-                List<Semester> semesters = new List<Semester>(_container.SemesterJeu);
-                List<PaymentMethod> methods = new List<PaymentMethod>(_container.PaymentMethodSet);
+                container.Configuration.AutoDetectChangesEnabled = false;
+                List<Player> players = new List<Player>(container.PlayerJeu);
+                List<Semester> semesters = new List<Semester>(container.SemesterJeu);
+                List<PaymentMethod> methods = new List<PaymentMethod>(container.PaymentMethodSet);
                 List<Payment> payments = new List<Payment>();
                 Payment payment;
 
@@ -295,66 +331,76 @@ namespace DatabaseFiller
                     payment.amount = GetRandom(10, 200);
                     payment.PaymentMethod = methods[GetRandom(0, 2)];
                     payment.raison = listRaisons[GetRandom(0, listRaisons.Count)];
-                    payment.Semester = new ObservableCollection<Semester> {semesters[GetRandom(0, semesters.Count - 1)]};
+                    payment.Semester = new ObservableCollection<Semester> { semesters[GetRandom(0, semesters.Count - 1)] };
                     payments.Add(payment);
-                    Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart) (() => bar.Value = i/1200*100));
+                    bar.Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = i / 1200 * 100));
                 }
 
-                _container.PaymentJeu.AddRange(payments);
-                _container.SaveChanges();
+                container.PaymentJeu.AddRange(payments);
+                container.SaveChanges();
             }
         }
 
         private void createTraining(ProgressBar bar)
         {
-            List<Player> players = new List<Player>(_container.PlayerJeu);
-            List<Day> days = new List<Day>(_container.DaySet);
-            List<TrainingPreferences> preferenceses = new List<TrainingPreferences>(_container.TrainingPreferencesSet);
-            TrainingPreferences pref;
-
-            foreach (var player in players)
+            using (entityContainer container = new entityContainer())
             {
-                for (int i = 0; i < 4; i++)
+                container.Configuration.AutoDetectChangesEnabled = false;
+                List<Player> players = new List<Player>(container.PlayerJeu);
+                List<Day> days = new List<Day>(container.DaySet);
+                List<TrainingPreferences> preferenceses =
+                    new List<TrainingPreferences>(container.TrainingPreferencesSet);
+                TrainingPreferences pref;
+
+                foreach (var player in players)
                 {
-                    pref = new TrainingPreferences();
-                    pref.Day = days[GetRandom(0, 6)];
-                    pref.beginning = GetRandom(8, 23);
-                    pref.end = pref.beginning + GetRandom(1, 4);
+                    for (int i = 0; i < 4; i++)
+                    {
+                        pref = new TrainingPreferences();
+                        pref.Day = days[GetRandom(0, 6)];
+                        pref.beginning = GetRandom(8, 23);
+                        pref.end = pref.beginning + GetRandom(1, 4);
 
-                    player.TrainingPreferences.Add(pref);
+                        player.TrainingPreferences.Add(pref);
+                    }
+
                 }
-                
-            }
 
-            _container.SaveChanges();
+                container.SaveChanges();
+            }
         }
 
         private void createBookingPrefs(ProgressBar bar)
         {
-            List<Player> players = new List<Player>(_container.PlayerJeu);
-            List<Day> days = new List<Day>(_container.DaySet);
-            List<PreferencePeriod> pref = new List<PreferencePeriod>(_container.PreferencePeriodJeu);
-            PreferencePeriod p;
-            int numPlayers = players.Count;
-            int y = 0;
-            
-            foreach (var player in players)
+            using (entityContainer container = new entityContainer())
             {
-               y++;
-                for (int i = 0; i < 3; i++)
-                {
-                    p = new PreferencePeriod();
-                    p.Day = days[GetRandom(0, 6)];
-                    p.beginningHour = GetRandom(16, 23);
-                    p.endHour = p.beginningHour + GetRandom(1, 3);
-                    p.beginningMin = 30;
-                    p.endmin = 0;
+                container.Configuration.AutoDetectChangesEnabled = false;
+                List<Player> players = new List<Player>(container.PlayerJeu);
+                List<Day> days = new List<Day>(container.DaySet);
+                List<PreferencePeriod> pref = new List<PreferencePeriod>(container.PreferencePeriodJeu);
+                PreferencePeriod p;
+                int numPlayers = players.Count;
+                int y = 0;
 
-                    player.PreferencePeriod.Add(p);
+                foreach (var player in players)
+                {
+                    y++;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        p = new PreferencePeriod();
+                        p.Day = days[GetRandom(0, 6)];
+                        p.beginningHour = GetRandom(16, 23);
+                        p.endHour = p.beginningHour + GetRandom(1, 3);
+                        p.beginningMin = 30;
+                        p.endmin = 0;
+
+                        player.PreferencePeriod.Add(p);
+                    }
+                    bar.Dispatcher.BeginInvoke(DispatcherPriority.Background,
+                        (ThreadStart)(() => bar.Value = y / numPlayers * 100));
                 }
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = y / numPlayers * 100));
+                container.SaveChanges();
             }
-            _container.SaveChanges();
         }
 
         private int GetRandom(int min, int max)
@@ -371,46 +417,61 @@ namespace DatabaseFiller
 
         private void AssignBadges(ProgressBar bar)
         {
-            List<Badge> badges = new List<Badge>(_container.BadgeJeu);
-            List<Player> players = new List<Player>(_container.PlayerJeu);
-            int numBadges = badges.Count;
-            int i = 0;
-
-            foreach (var badge in badges)
+            using (entityContainer container = new entityContainer())
             {
-                badge.Player = players[GetRandom(0, players.Count)];
-                i++;
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = i / numBadges * 100));
+                container.Configuration.AutoDetectChangesEnabled = false;
+                List<Badge> badges = new List<Badge>(container.BadgeJeu);
+                List<Player> players = new List<Player>(container.PlayerJeu);
+                int numBadges = badges.Count;
+                int i = 0;
+
+                foreach (var badge in badges)
+                {
+                    badge.Player = players[GetRandom(0, players.Count)];
+                    i++;
+                    bar.Dispatcher.BeginInvoke(DispatcherPriority.Background,
+                        (ThreadStart)(() => bar.Value = i / numBadges * 100));
+                }
+
+
+                container.SaveChanges();
             }
-
-
-            _container.SaveChanges();
         }
 
         #region static
         private void CreateBallLevels()
         {
-            if (_container.BallLevelSet.Count() == 0)
+            using (entityContainer container = new entityContainer())
             {
-                BallLevel blanche = new BallLevel();
-                blanche.ballName = "Blanche";
-                BallLevel jaune = new BallLevel();
-                jaune.ballName = "Jaune";
-                BallLevel orange = new BallLevel();
-                orange.ballName = "Orange";
-                BallLevel verte = new BallLevel();
-                verte.ballName = "Verte";
-                BallLevel rouge = new BallLevel();
-                rouge.ballName = "Rouge";
-                BallLevel raquette = new BallLevel();
-                raquette.ballName = "Raquette";
-                BallLevel mousse = new BallLevel();
-                mousse.ballName = "Mousse";
-                BallLevel souple = new BallLevel();
-                souple.ballName = "Souple";
-                BallLevel intermediaire = new BallLevel();
-                intermediaire.ballName = "Intermédiaire";
-                _container.BallLevelSet.AddRange(new[] { blanche, jaune, orange, verte, rouge, raquette, mousse, souple, intermediaire });
+                container.Configuration.AutoDetectChangesEnabled = false;
+                if (container.BallLevelSet.Count() == 0)
+                {
+                    BallLevel blanche = new BallLevel();
+                    blanche.ballName = "Blanche";
+                    BallLevel jaune = new BallLevel();
+                    jaune.ballName = "Jaune";
+                    BallLevel orange = new BallLevel();
+                    orange.ballName = "Orange";
+                    BallLevel verte = new BallLevel();
+                    verte.ballName = "Verte";
+                    BallLevel rouge = new BallLevel();
+                    rouge.ballName = "Rouge";
+                    BallLevel raquette = new BallLevel();
+                    raquette.ballName = "Raquette";
+                    BallLevel mousse = new BallLevel();
+                    mousse.ballName = "Mousse";
+                    BallLevel souple = new BallLevel();
+                    souple.ballName = "Souple";
+                    BallLevel intermediaire = new BallLevel();
+                    intermediaire.ballName = "Intermédiaire";
+                    container.BallLevelSet.AddRange(new[]
+                                                     {
+                                                         blanche, jaune, orange, verte, rouge, raquette, mousse, souple,
+                                                         intermediaire
+                                                     });
+                    container.SaveChanges();
+                }
+                
             }
 
 
@@ -418,70 +479,87 @@ namespace DatabaseFiller
 
         private void CreateStatus()
         {
-            if (_container.StatusSet.Count() == 0)
+            using (entityContainer container = new entityContainer())
             {
-                Status utilisateur = new Status();
-                utilisateur.statusName = "Utilisateur";
-                Status club = new Status();
-                club.statusName = "Club";
-                Status admin = new Status();
-                admin.statusName = "Administrateur";
-                _container.StatusSet.AddRange(new[] { utilisateur, club, admin });
+                container.Configuration.AutoDetectChangesEnabled = false;
+                if (container.StatusSet.Count() == 0)
+                {
+                    Status utilisateur = new Status();
+                    utilisateur.statusName = "Utilisateur";
+                    Status club = new Status();
+                    club.statusName = "Club";
+                    Status admin = new Status();
+                    admin.statusName = "Administrateur";
+                    container.StatusSet.AddRange(new[] { utilisateur, club, admin });
+                    container.SaveChanges();
+                }
             }
-
         }
 
         private void CreatePaymentMethods()
         {
-            if (_container.PaymentMethodSet.Count() == 0)
+            using (entityContainer container = new entityContainer())
             {
-                PaymentMethod argentComptant = new PaymentMethod();
-                argentComptant.methodName = "Argent comptant";
-                PaymentMethod cheque = new PaymentMethod();
-                cheque.methodName = "Chèque";
-                PaymentMethod chequeVacance = new PaymentMethod();
-                chequeVacance.methodName = "Chèque vacance";
-                _container.PaymentMethodSet.AddRange(new PaymentMethod[] { argentComptant, cheque, chequeVacance });
+                container.Configuration.AutoDetectChangesEnabled = false;
+                if (container.PaymentMethodSet.Count() == 0)
+                {
+                    PaymentMethod argentComptant = new PaymentMethod();
+                    argentComptant.methodName = "Argent comptant";
+                    PaymentMethod cheque = new PaymentMethod();
+                    cheque.methodName = "Chèque";
+                    PaymentMethod chequeVacance = new PaymentMethod();
+                    chequeVacance.methodName = "Chèque vacance";
+                    container.PaymentMethodSet.AddRange(new PaymentMethod[] { argentComptant, cheque, chequeVacance });
+                }
             }
         }
 
         private void CreateDays()
         {
-            if (_container.DaySet.Count() == 0)
+            using (entityContainer container = new entityContainer())
             {
-                Day lundi = new Day();
-                lundi.name = "Lundi";
-                Day mardi = new Day();
-                mardi.name = "Mardi";
-                Day mercredi = new Day();
-                mercredi.name = "Mercredi";
-                Day jeudi = new Day();
-                jeudi.name = "Jeudi";
-                Day vendredi = new Day();
-                vendredi.name = "Vendredi";
-                Day samedi = new Day();
-                samedi.name = "Samedi";
-                Day dimanche = new Day();
-                dimanche.name = "Dimanche";
+                container.Configuration.AutoDetectChangesEnabled = false;
+                if (container.DaySet.Count() == 0)
+                {
+                    Day lundi = new Day();
+                    lundi.name = "Lundi";
+                    Day mardi = new Day();
+                    mardi.name = "Mardi";
+                    Day mercredi = new Day();
+                    mercredi.name = "Mercredi";
+                    Day jeudi = new Day();
+                    jeudi.name = "Jeudi";
+                    Day vendredi = new Day();
+                    vendredi.name = "Vendredi";
+                    Day samedi = new Day();
+                    samedi.name = "Samedi";
+                    Day dimanche = new Day();
+                    dimanche.name = "Dimanche";
 
-                _container.DaySet.AddRange(new Day[] { lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche });
+                    container.DaySet.AddRange(new Day[] { lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche });
+                }
             }
         }
 
         private void CreateCategories()
         {
-            if (_container.CategorySet.Count() == 0)
+            using (entityContainer container = new entityContainer())
             {
-                Category loisir = new Category();
-                loisir.categoryName = "Loisir";
-                Category competition = new Category();
-                competition.categoryName = "Compétition";
-                Category ecoleDeTennis = new Category();
-                ecoleDeTennis.categoryName = "Ecole de Tennis";
-                Category entrainement = new Category();
-                entrainement.categoryName = "Entraînement";
+                container.Configuration.AutoDetectChangesEnabled = false;
+                if (container.CategorySet.Count() == 0)
+                {
+                    Category loisir = new Category();
+                    loisir.categoryName = "Loisir";
+                    Category competition = new Category();
+                    competition.categoryName = "Compétition";
+                    Category ecoleDeTennis = new Category();
+                    ecoleDeTennis.categoryName = "Ecole de Tennis";
+                    Category entrainement = new Category();
+                    entrainement.categoryName = "Entraînement";
 
-                _container.CategorySet.AddRange(new[] { loisir, competition, ecoleDeTennis, entrainement });
+                    container.CategorySet.AddRange(new[] { loisir, competition, ecoleDeTennis, entrainement });
+                    container.SaveChanges();
+                }
             }
         }
         #endregion
