@@ -5,6 +5,22 @@
     <Grid>
         <Button Content="Init" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <ProgressBar x:Name="prog" HorizontalAlignment="Left" Height="15" Margin="10,294,0,0" VerticalAlignment="Top" Width="497"/>
+        <Label Content="Create Badges" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
+        <Label Content="Create Seasons" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+        <Label Content="Create Players" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top"/>
+        <Label Content="Create Booking prefs" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top"/>
+        <Label Content="Create Bookings" HorizontalAlignment="Left" Margin="10,139,0,0" VerticalAlignment="Top"/>
+        <Label Content="Create Payments" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top"/>
+        <Label Content="Create Training" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top"/>
+        <Label Content="Assign Badges" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top"/>
+        <ProgressBar x:Name="pCreateBadges" HorizontalAlignment="Left" Height="15" Margin="141,42,0,0" VerticalAlignment="Top" Width="366"/>
+        <ProgressBar x:Name="pCreateSeasons" HorizontalAlignment="Left" Height="15" Margin="141,68,0,0" VerticalAlignment="Top" Width="366"/>
+        <ProgressBar x:Name="pCreatePlayers" HorizontalAlignment="Left" Height="15" Margin="141,94,0,0" VerticalAlignment="Top" Width="366"/>
+        <ProgressBar x:Name="pCreateBookingPrefs" HorizontalAlignment="Left" Height="15" Margin="141,120,0,0" VerticalAlignment="Top" Width="366"/>
+        <ProgressBar x:Name="pCreateBookings" HorizontalAlignment="Left" Height="15" Margin="141,146,0,0" VerticalAlignment="Top" Width="366"/>
+        <ProgressBar x:Name="pCreatePayments" HorizontalAlignment="Left" Height="15" Margin="141,171,0,0" VerticalAlignment="Top" Width="366"/>
+        <ProgressBar x:Name="pCreateTraining" HorizontalAlignment="Left" Height="15" Margin="141,197,0,0" VerticalAlignment="Top" Width="366" />
+        <ProgressBar x:Name="pAssignBadges" HorizontalAlignment="Left" Height="15" Margin="141,224,0,0" VerticalAlignment="Top" Width="366"/>
 
 
     </Grid>

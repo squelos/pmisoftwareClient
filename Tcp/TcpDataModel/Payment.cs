@@ -22,6 +22,7 @@ namespace TcpDataModel
         public int ID { get; set; }
         public double amount { get; set; }
         public System.DateTime date { get; set; }
+        public string raison { get; set; }
     
         public virtual Player Player { get; set; }
         public virtual ObservableCollection<Semester> Semester { get; set; }

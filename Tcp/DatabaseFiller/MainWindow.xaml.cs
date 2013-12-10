@@ -55,23 +55,23 @@ namespace DatabaseFiller
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 4));
             CreateStatus();
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 5));
-            createBadges();
+            createBadges(pCreateBadges);
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 10));
             createTerrains();
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 11));
-            createSeasons();
+            createSeasons(pCreateSeasons);
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 12));
-            createPlayers();
+            createPlayers(pCreatePlayers);
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 40));
-            createBookingPrefs();
+            createBookingPrefs(pCreateBookingPrefs);
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 60));
-            createBookings();
+            createBookings(pCreateBookings);
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 70));
-            createPayments();
+            createPayments(pCreatePayments);
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 80));
-            createTraining();
+            createTraining(pCreateTraining);
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 90));
-            AssignBadges();
+            AssignBadges(pAssignBadges);
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 100));
             _container.SaveChanges();
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 0));
@@ -81,7 +81,7 @@ namespace DatabaseFiller
 
 
 
-        private void createBadges()
+        private void createBadges(ProgressBar bar)
         {
             List<Badge> badges = new List<Badge>();
             badges.Add(new Badge(24245252, true, false));
@@ -94,7 +94,9 @@ namespace DatabaseFiller
             for (int i = 0; i < 200; i++)
             {
                 badges.Add(new Badge(GetBadgeNumber(), true, false));
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart) (() => bar.Value = i/200*100));
             }
+            
             _container.BadgeJeu.AddRange(badges);
             _container.SaveChanges();
         }
@@ -110,7 +112,7 @@ namespace DatabaseFiller
             _container.SaveChanges();
         }
 
-        private void createSeasons()
+        private void createSeasons(ProgressBar bar)
         {
             List<Season> seasons = new List<Season>();
             List<Semester> semesters = new List<Semester>();
@@ -133,6 +135,9 @@ namespace DatabaseFiller
             semesters.Add(new Semester(DateTime.Now.AddMonths(8), DateTime.Now.AddMonths(9)));
             semesters.Add(new Semester(DateTime.Now.AddMonths(10), DateTime.Now.AddMonths(11)));
 
+            semesters.Add(new Semester(DateTime.Now.AddMonths(-6), DateTime.Now.AddMonths(1)));
+            semesters.Add(new Semester(DateTime.Now.AddMonths(2), DateTime.Now.AddMonths(3)));
+
             Season sea;
             for (int i = 0; i < 12; i++)
             {
@@ -143,6 +148,7 @@ namespace DatabaseFiller
                 // semesters[i].Season1 = sea;
                 seasons.Add(sea);
                 i++;
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = i / 12 * 100));
             }
 
             //seasons.Add(new Season(semesters[0], semesters[1]));
@@ -160,7 +166,7 @@ namespace DatabaseFiller
 
         }
 
-        private void createPlayers()
+        private void createPlayers(ProgressBar bar)
         {
             List<Player> players = new List<Player>();
 
@@ -168,14 +174,22 @@ namespace DatabaseFiller
             {
                 "Christopher", "luke", "Nathan", "Olivier", "Frederic", 
                 "Manon","Louise","Sarah","Emma","Lea","Enzo",
-                "Camille","Gabriel","Ethan"
+                "Camille","Gabriel","Ethan", "Abraham","Hodiya ","Hédèr ",
+                "Laviv",  "Achebèl ","Èliêzèr  ","Èlnatane ","Guil","Néhèmia",
+                "Brendan","Alan","Allan","Brice","Bryan","Erwann",
+                "Fiacre","Gael","Nigel","Nelly","Nolann","Rohan",
+                "Gwladys","Goulwen","Tangi","Gwendoline","Rowena","Roween",
             });
             //14
 
             List<string> noms = new List<string>(new[]
             {
                 "Tremblay", "Gagnon", "Roy","Côté", "Bouchard","Gauthier","Morin",
-                "Lavoie","Fortin","Gagné","Ouellet","Pelletier","Bélanger","Lévesque","Bergeron"
+                "Lavoie","Fortin","Gagné","Ouellet","Pelletier","Bélanger","Lévesque","Bergeron",
+                "Bernard","Schmitt","Martin","Klein","Byche","Simon","Michel","Jacob",
+                "Mayer","Meyer","Koch","Wolf","Wolff","Kirsch","Raymond","Guyot",
+                "Hamm","Scherer","Grosse","Marx","Thiel","Rodriguez","Tritz","Robert",
+                "Beck","Philippe","Weiss","Ricard","Picard","Husson","Lefort","Barthel",
             });
             //15
             List<string> cp = new List<string>(new[]
@@ -192,7 +206,8 @@ namespace DatabaseFiller
             //15
             List<string> listVilles = new List<string>(new[]
             {
-                "Paris", "Nancy", "Metz ","Longwy", "Luxembourg","Montreal","Quebec "
+                "Paris", "Nancy", "Metz ","Longwy", "Luxembourg","Montreal","Quebec"
+                , "Montpellier", "Aix"
                 
             });
             //7
@@ -202,7 +217,7 @@ namespace DatabaseFiller
             List<Status> statuses = new List<Status>(_container.StatusSet);
 
 
-            for (int i = 0; i < 300; i++)
+            for (int i = 0; i < 600; i++)
             {
                 int p = GetRandom(0, prenoms.Count);
                 int n = GetRandom(0, noms.Count);
@@ -210,23 +225,24 @@ namespace DatabaseFiller
                     DateTime.Now.AddYears(GetRandom(-50, -10)),
                     "30/" + GetRandom(1, 5), prenoms[p] + "." + noms[n] + "@gmail.com",
                     GetRandom(1, 120).ToString() + " " + listRue[GetRandom(0, 14)], cp[GetRandom(0, 14)],
-                    listVilles[GetRandom(0, 6)],
+                    listVilles[GetRandom(0, listVilles.Count)],
                     GetRandom(100000000, 900000000).ToString(), GetRandom(100000000, 900000000).ToString(), "00000",
                     GetRandom(100000000, 900000000).ToString(),
-                    prenoms[GetRandom(0, 13)] + "." + noms[GetRandom(0, 14)] + i + "@gmail.com");
+                    prenoms[p] + "." + noms[n] + i + "@gmail.com");
                 player.lastLogin = DateTime.Now;
                 player.BallLevel = ballLevels[GetRandom(0, 9)];
                 player.Status = statuses[GetRandom(0, 2)];
                 player.Category.Add(categories[GetRandom(0, 3)]);
 
                 players.Add(player);
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = i / 600 * 100));
             }
 
             _container.PlayerJeu.AddRange(players);
             _container.SaveChanges();
         }
 
-        private void createBookings()
+        private void createBookings(ProgressBar bar)
         {
 
             List<Player> players = new List<Player>(_container.PlayerJeu);
@@ -234,7 +250,7 @@ namespace DatabaseFiller
             List<Booking> bookings = new List<Booking>();
             Booking booking;
 
-            for (int i = 0; i < 600; i++)
+            for (int i = 0; i < 5000; i++)
             {
                 booking = new Booking();
                 booking.Court = courts[GetRandom(0, courts.Count - 1)];
@@ -244,7 +260,7 @@ namespace DatabaseFiller
                 booking.isSpecial = false;
                 booking.start = DateTime.Now.AddDays(GetRandom(-200, 100)).AddHours(GetRandom(-5, 5));
                 booking.end = booking.start.AddHours(1);
-                booking.creationDate = booking.start.AddDays(-7);
+                booking.creationDate = booking.start.AddDays(GetRandom(-20, -4));
                 bookings.Add(booking);
             }
 
@@ -252,30 +268,44 @@ namespace DatabaseFiller
             _container.SaveChanges();
         }
 
-        private void createPayments()
+        private void createPayments(ProgressBar bar)
         {
-            List<Player> players = new List<Player>(_container.PlayerJeu);
-            List<Semester> semesters = new List<Semester>(_container.SemesterJeu);
-            List<PaymentMethod> methods = new List<PaymentMethod>(_container.PaymentMethodSet);
-            List<Payment> payments = new List<Payment>();
-            Payment payment;
 
-            for (int i = 0; i < 80; i++)
+            using (entityContainer container = new entityContainer())
             {
-                payment = new Payment();
-                payment.Player = players[GetRandom(0, players.Count - 1)];
-                payment.date = DateTime.Now.AddMonths(GetRandom(-20, 0));
-                payment.amount = GetRandom(10, 200);
-                payment.PaymentMethod = methods[GetRandom(0, 2)];
-                payment.Semester = new ObservableCollection<Semester> { semesters[GetRandom(0, semesters.Count - 1)] };
-                payments.Add(payment);
-            }
 
-            _container.PaymentJeu.AddRange(payments);
-            _container.SaveChanges();
+                List<Player> players = new List<Player>(_container.PlayerJeu);
+                List<Semester> semesters = new List<Semester>(_container.SemesterJeu);
+                List<PaymentMethod> methods = new List<PaymentMethod>(_container.PaymentMethodSet);
+                List<Payment> payments = new List<Payment>();
+                Payment payment;
+
+                List<string> listRaisons = new List<string>(new[]
+                                                            {
+                                                                "Veteran", "Junion ", "Jeune", "Enfant école de tennis",
+                                                                "Veteran compétition", "Enfant entraînement"
+
+                                                            });
+
+                for (int i = 0; i < 1200; i++)
+                {
+                    payment = new Payment();
+                    payment.Player = players[GetRandom(0, players.Count - 1)];
+                    payment.date = DateTime.Now.AddMonths(GetRandom(-20, 0));
+                    payment.amount = GetRandom(10, 200);
+                    payment.PaymentMethod = methods[GetRandom(0, 2)];
+                    payment.raison = listRaisons[GetRandom(0, listRaisons.Count)];
+                    payment.Semester = new ObservableCollection<Semester> {semesters[GetRandom(0, semesters.Count - 1)]};
+                    payments.Add(payment);
+                    Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart) (() => bar.Value = i/1200*100));
+                }
+
+                _container.PaymentJeu.AddRange(payments);
+                _container.SaveChanges();
+            }
         }
 
-        private void createTraining()
+        private void createTraining(ProgressBar bar)
         {
             List<Player> players = new List<Player>(_container.PlayerJeu);
             List<Day> days = new List<Day>(_container.DaySet);
@@ -293,20 +323,24 @@ namespace DatabaseFiller
 
                     player.TrainingPreferences.Add(pref);
                 }
+                
             }
 
             _container.SaveChanges();
         }
 
-        private void createBookingPrefs()
+        private void createBookingPrefs(ProgressBar bar)
         {
             List<Player> players = new List<Player>(_container.PlayerJeu);
             List<Day> days = new List<Day>(_container.DaySet);
             List<PreferencePeriod> pref = new List<PreferencePeriod>(_container.PreferencePeriodJeu);
             PreferencePeriod p;
-
+            int numPlayers = players.Count;
+            int y = 0;
+            
             foreach (var player in players)
             {
+               y++;
                 for (int i = 0; i < 3; i++)
                 {
                     p = new PreferencePeriod();
@@ -318,11 +352,9 @@ namespace DatabaseFiller
 
                     player.PreferencePeriod.Add(p);
                 }
-
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = y / numPlayers * 100));
             }
-
             _container.SaveChanges();
-
         }
 
         private int GetRandom(int min, int max)
@@ -337,14 +369,18 @@ namespace DatabaseFiller
 
 
 
-        private void AssignBadges()
+        private void AssignBadges(ProgressBar bar)
         {
             List<Badge> badges = new List<Badge>(_container.BadgeJeu);
             List<Player> players = new List<Player>(_container.PlayerJeu);
+            int numBadges = badges.Count;
+            int i = 0;
 
             foreach (var badge in badges)
             {
                 badge.Player = players[GetRandom(0, players.Count)];
+                i++;
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = i / numBadges * 100));
             }
 
 
@@ -449,6 +485,8 @@ namespace DatabaseFiller
             }
         }
         #endregion
+
+
 
 
     }

@@ -13,7 +13,7 @@ namespace TcpDataModel
             number = id;
             isEnabled = enable;
             isMaster = master;
-            hash = 0;
+           
         }
 
         public override string ToString()

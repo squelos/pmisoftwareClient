@@ -7,7 +7,7 @@
                       Title="Tennis Club Portois" MinWidth="650" MinHeight="650" ShowTitleBar="True"
                       ShowIconOnTitleBar="True"
                       Width="1366" Height="768" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
-                      Loaded="MetroWindow_Loaded" Padding="10,10,10,10">
+                      Loaded="MetroWindow_Loaded" Margin="10,10,10,10" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Converters:BoolInverterConverter x:Key="BoolInverterConverter" />
 
@@ -64,7 +64,7 @@
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
-    <Controls:MetroAnimatedSingleRowTabControl TabStripPlacement="Top">
+    <Controls:MetroAnimatedSingleRowTabControl TabStripPlacement="Top" Margin="10,0,10,10">
         <TabItem Header="Accueil">
             <Grid />
         </TabItem>
@@ -610,14 +610,54 @@
                 <StackPanel DockPanel.Dock="Left">
                     <Controls:MetroAnimatedSingleRowTabControl>
                         <TabItem Header="Paiements">
-                            <DataGrid  ItemsSource="{Binding PlayersViewModel.SelectedPlayer.Payment}" AutoGenerateColumns="False">
+                            <DataGrid ItemsSource="{Binding PlayersViewModel.SelectedPlayer}">
+                                
+                            </DataGrid>
+                            <!--<ListBox  ItemsSource="{Binding PlayersViewModel.SelectedPlayer.Payment}" HorizontalAlignment="Stretch">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Valeur" Grid.Column="0" Grid.Row="0"/>
+                                            <Label Content="Date" Grid.Column="0" Grid.Row="1"/>
+                                            <Label Content="Moyen" Grid.Column="0" Grid.Row="2"/>
+                                            <Label Content="Semestres" Grid.Column="0" Grid.Row="3"/>
+                                            
+                                            <Label Content="{Binding amount}" Grid.Column="1" Grid.Row="0"/>
+                                            <Label Content="{Binding date, StringFormat=\{0:d\}}" Grid.Column="1" Grid.Row="1"/>
+                                            <Label Content="{Binding PaymentMethod.methodName}" Grid.Column="1" Grid.Row="2"/>
+                                            <ListBox ItemsSource="{Binding Semester}" Grid.Row="3" Grid.Column="1">
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Label Content="{Binding start,StringFormat=\{0:d\}}"></Label>
+                                                            <Label Content="{Binding end,StringFormat=\{0:d\}}"></Label>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                    </ListBox.ItemTemplate>
+                                            </ListBox>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>-->
+                            <!--<DataGrid  ItemsSource="{Binding PlayersViewModel.SelectedPlayer.Payment}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Valeur" Binding="{Binding amount, StringFormat=\{0:C\}}"/>
                                     <DataGridTextColumn Header="Date" Binding="{Binding date.Date, Mode=OneWay, StringFormat=\{0:f\}}"/>
                                     <DataGridTextColumn Header="Moyen" Binding="{Binding PaymentMethod.methodName}"/>
 
-                                </DataGrid.Columns>
-                            </DataGrid>
+                                </DataGrid.Columns>-->
+                            <!--</DataGrid>-->
                         </TabItem>
                         <TabItem Header="Ajout de paiement">
                             <Grid>

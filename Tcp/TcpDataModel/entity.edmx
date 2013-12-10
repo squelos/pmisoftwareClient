@@ -127,6 +127,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="amount" Type="float" Nullable="false" />
     <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="raison" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Player_ID" Type="int" Nullable="false" />
     <Property Name="PaymentMethod_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -136,7 +137,6 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="number" Type="bigint" Nullable="false" />
-    <Property Name="hash" Type="int" Nullable="false" />
     <Property Name="isEnabled" Type="bit" Nullable="false" />
     <Property Name="isMaster" Type="bit" Nullable="false" />
     <Property Name="Player_ID" Type="int" Nullable="true" />
@@ -637,6 +637,7 @@
           <Property Type="Double" Name="amount" Nullable="false" />
           <Property Type="DateTime" Name="date" Nullable="false" />
           <NavigationProperty Name="PaymentMethod" Relationship="entity.PaymentMethodPayment" FromRole="Payment" ToRole="PaymentMethod" />
+          <Property Name="raison" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Badge">
           <Key>
@@ -646,7 +647,6 @@
           <NavigationProperty Name="Player" Relationship="entity.BadgePlayer" FromRole="Badge" ToRole="Player" />
           <NavigationProperty Name="Opening" Relationship="entity.OpeningBadge" FromRole="Badge" ToRole="Opening" />
           <Property Type="Int64" Name="number" Nullable="false" />
-          <Property Type="Int32" Name="hash" Nullable="false" />
           <Property Type="Boolean" Name="isEnabled" Nullable="false" />
           <Property Type="Boolean" Name="isMaster" Nullable="false" />
         </EntityType>
@@ -885,6 +885,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="amount" ColumnName="amount" />
           <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="raison" ColumnName="raison" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -893,7 +894,6 @@
         <MappingFragment StoreEntitySet="BadgeJeu">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="number" ColumnName="number" />
-          <ScalarProperty Name="hash" ColumnName="hash" />
           <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
           <ScalarProperty Name="isMaster" ColumnName="isMaster" />
         </MappingFragment>
