@@ -44,6 +44,26 @@ namespace DatabaseFiller
 
         private void Wrapper()
         {
+           FixedPart();
+            Task tBadges = new Task(()=> createBadges(pCreateBadges));
+            Task tPlayers = new Task(() => createPlayers(pCreatePlayers));
+
+            tPlayers.ContinueWith(task => createBookingPrefs(pCreateBookingPrefs));
+            tPlayers.ContinueWith(task => createBookings(pCreateBookings));
+            tPlayers.ContinueWith(task => createPayments(pCreatePayments));
+            tPlayers.ContinueWith(task => createTraining(pCreateTraining));
+            Task tAssignBadges = new Task(() => AssignBadges(pAssignBadges));
+            tBadges.Start();
+            tPlayers.Start();
+            Task.WaitAll(new[] {tBadges, tPlayers, tPlayers});
+            tAssignBadges.Start();
+
+        }
+
+        
+
+        private void FixedPart()
+        {
             CreateBallLevels();
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 1));
             CreateCategories();
@@ -54,26 +74,8 @@ namespace DatabaseFiller
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 4));
             CreateStatus();
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 5));
-            createBadges(pCreateBadges);
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 10));
             createTerrains();
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 11));
             createSeasons(pCreateSeasons);
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 12));
-            createPlayers(pCreatePlayers);
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 40));
-            createBookingPrefs(pCreateBookingPrefs);
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 60));
-            createBookings(pCreateBookings);
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 70));
-            createPayments(pCreatePayments);
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 80));
-            createTraining(pCreateTraining);
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 90));
-            AssignBadges(pAssignBadges);
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 100));
-
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => prog.Value = 0));
         }
 
 
@@ -285,7 +287,7 @@ namespace DatabaseFiller
                 List<Booking> bookings = new List<Booking>();
                 Booking booking;
 
-                for (int i = 0; i < 5000; i++)
+                for (int i = 0; i < 500; i++)
                 {
                     booking = new Booking();
                     booking.Court = courts[GetRandom(0, courts.Count - 1)];
@@ -306,7 +308,6 @@ namespace DatabaseFiller
 
         private void createPayments(ProgressBar bar)
         {
-
             using (entityContainer container = new entityContainer())
             {
                 container.Configuration.AutoDetectChangesEnabled = false;
@@ -322,8 +323,7 @@ namespace DatabaseFiller
                                                                 "Veteran compétition", "Enfant entraînement"
 
                                                             });
-
-                for (int i = 0; i < 1200; i++)
+                for (int i = 0; i < 600; i++)
                 {
                     payment = new Payment();
                     payment.Player = players[GetRandom(0, players.Count - 1)];
@@ -510,6 +510,7 @@ namespace DatabaseFiller
                     PaymentMethod chequeVacance = new PaymentMethod();
                     chequeVacance.methodName = "Chèque vacance";
                     container.PaymentMethodSet.AddRange(new PaymentMethod[] { argentComptant, cheque, chequeVacance });
+                    container.SaveChanges();
                 }
             }
         }
@@ -537,6 +538,7 @@ namespace DatabaseFiller
                     dimanche.name = "Dimanche";
 
                     container.DaySet.AddRange(new Day[] { lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche });
+                    container.SaveChanges();
                 }
             }
         }
@@ -563,6 +565,16 @@ namespace DatabaseFiller
             }
         }
         #endregion
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            createBookings(pCreateBookings);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            createPayments(pCreatePayments);
+        }
 
 
 
