@@ -11,6 +11,7 @@ namespace TcpModernUI.ViewModel
         private CourtViewModel _courtvm;
         private PlayersViewModel _playersvm;
         private SeasonsViewModel _seasonsvm;
+        private UnpaidViewModel _unpaidvm;
         
         #endregion
 
@@ -37,6 +38,11 @@ namespace TcpModernUI.ViewModel
             _seasonsvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
             _seasonsvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("seasonsvm");
             _seasonsvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("seasonsvm");
+
+            _unpaidvm = new UnpaidViewModel();
+            _unpaidvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+            _unpaidvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("unpaidvm");
+            _unpaidvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("unpaidvm");
         }
         #endregion
 
@@ -62,6 +68,11 @@ namespace TcpModernUI.ViewModel
         public SeasonsViewModel SeasonsViewModel
         {
             get { return _seasonsvm; }
+        }
+
+        public UnpaidViewModel UnpaidViewModel
+        {
+            get { return _unpaidvm; }
         }
 
         #endregion

@@ -614,7 +614,27 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Expander Header="{Binding Mode=OneWay}">
-                                            
+                                            <StackPanel Orientation="Vertical">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Label Content="Méthode de paiement : "></Label>
+                                                    <Label Content="{Binding PaymentMethod.methodName, FallbackValue=Bite, Mode=OneTime}"></Label>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Label Content="Date de paiement : "></Label>
+                                                    <Label Content="{Binding date, StringFormat=\{0:D\}}"></Label>
+                                                </StackPanel>
+                                                <ItemsControl ItemsSource="{Binding Semester}">
+                                                   <ItemsControl.ItemTemplate>
+                                                       <DataTemplate>
+                                                           <StackPanel Orientation="Horizontal">
+                                                               <Label Content="Semestre "></Label>
+                                                                <Label Content="{Binding start, StringFormat=\{0:d\}}"></Label>
+                                                                <Label Content="{Binding end, StringFormat=\{0:d\}}"></Label>
+                                                            </StackPanel>
+                                                       </DataTemplate>
+                                                   </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </StackPanel>
                                         </Expander>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -669,7 +689,7 @@
                             <!--</DataGrid>-->
                         </TabItem>
                         <TabItem Header="Ajout de paiement">
-                            <Grid>
+                            <Grid Margin="10,10,10,10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -677,7 +697,30 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
+                                
+                                <Label Content="Methode de paiement " Grid.Column="0" Grid.Row="0"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1"/>
+                                
+                                <Label Grid.Row="1" Grid.Column="0"  Content="Montant"/>
+                                <TextBox Grid.Column="1" Grid.Row="1" />
+                                
+                                <Label Content="Date de paiement" Grid.Row="2" Grid.Column="0"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Saison"/>
+
+                                    
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                   
+
+                                    <Label Content="Semestre"/>
+                                </StackPanel>
+                                
                             </Grid>
                         </TabItem>
                     </Controls:MetroAnimatedSingleRowTabControl>

@@ -24,8 +24,8 @@ namespace TcpModernUI.ViewModel
 
         private Player _player;
         private Player _selectedPlayer;
-        private CollectionViewSource _playersViewSource;
         private ObservableCollection<Player> _players;
+        private List<Player> _viewPlayers = new List<Player>();  
         private ObservableCollection<Player> _unpaidPlayers = new ObservableCollection<Player>();
         private List<BallLevel> _ballLevels;
         private List<Status> _statuses;
@@ -95,7 +95,6 @@ namespace TcpModernUI.ViewModel
         #endregion
 
         #region getters/setters
-
         public Player SelectedPlayer
         {
             get { return _selectedPlayer; }
@@ -103,6 +102,10 @@ namespace TcpModernUI.ViewModel
             {
                 Task t = new Task(() =>
                                   {
+                                      //_selectedPlayer =
+                                      //    Container.PlayerJeu.Where(p => p.ID == value.ID)
+                                      //        .Include(p => p.Payment)
+                                      //        .First();
                                       _selectedPlayer = value;
                                       RaisePropertyChangedEvent("selectedPlayer");
                                   });
