@@ -610,9 +610,18 @@
                 <StackPanel DockPanel.Dock="Left">
                     <Controls:MetroAnimatedSingleRowTabControl>
                         <TabItem Header="Paiements">
-                            <DataGrid ItemsSource="{Binding PlayersViewModel.SelectedPlayer}">
+                            <ItemsControl ItemsSource="{Binding PlayersViewModel.SelectedPlayer.Payment}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Expander Header="{Binding Mode=OneWay}">
+                                            
+                                        </Expander>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <!--<DataGrid ItemsSource="{Binding PlayersViewModel.SelectedPlayer}">
                                 
-                            </DataGrid>
+                            </DataGrid>-->
                             <!--<ListBox  ItemsSource="{Binding PlayersViewModel.SelectedPlayer.Payment}" HorizontalAlignment="Stretch">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>

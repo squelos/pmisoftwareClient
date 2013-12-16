@@ -8,6 +8,10 @@ namespace TcpDataModel
 {
     public partial class Payment
     {
-
+        public override string ToString()
+        {
+            return this.amount.ToString("C0") + " " + this.raison;
+            
+        }
     }
 }

@@ -150,6 +150,12 @@
     <Compile Include="Pages\seasons\creationSeasons.xaml.cs">
       <DependentUpon>creationSeasons.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewModel\BadgesViewModel.cs" />
     <Compile Include="ViewModel\CourtViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -278,6 +284,10 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TcpModernUI.ViewModels.PlayersViewModel.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Resources\Entypo.ttf" />
     <None Include="TcpModernUI_TemporaryKey.pfx" />
   </ItemGroup>
