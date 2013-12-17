@@ -42,6 +42,13 @@ namespace TcpDataModel
             }
         }
 
-       
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(Semester[0].start.ToShortDateString() + " ");
+            sb.Append(Semester[1].end.ToShortDateString());
+
+            return sb.ToString();
+        }
     }
 }

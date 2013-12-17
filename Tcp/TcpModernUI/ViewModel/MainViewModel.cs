@@ -29,31 +29,31 @@ namespace TcpModernUI.ViewModel
         #region ctor
         public MainViewModel()
         {
-            _badgesvm = new BadgesViewModel();
+            _badgesvm = new BadgesViewModel(this);
             _badgesvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
             _badgesvm.CustomErrorsChanged += (sender, s) => RaiseCustomError(s);
             _badgesvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("badgesvm");
             _badgesvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("badgesvm");
             
-            _courtvm = new CourtViewModel();
+            _courtvm = new CourtViewModel(this);
             _courtvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
             _courtvm.CustomErrorsChanged += (sender, s) => RaiseCustomError(s);
             _courtvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("courtsvm");
             _courtvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("courtsvm");
 
-            _playersvm = new PlayersViewModel();
+            _playersvm = new PlayersViewModel(this);
             _playersvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
             _playersvm.CustomErrorsChanged += (sender, s) => RaiseCustomError(s);
             _playersvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("playersvm");
             _playersvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("playersvm");
             
-            _seasonsvm = new SeasonsViewModel();
+            _seasonsvm = new SeasonsViewModel(this);
             _seasonsvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
             _seasonsvm.CustomErrorsChanged += (sender, s) => RaiseCustomError(s);
             _seasonsvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("seasonsvm");
             _seasonsvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("seasonsvm");
 
-            _unpaid = new UnpaidViewModel();
+            _unpaid = new UnpaidViewModel(this);
             _unpaid.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
             _unpaid.CustomErrorsChanged += (sender, s) => RaiseCustomError(s);
             _unpaid.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("unpaid");

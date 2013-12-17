@@ -13,5 +13,10 @@ namespace TcpDataModel
             this.start = startDateTime;
             this.end = endDateTime;
         }
+
+        public override string ToString()
+        {
+            return start.ToShortDateString() + " " + end.ToShortDateString();
+        }
     }
 }

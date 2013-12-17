@@ -25,7 +25,7 @@ namespace TcpModernUI.ViewModel
         private Player _player;
         private Player _selectedPlayer;
         private ObservableCollection<Player> _players;
-        private List<Player> _viewPlayers = new List<Player>();  
+        private List<Player> _viewPlayers = new List<Player>();
         private ObservableCollection<Player> _unpaidPlayers = new ObservableCollection<Player>();
         private List<BallLevel> _ballLevels;
         private List<Status> _statuses;
@@ -33,13 +33,15 @@ namespace TcpModernUI.ViewModel
         private RelayCommand _cancelCommand;
         private RelayCommand _updateCommand;
         private List<Category> _categories;
+        private MainViewModel _mvm;
 
         #endregion
 
         #region ctor
 
-        public PlayersViewModel()
+        public PlayersViewModel(MainViewModel mvm)
         {
+            _mvm = mvm;
             _players =
                 new ObservableCollection<Player>(Container.PlayerJeu.ToList());
 
@@ -68,20 +70,26 @@ namespace TcpModernUI.ViewModel
                                               RaisePropertyChangedEvent("players");
                                           };
 
-            Task t = new Task(() =>
-                                                  {
-                                                      foreach (Player player in Players)
-                                                      {
-                                                          if (player.Payment.Count() == 0 ||
-                                                              player.Payment.Last().Semester.Last().end < DateTime.Now)
-                                                          {
-                                                              CustomDispatcher.Instance.BeginInvoke(
-                                                                  () => Unpaid.Add(player));
-                                                              //Unpaid.Add(player);
-                                                          }
-                                                      }
-                                                  });
-            t.Start();
+
+            Task t = new Task(() => Parallel.ForEach(Players, p =>
+                                                              {
+                                                                  if (!p.Payment.Any())
+                                                                  {
+                                                                      CustomDispatcher.Instance.BeginInvoke(
+                                                                          () => Unpaid.Add(p));
+                                                                  }
+                                                                  else
+                                                                  {
+                                                                      if (!p.Payment.Any(
+                                                                              payment =>
+                                                                                  payment.Semester.Any(semester => semester.end > DateTime.Now)))
+                                                                      {
+                                                                          CustomDispatcher.Instance.BeginInvoke(
+                                                                              () => Unpaid.Add(p));
+                                                                      }
+                                                                  }
+                                                              }));
+         
 
             _ballLevels = (from a in Container.BallLevelSet select a).ToList();
             _statuses = (from a in Container.StatusSet select a).ToList();
@@ -95,11 +103,15 @@ namespace TcpModernUI.ViewModel
         #endregion
 
         #region getters/setters
+
         public Player SelectedPlayer
         {
             get { return _selectedPlayer; }
             set
             {
+                //_selectedPlayer = value;
+                //RaisePropertyChangedEvent("selectedPlayer");
+
                 Task t = new Task(() =>
                                   {
                                       //_selectedPlayer =

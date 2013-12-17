@@ -616,23 +616,24 @@
                                         <Expander Header="{Binding Mode=OneWay}">
                                             <StackPanel Orientation="Vertical">
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="Méthode de paiement : "></Label>
-                                                    <Label Content="{Binding PaymentMethod.methodName, FallbackValue=Bite, Mode=OneTime}"></Label>
+                                                    <Label Content="Méthode de paiement : " />
+                                                    <Label
+                                                        Content="{Binding PaymentMethod.methodName, FallbackValue=Bite, Mode=OneTime}" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="Date de paiement : "></Label>
-                                                    <Label Content="{Binding date, StringFormat=\{0:D\}}"></Label>
+                                                    <Label Content="Date de paiement : " />
+                                                    <Label Content="{Binding date, StringFormat=\{0:D\}}" />
                                                 </StackPanel>
                                                 <ItemsControl ItemsSource="{Binding Semester}">
-                                                   <ItemsControl.ItemTemplate>
-                                                       <DataTemplate>
-                                                           <StackPanel Orientation="Horizontal">
-                                                               <Label Content="Semestre "></Label>
-                                                                <Label Content="{Binding start, StringFormat=\{0:d\}}"></Label>
-                                                                <Label Content="{Binding end, StringFormat=\{0:d\}}"></Label>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Label Content="Semestre " />
+                                                                <Label Content="{Binding start, StringFormat=\{0:d\}}" />
+                                                                <Label Content="{Binding end, StringFormat=\{0:d\}}" />
                                                             </StackPanel>
-                                                       </DataTemplate>
-                                                   </ItemsControl.ItemTemplate>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
                                                 </ItemsControl>
                                             </StackPanel>
                                         </Expander>
@@ -691,36 +692,55 @@
                         <TabItem Header="Ajout de paiement">
                             <Grid Margin="10,10,10,10">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                
-                                <Label Content="Methode de paiement " Grid.Column="0" Grid.Row="0"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1"/>
-                                
-                                <Label Grid.Row="1" Grid.Column="0"  Content="Montant"/>
-                                <TextBox Grid.Column="1" Grid.Row="1" />
-                                
-                                <Label Content="Date de paiement" Grid.Row="2" Grid.Column="0"/>
-                                <ComboBox Grid.Row="2" Grid.Column="1"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="Saison"/>
+                                <Label Content="{Binding PlayersViewModel.SelectedPlayer}" Grid.Row="0 " FontWeight="Bold"/>
+                                <!--<Label Content="{Binding PlayersViewModel.SelectedPlayer}" Grid.Row="0" Grid.Column="1"/>-->
 
-                                    
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                   
+                                <Label Content="Methode de paiement " Grid.Column="0" Grid.Row="1" />
+                                <ComboBox Grid.Row="1" Grid.Column="1" SelectedIndex="0"
+                                          ItemsSource="{Binding UnpaidViewModel.PaymentMethods}"
+                                          SelectedValue="{Binding UnpaidViewModel.NewPayment.PaymentMethod}"
+                                          DisplayMemberPath="methodName" />
 
-                                    <Label Content="Semestre"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="Montant" />
+                                <TextBox Grid.Column="1" Grid.Row="2"
+                                         Text="{Binding UnpaidViewModel.NewPayment.amount}" />
+                                <Label Content="Date de paiement" Grid.Row="3" Grid.Column="0" />
+                                <DatePickerTextBox Grid.Row="3" Grid.Column="1"
+                                                   Text="{Binding UnpaidViewModel.NewPayment.date}" />
+                                <GroupBox Header="Semestres" Grid.Row="4" Grid.ColumnSpan="2">
+                                    <ListBox ItemsSource="{Binding SeasonsViewModel.Semesters}"
+                                             SelectionMode="Multiple" SelectionChanged="ListBox_SelectionChanged" />
+                                </GroupBox>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1">
+                                    <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                        Command="{Binding UnpaidViewModel.CancelCommand}">
+                                        <Rectangle Width="12" Height="12">
+                                            <Rectangle.Fill>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cancel}" />
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                    </Button>
+                                    <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
+                                        Command="{Binding UnpaidViewModel.SaveCommand}">
+                                        <Rectangle Width="12" Height="12">
+                                            <Rectangle.Fill>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new}" />
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                    </Button>
                                 </StackPanel>
-                                
                             </Grid>
                         </TabItem>
                     </Controls:MetroAnimatedSingleRowTabControl>
@@ -787,36 +807,36 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Label Content="Nouvelle Saison"  HorizontalAlignment="Left" Margin="20,6,0,7"
-                           VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
-                            <Label Content="Première demie saison"  HorizontalAlignment="Left"
-                           Margin="10,10,0,10" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" />
-                            <Label Content="Deuxième demie saison"  HorizontalAlignment="Left"
-                           Margin="10,10,0,10" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold" />
+                            <Label Content="Nouvelle Saison" HorizontalAlignment="Left" Margin="20,6,0,7"
+                                   VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
+                            <Label Content="Première demie saison" HorizontalAlignment="Left"
+                                   Margin="10,10,0,10" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" />
+                            <Label Content="Deuxième demie saison" HorizontalAlignment="Left"
+                                   Margin="10,10,0,10" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold" />
                             <StackPanel HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"
-                                Orientation="Horizontal" Margin="0,10,0,10">
+                                        Orientation="Horizontal" Margin="0,10,0,10">
                                 <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center" />
                                 <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                    SelectedDate="{Binding SeasonsViewModel.FirstSemester.start, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedDateFormat="Short" />
+                                            SelectedDate="{Binding SeasonsViewModel.FirstSemester.start, UpdateSourceTrigger=PropertyChanged}"
+                                            SelectedDateFormat="Short" />
                                 <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center" />
                                 <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                    SelectedDate="{Binding SeasonsViewModel.FirstSemester.end, UpdateSourceTrigger=PropertyChanged}" />
+                                            SelectedDate="{Binding SeasonsViewModel.FirstSemester.end, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Stretch" Grid.Row="4" Margin="0,10,0,10"
-                                VerticalAlignment="Stretch" Orientation="Horizontal">
+                                        VerticalAlignment="Stretch" Orientation="Horizontal">
                                 <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center" />
                                 <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                    SelectedDate="{Binding SeasonsViewModel.SecondSemester.start, UpdateSourceTrigger=PropertyChanged}" />
+                                            SelectedDate="{Binding SeasonsViewModel.SecondSemester.start, UpdateSourceTrigger=PropertyChanged}" />
                                 <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center" />
                                 <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                    SelectedDate="{Binding SeasonsViewModel.SecondSemester.end, UpdateSourceTrigger=PropertyChanged}" />
+                                            SelectedDate="{Binding SeasonsViewModel.SecondSemester.end, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="0"
-                                HorizontalAlignment="Right" Grid.Row="5" VerticalAlignment="Stretch"
-                                Margin="0,10,0,10">
+                                        HorizontalAlignment="Right" Grid.Row="5" VerticalAlignment="Stretch"
+                                        Margin="0,10,0,10">
                                 <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                Command="{Binding SeasonsViewModel.CancelCommand}">
+                                        Command="{Binding SeasonsViewModel.CancelCommand}">
                                     <Rectangle Width="12" Height="12">
                                         <Rectangle.Fill>
                                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cancel}" />
@@ -824,7 +844,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                Command="{Binding SeasonsViewModel.SaveCommand}">
+                                        Command="{Binding SeasonsViewModel.SaveCommand}">
                                     <Rectangle Width="12" Height="12">
                                         <Rectangle.Fill>
                                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new}" />
@@ -850,36 +870,37 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Label Content="Nouvelle Saison" x:Name="lTitle" HorizontalAlignment="Left" Margin="20,6,0,7"
-                           VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
+                            <Label Content="Nouvelle Saison" x:Name="lTitle" HorizontalAlignment="Left"
+                                   Margin="20,6,0,7"
+                                   VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
                             <Label Content="Première demie saison" x:Name="lFirstSemester" HorizontalAlignment="Left"
-                           Margin="10,10,0,10" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" />
+                                   Margin="10,10,0,10" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" />
                             <Label Content="Deuxième demie saison" x:Name="lSecondSemester" HorizontalAlignment="Left"
-                           Margin="10,10,0,10" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold" />
+                                   Margin="10,10,0,10" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold" />
                             <StackPanel HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"
-                                Orientation="Horizontal" Margin="0,10,0,10">
+                                        Orientation="Horizontal" Margin="0,10,0,10">
                                 <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center" />
                                 <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                    SelectedDate="{Binding SeasonsViewModel.FirstSemester.start, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedDateFormat="Short" />
+                                            SelectedDate="{Binding SeasonsViewModel.FirstSemester.start, UpdateSourceTrigger=PropertyChanged}"
+                                            SelectedDateFormat="Short" />
                                 <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center" />
                                 <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                    SelectedDate="{Binding SeasonsViewModel.FirstSemester.end, UpdateSourceTrigger=PropertyChanged}" />
+                                            SelectedDate="{Binding SeasonsViewModel.FirstSemester.end, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Stretch" Grid.Row="4" Margin="0,10,0,10"
-                                VerticalAlignment="Stretch" Orientation="Horizontal">
+                                        VerticalAlignment="Stretch" Orientation="Horizontal">
                                 <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center" />
                                 <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                    SelectedDate="{Binding SeasonsViewModel.SecondSemester.start, UpdateSourceTrigger=PropertyChanged}" />
+                                            SelectedDate="{Binding SeasonsViewModel.SecondSemester.start, UpdateSourceTrigger=PropertyChanged}" />
                                 <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center" />
                                 <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                    SelectedDate="{Binding SeasonsViewModel.SecondSemester.end, UpdateSourceTrigger=PropertyChanged}" />
+                                            SelectedDate="{Binding SeasonsViewModel.SecondSemester.end, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="0"
-                                HorizontalAlignment="Right" Grid.Row="5" VerticalAlignment="Stretch"
-                                Margin="0,10,0,10">
+                                        HorizontalAlignment="Right" Grid.Row="5" VerticalAlignment="Stretch"
+                                        Margin="0,10,0,10">
                                 <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                Command="{Binding SeasonsViewModel.CancelCommand}">
+                                        Command="{Binding SeasonsViewModel.CancelCommand}">
                                     <Rectangle Width="12" Height="12">
                                         <Rectangle.Fill>
                                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cancel}" />
@@ -887,7 +908,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                Command="{Binding SeasonsViewModel.SaveCommand}">
+                                        Command="{Binding SeasonsViewModel.SaveCommand}">
                                     <Rectangle Width="12" Height="12">
                                         <Rectangle.Fill>
                                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new}" />
@@ -924,7 +945,6 @@
                             </Rectangle>
                         </Button>
                     </StackPanel>
-
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -941,7 +961,7 @@
                     </Grid>
                 </DockPanel>
 
-                <GridSplitter Width="3" Margin="3,3,3,3"></GridSplitter>
+                <GridSplitter Width="3" Margin="3,3,3,3" />
 
                 <Controls:MetroAnimatedSingleRowTabControl>
 
@@ -956,16 +976,18 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Label Content="Numéro" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" />
+                            <Label Content="Numéro" HorizontalAlignment="Left" Margin="10,10,10,10"
+                                   VerticalAlignment="Top" />
                             <Controls:ToggleSwitch OnLabel="Couvert" OffLabel="Extérieur"
-                                           IsChecked="{Binding CourtViewModel.CurrentCourt.isCovered}"
-                                           HorizontalAlignment="Left"
-                                           Margin="10,10,10,10" Grid.Row="1" VerticalAlignment="Top" Width="145" />
+                                                   IsChecked="{Binding CourtViewModel.CurrentCourt.isCovered}"
+                                                   HorizontalAlignment="Left"
+                                                   Margin="10,10,10,10" Grid.Row="1" VerticalAlignment="Top"
+                                                   Width="145" />
                             <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1"
-                                HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Stretch"
-                                Margin="0,10,0,10">
+                                        HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Stretch"
+                                        Margin="0,10,0,10">
                                 <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                Command="{Binding CourtViewModel.CancelCommand}">
+                                        Command="{Binding CourtViewModel.CancelCommand}">
                                     <Rectangle Width="12" Height="12">
                                         <Rectangle.Fill>
                                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cancel}" />
@@ -973,7 +995,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                Command="{Binding CourtViewModel.SaveCommand}">
+                                        Command="{Binding CourtViewModel.SaveCommand}">
                                     <Rectangle Width="12" Height="12">
                                         <Rectangle.Fill>
                                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new}" />
@@ -982,10 +1004,9 @@
                                 </Button>
                             </StackPanel>
                             <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10,10,10,10"
-                             TextWrapping="Wrap" Text="{Binding CourtViewModel.CurrentCourt.number}"
-                             VerticalAlignment="Top"
-                             Width="Auto" MinWidth="120" />
-
+                                     TextWrapping="Wrap" Text="{Binding CourtViewModel.CurrentCourt.number}"
+                                     VerticalAlignment="Top"
+                                     Width="Auto" MinWidth="120" />
                         </Grid>
                     </TabItem>
                     <TabItem Header="Modification">
@@ -999,16 +1020,18 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Label Content="Numéro" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" />
+                            <Label Content="Numéro" HorizontalAlignment="Left" Margin="10,10,10,10"
+                                   VerticalAlignment="Top" />
                             <Controls:ToggleSwitch OnLabel="Couvert" OffLabel="Extérieur"
-                                           IsChecked="{Binding CourtViewModel.CurrentCourt.isCovered}"
-                                           HorizontalAlignment="Left"
-                                           Margin="10,10,10,10" Grid.Row="1" VerticalAlignment="Top" Width="145" />
+                                                   IsChecked="{Binding CourtViewModel.CurrentCourt.isCovered}"
+                                                   HorizontalAlignment="Left"
+                                                   Margin="10,10,10,10" Grid.Row="1" VerticalAlignment="Top"
+                                                   Width="145" />
                             <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1"
-                                HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Stretch"
-                                Margin="0,10,0,10">
+                                        HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Stretch"
+                                        Margin="0,10,0,10">
                                 <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                Command="{Binding CourtViewModel.CancelCommand}">
+                                        Command="{Binding CourtViewModel.CancelCommand}">
                                     <Rectangle Width="12" Height="12">
                                         <Rectangle.Fill>
                                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cancel}" />
@@ -1016,7 +1039,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                Command="{Binding CourtViewModel.SaveCommand}">
+                                        Command="{Binding CourtViewModel.SaveCommand}">
                                     <Rectangle Width="12" Height="12">
                                         <Rectangle.Fill>
                                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new}" />
@@ -1025,9 +1048,9 @@
                                 </Button>
                             </StackPanel>
                             <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10,10,10,10"
-                             TextWrapping="Wrap" Text="{Binding CourtViewModel.CurrentCourt.number}"
-                             VerticalAlignment="Top"
-                             Width="Auto" MinWidth="120" />
+                                     TextWrapping="Wrap" Text="{Binding CourtViewModel.CurrentCourt.number}"
+                                     VerticalAlignment="Top"
+                                     Width="Auto" MinWidth="120" />
 
                         </Grid>
                     </TabItem>

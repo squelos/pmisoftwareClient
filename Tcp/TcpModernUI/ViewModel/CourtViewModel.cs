@@ -16,11 +16,13 @@ namespace TcpModernUI.ViewModel
         private RelayCommand _saveCommand;
         private RelayCommand _cancelCommand;
         private RelayCommand _updateCommand;
+        private MainViewModel _mvm;
         #endregion
 
         #region ctor
-        public CourtViewModel()
+        public CourtViewModel(MainViewModel mvm)
         {
+            _mvm = mvm;
             _saveCommand = new RelayCommand(Save);
             _cancelCommand = new RelayCommand(Cancel);
             _updateCommand = new RelayCommand(Update);

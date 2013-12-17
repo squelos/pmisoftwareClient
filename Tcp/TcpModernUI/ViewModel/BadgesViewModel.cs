@@ -17,12 +17,14 @@ namespace TcpModernUI.ViewModel
         private RelayCommand _updateCommand;
         private RelayCommand _cancelCommand;
         private Badge _badge;
+        private MainViewModel _mvm;
 
         #endregion
 
         #region ctor
-        public BadgesViewModel()
+        public BadgesViewModel(MainViewModel mvm)
         {
+            _mvm = mvm;
             _saveCommand = new RelayCommand(Save);
             _updateCommand = new RelayCommand(Update);
             _cancelCommand = new RelayCommand(Cancel);
@@ -38,7 +40,6 @@ namespace TcpModernUI.ViewModel
                     }
                 }
                 RaisePropertyChangedEvent("badges");
-                
             };
             InitialiseBadges();
         }

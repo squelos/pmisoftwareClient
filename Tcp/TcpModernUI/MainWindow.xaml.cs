@@ -1,8 +1,12 @@
-﻿using System.Data.Entity.Validation;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity.Validation;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using MahApps.Metro.Controls;
+using TcpDataModel;
 using TcpModernUI.BaseClasses;
 using TcpModernUI.ViewModel;
 
@@ -15,6 +19,7 @@ namespace TcpModernUI
     public partial class MainWindow
     {
         private CustomDispatcher _dispatcher;
+        private MainViewModel _mainViewModel;
 
         public MainWindow()
         {
@@ -102,15 +107,27 @@ namespace TcpModernUI
                 mainViewModel.ValidationErrorsChanged +=
                     (o, exception) => ViewModelBase_OnValidationErrorsChanged(o, exception);
                 mainViewModel.CustomErrorsChanged += (o, s) => ViewModelBase_CustomErrorsChanged(o, s);
+                _mainViewModel = mainViewModel;
             }
-
-
         }
 
         private void ViewModelBase_CustomErrorsChanged(object sender, string s)
         {
             this.ShowMessageAsync("Erreur de validation", s,
                 MahApps.Metro.Controls.MessageDialogStyle.Affirmative);
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //_mainViewModel.UnpaidViewModel.NewPayment.Semester = (ObservableCollection<Semester>) (sender as ListBox).SelectedItems;
+
+            _mainViewModel.UnpaidViewModel.NewPayment.Semester.Clear();
+
+            foreach (var item in (sender as ListBox).SelectedItems)
+            {
+                _mainViewModel.UnpaidViewModel.NewPayment.Semester.Add((Semester)item);
+            }
+
         }
     }
 }
