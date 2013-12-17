@@ -71,25 +71,29 @@ namespace TcpModernUI.ViewModel
                                           };
 
 
-            Task t = new Task(() => Parallel.ForEach(Players, p =>
-                                                              {
-                                                                  if (!p.Payment.Any())
-                                                                  {
-                                                                      CustomDispatcher.Instance.BeginInvoke(
-                                                                          () => Unpaid.Add(p));
-                                                                  }
-                                                                  else
-                                                                  {
-                                                                      if (!p.Payment.Any(
-                                                                              payment =>
-                                                                                  payment.Semester.Any(semester => semester.end > DateTime.Now)))
-                                                                      {
-                                                                          CustomDispatcher.Instance.BeginInvoke(
-                                                                              () => Unpaid.Add(p));
-                                                                      }
-                                                                  }
-                                                              }));
-         
+            Task t = new Task(() =>
+            {
+                foreach (Player p in Players)
+                {
+                    if (p.Payment.Count == 0)
+                    {
+                        CustomDispatcher.Instance.BeginInvoke(() => Unpaid.Add(p));
+                    }
+                    else
+                    {
+                        if (
+                            !p.Payment.Any(
+                                payment =>
+                                    payment.Semester.Any(semester => semester.end > DateTime.Now)))
+                        {
+                            CustomDispatcher.Instance.BeginInvoke(() => Unpaid.Add(p));
+                        }
+                    }
+                }
+            });
+
+            t.Start();
+
 
             _ballLevels = (from a in Container.BallLevelSet select a).ToList();
             _statuses = (from a in Container.StatusSet select a).ToList();
