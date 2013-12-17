@@ -10,7 +10,7 @@ namespace TcpDataModel
     {
         public override string ToString()
         {
-            return base.ToString();
+            return methodName;
         }
     }
 }

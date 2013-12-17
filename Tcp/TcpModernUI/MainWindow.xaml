@@ -613,10 +613,12 @@
                             <ItemsControl ItemsSource="{Binding PlayersViewModel.SelectedPlayer.Payment}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
+                                        
                                         <Expander Header="{Binding Mode=OneWay}">
                                             <StackPanel Orientation="Vertical">
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="Méthode de paiement : " />
+                                                    <!--<ComboBox ItemsSource="{Binding PaymentMethod}"/>-->
                                                     <Label
                                                         Content="{Binding PaymentMethod.methodName, FallbackValue=Bite, Mode=OneTime}" />
                                                 </StackPanel>

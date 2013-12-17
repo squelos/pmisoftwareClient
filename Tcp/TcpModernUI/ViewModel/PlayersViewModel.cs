@@ -75,7 +75,7 @@ namespace TcpModernUI.ViewModel
                               {
                                   foreach (Player p in Players)
                                   {
-                                      if (!p.Payment.Any())
+                                      if (p.Payment.Count() == 0)
                                       {
                                           CustomDispatcher.Instance.BeginInvoke(() => Unpaid.Add(p));
                                       }
