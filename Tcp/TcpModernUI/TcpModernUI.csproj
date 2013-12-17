@@ -156,6 +156,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="UserControls\UserBadge.xaml.cs">
+      <DependentUpon>UserBadge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserCourt.xaml.cs">
+      <DependentUpon>UserCourt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserNonRenew.xaml.cs">
+      <DependentUpon>UserNonRenew.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserPlayer.xaml.cs">
+      <DependentUpon>UserPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserSeasons.xaml.cs">
+      <DependentUpon>UserSeasons.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserUnpaid.xaml.cs">
+      <DependentUpon>UserUnpaid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BadgesViewModel.cs" />
     <Compile Include="ViewModel\CourtViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -254,6 +272,30 @@
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\UserBadge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserCourt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserNonRenew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserSeasons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserUnpaid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
