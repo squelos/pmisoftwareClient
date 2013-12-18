@@ -24,30 +24,5 @@ namespace TcpModernUI.Pages.players
         {
             InitializeComponent();
         }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
-
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var dataGrid = sender as DataGrid;
-            if (dataGrid != null && dataGrid.SelectedItems.Count == 1)
-            {
-                expanderModif.IsExpanded = true;
-            }
-        }
-
-        private void ClickBadges(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ClickBookings(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

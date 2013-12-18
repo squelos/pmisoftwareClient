@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TcpDataModel;
+using TcpModernUI.ViewModel;
 
 namespace TcpModernUI.UserControls
 {
@@ -20,9 +22,25 @@ namespace TcpModernUI.UserControls
     /// </summary>
     public partial class UserUnpaid : UserControl
     {
+        private MainViewModel _mainViewModel;
         public UserUnpaid()
         {
             InitializeComponent();
+            var dataContext = DataContext;
+           _mainViewModel = dataContext as MainViewModel;
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //_mainViewModel.UnpaidViewModel.NewPayment.Semester = (ObservableCollection<Semester>) (sender as ListBox).SelectedItems;
+
+            _mainViewModel.UnpaidViewModel.NewPayment.Semester.Clear();
+
+            foreach (var item in (sender as ListBox).SelectedItems)
+            {
+                _mainViewModel.UnpaidViewModel.NewPayment.Semester.Add((Semester)item);
+            }
+
         }
     }
 }

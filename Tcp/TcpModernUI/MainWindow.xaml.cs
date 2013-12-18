@@ -5,6 +5,7 @@ using System.Data.Entity.Validation;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using MahApps.Metro.Controls;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
@@ -20,11 +21,18 @@ namespace TcpModernUI
     {
         private CustomDispatcher _dispatcher;
         private MainViewModel _mainViewModel;
+       
 
         public MainWindow()
         {
             _dispatcher = CustomDispatcher.Instance;
             _dispatcher.RegisterUI(this);
+
+            _dispatcher.BadgeRequest += text => OpenPlayerBadges();
+            _dispatcher.BookingPrefRequest += text => OpenPlayerBookingPrefs();
+            _dispatcher.BookingRequest += text => OpenPlayerBookings();
+            _dispatcher.CategoriesRequest += text => OpenPlayerCategories();
+            _dispatcher.TrainingRequest += text => OpenPlayerTraining();
         }
 
         private void LaunchFlyoutDemo(object sender, RoutedEventArgs e)
@@ -33,39 +41,30 @@ namespace TcpModernUI
             win.Show();
         }
 
-        private void PlayerDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var dataGrid = sender as DataGrid;
-            if (dataGrid != null && dataGrid.SelectedItems.Count == 1)
-            {
-                this.playerModif.IsSelected = true;
-                
-            }
-        }
+       
 
-        private void PLayerClickBadges(object sender, RoutedEventArgs e)
+        private void OpenPlayerBadges()
         {
             ToggleFlyout(0);
         }
 
-        private void PlayerClickBookings(object sender, RoutedEventArgs e)
+        private void OpenPlayerBookings()
         {
             ToggleFlyout(1);
         }
 
-        private void PlayerClickPrefBooking(object sender, RoutedEventArgs e)
+        private void OpenPlayerBookingPrefs()
         {
             ToggleFlyout(2);
         }
 
-        private void PlayerClickTraining(object sender, RoutedEventArgs e)
+        private void OpenPlayerTraining()
         {
             ToggleFlyout(3);
         }
 
-        private void PlayerClickCategories(object sender, RoutedEventArgs e)
+        private void OpenPlayerCategories()
         {
-            
             ToggleFlyout(4);
         }
 
@@ -117,17 +116,6 @@ namespace TcpModernUI
                 MahApps.Metro.Controls.MessageDialogStyle.Affirmative);
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //_mainViewModel.UnpaidViewModel.NewPayment.Semester = (ObservableCollection<Semester>) (sender as ListBox).SelectedItems;
-
-            _mainViewModel.UnpaidViewModel.NewPayment.Semester.Clear();
-
-            foreach (var item in (sender as ListBox).SelectedItems)
-            {
-                _mainViewModel.UnpaidViewModel.NewPayment.Semester.Add((Semester)item);
-            }
-
-        }
+        
     }
 }
