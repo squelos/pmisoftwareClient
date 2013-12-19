@@ -7,15 +7,13 @@
                       Title="Tennis Club Portois" MinWidth="650" MinHeight="650" ShowTitleBar="True"
                       ShowIconOnTitleBar="True"
                       Width="1366" Height="768" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
-                      Loaded="MetroWindow_Loaded" Margin="10,10,10,10" WindowStartupLocation="CenterScreen">
+                      Loaded="MetroWindow_Loaded" Margin="10,10,10,10" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
         <Converters:BoolInverterConverter x:Key="BoolInverterConverter" />
-
     </Window.Resources>
     <Controls:MetroWindow.WindowCommands>
         <Controls:WindowCommands>
             <Button Click="LaunchFlyoutDemo" Content="Site internet" />
-
         </Controls:WindowCommands>
     </Controls:MetroWindow.WindowCommands>
 
@@ -70,6 +68,14 @@
         <!--Impayés-->
         <TabItem Header="Impayés">
            <UserControls:UserUnpaid x:Name="userUnpaid" />
+        </TabItem>
+        <!--Impayés-->
+        <TabItem Header="Non Renouv.">
+            <UserControls:UserNonRenew x:Name="userNonRenouv" />
+        </TabItem>
+        <!--Mail-->
+        <TabItem Header="Mails">
+            <UserControls:UserMail x:Name="UserMail" />
         </TabItem>
         <!--Saisons-->
         <TabItem Header="Saisons">

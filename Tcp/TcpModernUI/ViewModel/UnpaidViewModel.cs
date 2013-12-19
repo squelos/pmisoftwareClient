@@ -67,7 +67,7 @@ namespace TcpModernUI.ViewModel
         public void Save()
         {
             _mvm.PlayersViewModel.SelectedPlayer.Payment.Add(_newPayment);
-            _mvm.PlayersViewModel.Save();
+            _mvm.PlayersViewModel.Update();
             NewPayment = new Payment {date = DateTime.Now};
         }
 

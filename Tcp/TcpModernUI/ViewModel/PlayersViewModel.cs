@@ -25,6 +25,7 @@ namespace TcpModernUI.ViewModel
         private Player _player;
         private Player _selectedPlayer;
         private ObservableCollection<Player> _players;
+        private String _filterStr;
         private List<Player> _viewPlayers = new List<Player>();
         private ObservableCollection<Player> _unpaidPlayers;
         private List<BallLevel> _ballLevels;
@@ -46,42 +47,41 @@ namespace TcpModernUI.ViewModel
                 new ObservableCollection<Player>(Container.PlayerJeu.ToList());
 
             _players.CollectionChanged += (sender, args) =>
-            {
-                if (args.Action == NotifyCollectionChangedAction.Remove)
-                {
-                    foreach (var old in args.OldItems)
-                    {
-                        Container.PlayerJeu.Remove(old as Player);
-                        CustomDispatcher.Instance.BeginInvoke(
-                            () => Unpaid.Remove(old as Player));
-                    }
-                }
-                else if (args.Action == NotifyCollectionChangedAction.Add)
-                {
-                    foreach (Player p in args.OldItems)
-                    {
-                        if (p.Payment.Count() == 0 ||
-                            p.Payment.Last().Semester.Last().end < DateTime.Now)
-                        {
-                            CustomDispatcher.Instance.BeginInvoke(() => Unpaid.Add(p));
-                        }
-                    }
-                }
-                RaisePropertyChangedEvent("players");
-            };
-
+                                          {
+                                              if (args.Action == NotifyCollectionChangedAction.Remove)
+                                              {
+                                                  foreach (var old in args.OldItems)
+                                                  {
+                                                      Container.PlayerJeu.Remove(old as Player);
+                                                      CustomDispatcher.Instance.BeginInvoke(
+                                                          () => Unpaid.Remove(old as Player));
+                                                  }
+                                              }
+                                              else if (args.Action == NotifyCollectionChangedAction.Add)
+                                              {
+                                                  foreach (Player p in args.OldItems)
+                                                  {
+                                                      if (p.Payment.Count() == 0 ||
+                                                          p.Payment.Last().Semester.Last().end < DateTime.Now)
+                                                      {
+                                                          CustomDispatcher.Instance.BeginInvoke(() => Unpaid.Add(p));
+                                                      }
+                                                  }
+                                              }
+                                              RaisePropertyChangedEvent("players");
+                                          };
 
             var t = new Task(() =>
-            {
-                Unpaid = new ObservableCollection<Player>(
-                    _players.Where(
-                        player =>
-                            player.Payment.Count() == 0 ||
-                            player.Payment.Any(payment => payment.Semester.Any(semester => semester.end > DateTime.Now))));
-            });
-
+                             {
+                                 Unpaid = new ObservableCollection<Player>(
+                                     _players.Where(
+                                         player =>
+                                             player.Payment.Count() == 0 ||
+                                             player.Payment.Any(
+                                                 payment =>
+                                                     payment.Semester.Any(semester => semester.end > DateTime.Now))));
+                             });
             t.Start();
-
 
             _ballLevels = (from a in Container.BallLevelSet select a).ToList();
             _statuses = (from a in Container.StatusSet select a).ToList();
@@ -105,14 +105,14 @@ namespace TcpModernUI.ViewModel
                 //RaisePropertyChangedEvent("selectedPlayer");
 
                 Task t = new Task(() =>
-                {
-                    //_selectedPlayer =
-                    //    Container.PlayerJeu.Where(p => p.ID == value.ID)
-                    //        .Include(p => p.Payment)
-                    //        .First();
-                    _selectedPlayer = value;
-                    RaisePropertyChangedEvent("selectedPlayer");
-                });
+                                  {
+                                      //_selectedPlayer =
+                                      //    Container.PlayerJeu.Where(p => p.ID == value.ID)
+                                      //        .Include(p => p.Payment)
+                                      //        .First();
+                                      _selectedPlayer = value;
+                                      RaisePropertyChangedEvent("selectedPlayer");
+                                  });
                 t.Start();
             }
         }
@@ -139,6 +139,16 @@ namespace TcpModernUI.ViewModel
             {
                 _players = value;
                 RaisePropertyChangedEvent("players");
+            }
+        }
+
+        public String FilterStr
+        {
+            get { return _filterStr; }
+            set
+            {
+                _filterStr = value;
+                RaisePropertyChangedEvent("filter");
             }
         }
 
@@ -222,11 +232,11 @@ namespace TcpModernUI.ViewModel
         private void InitializePlayers()
         {
             Task t = new Task(() =>
-            {
-                CurrentPlayer = new Player(DateTime.Now, DateTime.Now);
-                CurrentPlayer.isEnabled = true;
-                CurrentPlayer.passwordHash = "00000";
-            });
+                              {
+                                  CurrentPlayer = new Player(DateTime.Now, DateTime.Now);
+                                  CurrentPlayer.isEnabled = true;
+                                  CurrentPlayer.passwordHash = "00000";
+                              });
             t.Start();
         }
 
