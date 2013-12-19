@@ -153,6 +153,9 @@
     <Compile Include="UserControls\UserCourt.xaml.cs">
       <DependentUpon>UserCourt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UserMail.xaml.cs">
+      <DependentUpon>UserMail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UserNonRenew.xaml.cs">
       <DependentUpon>UserNonRenew.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,7 @@
     </Compile>
     <Compile Include="ViewModel\BadgesViewModel.cs" />
     <Compile Include="ViewModel\CourtViewModel.cs" />
+    <Compile Include="ViewModel\MailViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PlayersViewModel.cs" />
     <Compile Include="ViewModel\SeasonsViewModel.cs" />
@@ -260,6 +264,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\UserMail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UserNonRenew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -278,6 +286,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SmithHtmlEditor\SmithHtmlEditor.csproj">
+      <Project>{84badda1-ab3a-4064-b87e-178d7446901d}</Project>
+      <Name>SmithHtmlEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TcpDataModel\TcpDataModel.csproj">
       <Project>{44434e2f-8746-4e8e-bb0c-18afbb314fbd}</Project>
       <Name>TcpDataModel</Name>
