@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/19/2013 21:01:35
+-- Date Created: 12/20/2013 09:52:11
 -- Generated from EDMX file: C:\Users\squelos\Documents\GitHub\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
 -- --------------------------------------------------
 
@@ -194,6 +194,7 @@ CREATE TABLE [dbo].[BookingJeu] (
     [start] datetime  NOT NULL,
     [end] datetime  NOT NULL,
     [creationDate] datetime  NOT NULL,
+    [Filmed] bit  NOT NULL,
     [BookingAggregation_ID] int  NULL,
     [Court_ID] int  NOT NULL,
     [Player1_ID] int  NOT NULL,
@@ -296,6 +297,16 @@ GO
 CREATE TABLE [dbo].[BallLevelSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [ballName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'NewsSet'
+CREATE TABLE [dbo].[NewsSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Title] nvarchar(max)  NOT NULL,
+    [Content] nvarchar(max)  NOT NULL,
+    [PublishDate] datetime  NOT NULL,
+    [Visibility] bit  NOT NULL
 );
 GO
 
@@ -410,6 +421,12 @@ GO
 -- Creating primary key on [Id] in table 'BallLevelSet'
 ALTER TABLE [dbo].[BallLevelSet]
 ADD CONSTRAINT [PK_BallLevelSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'NewsSet'
+ALTER TABLE [dbo].[NewsSet]
+ADD CONSTRAINT [PK_NewsSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

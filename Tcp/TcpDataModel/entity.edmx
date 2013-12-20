@@ -22,6 +22,7 @@
     <EntitySet Name="PaymentMethodSet" EntityType="entity.Store.PaymentMethodSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DaySet" EntityType="entity.Store.DaySet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="BallLevelSet" EntityType="entity.Store.BallLevelSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NewsSet" EntityType="entity.Store.NewsSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PaymentSemester" EntityType="entity.Store.PaymentSemester" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PlayerCategory" EntityType="entity.Store.PlayerCategory" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="BookingAggregation" Association="entity.Store.BookingAggregationBooking">
@@ -160,6 +161,7 @@
     <Property Name="start" Type="datetime" Nullable="false" />
     <Property Name="end" Type="datetime" Nullable="false" />
     <Property Name="creationDate" Type="datetime" Nullable="false" />
+    <Property Name="Filmed" Type="bit" Nullable="false" />
     <Property Name="BookingAggregation_ID" Type="int" Nullable="true" />
     <Property Name="Court_ID" Type="int" Nullable="false" />
     <Property Name="Player1_ID" Type="int" Nullable="false" />
@@ -262,6 +264,16 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ballName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NewsSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PublishDate" Type="datetime" Nullable="false" />
+    <Property Name="Visibility" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="PaymentSemester">
     <Key>
@@ -612,6 +624,7 @@
             <End Role="Season" EntitySet="SeasonJeu" />
             <End Role="Semester" EntitySet="SemesterJeu" />
           </AssociationSet>
+          <EntitySet Name="NewsSet" EntityType="entity.News" />
         </EntityContainer>
         <EntityType Name="Season">
           <Key>
@@ -677,6 +690,7 @@
           <Property Type="DateTime" Name="end" Nullable="false" />
           <Property Name="creationDate" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Player2" Relationship="entity.BookingPlayer2" FromRole="Booking" ToRole="Player" />
+          <Property Name="Filmed" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Court">
           <Key>
@@ -863,6 +877,16 @@
           <End Type="entity.Season" Role="Season" Multiplicity="0..1" />
           <End Type="entity.Semester" Role="Semester" Multiplicity="*" />
         </Association>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" />
+          <Property Name="PublishDate" Type="DateTime" Nullable="false" />
+          <Property Name="Visibility" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -924,6 +948,7 @@
           <ScalarProperty Name="start" ColumnName="start" />
           <ScalarProperty Name="end" ColumnName="end" />
           <ScalarProperty Name="creationDate" ColumnName="creationDate" />
+          <ScalarProperty Name="Filmed" ColumnName="Filmed" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1024,6 +1049,17 @@
         <MappingFragment StoreEntitySet="BallLevelSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ballName" ColumnName="ballName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NewsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(entity.News)">
+        <MappingFragment StoreEntitySet="NewsSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+          <ScalarProperty Name="Visibility" ColumnName="Visibility" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

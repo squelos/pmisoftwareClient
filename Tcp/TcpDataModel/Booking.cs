@@ -20,6 +20,7 @@ namespace TcpDataModel
         public System.DateTime start { get; set; }
         public System.DateTime end { get; set; }
         public System.DateTime creationDate { get; set; }
+        public bool Filmed { get; set; }
     
         public virtual BookingAggregation BookingAggregation { get; set; }
         public virtual Court Court { get; set; }

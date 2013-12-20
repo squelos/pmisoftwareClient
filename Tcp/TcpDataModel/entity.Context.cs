@@ -41,5 +41,6 @@ namespace TcpDataModel
         public virtual DbSet<PaymentMethod> PaymentMethodSet { get; set; }
         public virtual DbSet<Day> DaySet { get; set; }
         public virtual DbSet<BallLevel> BallLevelSet { get; set; }
+        public virtual DbSet<News> NewsSet { get; set; }
     }
 }

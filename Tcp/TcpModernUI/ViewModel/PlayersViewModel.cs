@@ -14,6 +14,7 @@ using GalaSoft.MvvmLight.Command;
 using Microsoft.QualityTools.Testing.Fakes;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
+using TcpModernUI.Utility;
 
 
 namespace TcpModernUI.ViewModel
@@ -236,6 +237,7 @@ namespace TcpModernUI.ViewModel
                                   CurrentPlayer = new Player(DateTime.Now, DateTime.Now);
                                   CurrentPlayer.isEnabled = true;
                                   CurrentPlayer.passwordHash = "00000";
+                                  CurrentPlayer.salt = Crypto.GetRandomString(32);
                               });
             t.Start();
         }

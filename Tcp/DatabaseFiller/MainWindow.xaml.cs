@@ -292,7 +292,6 @@ namespace DatabaseFiller
             for (int i = 0; i < plainText.Length; i++)
             {
                 plainTextWithSaltBytes[i] = plainText[i];
-
             }
             for (int i = 0; i < salt.Length; i++)
             {
@@ -361,6 +360,7 @@ namespace DatabaseFiller
                     booking.start = DateTime.Now.AddDays(GetRandom(-200, 100)).AddHours(GetRandom(-5, 5));
                     booking.end = booking.start.AddHours(1);
                     booking.creationDate = booking.start.AddDays(GetRandom(-20, -4));
+                    booking.Filmed = false;
                     bookings.Add(booking);
                 }
 
