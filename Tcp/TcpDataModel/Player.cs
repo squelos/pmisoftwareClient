@@ -41,6 +41,7 @@ namespace TcpDataModel
         public System.DateTime lastLogin { get; set; }
         public string licenceNumber { get; set; }
         public string login { get; set; }
+        public string salt { get; set; }
     
         public virtual ObservableCollection<Badge> Badge { get; set; }
         public virtual ObservableCollection<PreferencePeriod> PreferencePeriod { get; set; }

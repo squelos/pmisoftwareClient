@@ -74,7 +74,7 @@ namespace TcpModernUI.ViewModel
             set
             {
                 _content = value;
-                RaisePropertyChangedEvent("content");
+                //RaisePropertyChangedEvent("content");
             }
         }
 

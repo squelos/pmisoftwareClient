@@ -286,10 +286,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SmithHtmlEditor\SmithHtmlEditor.csproj">
-      <Project>{84badda1-ab3a-4064-b87e-178d7446901d}</Project>
-      <Name>SmithHtmlEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TcpDataModel\TcpDataModel.csproj">
       <Project>{44434e2f-8746-4e8e-bb0c-18afbb314fbd}</Project>
       <Name>TcpDataModel</Name>

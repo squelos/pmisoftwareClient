@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -249,7 +250,8 @@ namespace DatabaseFiller
                 List<BallLevel> ballLevels = new List<BallLevel>(container.BallLevelSet);
                 List<Category> categories = new List<Category>(container.CategorySet);
                 List<Status> statuses = new List<Status>(container.StatusSet);
-
+                RandomString stringGen = new RandomString();
+                string pass;
 
                 for (int i = 0; i < 600; i++)
                 {
@@ -267,7 +269,9 @@ namespace DatabaseFiller
                     player.BallLevel = ballLevels[GetRandom(0, 9)];
                     player.Status = statuses[GetRandom(0, 2)];
                     player.Category.Add(categories[GetRandom(0, 3)]);
-
+                    player.salt = stringGen.GetRandomString(32);
+                    pass = "password" + i;
+                    player.passwordHash = GenerateSaltedHash(pass, player.salt);
                     players.Add(player);
                     bar.Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)(() => bar.Value = i / 600 * 100));
                 }
@@ -275,6 +279,65 @@ namespace DatabaseFiller
                 container.PlayerJeu.AddRange(players);
                 container.SaveChanges();
             }
+        }
+
+        static string GenerateSaltedHash(string text,string saltStr)
+        {
+            byte[] plainText = Encoding.UTF8.GetBytes(text);
+            byte[] salt = Encoding.UTF8.GetBytes(saltStr);
+            HashAlgorithm algo = new SHA256Managed();
+            byte[] plainTextWithSaltBytes =
+                new byte[plainText.Length + salt.Length];
+
+            for (int i = 0; i < plainText.Length; i++)
+            {
+                plainTextWithSaltBytes[i] = plainText[i];
+
+            }
+            for (int i = 0; i < salt.Length; i++)
+            {
+                plainTextWithSaltBytes[plainText.Length + i] = salt[i];
+            }
+
+            return Encoding.UTF8.GetString(algo.ComputeHash(plainTextWithSaltBytes)); 
+        }
+
+        public static bool CompareByteArrays(byte[] array1, byte[] array2)
+        {
+            if (array1.Length != array2.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < array1.Length; i++)
+            {
+                if (array1[i] != array2[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static bool CompareStrings(string str1, string str2)
+        {
+            byte[] array1 = Encoding.UTF8.GetBytes(str1);
+            byte[] array2 = Encoding.UTF8.GetBytes(str2);
+            if (array1.Length != array2.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < array1.Length; i++)
+            {
+                if (array1[i] != array2[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void createBookings(ProgressBar bar)
@@ -329,6 +392,8 @@ namespace DatabaseFiller
                     payment.Player = players[GetRandom(0, players.Count - 1)];
                     payment.date = DateTime.Now.AddMonths(GetRandom(-20, 0));
                     payment.amount = GetRandom(10, 200);
+                    payment.invalid = false;
+                    payment.comment = "";
                     payment.PaymentMethod = methods[GetRandom(0, 2)];
                     payment.raison = listRaisons[GetRandom(0, listRaisons.Count)];
                     payment.Semester = new ObservableCollection<Semester> { semesters[GetRandom(0, semesters.Count - 1)] };
@@ -574,6 +639,24 @@ namespace DatabaseFiller
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             createPayments(pCreatePayments);
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            using (entityContainer container = new entityContainer())
+            {
+                List<Player> players =  new List<Player>(container.PlayerJeu);
+                Player p = (from a in container.PlayerJeu where a.ID == 1 select a).First();
+
+                if(CompareStrings(GenerateSaltedHash("password0",p.salt), p.passwordHash))
+                {
+                    Console.Out.WriteLine("Yes");
+                }
+                else
+                {
+                    Console.Out.WriteLine("No");
+                }
+            }
         }
 
 

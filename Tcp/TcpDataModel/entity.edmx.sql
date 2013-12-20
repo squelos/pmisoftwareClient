@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/10/2013 14:05:50
+-- Date Created: 12/19/2013 21:01:35
 -- Generated from EDMX file: C:\Users\squelos\Documents\GitHub\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
 -- --------------------------------------------------
 
@@ -162,6 +162,8 @@ CREATE TABLE [dbo].[PaymentJeu] (
     [amount] float  NOT NULL,
     [date] datetime  NOT NULL,
     [raison] nvarchar(max)  NOT NULL,
+    [invalid] bit  NOT NULL,
+    [comment] nvarchar(max)  NOT NULL,
     [Player_ID] int  NOT NULL,
     [PaymentMethod_Id] int  NOT NULL
 );
@@ -234,6 +236,7 @@ CREATE TABLE [dbo].[PlayerJeu] (
     [lastLogin] datetime  NOT NULL,
     [licenceNumber] nvarchar(max)  NULL,
     [login] nvarchar(max)  NOT NULL,
+    [salt] nvarchar(max)  NOT NULL,
     [Status_Id] int  NOT NULL,
     [BallLevel_Id] int  NULL
 );

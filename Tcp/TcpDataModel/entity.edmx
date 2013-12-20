@@ -128,6 +128,8 @@
     <Property Name="amount" Type="float" Nullable="false" />
     <Property Name="date" Type="datetime" Nullable="false" />
     <Property Name="raison" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="invalid" Type="bit" Nullable="false" />
+    <Property Name="comment" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Player_ID" Type="int" Nullable="false" />
     <Property Name="PaymentMethod_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -200,6 +202,7 @@
     <Property Name="lastLogin" Type="datetime" Nullable="false" />
     <Property Name="licenceNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="salt" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Status_Id" Type="int" Nullable="false" />
     <Property Name="BallLevel_Id" Type="int" Nullable="true" />
   </EntityType>
@@ -638,6 +641,8 @@
           <Property Type="DateTime" Name="date" Nullable="false" />
           <NavigationProperty Name="PaymentMethod" Relationship="entity.PaymentMethodPayment" FromRole="Payment" ToRole="PaymentMethod" />
           <Property Name="raison" Type="String" Nullable="false" />
+          <Property Name="invalid" Type="Boolean" Nullable="false" />
+          <Property Name="comment" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Badge">
           <Key>
@@ -721,6 +726,7 @@
           <NavigationProperty Name="BallLevel" Relationship="entity.PlayerBallLevel" FromRole="Player" ToRole="BallLevel" />
           <NavigationProperty Name="Booking1" Relationship="entity.BookingPlayer2" FromRole="Player" ToRole="Booking" />
           <Property Name="login" Type="String" Nullable="false" />
+          <Property Name="salt" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="PreferencePeriod">
           <Key>
@@ -886,6 +892,8 @@
           <ScalarProperty Name="amount" ColumnName="amount" />
           <ScalarProperty Name="date" ColumnName="date" />
           <ScalarProperty Name="raison" ColumnName="raison" />
+          <ScalarProperty Name="invalid" ColumnName="invalid" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -955,6 +963,7 @@
           <ScalarProperty Name="lastLogin" ColumnName="lastLogin" />
           <ScalarProperty Name="licenceNumber" ColumnName="licenceNumber" />
           <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="salt" ColumnName="salt" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:htmlEditor="clr-namespace:Smith.WPF.HtmlEditor;assembly=Smith.WPF.HtmlEditor"
-             
+
 
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
              d:DesignHeight="600" d:DesignWidth="800">
@@ -48,34 +47,8 @@
             <CheckBox Content="Administrateurs" Margin="10,0,10,0" IsChecked="{Binding MailViewModel.Administrators}"/>
         </StackPanel>
         <Label Content="Contenu " Grid.Column="0" Grid.Row="2"/>
-        <DockPanel Grid.Column="0" Grid.Row="3">
-            <Border DockPanel.Dock="Bottom"
-                BorderBrush="#FFC5C5C5"
-                BorderThickness="0,1,0,0"
-                Padding="8">
-                <DockPanel>
-                    <StackPanel DockPanel.Dock="Right"
-                            Orientation="Horizontal">
-                        <Button x:Name="BindingTestButton"
-                            Content="Binding Test"
-                            Margin="8,0" />
-                        <Button x:Name="GetHtmlButton"
-                            Content="Get HTML"
-                            Margin="8,0" />
-                        <Button x:Name="GetTextButton"
-                            Content="getText"
-                            Margin="8,0" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Word Count" />
-                        <Label x:Name="WordCountText"
-                           Content="0" />
-                    </StackPanel>
-                </DockPanel>
-            </Border>
-          
-            <htmlEditor:HtmlEditor x:Name="Editor" />
-        </DockPanel>
+       
+       
 
 
         <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">

@@ -23,6 +23,7 @@ namespace TcpModernUI.UserControls
         public UserMail()
         {
             InitializeComponent();
+            
         }
     }
 }
