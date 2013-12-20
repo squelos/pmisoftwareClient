@@ -53,7 +53,7 @@ namespace DatabaseFiller
             tPlayers.ContinueWith(task => createBookings(pCreateBookings));
             tPlayers.ContinueWith(task => createPayments(pCreatePayments));
             tPlayers.ContinueWith(task => createTraining(pCreateTraining));
-            Task tAssignBadges = new Task(() => AssignBadges(pAssignBadges));
+            Task tAssignBadges = new Task(() => AssignBadges());
             tBadges.Start();
             tPlayers.Start();
             Task.WaitAll(new[] {tBadges, tPlayers, tPlayers});
@@ -480,7 +480,7 @@ namespace DatabaseFiller
 
 
 
-        private void AssignBadges(ProgressBar bar)
+        private void AssignBadges()
         {
             using (entityContainer container = new entityContainer())
             {
@@ -488,14 +488,19 @@ namespace DatabaseFiller
                 List<Badge> badges = new List<Badge>(container.BadgeJeu);
                 List<Player> players = new List<Player>(container.PlayerJeu);
                 int numBadges = badges.Count;
+                badges.Add(new Badge(4151116, true, false));
+                badges.Add(new Badge(4127606, true, false));
+                badges.Add(new Badge(4088790, true, false));
                 int i = 0;
 
                 foreach (var badge in badges)
                 {
-                    badge.Player = players[GetRandom(0, players.Count)];
+                    var pl = players[GetRandom(0, players.Count)];
+                    badge.Player = pl;
+                    pl.Badge.Add(badge);
+                    
                     i++;
-                    bar.Dispatcher.BeginInvoke(DispatcherPriority.Background,
-                        (ThreadStart)(() => bar.Value = i / numBadges * 100));
+                   
                 }
 
 
@@ -657,6 +662,11 @@ namespace DatabaseFiller
                     Console.Out.WriteLine("No");
                 }
             }
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            AssignBadges();
         }
 
 
