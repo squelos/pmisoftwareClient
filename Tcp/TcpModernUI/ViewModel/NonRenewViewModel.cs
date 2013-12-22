@@ -1,14 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TcpModernUI.BaseClasses;
+﻿using TcpModernUI.BaseClasses;
 
 namespace TcpModernUI.ViewModel
 {
     public class NonRenewViewModel : ViewModelBase
     {
+        #region members
 
+
+        #endregion
+
+        #region ctor
+
+
+        #endregion
+
+        #region getters/Setters
+        #endregion
+
+        #region privates
+        #endregion
+
+        #region publics
+        #endregion
     }
 }

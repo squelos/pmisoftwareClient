@@ -153,6 +153,9 @@
     <Compile Include="UserControls\UserCourt.xaml.cs">
       <DependentUpon>UserCourt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UserHome.xaml.cs">
+      <DependentUpon>UserHome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UserMail.xaml.cs">
       <DependentUpon>UserMail.xaml</DependentUpon>
     </Compile>
@@ -263,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UserCourt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

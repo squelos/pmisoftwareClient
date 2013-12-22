@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="TcpModernUI.UserControls.UserSeasons"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
@@ -10,9 +10,9 @@
         <DockPanel>
             <DockPanel Dock="Left">
                 <StackPanel HorizontalAlignment="Right" DockPanel.Dock="Top" FlowDirection="LeftToRight"
-                                Orientation="Horizontal">
+                            Orientation="Horizontal">
                     <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                Command="{Binding SeasonsViewModel.CancelCommand}">
+                            Command="{Binding SeasonsViewModel.CancelCommand}">
                         <Rectangle Width="12" Height="12">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cancel}" />
@@ -20,7 +20,7 @@
                         </Rectangle>
                     </Button>
                     <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                Command="{Binding SeasonsViewModel.UpdateCommand}">
+                            Command="{Binding SeasonsViewModel.UpdateCommand}">
                         <Rectangle Width="12" Height="12">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
@@ -30,21 +30,21 @@
                 </StackPanel>
 
                 <DataGrid AutoGenerateColumns="False" DockPanel.Dock="Left"
-                              ItemsSource="{Binding SeasonsViewModel.Seasons}"
-                              CanUserAddRows="False"
-                              CanUserDeleteRows="True">
+                          ItemsSource="{Binding SeasonsViewModel.Seasons}"
+                          SelectedValue="{Binding SeasonsViewModel.SelectedSeason}"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="True" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
                         <DataGridTextColumn Binding="{Binding FirstSemester.start, StringFormat='\{0:d\}'}"
-                                                Header="Début " />
+                                            Header="Début " />
                         <DataGridTextColumn Binding="{Binding FirstSemester.end, StringFormat='\{0:d\}'}"
-                                                Header="Fin" />
+                                            Header="Fin" />
                         <DataGridTextColumn Binding="{Binding SecondSemester.start, StringFormat='\{0:d\}'}"
-                                                Header="Début" />
+                                            Header="Début" />
                         <DataGridTextColumn Binding="{Binding SecondSemester.end, StringFormat='\{0:d\}'}"
-                                                Header="Fin" />
+                                            Header="Fin" />
                     </DataGrid.Columns>
-
                 </DataGrid>
             </DockPanel>
             <GridSplitter DockPanel.Dock="Left" Margin="3,3,3,3" Width="3" />
@@ -66,35 +66,35 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label Content="Nouvelle Saison" HorizontalAlignment="Left" Margin="20,6,0,7"
-                                   VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
+                               VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
                         <Label Content="Première demie saison" HorizontalAlignment="Left"
-                                   Margin="10,10,0,10" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" />
+                               Margin="10,10,0,10" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" />
                         <Label Content="Deuxième demie saison" HorizontalAlignment="Left"
-                                   Margin="10,10,0,10" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold" />
+                               Margin="10,10,0,10" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold" />
                         <StackPanel HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"
-                                        Orientation="Horizontal" Margin="0,10,0,10">
+                                    Orientation="Horizontal" Margin="0,10,0,10">
                             <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center" />
                             <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                            SelectedDate="{Binding SeasonsViewModel.FirstSemester.start, UpdateSourceTrigger=PropertyChanged}"
-                                            SelectedDateFormat="Short" />
+                                        SelectedDate="{Binding SeasonsViewModel.FirstSemester.start, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedDateFormat="Short" />
                             <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center" />
                             <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                            SelectedDate="{Binding SeasonsViewModel.FirstSemester.end, UpdateSourceTrigger=PropertyChanged}" />
+                                        SelectedDate="{Binding SeasonsViewModel.FirstSemester.end, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Stretch" Grid.Row="4" Margin="0,10,0,10"
-                                        VerticalAlignment="Stretch" Orientation="Horizontal">
+                                    VerticalAlignment="Stretch" Orientation="Horizontal">
                             <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center" />
                             <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                            SelectedDate="{Binding SeasonsViewModel.SecondSemester.start, UpdateSourceTrigger=PropertyChanged}" />
+                                        SelectedDate="{Binding SeasonsViewModel.SecondSemester.start, UpdateSourceTrigger=PropertyChanged}" />
                             <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center" />
                             <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                            SelectedDate="{Binding SeasonsViewModel.SecondSemester.end, UpdateSourceTrigger=PropertyChanged}" />
+                                        SelectedDate="{Binding SeasonsViewModel.SecondSemester.end, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="0"
-                                        HorizontalAlignment="Right" Grid.Row="5" VerticalAlignment="Stretch"
-                                        Margin="0,10,0,10">
+                                    HorizontalAlignment="Right" Grid.Row="5" VerticalAlignment="Stretch"
+                                    Margin="0,10,0,10">
                             <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                        Command="{Binding SeasonsViewModel.CancelCommand}">
+                                    Command="{Binding SeasonsViewModel.CancelCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cancel}" />
@@ -102,10 +102,10 @@
                                 </Rectangle>
                             </Button>
                             <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                        Command="{Binding SeasonsViewModel.SaveCommand}">
+                                    Command="{Binding SeasonsViewModel.UpdateCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new}" />
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
@@ -128,37 +128,37 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Label Content="Nouvelle Saison" x:Name="lTitle" HorizontalAlignment="Left"
-                                   Margin="20,6,0,7"
-                                   VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
+                        <Label Content="Modification de la saison" x:Name="lTitle" HorizontalAlignment="Left"
+                               Margin="20,6,0,7"
+                               VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
                         <Label Content="Première demie saison" x:Name="lFirstSemester" HorizontalAlignment="Left"
-                                   Margin="10,10,0,10" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" />
+                               Margin="10,10,0,10" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" />
                         <Label Content="Deuxième demie saison" x:Name="lSecondSemester" HorizontalAlignment="Left"
-                                   Margin="10,10,0,10" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold" />
+                               Margin="10,10,0,10" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold" />
                         <StackPanel HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"
-                                        Orientation="Horizontal" Margin="0,10,0,10">
+                                    Orientation="Horizontal" Margin="0,10,0,10">
                             <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center" />
                             <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                            SelectedDate="{Binding SeasonsViewModel.FirstSemester.start, UpdateSourceTrigger=PropertyChanged}"
-                                            SelectedDateFormat="Short" />
+                                        SelectedDate="{Binding SeasonsViewModel.FirstSelectedSemester.start, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedDateFormat="Short" />
                             <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center" />
                             <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                            SelectedDate="{Binding SeasonsViewModel.FirstSemester.end, UpdateSourceTrigger=PropertyChanged}" />
+                                        SelectedDate="{Binding SeasonsViewModel.FirstSelectedSemester.end, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Stretch" Grid.Row="4" Margin="0,10,0,10"
-                                        VerticalAlignment="Stretch" Orientation="Horizontal">
+                                    VerticalAlignment="Stretch" Orientation="Horizontal">
                             <Label Margin="10,0,10,0" Content="Début" VerticalAlignment="Center" />
                             <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                            SelectedDate="{Binding SeasonsViewModel.SecondSemester.start, UpdateSourceTrigger=PropertyChanged}" />
+                                        SelectedDate="{Binding SeasonsViewModel.SecondSelectedSemester.start, UpdateSourceTrigger=PropertyChanged}" />
                             <Label Margin="10,0,10,0" Content="Fin" VerticalAlignment="Center" />
                             <DatePicker Margin="10,0,10,0" MaxHeight="30"
-                                            SelectedDate="{Binding SeasonsViewModel.SecondSemester.end, UpdateSourceTrigger=PropertyChanged}" />
+                                        SelectedDate="{Binding SeasonsViewModel.SecondSelectedSemester.end, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="0"
-                                        HorizontalAlignment="Right" Grid.Row="5" VerticalAlignment="Stretch"
-                                        Margin="0,10,0,10">
+                                    HorizontalAlignment="Right" Grid.Row="5" VerticalAlignment="Stretch"
+                                    Margin="0,10,0,10">
                             <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                        Command="{Binding SeasonsViewModel.CancelCommand}">
+                                    Command="{Binding SeasonsViewModel.CancelCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cancel}" />
@@ -166,7 +166,7 @@
                                 </Rectangle>
                             </Button>
                             <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                        Command="{Binding SeasonsViewModel.SaveCommand}">
+                                    Command="{Binding SeasonsViewModel.SaveCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new}" />
@@ -177,7 +177,6 @@
                     </Grid>
                 </TabItem>
             </controls:MetroAnimatedSingleRowTabControl>
-
         </DockPanel>
     </Grid>
 </UserControl>

@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Data.Entity;
-using System.Data.Entity.Validation;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
-using Microsoft.QualityTools.Testing.Fakes;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
 using TcpModernUI.Utility;

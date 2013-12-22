@@ -33,7 +33,7 @@
             <CheckBox Content="Administrateurs" Margin="10,0,10,0" IsChecked="{Binding MailViewModel.Administrators}"/>
         </StackPanel>
         <Label Content="Contenu " Grid.Column="0" Grid.Row="2"/>
-        <TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Width="400" Height="300" Text="{Binding MailViewModel.Content}"></TextBox>       
+        <TextBox  TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Width="400" Height="300" Text="{Binding MailViewModel.Content}"></TextBox>       
 
         <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
             

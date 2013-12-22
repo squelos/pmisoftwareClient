@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
@@ -15,7 +14,7 @@ namespace TcpModernUI.ViewModel
     public class MailViewModel : ViewModelBase
     {
         #region members
-
+        
         private MainViewModel _mvm;
         private ICommand _sendCommand;
         private ICommand _cancelCommand;
@@ -41,7 +40,6 @@ namespace TcpModernUI.ViewModel
         }
         #endregion
 
-
         #region private
 
         private void Send()
@@ -57,7 +55,6 @@ namespace TcpModernUI.ViewModel
             client.Host = "smtp.google.com";
             mail.Subject = Subject;
             mail.BodyEncoding = Encoding.UTF8;
-            
             mail.Body = Content;
 
             if (_players)
@@ -66,7 +63,6 @@ namespace TcpModernUI.ViewModel
                 {
                     mail.To.Add(pl.email.Replace(" ", String.Empty));
                 }
-                
             }
             if (_clubMembers)
             {
@@ -83,8 +79,6 @@ namespace TcpModernUI.ViewModel
                 }
             }
             //client.Send(mail);
-
-            
         }
 
         private void Cancel()
@@ -126,7 +120,6 @@ namespace TcpModernUI.ViewModel
                 RaisePropertyChangedEvent("admins");
             }
         }
-
         public string Content
         {
             get { return _content; }
@@ -136,7 +129,6 @@ namespace TcpModernUI.ViewModel
                 RaisePropertyChangedEvent("content");
             }
         }
-
         public string Subject
         {
             get { return _subject; }
@@ -146,12 +138,10 @@ namespace TcpModernUI.ViewModel
                 RaisePropertyChangedEvent("subject");
             }
         }
-
         public ICommand SendCommand
         {
             get { return _sendCommand; }
         }
-
         public ICommand CancelCommand
         {
             get { return _cancelCommand; }

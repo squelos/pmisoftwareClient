@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Windows.Documents;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
-
 
 namespace TcpModernUI.ViewModel
 {
@@ -20,6 +17,9 @@ namespace TcpModernUI.ViewModel
         private Season _season;
         private Semester _firstSemester;
         private Semester _secondSemester;
+        private Season _selectedSeason;
+        private Semester _firstSelectedSemester;
+        private Semester _secondSelectedSemester;
         private RelayCommand _saveCommand;
         private RelayCommand _cancelCommand;
         private RelayCommand _updateCommand;
@@ -74,6 +74,7 @@ namespace TcpModernUI.ViewModel
         {
             get { return _semesters; }
         }
+
         public Season Season
         {
             get { return _season; }
@@ -81,6 +82,18 @@ namespace TcpModernUI.ViewModel
             {
                 _season = value;
                 RaisePropertyChangedEvent("season");
+            }
+        }
+
+        public Season SelectedSeason
+        {
+            get { return _selectedSeason; }
+            set
+            {
+                _selectedSeason = value;
+                FirstSelectedSemester = value.FirstSemester;
+                SecondSelectedSemester = value.SecondSemester;
+                RaisePropertyChangedEvent("selectedSeason");
             }
         }
 
@@ -101,6 +114,26 @@ namespace TcpModernUI.ViewModel
             {
                 _secondSemester = value;
                 RaisePropertyChangedEvent("secondSemester");
+            }
+        }
+
+        public Semester FirstSelectedSemester
+        {
+            get { return _firstSelectedSemester; }
+            set
+            {
+                _firstSelectedSemester = value;
+                RaisePropertyChangedEvent("firstSelectedSemester");
+            }
+        }
+
+        public Semester SecondSelectedSemester
+        {
+            get { return _secondSelectedSemester; }
+            set
+            {
+                _secondSelectedSemester = value;
+                RaisePropertyChangedEvent("secondSelectedSemester");
             }
         }
 
