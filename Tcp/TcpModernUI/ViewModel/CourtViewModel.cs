@@ -61,7 +61,6 @@ namespace TcpModernUI.ViewModel
             get { return _courts; }
         }
 
-
         public ICommand SaveCommand
         {
             get { return _saveCommand; }

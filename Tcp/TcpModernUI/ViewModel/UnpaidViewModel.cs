@@ -18,6 +18,7 @@ namespace TcpModernUI.ViewModel
         private ICommand _saveCommand;
         private ICommand _cancelCommand;
         private readonly MainViewModel _mvm;
+
         #endregion
 
         #region ctor
