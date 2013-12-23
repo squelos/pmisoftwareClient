@@ -29,7 +29,7 @@
                         </Rectangle>
                     </Button>
                 </StackPanel>
-                <DataGrid AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False"
+                <DataGrid AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" IsReadOnly="True"
                               ItemsSource="{Binding PlayersViewModel.Players}"
                               RowDetailsVisibilityMode="VisibleWhenSelected"
                               SelectedValue="{Binding PlayersViewModel.SelectedPlayer}"

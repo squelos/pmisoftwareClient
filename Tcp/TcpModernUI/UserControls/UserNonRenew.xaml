@@ -9,8 +9,8 @@
     <Grid>
         <DockPanel>
             <DockPanel>
-                <DataGrid DockPanel.Dock="Left" ItemsSource="{Binding PlayersViewModel.Unpaid}"
-                              SelectedValue="{Binding PlayersViewModel.SelectedPlayer}"
+                <DataGrid DockPanel.Dock="Left" ItemsSource="{Binding NonRenewViewModel.Players}" IsReadOnly="True"
+                              SelectedValue="{Binding NonRenewViewModel.SelectedPlayer}"
                               AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding lastName}" Header="Nom" />
@@ -25,7 +25,7 @@
             <StackPanel DockPanel.Dock="Left">
                 <controls:MetroAnimatedSingleRowTabControl>
                     <TabItem Header="Paiements">
-                        <ItemsControl ItemsSource="{Binding PlayersViewModel.SelectedPlayer.Payment}">
+                        <ItemsControl ItemsSource="{Binding NonRenewViewModel.SelectedPlayer.Payment}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Expander Header="{Binding Mode=OneWay}">
@@ -69,29 +69,29 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Label Content="{Binding PlayersViewModel.SelectedPlayer}" Grid.Row="0 " FontWeight="Bold"/>
+                            <Label Content="{Binding NonRenewViewModel.SelectedPlayer}" Grid.Row="0 " FontWeight="Bold"/>
                             <!--<Label Content="{Binding PlayersViewModel.SelectedPlayer}" Grid.Row="0" Grid.Column="1"/>-->
 
                             <Label Content="Methode de paiement " Grid.Column="0" Grid.Row="1" />
                             <ComboBox Grid.Row="1" Grid.Column="1" SelectedIndex="0"
-                                          ItemsSource="{Binding UnpaidViewModel.PaymentMethods}"
-                                          SelectedValue="{Binding UnpaidViewModel.NewPayment.PaymentMethod}"
+                                          ItemsSource="{Binding NonRenewViewModel.PaymentMethods}"
+                                          SelectedValue="{Binding NonRenewViewModel.NewPayment.PaymentMethod}"
                                           DisplayMemberPath="methodName" />
 
                             <Label Grid.Row="2" Grid.Column="0" Content="Montant" />
                             <TextBox Grid.Column="1" Grid.Row="2"
-                                         Text="{Binding UnpaidViewModel.NewPayment.amount}" />
+                                         Text="{Binding NonRenewViewModel.NewPayment.amount}" />
                             <Label Content="Date de paiement" Grid.Row="3" Grid.Column="0" />
                             <DatePickerTextBox Grid.Row="3" Grid.Column="1"
-                                                   Text="{Binding UnpaidViewModel.NewPayment.date}" />
+                                                   Text="{Binding NonRenewViewModel.NewPayment.date}" />
                             <GroupBox Header="Semestres" Grid.Row="4" Grid.ColumnSpan="2">
-                                <ListBox ItemsSource="{Binding SeasonsViewModel.Semesters}"
+                                <ListBox ItemsSource="{Binding NonRenewViewModel.Semesters}"
                                              SelectionMode="Multiple" SelectionChanged="ListBox_SelectionChanged" />
                             </GroupBox>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1">
                                 <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                        Command="{Binding UnpaidViewModel.CancelCommand}">
+                                        Command="{Binding NonRenewViewModel.CancelCommand}">
                                     <Rectangle Width="12" Height="12">
                                         <Rectangle.Fill>
                                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cancel}" />
@@ -99,7 +99,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                        Command="{Binding UnpaidViewModel.SaveCommand}">
+                                        Command="{Binding NonRenewViewModel.SaveCommand}">
                                     <Rectangle Width="12" Height="12">
                                         <Rectangle.Fill>
                                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new}" />

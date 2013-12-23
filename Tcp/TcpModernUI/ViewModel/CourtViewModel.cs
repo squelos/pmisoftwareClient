@@ -11,12 +11,15 @@ namespace TcpModernUI.ViewModel
     public class CourtViewModel : ViewModelBase
     {
         #region members
+
         private ObservableCollection<Court> _courts = new ObservableCollection<Court>();
         private Court _currentCourt;
+        private Court _selectedCourt;
         private RelayCommand _saveCommand;
         private RelayCommand _cancelCommand;
         private RelayCommand _updateCommand;
         private MainViewModel _mvm;
+
         #endregion
 
         #region ctor
@@ -45,6 +48,16 @@ namespace TcpModernUI.ViewModel
         #endregion
 
         #region getters/setters
+
+        public Court SelectedCourt
+        {
+            get { return _selectedCourt; }
+            set
+            {
+                _selectedCourt = value;
+                RaisePropertyChangedEvent("selectedCourt");
+            }
+        }
 
         public Court CurrentCourt
         {
@@ -98,8 +111,7 @@ namespace TcpModernUI.ViewModel
         public void Update()
         {
             CommitChanges();
-        }
-            
+        }    
         #endregion
 
         #region private methods
@@ -107,7 +119,6 @@ namespace TcpModernUI.ViewModel
         private void Initialise()
         {
             CurrentCourt = new Court();
-            
         }
         #endregion
     }

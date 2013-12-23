@@ -24,6 +24,7 @@ namespace TcpModernUI.ViewModel
         private SeasonsViewModel _seasonsvm;
         private UnpaidViewModel _unpaid;
         private MailViewModel _mailvm;
+        private NonRenewViewModel _nonRenewvm;
         #endregion
 
 
@@ -131,6 +132,21 @@ namespace TcpModernUI.ViewModel
                     _mailvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("mail");
                 }
                 return _mailvm;
+            }
+        }
+        public NonRenewViewModel NonRenewViewModel
+        {
+            get
+            {
+                if (_nonRenewvm == null)
+                {
+                    _nonRenewvm = new NonRenewViewModel(this);
+                    _nonRenewvm.ValidationErrorsChanged += (sender, exception) => RaiseValidationErrorsEvent(exception);
+                    _nonRenewvm.CustomErrorsChanged += (sender, s) => RaiseCustomError(s);
+                    _nonRenewvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("nonrenew");
+                    _nonRenewvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("nonrenew");
+                }
+                return _nonRenewvm;
             }
         }
 

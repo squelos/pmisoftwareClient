@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
+using System.Data.Entity;
 using TcpModernUI.BaseClasses;
+
 
 
 namespace TcpModernUI.ViewModel
@@ -12,12 +15,16 @@ namespace TcpModernUI.ViewModel
     public class UnpaidViewModel : ViewModelBase
     {
         #region members
-        
+
+        private List<Player> _players;
+        private List<Player> _filteredPlayers = new List<Player>();
+        private Player _selectedPlayer;
         private readonly List<PaymentMethod> _methods;
         private Payment _newPayment;
         private ICommand _saveCommand;
         private ICommand _cancelCommand;
         private readonly MainViewModel _mvm;
+        private List<Semester> _semesters; 
 
         #endregion
 
@@ -25,8 +32,21 @@ namespace TcpModernUI.ViewModel
 
         public UnpaidViewModel(MainViewModel mvm)
         {
-            _newPayment = new Payment();
-            _newPayment.date = DateTime.Now;
+            _semesters = Container.SemesterJeu.ToList();
+            Task t = new Task(() =>
+                              {
+                                  //must eager load here
+                                  _players = Container.PlayerJeu.Include
+                                      (p => p.Payment.Select(payment => payment.Semester)).ToList();
+
+                                  _filteredPlayers = _players.Where(
+                                      player => player.Payment.Count == 0 | player.Payment.Any(
+                                          payment => payment.Semester.Any(semester => semester.end > DateTime.Now))).ToList();
+                                  RaisePropertyChangedEvent("players");
+                              });
+          
+            t.Start();
+            InitPayment();
             _mvm = mvm;
             _methods = new List<PaymentMethod>(Container.PaymentMethodSet.ToList());
             _saveCommand = new RelayCommand(Save);
@@ -51,6 +71,26 @@ namespace TcpModernUI.ViewModel
             }
         }
 
+        public Player SelectedPlayer
+        {
+            get { return _selectedPlayer; }
+            set
+            {
+                _selectedPlayer = value;
+                RaisePropertyChangedEvent("selectedPlayer");
+            }
+        }
+
+        public IEnumerable<Semester> Semesters
+        {
+            get { return _semesters; }
+        }
+
+        public IEnumerable<Player> Players
+        {
+            get { return _filteredPlayers; }
+        }
+
         public ICommand SaveCommand
         { get { return _saveCommand; } }
 
@@ -60,22 +100,27 @@ namespace TcpModernUI.ViewModel
         #endregion
 
         #region privates
-        
+        private void Save()
+        {
+            SelectedPlayer.Payment.Add(_newPayment);
+            CommitChanges();
+            InitPayment();
+        }
+
+        private void Cancel()
+        {
+            InitPayment();
+        }
+
+        private void InitPayment()
+        {
+            NewPayment = new Payment { date = DateTime.Now };
+        }
         #endregion
 
         #region publics
 
-        public void Save()
-        {
-            _mvm.PlayersViewModel.SelectedPlayer.Payment.Add(_newPayment);
-            _mvm.PlayersViewModel.Update();
-            NewPayment = new Payment {date = DateTime.Now};
-        }
-
-        public void Cancel()
-        {
-            
-        }
+        
         #endregion
     }
 }

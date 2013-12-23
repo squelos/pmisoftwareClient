@@ -50,7 +50,6 @@ namespace TcpModernUI.ViewModel
                                               }
                                               RaisePropertyChangedEvent("seasons");
                                           };
-
             _semesters.CollectionChanged += (sender, args) =>
                                             {
                                                 if (args.Action == NotifyCollectionChangedAction.Remove)
@@ -62,7 +61,6 @@ namespace TcpModernUI.ViewModel
                                                 }
                                                 RaisePropertyChangedEvent("semesters");
                                             };
-
             _seasons = new ObservableCollection<Season>(Container.SeasonJeu);
         }
 
@@ -165,7 +163,6 @@ namespace TcpModernUI.ViewModel
         #endregion
 
         #region public methods
-
         public void Save()
         {
             Container.SeasonJeu.Add(_season);

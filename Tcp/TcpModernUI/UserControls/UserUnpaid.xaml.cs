@@ -32,8 +32,7 @@ namespace TcpModernUI.UserControls
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //_mainViewModel.UnpaidViewModel.NewPayment.Semester = (ObservableCollection<Semester>) (sender as ListBox).SelectedItems;
-
+            
             _mainViewModel.UnpaidViewModel.NewPayment.Semester.Clear();
 
             foreach (var item in (sender as ListBox).SelectedItems)

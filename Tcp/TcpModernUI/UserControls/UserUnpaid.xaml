@@ -9,8 +9,8 @@
     <Grid>
         <DockPanel>
             <DockPanel>
-                <DataGrid DockPanel.Dock="Left" ItemsSource="{Binding PlayersViewModel.Unpaid}"
-                              SelectedValue="{Binding PlayersViewModel.SelectedPlayer}"
+                <DataGrid DockPanel.Dock="Left" ItemsSource="{Binding UnpaidViewModel.Players}" IsReadOnly="True"
+                              SelectedValue="{Binding UnpaidViewModel.SelectedPlayer}"
                               AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding lastName}" Header="Nom" />
@@ -25,7 +25,7 @@
             <StackPanel DockPanel.Dock="Left">
                 <controls:MetroAnimatedSingleRowTabControl>
                     <TabItem Header="Paiements">
-                        <ItemsControl ItemsSource="{Binding PlayersViewModel.SelectedPlayer.Payment}">
+                        <ItemsControl ItemsSource="{Binding UnpaidViewModel.SelectedPlayer.Payment}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
 
@@ -72,7 +72,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Label Content="{Binding PlayersViewModel.SelectedPlayer}" Grid.Row="0 " FontWeight="Bold"/>
+                            <Label Content="{Binding UnpaidViewModel.SelectedPlayer}" Grid.Row="0 " FontWeight="Bold"/>
                             <!--<Label Content="{Binding PlayersViewModel.SelectedPlayer}" Grid.Row="0" Grid.Column="1"/>-->
 
                             <Label Content="Methode de paiement " Grid.Column="0" Grid.Row="1" />
@@ -88,7 +88,7 @@
                             <DatePickerTextBox Grid.Row="3" Grid.Column="1"
                                                    Text="{Binding UnpaidViewModel.NewPayment.date}" />
                             <GroupBox Header="Semestres" Grid.Row="4" Grid.ColumnSpan="2">
-                                <ListBox ItemsSource="{Binding SeasonsViewModel.Semesters}"
+                                <ListBox ItemsSource="{Binding UnpaidViewModel.Semesters}"
                                              SelectionMode="Multiple" SelectionChanged="ListBox_SelectionChanged" />
                             </GroupBox>
 

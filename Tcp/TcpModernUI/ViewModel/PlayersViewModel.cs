@@ -66,18 +66,6 @@ namespace TcpModernUI.ViewModel
                                               RaisePropertyChangedEvent("players");
                                           };
 
-            var t = new Task(() =>
-                             {
-                                 Unpaid = new ObservableCollection<Player>(
-                                     _players.Where(
-                                         player =>
-                                             player.Payment.Count() == 0 ||
-                                             player.Payment.Any(
-                                                 payment =>
-                                                     payment.Semester.Any(semester => semester.end > DateTime.Now))));
-                             });
-            t.Start();
-
             _ballLevels = (from a in Container.BallLevelSet select a).ToList();
             _statuses = (from a in Container.StatusSet select a).ToList();
             _categories = (from a in Container.CategorySet select a).ToList();
@@ -197,13 +185,10 @@ namespace TcpModernUI.ViewModel
                 }
             }
             Container.PlayerJeu.Add(CurrentPlayer);
-
             //RaisePropertyChangedEvent("container");
-            if (CommitChanges())
-            {
-                Players.Add(CurrentPlayer);
-                InitializePlayers();
-            }
+            if (!CommitChanges()) return;
+            Players.Add(CurrentPlayer);
+            InitializePlayers();
         }
 
         public void Cancel()

@@ -102,10 +102,10 @@
                                 </Rectangle>
                             </Button>
                             <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                    Command="{Binding SeasonsViewModel.UpdateCommand}">
+                                    Command="{Binding SeasonsViewModel.SaveCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>
@@ -166,10 +166,10 @@
                                 </Rectangle>
                             </Button>
                             <Button Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35"
-                                    Command="{Binding SeasonsViewModel.SaveCommand}">
+                                    Command="{Binding SeasonsViewModel.UpdateCommand}">
                                 <Rectangle Width="12" Height="12">
                                     <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new}" />
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Button>

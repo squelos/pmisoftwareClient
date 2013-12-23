@@ -13,6 +13,7 @@ namespace TcpModernUI.ViewModel
         #region members
 
         private ObservableCollection<Badge> _badges = new ObservableCollection<Badge>();
+        private Badge _selectedBadge;
         private RelayCommand _saveCommand;
         private RelayCommand _updateCommand;
         private RelayCommand _cancelCommand;
@@ -53,6 +54,16 @@ namespace TcpModernUI.ViewModel
             {
                 _badge = value;
                RaisePropertyChangedEvent("currentBadge");
+            }
+        }
+
+        public Badge SelectedBadge
+        {
+            get { return _selectedBadge; }
+            set
+            {
+                _selectedBadge = value;
+                RaisePropertyChangedEvent("selectedBadge");
             }
         }
 
