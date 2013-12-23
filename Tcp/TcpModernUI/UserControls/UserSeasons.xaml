@@ -33,7 +33,7 @@
                           ItemsSource="{Binding SeasonsViewModel.Seasons}"
                           SelectedValue="{Binding SeasonsViewModel.SelectedSeason}"
                           CanUserAddRows="False"
-                          CanUserDeleteRows="True" IsReadOnly="True">
+                          CanUserDeleteRows="True" IsReadOnly="True" SelectionChanged="Selector_OnSelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
                         <DataGridTextColumn Binding="{Binding FirstSemester.start, StringFormat='\{0:d\}'}"
@@ -112,7 +112,7 @@
                         </StackPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Modification">
+                <TabItem Header="Modification" x:Name="modif">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />

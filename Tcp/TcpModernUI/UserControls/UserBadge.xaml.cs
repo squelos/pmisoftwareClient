@@ -24,5 +24,15 @@ namespace TcpModernUI.UserControls
         {
             InitializeComponent();
         }
+
+        private void BadgesDataGrid_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var dataGrid = sender as DataGrid;
+            if (dataGrid != null && dataGrid.SelectedItems.Count == 1)
+            {
+                modif.IsSelected = true;
+
+            }
+        }
     }
 }

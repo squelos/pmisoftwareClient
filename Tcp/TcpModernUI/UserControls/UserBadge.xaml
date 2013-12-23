@@ -34,7 +34,7 @@
                           CanUserDeleteRows="True" CanUserAddRows="False"
                           EnableRowVirtualization="True" Height="Auto"
                           ItemsSource="{Binding BadgesViewModel.Badges}"
-                          RowDetailsVisibilityMode="VisibleWhenSelected" Width="Auto">
+                          RowDetailsVisibilityMode="VisibleWhenSelected" Width="Auto" SelectionChanged="BadgesDataGrid_OnSelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn IsReadOnly="True" x:Name="iDColumn" Binding="{Binding ID}"
                                             Header="ID" Width="SizeToHeader" />
@@ -103,7 +103,7 @@
                         </StackPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Modification">
+                <TabItem Header="Modification" x:Name="modif">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />

@@ -30,7 +30,7 @@
                     </Button>
                 </StackPanel>
                 <DataGrid AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" IsReadOnly="True"
-                              ItemsSource="{Binding PlayersViewModel.Players}"
+                              ItemsSource="{Binding PlayersViewModel.Players}" MinWidth="650"
                               RowDetailsVisibilityMode="VisibleWhenSelected"
                               SelectedValue="{Binding PlayersViewModel.SelectedPlayer}"
                               SelectionChanged="PlayerDataGrid_SelectionChanged">

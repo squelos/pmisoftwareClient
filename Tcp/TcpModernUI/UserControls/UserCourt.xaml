@@ -36,7 +36,7 @@
                     <DataGrid Grid.Row="0" ItemsSource="{Binding CourtViewModel.Courts}" CanUserDeleteRows="True"
                               IsReadOnly="True" SelectedValue="{Binding CourtViewModel.SelectedCourt}"
                               CanUserAddRows="False"
-                              AutoGenerateColumns="False">
+                              AutoGenerateColumns="False" SelectionChanged="Selector_OnSelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding number }" Header="Numéro" />
                             <DataGridCheckBoxColumn Binding="{Binding isCovered}" Header="Couvert" />
@@ -93,7 +93,7 @@
                                  Width="Auto" MinWidth="120" />
                     </Grid>
                 </TabItem>
-                <TabItem Header="Modification">
+                <TabItem Header="Modification" x:Name="modif">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
