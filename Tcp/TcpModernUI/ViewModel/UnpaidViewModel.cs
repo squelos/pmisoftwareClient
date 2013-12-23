@@ -32,7 +32,7 @@ namespace TcpModernUI.ViewModel
 
         public UnpaidViewModel(MainViewModel mvm)
         {
-            _semesters = Container.SemesterJeu.ToList();
+            _semesters = Container.SemesterJeu.OrderByDescending(semester => semester.end).Take(6).ToList();
             Task t = new Task(() =>
                               {
                                   //must eager load here
@@ -40,7 +40,7 @@ namespace TcpModernUI.ViewModel
                                       (p => p.Payment.Select(payment => payment.Semester)).ToList();
 
                                   _filteredPlayers = _players.Where(
-                                      player => player.Payment.Count == 0 | player.Payment.Any(
+                                      player => player.Payment.Count == 0 | player.Payment.All(
                                           payment => payment.Semester.Any(semester => semester.end > DateTime.Now))).ToList();
                                   RaisePropertyChangedEvent("players");
                               });

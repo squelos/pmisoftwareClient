@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -37,13 +36,14 @@ namespace TcpModernUI.ViewModel
             _cancelCommand = new RelayCommand(Cancel);
             _methods = new List<PaymentMethod>(Container.PaymentMethodSet.ToList());
             InitNewPayment();
-            _semesters = Container.SemesterJeu.ToList();
+            _semesters = Container.SemesterJeu.OrderByDescending(semester => semester.end).Take(6).ToList();
+            DateTime time = DateTime.Now.AddMonths(-6);
             Task t = new Task(() =>
                               {
                                   _players = Container.PlayerJeu.Include(p => p.Payment.Select(payment => payment.Semester)).ToList();
                                   _filteredPlayers = _players.Where(
-                                      player => player.Payment.Count != 0 && player.Payment.Any(
-                                          payment => !payment.Semester.Any(semester => semester.end > DateTime.Now.AddMonths(-6)))).ToList();
+                                      player => player.Payment.Count != 0 && player.Payment.All(
+                                          payment => !payment.Semester.Any(semester => semester.end > time))).ToList();
                                   RaisePropertyChangedEvent("players");
                               });
             t.Start();
@@ -104,7 +104,6 @@ namespace TcpModernUI.ViewModel
         #endregion
 
         #region privates
-
         private void Save()
         {
             SelectedPlayer.Payment.Add(NewPayment);
