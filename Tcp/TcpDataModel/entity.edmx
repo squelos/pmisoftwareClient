@@ -201,10 +201,12 @@
     <Property Name="phone2" Type="nvarchar(max)" Nullable="true" />
     <Property Name="isEnabled" Type="bit" Nullable="false" />
     <Property Name="passwordHash" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="lastLogin" Type="datetime" Nullable="false" />
+    <Property Name="lastLogin" Type="datetime" Nullable="true" />
     <Property Name="licenceNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="login" Type="nvarchar(max)" Nullable="false" />
     <Property Name="salt" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="passwordReset" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="passwordResetDemand" Type="datetime" Nullable="true" />
     <Property Name="Status_Id" Type="int" Nullable="false" />
     <Property Name="BallLevel_Id" Type="int" Nullable="true" />
   </EntityType>
@@ -732,7 +734,7 @@
           <Property Type="String" Name="phone2" Nullable="true" />
           <Property Type="Boolean" Name="isEnabled" Nullable="false" />
           <Property Type="String" Name="passwordHash" Nullable="false" />
-          <Property Type="DateTime" Name="lastLogin" Nullable="false" />
+          <Property Type="DateTime" Name="lastLogin" Nullable="true" />
           <Property Type="String" Name="licenceNumber" Nullable="true" />
           <NavigationProperty Name="Category" Relationship="entity.PlayerCategory" FromRole="Player" ToRole="Category" />
           <NavigationProperty Name="TrainingPreferences" Relationship="entity.PlayerTrainingPreferences" FromRole="Player" ToRole="TrainingPreferences" />
@@ -741,6 +743,8 @@
           <NavigationProperty Name="Booking1" Relationship="entity.BookingPlayer2" FromRole="Player" ToRole="Booking" />
           <Property Name="login" Type="String" Nullable="false" />
           <Property Name="salt" Type="String" Nullable="false" />
+          <Property Name="passwordReset" Type="String" Nullable="true" />
+          <Property Name="passwordResetDemand" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="PreferencePeriod">
           <Key>
@@ -989,6 +993,8 @@
           <ScalarProperty Name="licenceNumber" ColumnName="licenceNumber" />
           <ScalarProperty Name="login" ColumnName="login" />
           <ScalarProperty Name="salt" ColumnName="salt" />
+          <ScalarProperty Name="passwordReset" ColumnName="passwordReset" />
+          <ScalarProperty Name="passwordResetDemand" ColumnName="passwordResetDemand" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

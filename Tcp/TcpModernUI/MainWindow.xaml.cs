@@ -116,6 +116,11 @@ namespace TcpModernUI
                 MahApps.Metro.Controls.MessageDialogStyle.Affirmative);
         }
 
+        public void ChangeTab(int tabNumber)
+        {
+            tabControl.SelectedIndex = tabNumber;
+        }
+
         
     }
 }
