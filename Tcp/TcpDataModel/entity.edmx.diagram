@@ -40,6 +40,7 @@
         <AssociationConnector Association="entity.BookingPlayer2" />
         <AssociationConnector Association="entity.SeasonSemester" />
         <EntityTypeShape EntityType="entity.News" Width="1.5" PointX="7.875" PointY="1.125" />
+        <EntityTypeShape EntityType="entity.AuthorizedTagsVersion" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
