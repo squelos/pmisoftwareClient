@@ -25,11 +25,6 @@ namespace TcpModernUI.ViewModel
         private UnpaidViewModel _unpaid;
         private MailViewModel _mailvm;
         private NonRenewViewModel _nonRenewvm;
-        private int _playersCount;
-        private int _unpaidCount;
-        private int _nonRenewCount;
-        private int _paidlayers;
-
         #endregion
 
 
@@ -152,43 +147,6 @@ namespace TcpModernUI.ViewModel
                     _nonRenewvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("nonrenew");
                 }
                 return _nonRenewvm;
-            }
-        }
-
-        public int PlayersCount
-        {
-            get { return _playersCount; }
-            set
-            {
-                _playersCount = value;
-                RaisePropertyChangedEvent("playersCount");
-            }
-        }
-        public int UnpaidCount
-        {
-            get { return _unpaidCount; }
-            set
-            {
-                _unpaidCount = value;
-                RaisePropertyChangedEvent("playersCount");
-            }
-        }
-        public int NonRenewCount
-        {
-            get { return _nonRenewCount; }
-            set
-            {
-                _nonRenewCount = value;
-                RaisePropertyChangedEvent("playersCount");
-            }
-        }
-        public int PaidPlayers
-        {
-            get { return _paidlayers; }
-            set
-            {
-                _paidlayers = value;
-                RaisePropertyChangedEvent("playersCount");
             }
         }
 

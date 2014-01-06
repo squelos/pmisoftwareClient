@@ -42,7 +42,6 @@ namespace TcpModernUI.ViewModel
                                   _filteredPlayers = _players.Where(
                                       player => player.Payment.Count == 0 | player.Payment.All(
                                           payment => payment.Semester.Any(semester => semester.end > DateTime.Now))).ToList();
-                                  _mvm.UnpaidCount = _filteredPlayers.Count;
                                   RaisePropertyChangedEvent("players");
                               });
           

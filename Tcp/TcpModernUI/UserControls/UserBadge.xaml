@@ -44,14 +44,8 @@
                                                 Header="Maître" Width="SizeToHeader" />
                         <DataGridTextColumn x:Name="numberColumn" Binding="{Binding number}" Header="Numéro"
                                             Width="SizeToHeader" />
-                        
-                        <DataGridTemplateColumn IsReadOnly="True" Header="Joueur">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding Player}"></Label>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>    
-                        </DataGridTemplateColumn>
+                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Player.firstName}"
+                                            Header="Joueur" Width="SizeToHeader" />
                     </DataGrid.Columns>
                 </DataGrid>
 

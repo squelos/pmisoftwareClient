@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/23/2013 18:06:53
+-- Date Created: 12/20/2013 09:52:11
 -- Generated from EDMX file: C:\Users\squelos\Documents\GitHub\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
 -- --------------------------------------------------
 
@@ -130,9 +130,6 @@ GO
 IF OBJECT_ID(N'[dbo].[BallLevelSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[BallLevelSet];
 GO
-IF OBJECT_ID(N'[dbo].[NewsSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[NewsSet];
-GO
 IF OBJECT_ID(N'[dbo].[PaymentSemester]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PaymentSemester];
 GO
@@ -237,12 +234,10 @@ CREATE TABLE [dbo].[PlayerJeu] (
     [phone2] nvarchar(max)  NULL,
     [isEnabled] bit  NOT NULL,
     [passwordHash] nvarchar(max)  NOT NULL,
-    [lastLogin] datetime  NULL,
+    [lastLogin] datetime  NOT NULL,
     [licenceNumber] nvarchar(max)  NULL,
     [login] nvarchar(max)  NOT NULL,
     [salt] nvarchar(max)  NOT NULL,
-    [passwordReset] nvarchar(max)  NULL,
-    [passwordResetDemand] datetime  NULL,
     [Status_Id] int  NOT NULL,
     [BallLevel_Id] int  NULL
 );

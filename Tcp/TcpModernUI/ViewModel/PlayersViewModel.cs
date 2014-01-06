@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Data;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
@@ -22,8 +20,8 @@ namespace TcpModernUI.ViewModel
         private Player _player;
         private Player _selectedPlayer;
         private ObservableCollection<Player> _players;
-        private ObservableCollection<Player> _filteredPlayers;
         private String _filterStr;
+        private List<Player> _viewPlayers = new List<Player>();
         private ObservableCollection<Player> _unpaidPlayers;
         private List<BallLevel> _ballLevels;
         private List<Status> _statuses;
@@ -42,9 +40,7 @@ namespace TcpModernUI.ViewModel
             _mvm = mvm;
             _players =
                 new ObservableCollection<Player>(Container.PlayerJeu.ToList());
-            _filteredPlayers = new ObservableCollection<Player>(_players);
-            _mvm.PlayersCount = _players.Count;
-           
+
             _players.CollectionChanged += (sender, args) =>
                                           {
                                               if (args.Action == NotifyCollectionChangedAction.Remove)
@@ -88,6 +84,9 @@ namespace TcpModernUI.ViewModel
             get { return _selectedPlayer; }
             set
             {
+                //_selectedPlayer = value;
+                //RaisePropertyChangedEvent("selectedPlayer");
+
                 Task t = new Task(() =>
                                   {
                                       //_selectedPlayer =
@@ -132,39 +131,7 @@ namespace TcpModernUI.ViewModel
             set
             {
                 _filterStr = value;
-                if (value.Count() > 2)
-                {
-                   FilteredPlayers.Clear();
-                    foreach (var player in _players)
-                    {
-                        if (player.firstName.ToLower().Contains(_filterStr.ToLower()) ||
-                            player.lastName.ToLower().Contains(_filterStr.ToLower()))
-                        {
-                            FilteredPlayers.Add(player);    
-                        }
-                        
-                    }
-
-                }
-                else
-                {
-                   FilteredPlayers.Clear();
-                    foreach (var player in _players)
-                    {
-                        FilteredPlayers.Add(player);
-                    }
-
-                }
-                
                 RaisePropertyChangedEvent("filter");
-            }
-        }
-
-        public ObservableCollection<Player> FilteredPlayers
-        {
-            get
-            {
-                return _filteredPlayers;
             }
         }
 
