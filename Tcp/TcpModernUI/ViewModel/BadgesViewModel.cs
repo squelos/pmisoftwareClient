@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
+using System.Data.Entity;
 using TcpModernUI.BaseClasses;
 
 
@@ -29,7 +30,7 @@ namespace TcpModernUI.ViewModel
             _saveCommand = new RelayCommand(Save);
             _updateCommand = new RelayCommand(Update);
             _cancelCommand = new RelayCommand(Cancel);
-            _badges = new ObservableCollection<Badge>(Container.BadgeJeu);
+            _badges = new ObservableCollection<Badge>(Container.BadgeJeu.Include(badge => badge.Player));
 
             _badges.CollectionChanged += (sender, args) =>
             {

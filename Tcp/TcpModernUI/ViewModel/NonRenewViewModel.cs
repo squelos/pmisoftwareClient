@@ -44,6 +44,7 @@ namespace TcpModernUI.ViewModel
                                   _filteredPlayers = _players.Where(
                                       player => player.Payment.Count != 0 && player.Payment.All(
                                           payment => !payment.Semester.Any(semester => semester.end > time))).ToList();
+                                  _mvm.NonRenewCount = _filteredPlayers.Count;
                                   RaisePropertyChangedEvent("players");
                               });
             t.Start();

@@ -4,6 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
+<<<<<<< HEAD
     <Schema Namespace="entity.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -550,6 +551,538 @@ warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a 
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
+=======
+    <Schema Namespace="entity.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="entityStoreContainer">
+    <EntitySet Name="SeasonJeu" EntityType="entity.Store.SeasonJeu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SemesterJeu" EntityType="entity.Store.SemesterJeu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PaymentJeu" EntityType="entity.Store.PaymentJeu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BadgeJeu" EntityType="entity.Store.BadgeJeu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BookingAggregationJeu" EntityType="entity.Store.BookingAggregationJeu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BookingJeu" EntityType="entity.Store.BookingJeu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CourtJeu" EntityType="entity.Store.CourtJeu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OpeningJeu" EntityType="entity.Store.OpeningJeu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PlayerJeu" EntityType="entity.Store.PlayerJeu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PreferencePeriodJeu" EntityType="entity.Store.PreferencePeriodJeu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategorySet" EntityType="entity.Store.CategorySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TrainingPreferencesSet" EntityType="entity.Store.TrainingPreferencesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StatusSet" EntityType="entity.Store.StatusSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PaymentMethodSet" EntityType="entity.Store.PaymentMethodSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DaySet" EntityType="entity.Store.DaySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BallLevelSet" EntityType="entity.Store.BallLevelSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NewsSet" EntityType="entity.Store.NewsSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PaymentSemester" EntityType="entity.Store.PaymentSemester" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PlayerCategory" EntityType="entity.Store.PlayerCategory" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="BookingAggregation" Association="entity.Store.BookingAggregationBooking">
+      <End Role="BookingAggregation" EntitySet="BookingAggregationJeu" />
+      <End Role="Booking" EntitySet="BookingJeu" />
+    </AssociationSet>
+    <AssociationSet Name="BookingCourt" Association="entity.Store.BookingCourt">
+      <End Role="Booking" EntitySet="BookingJeu" />
+      <End Role="Court" EntitySet="CourtJeu" />
+    </AssociationSet>
+    <AssociationSet Name="CourtOpening" Association="entity.Store.CourtOpening">
+      <End Role="Court" EntitySet="CourtJeu" />
+      <End Role="Opening" EntitySet="OpeningJeu" />
+    </AssociationSet>
+    <AssociationSet Name="BadgePlayer" Association="entity.Store.BadgePlayer">
+      <End Role="Badge" EntitySet="BadgeJeu" />
+      <End Role="Player" EntitySet="PlayerJeu" />
+    </AssociationSet>
+    <AssociationSet Name="PreferencePeriodPlayer" Association="entity.Store.PreferencePeriodPlayer">
+      <End Role="PreferencePeriod" EntitySet="PreferencePeriodJeu" />
+      <End Role="Player" EntitySet="PlayerJeu" />
+    </AssociationSet>
+    <AssociationSet Name="PlayerBooking" Association="entity.Store.PlayerBooking">
+      <End Role="Player" EntitySet="PlayerJeu" />
+      <End Role="Booking" EntitySet="BookingJeu" />
+    </AssociationSet>
+    <AssociationSet Name="PlayerPayment" Association="entity.Store.PlayerPayment">
+      <End Role="Player" EntitySet="PlayerJeu" />
+      <End Role="Payment" EntitySet="PaymentJeu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaymentSemester_Payment" Association="entity.Store.FK_PaymentSemester_Payment">
+      <End Role="Payment" EntitySet="PaymentJeu" />
+      <End Role="PaymentSemester" EntitySet="PaymentSemester" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaymentSemester_Semester" Association="entity.Store.FK_PaymentSemester_Semester">
+      <End Role="Semester" EntitySet="SemesterJeu" />
+      <End Role="PaymentSemester" EntitySet="PaymentSemester" />
+    </AssociationSet>
+    <AssociationSet Name="OpeningBadge" Association="entity.Store.OpeningBadge">
+      <End Role="Opening" EntitySet="OpeningJeu" />
+      <End Role="Badge" EntitySet="BadgeJeu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlayerCategory_Player" Association="entity.Store.FK_PlayerCategory_Player">
+      <End Role="Player" EntitySet="PlayerJeu" />
+      <End Role="PlayerCategory" EntitySet="PlayerCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlayerCategory_Category" Association="entity.Store.FK_PlayerCategory_Category">
+      <End Role="Category" EntitySet="CategorySet" />
+      <End Role="PlayerCategory" EntitySet="PlayerCategory" />
+    </AssociationSet>
+    <AssociationSet Name="PlayerTrainingPreferences" Association="entity.Store.PlayerTrainingPreferences">
+      <End Role="Player" EntitySet="PlayerJeu" />
+      <End Role="TrainingPreferences" EntitySet="TrainingPreferencesSet" />
+    </AssociationSet>
+    <AssociationSet Name="PlayerStatus" Association="entity.Store.PlayerStatus">
+      <End Role="Player" EntitySet="PlayerJeu" />
+      <End Role="Status" EntitySet="StatusSet" />
+    </AssociationSet>
+    <AssociationSet Name="PaymentMethodPayment" Association="entity.Store.PaymentMethodPayment">
+      <End Role="PaymentMethod" EntitySet="PaymentMethodSet" />
+      <End Role="Payment" EntitySet="PaymentJeu" />
+    </AssociationSet>
+    <AssociationSet Name="DayPreferencePeriod" Association="entity.Store.DayPreferencePeriod">
+      <End Role="Day" EntitySet="DaySet" />
+      <End Role="PreferencePeriod" EntitySet="PreferencePeriodJeu" />
+    </AssociationSet>
+    <AssociationSet Name="DayTrainingPreferences" Association="entity.Store.DayTrainingPreferences">
+      <End Role="Day" EntitySet="DaySet" />
+      <End Role="TrainingPreferences" EntitySet="TrainingPreferencesSet" />
+    </AssociationSet>
+    <AssociationSet Name="PlayerBallLevel" Association="entity.Store.PlayerBallLevel">
+      <End Role="Player" EntitySet="PlayerJeu" />
+      <End Role="BallLevel" EntitySet="BallLevelSet" />
+    </AssociationSet>
+    <AssociationSet Name="BookingPlayer2" Association="entity.Store.BookingPlayer2">
+      <End Role="Booking" EntitySet="BookingJeu" />
+      <End Role="Player" EntitySet="PlayerJeu" />
+    </AssociationSet>
+    <AssociationSet Name="SeasonSemester" Association="entity.Store.SeasonSemester">
+      <End Role="Season" EntitySet="SeasonJeu" />
+      <End Role="Semester" EntitySet="SemesterJeu" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="SeasonJeu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SemesterJeu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="start" Type="datetime" Nullable="false" />
+    <Property Name="end" Type="datetime" Nullable="false" />
+    <Property Name="Season_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="PaymentJeu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="amount" Type="float" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="raison" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="invalid" Type="bit" Nullable="false" />
+    <Property Name="comment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="PaymentMethod_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BadgeJeu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="number" Type="bigint" Nullable="false" />
+    <Property Name="isEnabled" Type="bit" Nullable="false" />
+    <Property Name="isMaster" Type="bit" Nullable="false" />
+    <Property Name="Player_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="BookingAggregationJeu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookingJeu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isSpecial" Type="bit" Nullable="false" />
+    <Property Name="start" Type="datetime" Nullable="false" />
+    <Property Name="end" Type="datetime" Nullable="false" />
+    <Property Name="creationDate" Type="datetime" Nullable="false" />
+    <Property Name="Filmed" Type="bit" Nullable="false" />
+    <Property Name="BookingAggregation_ID" Type="int" Nullable="true" />
+    <Property Name="Court_ID" Type="int" Nullable="false" />
+    <Property Name="Player1_ID" Type="int" Nullable="false" />
+    <Property Name="Player2_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CourtJeu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="number" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isCovered" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OpeningJeu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="time" Type="datetime" Nullable="false" />
+    <Property Name="Court_ID" Type="int" Nullable="true" />
+    <Property Name="Badge_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlayerJeu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="birthDate" Type="datetime" Nullable="false" />
+    <Property Name="ranking" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="street" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="zipCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="city" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="phone1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="phone2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="isEnabled" Type="bit" Nullable="false" />
+    <Property Name="passwordHash" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lastLogin" Type="datetime" Nullable="true" />
+    <Property Name="licenceNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="salt" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="passwordReset" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="passwordResetDemand" Type="datetime" Nullable="true" />
+    <Property Name="Status_Id" Type="int" Nullable="false" />
+    <Property Name="BallLevel_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="PreferencePeriodJeu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="beginningHour" Type="int" Nullable="false" />
+    <Property Name="endHour" Type="int" Nullable="false" />
+    <Property Name="beginningMin" Type="int" Nullable="false" />
+    <Property Name="endmin" Type="int" Nullable="false" />
+    <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="Day_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategorySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoryName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TrainingPreferencesSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="beginning" Type="int" Nullable="false" />
+    <Property Name="end" Type="int" Nullable="false" />
+    <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="Day_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StatusSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="statusName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PaymentMethodSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="methodName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DaySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BallLevelSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ballName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NewsSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PublishDate" Type="datetime" Nullable="false" />
+    <Property Name="Visibility" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PaymentSemester">
+    <Key>
+      <PropertyRef Name="Payment_ID" />
+      <PropertyRef Name="Semester_ID" />
+    </Key>
+    <Property Name="Payment_ID" Type="int" Nullable="false" />
+    <Property Name="Semester_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlayerCategory">
+    <Key>
+      <PropertyRef Name="Player_ID" />
+      <PropertyRef Name="Category_Id" />
+    </Key>
+    <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="Category_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="BookingAggregationBooking">
+    <End Role="BookingAggregation" Type="entity.Store.BookingAggregationJeu" Multiplicity="0..1" />
+    <End Role="Booking" Type="entity.Store.BookingJeu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookingAggregation">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="BookingAggregation_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BookingCourt">
+    <End Role="Booking" Type="entity.Store.BookingJeu" Multiplicity="*" />
+    <End Role="Court" Type="entity.Store.CourtJeu" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Court">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="Court_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CourtOpening">
+    <End Role="Court" Type="entity.Store.CourtJeu" Multiplicity="0..1" />
+    <End Role="Opening" Type="entity.Store.OpeningJeu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Court">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Opening">
+        <PropertyRef Name="Court_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BadgePlayer">
+    <End Role="Badge" Type="entity.Store.BadgeJeu" Multiplicity="*" />
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Badge">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PreferencePeriodPlayer">
+    <End Role="PreferencePeriod" Type="entity.Store.PreferencePeriodJeu" Multiplicity="*" />
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PreferencePeriod">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PlayerBooking">
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="1" />
+    <End Role="Booking" Type="entity.Store.BookingJeu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="Player1_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PlayerPayment">
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="1" />
+    <End Role="Payment" Type="entity.Store.PaymentJeu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OpeningBadge">
+    <End Role="Opening" Type="entity.Store.OpeningJeu" Multiplicity="*" />
+    <End Role="Badge" Type="entity.Store.BadgeJeu" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Badge">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Opening">
+        <PropertyRef Name="Badge_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PlayerTrainingPreferences">
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="1" />
+    <End Role="TrainingPreferences" Type="entity.Store.TrainingPreferencesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TrainingPreferences">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PlayerStatus">
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="*" />
+    <End Role="Status" Type="entity.Store.StatusSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="Status_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PaymentMethodPayment">
+    <End Role="PaymentMethod" Type="entity.Store.PaymentMethodSet" Multiplicity="1" />
+    <End Role="Payment" Type="entity.Store.PaymentJeu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentMethod">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="PaymentMethod_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DayPreferencePeriod">
+    <End Role="Day" Type="entity.Store.DaySet" Multiplicity="1" />
+    <End Role="PreferencePeriod" Type="entity.Store.PreferencePeriodJeu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Day">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PreferencePeriod">
+        <PropertyRef Name="Day_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DayTrainingPreferences">
+    <End Role="Day" Type="entity.Store.DaySet" Multiplicity="1" />
+    <End Role="TrainingPreferences" Type="entity.Store.TrainingPreferencesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Day">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrainingPreferences">
+        <PropertyRef Name="Day_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PlayerBallLevel">
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="*" />
+    <End Role="BallLevel" Type="entity.Store.BallLevelSet" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="BallLevel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="BallLevel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BookingPlayer2">
+    <End Role="Booking" Type="entity.Store.BookingJeu" Multiplicity="*" />
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="Player2_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SeasonSemester">
+    <End Role="Season" Type="entity.Store.SeasonJeu" Multiplicity="0..1" />
+    <End Role="Semester" Type="entity.Store.SemesterJeu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Season">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Semester">
+        <PropertyRef Name="Season_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaymentSemester_Payment">
+    <End Role="Payment" Type="entity.Store.PaymentJeu" Multiplicity="1" />
+    <End Role="PaymentSemester" Type="entity.Store.PaymentSemester" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PaymentSemester">
+        <PropertyRef Name="Payment_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaymentSemester_Semester">
+    <End Role="PaymentSemester" Type="entity.Store.PaymentSemester" Multiplicity="*" />
+    <End Role="Semester" Type="entity.Store.SemesterJeu" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PaymentSemester">
+        <PropertyRef Name="Semester_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlayerCategory_Player">
+    <End Role="Player" Type="entity.Store.PlayerJeu" Multiplicity="1" />
+    <End Role="PlayerCategory" Type="entity.Store.PlayerCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PlayerCategory">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlayerCategory_Category">
+    <End Role="PlayerCategory" Type="entity.Store.PlayerCategory" Multiplicity="*" />
+    <End Role="Category" Type="entity.Store.CategorySet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlayerCategory">
+        <PropertyRef Name="Category_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+>>>>>>> bd55e95d2ab39f94d28a6cbfe7b2ab28720a2610
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="entity" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -750,18 +1283,31 @@ warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a 
           <Property Type="String" Name="phone1" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="phone2" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="Boolean" Name="isEnabled" Nullable="false" />
+<<<<<<< HEAD
           <Property Type="String" Name="passwordHash" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="DateTime" Name="lastLogin" Nullable="true" Precision="3" />
           <Property Type="String" Name="licenceNumber" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+=======
+          <Property Type="String" Name="passwordHash" Nullable="false" />
+          <Property Type="DateTime" Name="lastLogin" Nullable="true" />
+          <Property Type="String" Name="licenceNumber" Nullable="true" />
+>>>>>>> bd55e95d2ab39f94d28a6cbfe7b2ab28720a2610
           <NavigationProperty Name="Category" Relationship="entity.PlayerCategory" FromRole="Player" ToRole="Category" />
           <NavigationProperty Name="TrainingPreferences" Relationship="entity.PlayerTrainingPreferences" FromRole="Player" ToRole="TrainingPreferences" />
           <NavigationProperty Name="Status" Relationship="entity.PlayerStatus" FromRole="Player" ToRole="Status" />
           <NavigationProperty Name="BallLevel" Relationship="entity.PlayerBallLevel" FromRole="Player" ToRole="BallLevel" />
           <NavigationProperty Name="Booking1" Relationship="entity.BookingPlayer2" FromRole="Player" ToRole="Booking" />
+<<<<<<< HEAD
           <Property Name="login" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="salt" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="passwordReset" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="passwordResetDemand" Type="DateTime" Precision="3" />
+=======
+          <Property Name="login" Type="String" Nullable="false" />
+          <Property Name="salt" Type="String" Nullable="false" />
+          <Property Name="passwordReset" Type="String" Nullable="true" />
+          <Property Name="passwordResetDemand" Type="DateTime" Nullable="true" />
+>>>>>>> bd55e95d2ab39f94d28a6cbfe7b2ab28720a2610
         </EntityType>
         <EntityType Name="PreferencePeriod">
           <Key>
@@ -1020,6 +1566,8 @@ warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a 
           <ScalarProperty Name="licenceNumber" ColumnName="licenceNumber" />
           <ScalarProperty Name="login" ColumnName="login" />
           <ScalarProperty Name="salt" ColumnName="salt" />
+          <ScalarProperty Name="passwordReset" ColumnName="passwordReset" />
+          <ScalarProperty Name="passwordResetDemand" ColumnName="passwordResetDemand" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

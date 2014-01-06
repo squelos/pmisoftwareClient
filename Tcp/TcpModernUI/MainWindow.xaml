@@ -54,7 +54,7 @@
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
-    <Controls:MetroAnimatedSingleRowTabControl TabStripPlacement="Top" Margin="10,0,10,10">
+    <Controls:MetroAnimatedSingleRowTabControl TabStripPlacement="Top" Margin="10,0,10,10" x:Name="tabControl">
         <TabItem Header="Accueil">
             <UserControls:UserHome/>
         </TabItem>
