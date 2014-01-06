@@ -38,12 +38,10 @@ namespace TcpDataModel
         public string phone2 { get; set; }
         public bool isEnabled { get; set; }
         public string passwordHash { get; set; }
-        public Nullable<System.DateTime> lastLogin { get; set; }
+        public System.DateTime lastLogin { get; set; }
         public string licenceNumber { get; set; }
         public string login { get; set; }
         public string salt { get; set; }
-        public string passwordReset { get; set; }
-        public Nullable<System.DateTime> passwordResetDemand { get; set; }
     
         public virtual ObservableCollection<Badge> Badge { get; set; }
         public virtual ObservableCollection<PreferencePeriod> PreferencePeriod { get; set; }

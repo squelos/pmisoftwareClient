@@ -42,6 +42,5 @@ namespace TcpDataModel
         public virtual DbSet<Day> DaySet { get; set; }
         public virtual DbSet<BallLevel> BallLevelSet { get; set; }
         public virtual DbSet<News> NewsSet { get; set; }
-        public virtual DbSet<AuthorizedTagsVersion> AuthorizedTagsVersion { get; set; }
     }
 }

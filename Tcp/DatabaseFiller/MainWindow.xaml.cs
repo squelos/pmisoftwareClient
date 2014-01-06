@@ -17,7 +17,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Data.Entity;
 using TcpDataModel;
 
 namespace DatabaseFiller
@@ -266,7 +265,7 @@ namespace DatabaseFiller
                         GetRandom(100000000, 900000000).ToString(), GetRandom(100000000, 900000000).ToString(), "00000",
                         GetRandom(100000000, 900000000).ToString(),
                         prenoms[p] + "." + noms[n] + i + "@gmail.com");
-                    
+                    player.lastLogin = DateTime.Now;
                     player.BallLevel = ballLevels[GetRandom(0, 9)];
                     player.Status = statuses[GetRandom(0, 2)];
                     player.Category.Add(categories[GetRandom(0, 3)]);
@@ -668,27 +667,6 @@ namespace DatabaseFiller
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             AssignBadges();
-        }
-
-        private void Button_Click_5(object sender, RoutedEventArgs e)
-        {
-            using (entityContainer container = new entityContainer())
-            { 
-                List<Badge> badges = new List<Badge>();
-                badges.Add(new Badge(4151116, true, false));
-                badges.Add(new Badge(4253563, true, false));
-                badges.Add(new Badge(4086466, true, false));
-                badges.Add(new Badge(4139734, true, false));
-                badges.Add(new Badge(4115639, true, false));
-                container.BadgeJeu.AddRange(badges);
-
-                List<Player> players = new List<Player>(container.PlayerJeu.Include(player => player.Badge));
-                for (int i = 0; i < 5; i++)
-                {
-                    players[i].Badge.Add(badges[i]);
-                }
-                container.SaveChanges();
-            }
         }
 
 
