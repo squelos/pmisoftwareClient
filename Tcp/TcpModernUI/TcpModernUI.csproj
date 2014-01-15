@@ -300,6 +300,10 @@
       <Project>{44434e2f-8746-4e8e-bb0c-18afbb314fbd}</Project>
       <Name>TcpDataModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VcpDriver\VcpDriver.csproj">
+      <Project>{00030f91-2733-417c-ad49-92a2100299dc}</Project>
+      <Name>VcpDriver</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

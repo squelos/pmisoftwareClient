@@ -1,4 +1,5 @@
 using TcpModernUI.BaseClasses;
+using VcpDriver;
 
 namespace TcpModernUI.ViewModel
 {
@@ -25,6 +26,7 @@ namespace TcpModernUI.ViewModel
         private UnpaidViewModel _unpaid;
         private MailViewModel _mailvm;
         private NonRenewViewModel _nonRenewvm;
+        private VcpDriver.Driver _driver = Driver.Instance;
         private int _playersCount;
         private int _unpaidCount;
         private int _nonRenewCount;
@@ -43,6 +45,11 @@ namespace TcpModernUI.ViewModel
         
 
         #region props
+
+        public Driver BadgeDriver
+        {
+            get { return _driver; }
+        }
 
         public BadgesViewModel BadgesViewModel
         {
