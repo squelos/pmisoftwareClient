@@ -69,11 +69,6 @@ namespace TcpModernUI.BaseClasses
             _uiElement.Dispatcher.BeginInvoke(DispatcherPriority.Background, action);
         }
 
-        public void SetActiveTab(int tabIndex)
-        {
-            _uiElement.ChangeTab(tabIndex);
-        }
-
         public void RequestFlyout(string str)
         {
             switch (str)

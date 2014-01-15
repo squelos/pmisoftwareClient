@@ -265,8 +265,7 @@ namespace DatabaseFiller
                         GetRandom(100000000, 900000000).ToString(), GetRandom(100000000, 900000000).ToString(), "00000",
                         GetRandom(100000000, 900000000).ToString(),
                         prenoms[p] + "." + noms[n] + i + "@gmail.com");
-                    //player.lastLogin = DateTime.Now;
-                    player.passwordReset = stringGen.GetRandomString(8);
+                   // player.lastLogin = DateTime.Now;
                     player.BallLevel = ballLevels[GetRandom(0, 9)];
                     player.Status = statuses[GetRandom(0, 2)];
                     player.Category.Add(categories[GetRandom(0, 3)]);

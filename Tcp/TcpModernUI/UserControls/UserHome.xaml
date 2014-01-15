@@ -7,16 +7,14 @@
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
              d:DesignHeight="600" d:DesignWidth="600">
     <Grid><WrapPanel>
-        <controls:Tile Title="Adhérents" Count="{Binding PlayersCount, Mode=OneWay}" Margin="10,10,10,10" Click="OnClickPlayers">
+        <controls:Tile Title="Adhérents" Count="1" Margin="10,10,10,10">
         </controls:Tile>
-            <controls:Tile Title="Impayés" Count="{Binding UnpaidCount, Mode=OneWay}" Margin="10,10,10,10" Background="Crimson" Click="OnClickUnpaid">
+            <controls:Tile Title="Impayés" Count="1" Margin="10,10,10,10" Background="Crimson">
             </controls:Tile>
-            <controls:Tile Title="Non renouvelants" Count="{Binding NonRenewCount, Mode=OneWay}" Margin="10,10,10,10" Background="DarkBlue" Click="OnClickNonRenew">
+            <controls:Tile Title="Non renouvelants" Count="1" Margin="10,10,10,10" Background="DarkBlue">
             </controls:Tile>
-            <controls:Tile Title="Saisons" Count="1" Margin="10,10,10,10" Background="Green" Click="OnClickSeasons">
+            <controls:Tile Title="Saisons" Count="1" Margin="10,10,10,10" Background="Green">
             </controls:Tile>
-        <TextBlock Text="Joyeux Noel ! Ceci est ma version de développement actuelle (pas une stable) sur laquelle je rajoute les fonctionnalités et je débug."></TextBlock>
-            <TextBlock Text="Ca risque donc de planter, mais vous aurez un apercu de l'application. n'hesitez pas a faire part de vos remarques a Kevin. "></TextBlock>
         </WrapPanel>
     </Grid>
 </UserControl>

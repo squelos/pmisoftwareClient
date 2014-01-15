@@ -162,43 +162,6 @@ namespace TcpModernUI.ViewModel
             }
         }
 
-        public int PlayersCount
-        {
-            get { return _playersCount; }
-            set
-            {
-                _playersCount = value;
-                RaisePropertyChangedEvent("playersCount");
-            }
-        }
-        public int UnpaidCount
-        {
-            get { return _unpaidCount; }
-            set
-            {
-                _unpaidCount = value;
-                RaisePropertyChangedEvent("playersCount");
-            }
-        }
-        public int NonRenewCount
-        {
-            get { return _nonRenewCount; }
-            set
-            {
-                _nonRenewCount = value;
-                RaisePropertyChangedEvent("playersCount");
-            }
-        }
-        public int PaidPlayers
-        {
-            get { return _paidlayers; }
-            set
-            {
-                _paidlayers = value;
-                RaisePropertyChangedEvent("playersCount");
-            }
-        }
-
         #endregion
     }
 }

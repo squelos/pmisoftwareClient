@@ -63,12 +63,5 @@ namespace TcpModernUI.UserControls
         {
             CustomDispatcher.Instance.RequestFlyout("bookingPref");
         }
-
-        private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //DataGrid.Sour
-        }
-
-        
     }
 }
