@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
 using TcpModernUI.Utility;
+using System.Data.Entity;
 
 
 namespace TcpModernUI.ViewModel
@@ -39,7 +40,7 @@ namespace TcpModernUI.ViewModel
         {
             _mvm = mvm;
             _players =
-                new ObservableCollection<Player>(Container.PlayerJeu.ToList());
+                new ObservableCollection<Player>(Container.PlayerJeu.Include(player => player.Badge).ToList());
 
             _players.CollectionChanged += (sender, args) =>
                                           {

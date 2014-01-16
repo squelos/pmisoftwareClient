@@ -1,9 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
 using TcpModernUI.BaseClasses;
+using System.Data.Entity;
 
 
 namespace TcpModernUI.ViewModel
@@ -18,6 +21,8 @@ namespace TcpModernUI.ViewModel
         private RelayCommand _updateCommand;
         private RelayCommand _cancelCommand;
         private Badge _badge;
+        
+
         private MainViewModel _mvm;
 
         #endregion
@@ -29,7 +34,7 @@ namespace TcpModernUI.ViewModel
             _saveCommand = new RelayCommand(Save);
             _updateCommand = new RelayCommand(Update);
             _cancelCommand = new RelayCommand(Cancel);
-            _badges = new ObservableCollection<Badge>(Container.BadgeJeu);
+            _badges = new ObservableCollection<Badge>(Container.BadgeJeu.Include(badge => badge.Player));
 
             _badges.CollectionChanged += (sender, args) =>
             {
@@ -43,6 +48,7 @@ namespace TcpModernUI.ViewModel
                 RaisePropertyChangedEvent("badges");
             };
             InitialiseBadges();
+           
         }
         #endregion
 
@@ -57,6 +63,7 @@ namespace TcpModernUI.ViewModel
             }
         }
 
+       
         public Badge SelectedBadge
         {
             get { return _selectedBadge; }
@@ -66,6 +73,8 @@ namespace TcpModernUI.ViewModel
                 RaisePropertyChangedEvent("selectedBadge");
             }
         }
+
+        
 
         public ICommand SaveCommand
         {
@@ -81,6 +90,7 @@ namespace TcpModernUI.ViewModel
         {
             get { return _cancelCommand; }
         }
+
 
         public ObservableCollection<Badge> Badges
         {
