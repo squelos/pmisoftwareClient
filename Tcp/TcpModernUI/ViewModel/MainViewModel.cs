@@ -31,6 +31,7 @@ namespace TcpModernUI.ViewModel
         private int _unpaidCount;
         private int _nonRenewCount;
         private int _paidlayers;
+        private int _selectedGeneralIndex;
 
         #endregion
 
@@ -49,6 +50,16 @@ namespace TcpModernUI.ViewModel
         public Driver BadgeDriver
         {
             get { return _driver; }
+        }
+
+        public int SelectedGeneralIndex
+        {
+            get { return _selectedGeneralIndex; }
+            set
+            {
+                _selectedGeneralIndex = value;
+                RaisePropertyChangedEvent("selectedGeneralIndex");
+            }
         }
 
         public BadgesViewModel BadgesViewModel

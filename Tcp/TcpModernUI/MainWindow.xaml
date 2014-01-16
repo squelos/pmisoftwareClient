@@ -15,8 +15,9 @@
     </Window.Resources>
     <Controls:MetroWindow.WindowCommands>
         <Controls:WindowCommands>
-            <Button Click="LaunchFlyoutDemo" Content="Site internet" />
+            <CheckBox IsChecked="{Binding BadgeDriver.Connected}" IsEnabled="False" Content="Lecteur connecté"></CheckBox>
         </Controls:WindowCommands>
+     
     </Controls:MetroWindow.WindowCommands>
 
     <Controls:MetroWindow.Flyouts>
@@ -54,7 +55,7 @@
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
-    <Controls:MetroAnimatedSingleRowTabControl TabStripPlacement="Top" Margin="10,0,10,10">
+    <Controls:MetroAnimatedSingleRowTabControl TabStripPlacement="Top" Margin="10,0,10,10" SelectedIndex="{Binding SelectedGeneralIndex}">
         <TabItem Header="Accueil">
             <UserControls:UserHome/>
         </TabItem>
@@ -79,13 +80,8 @@
         <TabItem Header="Mails">
             <UserControls:UserMail x:Name="UserMail" />
         </TabItem>
-        <!--Saisons-->
-        <TabItem Header="Saisons">
-            <UserControls:UserSeasons x:Name="userSeasons" />
-        </TabItem>
-        <!--Terrains-->
-        <TabItem Header="Terrains">
-            <UserControls:UserCourt x:Name="userCourt" />
+        <TabItem Header="Gestion">
+            <UserControls:UserMgmt />
         </TabItem>
     </Controls:MetroAnimatedSingleRowTabControl>
 

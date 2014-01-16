@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\gera\Desktop\</PublishUrl>
+    <PublishUrl>C:\Users\squelos\Google Drive\elodie\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -150,6 +150,9 @@
     <Compile Include="UserControls\UserBadge.xaml.cs">
       <DependentUpon>UserBadge.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UserCategories.xaml.cs">
+      <DependentUpon>UserCategories.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UserCourt.xaml.cs">
       <DependentUpon>UserCourt.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,9 @@
     </Compile>
     <Compile Include="UserControls\UserMail.xaml.cs">
       <DependentUpon>UserMail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserMgmt.xaml.cs">
+      <DependentUpon>UserMgmt.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UserNonRenew.xaml.cs">
       <DependentUpon>UserNonRenew.xaml</DependentUpon>
@@ -265,6 +271,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\UserCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UserCourt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -274,6 +284,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UserMail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserMgmt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

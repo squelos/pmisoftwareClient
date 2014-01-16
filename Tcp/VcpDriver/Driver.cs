@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO.Ports;
 using System.Linq;
@@ -20,21 +21,29 @@ namespace VcpDriver
 
         private Driver()
         {
-            _serialPort = new SerialPort(GetAvailablePorts().First(), _baudRate, Parity.None, _dataBits, _stopBits);
-
-            if (_serialPort.IsOpen)
+            try
             {
-                _serialPort.Close();
-            }
+                _serialPort = new SerialPort(GetAvailablePorts().First(), _baudRate, Parity.None, _dataBits, _stopBits);
+
+                if (_serialPort.IsOpen)
+                {
+                    _serialPort.Close();
+                }
                 _serialPort.Open();
 
                 _serialPort.RtsEnable = true;
                 _serialPort.DtrEnable = true;
 
+               
                 _serialPort.DataReceived += serialPort_dataReceived;
+                Connected = true;
+            }
+            catch (Exception ex)
+            {
+                Connected = false;
+                Console.Out.WriteLine(ex);
+            }
             
-            
-
         }
         #endregion
 
@@ -46,13 +55,17 @@ namespace VcpDriver
         private StopBits _stopBits = System.IO.Ports.StopBits.One;
         private SerialPort _serialPort;
         private string _lastScannedBadge;
+        private bool _connected = false;
         #endregion
 
         #region events
 
         public delegate void BadgeScannedHandler(int badgeId);
 
+        public delegate void ConnectedStatusHandler(bool stat);
+
         public event BadgeScannedHandler BadgeScanned;
+        public event ConnectedStatusHandler ConnectedStatusChanged;
         #endregion
 
         #region privateMethdos
@@ -87,8 +100,15 @@ namespace VcpDriver
 
         }
 
-      
-
+        public bool Connected
+        {
+            get { return _connected; }
+            set
+            {
+                _connected = value;
+                RaiseConnectedStatusChanded(value);
+            }
+        }
 
 
         #endregion
@@ -101,6 +121,18 @@ namespace VcpDriver
             }
         }
 
+        /// <summary>
+        /// Raises a new event concerning the serial port connection status
+        /// </summary>
+        /// <param name="state"></param>
+        private void RaiseConnectedStatusChanded(bool state)
+        {
+            if (ConnectedStatusChanged != null)
+            {
+                ConnectedStatusChanged(state);
+            }
+        }
+
         void IDisposable.Dispose()
         {
             Dispose();
@@ -108,11 +140,14 @@ namespace VcpDriver
 
         ~Driver()
         {
-            if (_serialPort.IsOpen)
+            if (_serialPort != null)
             {
-                _serialPort.Close();
+                if (_serialPort.IsOpen)
+                {
+                    _serialPort.Close();
+                }
+                _serialPort.Dispose();
             }
-            _serialPort.Dispose();
         }
     }
 }
