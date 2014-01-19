@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorizedTagsVersion.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="authorizedUserTags.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Badge.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
@@ -84,6 +90,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="getFilmedHours_Result.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="News.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
@@ -118,6 +127,12 @@
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Semester.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Status.cs">

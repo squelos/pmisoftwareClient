@@ -35,11 +35,13 @@
         <EntityTypeShape EntityType="entity.Day" Width="1.5" PointX="2.125" PointY="9" />
         <AssociationConnector Association="entity.DayPreferencePeriod" />
         <AssociationConnector Association="entity.DayTrainingPreferences" />
-        <EntityTypeShape EntityType="entity.BallLevel" Width="1.5" PointX="7.75" PointY="10.375" />
+        <EntityTypeShape EntityType="entity.BallLevel" Width="1.5" PointX="7.875" PointY="11" />
         <AssociationConnector Association="entity.PlayerBallLevel" />
         <AssociationConnector Association="entity.BookingPlayer2" />
         <AssociationConnector Association="entity.SeasonSemester" />
         <EntityTypeShape EntityType="entity.News" Width="1.5" PointX="7.875" PointY="1.125" />
+        <EntityTypeShape EntityType="entity.AuthorizedTagsVersion" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="entity.authorizedUserTags" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

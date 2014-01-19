@@ -44,6 +44,8 @@ namespace TcpDataModel
         public string salt { get; set; }
         public string passwordReset { get; set; }
         public Nullable<System.DateTime> passwordResetDemand { get; set; }
+        public Nullable<bool> Subscribed { get; set; }
+        public bool Sex { get; set; }
     
         public virtual ObservableCollection<Badge> Badge { get; set; }
         public virtual ObservableCollection<PreferencePeriod> PreferencePeriod { get; set; }

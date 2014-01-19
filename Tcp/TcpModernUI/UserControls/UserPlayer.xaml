@@ -97,6 +97,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -115,6 +116,8 @@
                             <Label Content="Status" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="5"
                                        VerticalAlignment="Center" />
                             <Label Content="Login" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="6"
+                                       VerticalAlignment="Center" />
+                            <Label Content="Sexe" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="7"
                                        VerticalAlignment="Center" />
                             <Label Content="Email" HorizontalAlignment="Left" Margin="15,9,0,10" Grid.Row="2"
                                        VerticalAlignment="Center" />
@@ -161,6 +164,7 @@
                                          controls:TextboxHelper.ClearTextButton="True"
                                          Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
                                          Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Center" />
+                            <controls:ToggleSwitch Grid.Row="7" Grid.Column="1" Margin="10,10,10,10" IsChecked="{Binding PlayersViewModel.CurrentPlayer.Sex}" OffLabel="Masculin" OnLabel="Feminin"/>
                             <TextBox Text="{Binding PlayersViewModel.CurrentPlayer.street}"
                                          controls:TextboxHelper.Watermark="1 rue de la gare"
                                          controls:TextboxHelper.ClearTextButton="True"
@@ -271,6 +275,8 @@
                                        Grid.Column="2" VerticalAlignment="Center" />
                             <Label Content="Login" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="6"
                                        VerticalAlignment="Center" />
+                            <Label Content="Sexe" HorizontalAlignment="Left" Margin="15,10,0,9" Grid.Row="7"
+                                       VerticalAlignment="Center" />
                             <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.firstName}"
                                          controls:TextboxHelper.Watermark="Prénom"
                                          controls:TextboxHelper.ClearTextButton="True"
@@ -286,6 +292,7 @@
                                          controls:TextboxHelper.ClearTextButton="True"
                                          Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,10,0"
                                          Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Center" />
+                            <controls:ToggleSwitch Grid.Row="7" Grid.Column="1" Margin="10,10,10,10" IsChecked="{Binding PlayersViewModel.SelectedPlayer.Sex}" OffLabel="Masculin" OnLabel="Feminin"/>
                             <TextBox Text="{Binding PlayersViewModel.SelectedPlayer.email}"
                                          controls:TextboxHelper.Watermark="test@email.com"
                                          controls:TextboxHelper.ClearTextButton="True"

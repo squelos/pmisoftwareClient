@@ -15,6 +15,10 @@
     </controls:MetroWindow.WindowCommands>
 
     <Grid>
-        
+        <DockPanel>
+            <StackPanel>
+                
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </controls:MetroWindow>
