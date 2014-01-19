@@ -27,6 +27,7 @@ namespace TcpModernUI.ViewModel
         private MailViewModel _mailvm;
         private NonRenewViewModel _nonRenewvm;
         private VcpDriver.Driver _driver = Driver.Instance;
+        private bool _readerStatus;
         private int _playersCount;
         private int _unpaidCount;
         private int _nonRenewCount;
@@ -39,7 +40,8 @@ namespace TcpModernUI.ViewModel
         #region ctor
         public MainViewModel()
         {
-       
+            _driver.ConnectedStatusChanged += stat => ReaderStatus = stat;
+            _readerStatus = _driver.Connected;
         }
         #endregion
 
@@ -170,6 +172,16 @@ namespace TcpModernUI.ViewModel
                     _nonRenewvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("nonrenew");
                 }
                 return _nonRenewvm;
+            }
+        }
+
+        public bool ReaderStatus
+        {
+            get { return _readerStatus; }
+            set
+            {
+                _readerStatus = value;
+                RaisePropertyChangedEvent("readerStatus");
             }
         }
 

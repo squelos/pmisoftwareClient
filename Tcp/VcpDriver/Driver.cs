@@ -21,30 +21,38 @@ namespace VcpDriver
 
         private Driver()
         {
-            try
+            //
+
+            if (GetAvailablePorts().Count() != 0)
             {
-                _serialPort = new SerialPort(GetAvailablePorts().First(), _baudRate, Parity.None, _dataBits, _stopBits);
-
-                if (_serialPort.IsOpen)
-                {
-                    _serialPort.Close();
-                }
-                _serialPort.Open();
-
-                _serialPort.RtsEnable = true;
-                _serialPort.DtrEnable = true;
-
-               
-                _serialPort.DataReceived += serialPort_dataReceived;
-                Connected = true;
+                Connect();
             }
-            catch (Exception ex)
-            {
-                Connected = false;
-                Console.Out.WriteLine(ex);
-            }
-            
+
+            SerialPortService.PortsChanged += SerialPortServiceOnPortsChanged;
         }
+
+        private void SerialPortServiceOnPortsChanged(object sender, PortsChangedArgs portsChangedArgs)
+        {
+            if (portsChangedArgs.EventType == SerialPortService.EventType.Insertion)
+            {
+                //its an insertion
+                Connect();
+            }
+            else
+            {
+                Clean();
+                //its a removal
+            }
+            if (_serialPort.IsOpen)
+            {
+                Console.Out.WriteLine("Is Open");
+            }
+            else
+            {
+                Console.Out.WriteLine("IsClosed");
+            }
+        }
+
         #endregion
 
 
@@ -61,15 +69,40 @@ namespace VcpDriver
         #region events
 
         public delegate void BadgeScannedHandler(int badgeId);
-
         public delegate void ConnectedStatusHandler(bool stat);
-
         public event BadgeScannedHandler BadgeScanned;
         public event ConnectedStatusHandler ConnectedStatusChanged;
         #endregion
 
         #region privateMethdos
 
+        private void Clean()
+        {
+            if (_serialPort != null)
+            {
+                _serialPort.DataReceived -= serialPort_dataReceived;
+                if (_serialPort.IsOpen)
+                {
+                    _serialPort.Close();
+                }
+                _serialPort.Dispose();
+                Connected = false;
+            }
+        }
+
+        private void Connect()
+        {
+            _serialPort = new SerialPort(GetAvailablePorts().First(), _baudRate, Parity.None, _dataBits, _stopBits);
+            //_serialPort.Dispose();
+
+            _serialPort.Open();
+
+            _serialPort.RtsEnable = true;
+            _serialPort.DtrEnable = true;
+
+            _serialPort.DataReceived += serialPort_dataReceived;
+            Connected = true;
+        }
         #endregion
 
         private void serialPort_dataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
@@ -97,7 +130,6 @@ namespace VcpDriver
         {
             string[] ports = SerialPort.GetPortNames();
             return ports;
-
         }
 
         public bool Connected
@@ -110,16 +142,9 @@ namespace VcpDriver
             }
         }
 
-
         #endregion
 
-        public void Dispose()
-        {
-            if (_serialPort.IsOpen)
-            {
-                _serialPort.Close();
-            }
-        }
+
 
         /// <summary>
         /// Raises a new event concerning the serial port connection status
@@ -133,19 +158,30 @@ namespace VcpDriver
             }
         }
 
-        void IDisposable.Dispose()
-        {
-            Dispose();
-        }
-
+     
         ~Driver()
         {
+            SerialPortService.CleanUp();
             if (_serialPort != null)
             {
                 if (_serialPort.IsOpen)
                 {
                     _serialPort.Close();
                 }
+                
+                if (_serialPort != null)
+                {
+                    _serialPort.Dispose();
+                }
+            }
+        }
+
+        public void Dispose()
+        {
+            if (_serialPort != null)
+            {
+                
+
                 _serialPort.Dispose();
             }
         }

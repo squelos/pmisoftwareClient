@@ -15,7 +15,7 @@
     </Window.Resources>
     <Controls:MetroWindow.WindowCommands>
         <Controls:WindowCommands>
-            <CheckBox IsChecked="{Binding BadgeDriver.Connected}" IsEnabled="False" Content="Lecteur connecté"></CheckBox>
+            <CheckBox IsChecked="{Binding ReaderStatus, Mode=OneWay}" IsEnabled="False" Content="Lecteur connecté"></CheckBox>
         </Controls:WindowCommands>
      
     </Controls:MetroWindow.WindowCommands>

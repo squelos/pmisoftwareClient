@@ -7,13 +7,13 @@
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
              d:DesignHeight="600" d:DesignWidth="600">
     <Grid><WrapPanel>
-        <controls:Tile Title="Adhérents" Count="1" Margin="10,10,10,10">
+        <controls:Tile Title="Adhérents" Margin="10,10,10,10">
         </controls:Tile>
-            <controls:Tile Title="Impayés" Count="1" Margin="10,10,10,10" Background="Crimson">
+            <controls:Tile Title="Impayés"  Margin="10,10,10,10" Background="Crimson">
             </controls:Tile>
-            <controls:Tile Title="Non renouvelants" Count="1" Margin="10,10,10,10" Background="DarkBlue">
+            <controls:Tile Title="Non renouvelants"  Margin="10,10,10,10" Background="DarkBlue">
             </controls:Tile>
-            <controls:Tile Title="Saisons" Count="1" Margin="10,10,10,10" Background="Green">
+            <controls:Tile Title="Saisons"  Margin="10,10,10,10" Background="Green">
             </controls:Tile>
         </WrapPanel>
     </Grid>
