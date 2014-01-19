@@ -13,13 +13,7 @@ namespace VcpDriver
     public class Driver : IDisposable
     {
 
-        #region singleton
-        private static readonly Lazy<Driver> lazy =
-        new Lazy<Driver>(() => new Driver());
-
-        public static Driver Instance { get { return lazy.Value; } }
-
-        private Driver()
+        public Driver()
         {
             //
 
@@ -43,17 +37,10 @@ namespace VcpDriver
                 Clean();
                 //its a removal
             }
-            if (_serialPort.IsOpen)
-            {
-                Console.Out.WriteLine("Is Open");
-            }
-            else
-            {
-                Console.Out.WriteLine("IsClosed");
-            }
+           
         }
 
-        #endregion
+        
 
 
         #region privates
@@ -161,29 +148,21 @@ namespace VcpDriver
      
         ~Driver()
         {
+            Dispose(false);
+        }
+
+
+        protected void Dispose(bool disposing)
+        {
             SerialPortService.CleanUp();
             if (_serialPort != null)
             {
-                if (_serialPort.IsOpen)
-                {
-                    _serialPort.Close();
-                }
-                
-                if (_serialPort != null)
-                {
-                    _serialPort.Dispose();
-                }
-            }
-        }
-
-        public void Dispose()
-        {
-            if (_serialPort != null)
-            {
-                
-
                 _serialPort.Dispose();
             }
+        }
+        public void Dispose()
+        {
+            Dispose(true); 
         }
     }
 }

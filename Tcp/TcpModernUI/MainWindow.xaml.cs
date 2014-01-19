@@ -41,8 +41,6 @@ namespace TcpModernUI
             win.Show();
         }
 
-       
-
         private void OpenPlayerBadges()
         {
             ToggleFlyout(0);
@@ -114,6 +112,11 @@ namespace TcpModernUI
         {
             this.ShowMessageAsync("Erreur de validation", s,
                 MahApps.Metro.Controls.MessageDialogStyle.Affirmative);
+        }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _mainViewModel.BadgeDriver.Dispose();
         }
 
         

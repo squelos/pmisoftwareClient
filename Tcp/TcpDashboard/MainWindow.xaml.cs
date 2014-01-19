@@ -12,17 +12,36 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
+using TcpDashboard.ViewModel;
 
 namespace TcpDashboard
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
+        private MainViewModel _mainViewModel;
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _mainViewModel.BadgeScanner.Dispose();
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var dataContext = DataContext;
+            var mainViewModel = dataContext as MainViewModel;
+            if (mainViewModel != null)
+            {
+               
+                _mainViewModel = mainViewModel;
+            }
         }
     }
 }

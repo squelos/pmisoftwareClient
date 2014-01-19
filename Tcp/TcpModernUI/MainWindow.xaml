@@ -9,7 +9,7 @@
                       Title="Tennis Club Portois" MinWidth="650" MinHeight="650" ShowTitleBar="True"
                       ShowIconOnTitleBar="True"
                       Width="1366" Height="768" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
-                      Loaded="MetroWindow_Loaded" Margin="10,10,10,10" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+                      Loaded="MetroWindow_Loaded" Margin="10,10,10,10" WindowStartupLocation="CenterScreen" WindowState="Maximized" Closing="MetroWindow_Closing">
     <Window.Resources>
         <Converters:BoolInverterConverter x:Key="BoolInverterConverter" />
     </Window.Resources>

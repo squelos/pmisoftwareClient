@@ -26,7 +26,7 @@ namespace TcpModernUI.ViewModel
         private UnpaidViewModel _unpaid;
         private MailViewModel _mailvm;
         private NonRenewViewModel _nonRenewvm;
-        private VcpDriver.Driver _driver = Driver.Instance;
+        private VcpDriver.Driver _driver = new Driver();
         private bool _readerStatus;
         private int _playersCount;
         private int _unpaidCount;

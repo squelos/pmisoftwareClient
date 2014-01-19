@@ -44,8 +44,16 @@ namespace VcpDriver
         /// </summary>
         public static void CleanUp()
         {
-            arrival.Stop();
-            removal.Stop();
+            try
+            {
+                arrival.Stop();
+                removal.Stop();
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex);   
+            }
+            
         }
 
         public static event EventHandler<PortsChangedArgs> PortsChanged;
