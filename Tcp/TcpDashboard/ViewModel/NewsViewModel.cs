@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using TcpDataModel;
 
 namespace TcpDashboard.ViewModel
@@ -23,6 +25,9 @@ namespace TcpDashboard.ViewModel
         private bool _refreshThread = false;
         private int _newsI = 0;
 
+        private RelayCommand _incrementCommand;
+        private RelayCommand _decrementCommand;
+
         #endregion
 
         #region ctor
@@ -37,7 +42,8 @@ namespace TcpDashboard.ViewModel
                         .OrderByDescending(news => news.PublishDate)
                         .Take(15));
             _currentNews = _newsCollection.First();
-           
+           _incrementCommand = new RelayCommand(Increment);
+            _decrementCommand = new RelayCommand(Decrement);
         }
 
       
@@ -66,6 +72,12 @@ namespace TcpDashboard.ViewModel
             }
 
         }
+
+        public ICommand DecrementCommand
+        { get { return _decrementCommand; } }
+
+        public ICommand IncrementCommand
+        { get { return _incrementCommand; } }
         #endregion
 
         #region commands
@@ -103,6 +115,24 @@ namespace TcpDashboard.ViewModel
             {
                 _newsI = 0;
             }
+        }
+        public void Decrement()
+        {
+            //if the recentNews contains nothing
+            if (RecentNews.Count == 0)
+            {
+                return;
+            }
+            if (_newsI > 0)
+            {
+                _newsI--;
+                CurrentNews = RecentNews[_newsI];
+            }
+            else
+            {
+                _newsI = RecentNews.Count - 1;
+            }
+            CurrentNews = RecentNews[_newsI];
         }
         #endregion
 

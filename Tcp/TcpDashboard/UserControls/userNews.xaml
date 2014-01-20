@@ -11,7 +11,22 @@
             <StackPanel Orientation="Vertical">
                 <Label Content="{Binding NewsViewModel.CurrentNews.Title}" FontWeight="Bold" FontSize="20" />
                 <WebBrowser x:Name="web"/>
-               
+                 <DockPanel >
+                    <Button Command="{Binding NewsViewModel.DecrementCommand}" DockPanel.Dock="Left" ToolTip="Lecteur RFID connecté" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40">
+                        <Rectangle Width="18" Height="18">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_arrow_left}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button Command="{Binding NewsViewModel.IncrementCommand}" DockPanel.Dock="Right" ToolTip="Lecteur RFID connecté" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40">
+                        <Rectangle Width="18" Height="18">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_arrow_right}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                </DockPanel>
             </StackPanel>
         </GroupBox>
       
