@@ -85,6 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SteveJobs.cs" />
     <Compile Include="UserControls\userCalendar.xaml.cs">
       <DependentUpon>userCalendar.xaml</DependentUpon>
     </Compile>

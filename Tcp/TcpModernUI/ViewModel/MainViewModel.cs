@@ -1,3 +1,5 @@
+using System;
+using System.Windows;
 using TcpModernUI.BaseClasses;
 using VcpDriver;
 
@@ -28,6 +30,9 @@ namespace TcpModernUI.ViewModel
         private NonRenewViewModel _nonRenewvm;
         private VcpDriver.Driver _driver = new Driver();
         private bool _readerStatus;
+        private Visibility _connected = Visibility.Collapsed;
+        private Visibility _disconnected = Visibility.Collapsed;
+
         private int _playersCount;
         private int _unpaidCount;
         private int _nonRenewCount;
@@ -42,10 +47,19 @@ namespace TcpModernUI.ViewModel
         {
             _driver.ConnectedStatusChanged += stat => ReaderStatus = stat;
             _readerStatus = _driver.Connected;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
-        #endregion
 
         
+        #endregion
+
+        #region privates
+        void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            //clean up here in the event of an exception, and maybe log or open up a window
+            _driver.Dispose();
+        }
+        #endregion
 
         #region props
 
@@ -181,7 +195,37 @@ namespace TcpModernUI.ViewModel
             set
             {
                 _readerStatus = value;
+                if (value)
+                {
+                    Connected = Visibility.Visible;
+                    Disconnected = Visibility.Collapsed;
+                }
+                else
+                {
+                    Connected = Visibility.Collapsed;
+                    Disconnected = Visibility.Visible;
+                }
                 RaisePropertyChangedEvent("readerStatus");
+            }
+        }
+
+        public Visibility Connected
+        {
+            get { return _connected; }
+            set
+            {
+                _connected = value;
+                RaisePropertyChangedEvent("connected");
+            }
+        }
+
+        public Visibility Disconnected
+        {
+            get { return _disconnected; }
+            set
+            {
+                _disconnected = value;
+                RaisePropertyChangedEvent("disconnected");
             }
         }
 

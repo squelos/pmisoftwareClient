@@ -9,7 +9,7 @@
 
         <GroupBox Header="Actualités">
             <StackPanel Orientation="Vertical">
-                <Label Content="{Binding NewsViewModel.CurrentNews.Title}" />
+                <Label Content="{Binding NewsViewModel.CurrentNews.Title}" FontWeight="Bold" FontSize="20" />
                 <WebBrowser x:Name="web"/>
                
             </StackPanel>

@@ -21,6 +21,7 @@ namespace TcpDashboard.ViewModel
         private Thread _threadNewsChanger;
         private bool _threadRun = false;
         private bool _refreshThread = false;
+        private int _newsI = 0;
 
         #endregion
 
@@ -36,26 +37,10 @@ namespace TcpDashboard.ViewModel
                         .OrderByDescending(news => news.PublishDate)
                         .Take(15));
             _currentNews = _newsCollection.First();
-            _threadNewsChanger = new Thread(Start);
-            _threadRun = true;
-            _threadNewsChanger.Start();
+           
         }
 
-        private void Start()
-        {
-            int i = 0;
-            int y = _newsCollection.Count;
-            while (_threadRun)
-            {
-                Thread.Sleep(6000);
-                CurrentNews = _newsCollection[i];
-                i++;
-                if (i == y)
-                {
-                    i = 0;
-                }
-            }
-        }
+      
 
         #endregion
 
@@ -88,11 +73,37 @@ namespace TcpDashboard.ViewModel
         #endregion
 
         #region privates
-
+        
         #endregion
 
         #region publics
 
+        public void Refresh()
+        {
+            DateTime now = DateTime.Now.AddMonths(-2);
+            RecentNews = new ObservableCollection<News>(
+                    _container.NewsSet.Where(news => news.Visibility && news.PublishDate > now)
+                        .OrderByDescending(news => news.PublishDate)
+                        .Take(15));
+        }
+
+        public void Increment()
+        {
+            //if the recentNews contains nothing
+            if (RecentNews.Count == 0)
+            {
+                return;
+            }
+            if (_newsI < RecentNews.Count-1)
+            {
+                _newsI++;
+                CurrentNews = RecentNews[_newsI];
+            }
+            else
+            {
+                _newsI = 0;
+            }
+        }
         #endregion
 
         public void Dispose()

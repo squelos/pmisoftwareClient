@@ -8,9 +8,10 @@ namespace TcpDashboard.ViewModel
 {
     public class CalendarViewModel
     {
-           #region privates
+        #region privates
 
         private MainViewModel _mvm;
+
         #endregion
 
         #region ctor
@@ -19,18 +20,27 @@ namespace TcpDashboard.ViewModel
         {
             _mvm = mvm;
         }
+
         #endregion
 
         #region getters/setters
+
         #endregion
 
         #region commands
+
         #endregion
 
         #region privates
+
         #endregion
 
         #region publics
+
+        public void Refresh()
+        {
+            //throw new NotImplementedException();
+        }
         #endregion
     }
 }
