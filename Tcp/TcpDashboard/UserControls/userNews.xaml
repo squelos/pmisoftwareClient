@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TcpDashboard.UserControls.userNews"
+﻿<UserControl xmlns:my="http://schemas.awesomium.com/winfx"  x:Class="TcpDashboard.UserControls.userNews"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,9 +10,8 @@
         <GroupBox Header="Actualités">
             <StackPanel Orientation="Vertical">
                 <Label Content="{Binding NewsViewModel.CurrentNews.Title}" />
-                
-            
-                <Label Content="{Binding NewsViewModel.CurrentNews.Content}" />
+                <WebBrowser x:Name="web"/>
+               
             </StackPanel>
         </GroupBox>
       

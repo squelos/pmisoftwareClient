@@ -10,7 +10,7 @@ using TcpDataModel;
 
 namespace TcpDashboard.ViewModel
 {
-    public class NewsViewModel : ViewModelBase
+    public class NewsViewModel : ViewModelBase, IDisposable
     {
         #region privates
 
@@ -19,6 +19,7 @@ namespace TcpDashboard.ViewModel
         private entityContainer _container = new entityContainer();
         private News _currentNews;
         private Thread _threadNewsChanger;
+        private bool _threadRun = false;
         private bool _refreshThread = false;
 
         #endregion
@@ -35,28 +36,25 @@ namespace TcpDashboard.ViewModel
                         .OrderByDescending(news => news.PublishDate)
                         .Take(15));
             _currentNews = _newsCollection.First();
-            //_threadNewsChanger = new Thread(Start);
-            //_threadNewsChanger.Start();
+            _threadNewsChanger = new Thread(Start);
+            _threadRun = true;
+            _threadNewsChanger.Start();
         }
 
         private void Start()
         {
-            
-                //int i = 0;
-                //int y = _newsCollection.Count;
-                //while (true)
-                //{
-                //    Thread.Sleep(60000);
-                //    CurrentNews = _newsCollection[i];
-                //    i++;
-                //    if (i == y)
-                //    {
-                //        i = 0;
-                //    }
-                    
-                //}
-            
-
+            int i = 0;
+            int y = _newsCollection.Count;
+            while (_threadRun)
+            {
+                Thread.Sleep(6000);
+                CurrentNews = _newsCollection[i];
+                i++;
+                if (i == y)
+                {
+                    i = 0;
+                }
+            }
         }
 
         #endregion
@@ -96,5 +94,11 @@ namespace TcpDashboard.ViewModel
         #region publics
 
         #endregion
+
+        public void Dispose()
+        {
+            _threadRun = false;
+            
+        }
     }
 }
