@@ -20,6 +20,8 @@ namespace TcpDashboard.ViewModel
 
         #region privates
         private Driver _driver = new Driver();
+        private NewsViewModel _newsViewModel;
+        private CalendarViewModel _calendarViewModel;
         private bool _readerStatus;
         #endregion
 
@@ -31,6 +33,8 @@ namespace TcpDashboard.ViewModel
         {
             _driver.ConnectedStatusChanged += stat => ReaderStatus = stat;
             _readerStatus = _driver.Connected;
+            _newsViewModel = new NewsViewModel(this);
+            _calendarViewModel = new CalendarViewModel(this);
         }
         #endregion
 
@@ -54,6 +58,28 @@ namespace TcpDashboard.ViewModel
                 RaisePropertyChanged("driver");
             }
         }
+
+        public NewsViewModel NewsViewModel
+        {
+            get { return _newsViewModel; }
+            set
+            {
+                _newsViewModel = value;
+                RaisePropertyChanged("newsViewModel");
+            }
+        }
+
+
+        public CalendarViewModel CalendarViewModel
+        {
+            get { return _calendarViewModel; }
+            set
+            {
+                _calendarViewModel = value;
+                RaisePropertyChanged("calendarViewModel");
+            }
+        }
+
         #endregion
 
         #region publics

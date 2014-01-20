@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="TcpDashboard.MainWindow"
+﻿<controls:MetroWindow xmlns:UserControls="clr-namespace:TcpDashboard.UserControls"  x:Class="TcpDashboard.MainWindow"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
@@ -9,15 +9,16 @@
 
     <controls:MetroWindow.WindowCommands>
         <controls:WindowCommands>
-            
             <CheckBox IsChecked="{Binding ReaderStatus, Mode=OneWay}" IsEnabled="False" Content="Lecteur connecté"></CheckBox>
         </controls:WindowCommands>
     </controls:MetroWindow.WindowCommands>
-
     <Grid>
         <DockPanel>
-            <StackPanel>
-                
+            <StackPanel DockPanel.Dock="Left">
+                <UserControls:userNews />
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Left">
+                <UserControls:userCalendar />
             </StackPanel>
         </DockPanel>
     </Grid>
