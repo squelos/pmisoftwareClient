@@ -33,10 +33,6 @@ namespace TcpModernUI.ViewModel
         private Visibility _connected = Visibility.Collapsed;
         private Visibility _disconnected = Visibility.Collapsed;
 
-        private int _playersCount;
-        private int _unpaidCount;
-        private int _nonRenewCount;
-        private int _paidlayers;
         private int _selectedGeneralIndex;
 
         #endregion

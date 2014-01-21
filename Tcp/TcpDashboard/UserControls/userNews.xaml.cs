@@ -33,10 +33,19 @@ namespace TcpDashboard.UserControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            var dataContext = DataContext;
-            var mainViewModel = dataContext as MainViewModel;
-            _mvm = mainViewModel;
-            _mvm.NewsViewModel.PropertyChanged +=NewsViewModelOnPropertyChanged;
+            try
+            {
+                var dataContext = DataContext;
+                var mainViewModel = dataContext as MainViewModel;
+                _mvm = mainViewModel;
+                if (_mvm != null) _mvm.NewsViewModel.PropertyChanged += NewsViewModelOnPropertyChanged;
+            }
+            catch (Exception ex)
+            {
+
+                Console.Out.WriteLine(ex);
+            }
+            
         }
 
         private void NewsViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

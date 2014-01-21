@@ -22,8 +22,7 @@ namespace TcpDashboard.UserControls
     /// </summary>
     public partial class userCalendar : UserControl
     {
-        public static readonly DependencyProperty CourtProperty =
-            DependencyProperty.Register("Court", typeof(Court), typeof (MetroWindow));
+        
 
         public userCalendar()
         {
