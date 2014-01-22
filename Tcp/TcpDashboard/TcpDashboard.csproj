@@ -80,11 +80,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BookingManager.cs" />
-    <Compile Include="DailyBookings.cs" />
+    <Compile Include="Business\BookingManager.cs" />
+    <Compile Include="Business\DailyBookings.cs" />
     <Compile Include="Jobs.cs" />
     <Compile Include="UserControls\userCalendar.xaml.cs">
       <DependentUpon>userCalendar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserDayColumn.xaml.cs">
+      <DependentUpon>UserDayColumn.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\userNews.xaml.cs">
       <DependentUpon>userNews.xaml</DependentUpon>
@@ -99,8 +102,8 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="VisualBooking.cs" />
-    <Compile Include="WeeklyBookings.cs" />
+    <Compile Include="Business\VisualBooking.cs" />
+    <Compile Include="Business\WeeklyBookings.cs" />
     <Page Include="Assets\BaseDark.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -146,6 +149,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\userCalendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserDayColumn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
