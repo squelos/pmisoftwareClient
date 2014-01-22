@@ -12,11 +12,9 @@ namespace VcpDriver
 {
     public class Driver : IDisposable
     {
-
         public Driver()
         {
             //
-
             if (GetAvailablePorts().Count() != 0)
             {
                 Connect();
