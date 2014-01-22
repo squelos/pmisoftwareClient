@@ -22,7 +22,7 @@ namespace TcpDashboard.ViewModel
 
         #region privates
         private Driver _driver = new Driver();
-        private SteveJobs _jobs;
+        private Jobs _jobs;
         private NewsViewModel _newsViewModel;
         private CalendarViewModel _calendarViewModel;
         private bool _readerStatus;
@@ -41,7 +41,7 @@ namespace TcpDashboard.ViewModel
             _readerStatus = _driver.Connected;
             _newsViewModel = new NewsViewModel(this);
             _calendarViewModel = new CalendarViewModel(this);
-            _jobs = new SteveJobs(_calendarViewModel, _newsViewModel, this);
+            _jobs = new Jobs(_calendarViewModel, _newsViewModel, this);
             _jobs.DoJobs = true;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }

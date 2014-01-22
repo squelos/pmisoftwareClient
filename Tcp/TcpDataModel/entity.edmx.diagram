@@ -28,7 +28,7 @@
         <AssociationConnector Association="entity.PlayerCategory" />
         <EntityTypeShape EntityType="entity.TrainingPreferences" Width="1.5" PointX="4.75" PointY="9.125" />
         <AssociationConnector Association="entity.PlayerTrainingPreferences" />
-        <EntityTypeShape EntityType="entity.Status" Width="1.5" PointX="10.75" PointY="6" />
+        <EntityTypeShape EntityType="entity.Status" Width="1.5" PointX="10.75" PointY="6.25" />
         <AssociationConnector Association="entity.PlayerStatus" />
         <EntityTypeShape EntityType="entity.PaymentMethod" Width="1.5" PointX="3.375" PointY="3.875" />
         <AssociationConnector Association="entity.PaymentMethodPayment" />

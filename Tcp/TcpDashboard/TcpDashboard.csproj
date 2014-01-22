@@ -80,7 +80,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SteveJobs.cs" />
+    <Compile Include="DailyBookings.cs" />
+    <Compile Include="Jobs.cs" />
     <Compile Include="UserControls\userCalendar.xaml.cs">
       <DependentUpon>userCalendar.xaml</DependentUpon>
     </Compile>
@@ -97,6 +98,8 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="VisualBooking.cs" />
+    <Compile Include="WeeklyBookings.cs" />
     <Page Include="Assets\BaseDark.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

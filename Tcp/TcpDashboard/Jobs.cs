@@ -8,7 +8,7 @@ using TcpDashboard.ViewModel;
 
 namespace TcpDashboard
 {
-    public class SteveJobs
+    public class Jobs
     {
         #region privates
 
@@ -23,7 +23,7 @@ namespace TcpDashboard
 
         #region ctor
 
-        public SteveJobs(CalendarViewModel calendar, NewsViewModel newsVm, MainViewModel mvm)
+        public Jobs(CalendarViewModel calendar, NewsViewModel newsVm, MainViewModel mvm)
         {
             _mvm = mvm;
             _calendarViewModel = calendar;
