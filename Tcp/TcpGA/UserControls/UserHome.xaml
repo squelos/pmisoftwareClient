@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="TcpGA.UserControls.UserHome"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
+             d:DesignHeight="600" d:DesignWidth="600">
+    <Grid>
+        <WrapPanel>
+            <controls:Tile Title="Adhérents" Margin="10,10,10,10">
+            </controls:Tile>
+            <controls:Tile Title="Impayés"  Margin="10,10,10,10" Background="Crimson">
+            </controls:Tile>
+            <controls:Tile Title="Non renouvelants"  Margin="10,10,10,10" Background="DarkBlue">
+            </controls:Tile>
+            <controls:Tile Title="Saisons"  Margin="10,10,10,10" Background="Green">
+            </controls:Tile>
+        </WrapPanel>
+    </Grid>
+</UserControl>
