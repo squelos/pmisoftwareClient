@@ -81,6 +81,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Business\BookingManager.cs" />
+    <Compile Include="Business\CourtBookings.cs" />
     <Compile Include="Business\DailyBookings.cs" />
     <Compile Include="Jobs.cs" />
     <Compile Include="UserControls\userCalendar.xaml.cs">
@@ -98,7 +99,14 @@
     <Compile Include="UserControls\UserPdfReader.Designer.cs">
       <DependentUpon>UserPdfReader.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UserTimeHeader.xaml.cs">
+      <DependentUpon>UserTimeHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserWeekView.xaml.cs">
+      <DependentUpon>UserWeekView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CalendarViewModel.cs" />
+    <Compile Include="ViewModel\DateTimeExtensions.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -157,6 +165,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\userNews.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserTimeHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserWeekView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

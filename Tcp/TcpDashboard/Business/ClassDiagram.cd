@@ -1,31 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="TcpDashboard.DailyBookings">
+  <Class Name="TcpDashboard.Business.DailyBookings">
     <Position X="2.5" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Business\DailyBookings.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TcpDashboard.WeeklyBookings">
+  <Class Name="TcpDashboard.Business.WeeklyBookings">
     <Position X="2.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Business\WeeklyBookings.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TcpDashboard.VisualBooking">
+  <Class Name="TcpDashboard.Business.VisualBooking">
     <Position X="2.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Business\VisualBooking.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TcpDashboard.BookingManager">
+  <Class Name="TcpDashboard.Business.BookingManager">
     <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Business\BookingManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TcpDashboard.ViewModel.CalendarViewModel">
+    <Position X="5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAIAAABAAAAEADAADIAAAAABAAAgAwAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\CalendarViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

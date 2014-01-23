@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.RightsManagement;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TcpDashboard.Business
 {
-    public class DailyBookings
+    public class CourtBookings
     {
         #region privates
         #endregion
 
         #region ctor
 
-        public DailyBookings()
+        public CourtBookings()
         {
             
         }
