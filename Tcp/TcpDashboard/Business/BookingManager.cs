@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Text;
+using TcpDataModel;
 
 namespace TcpDashboard.Business
 {
     public class BookingManager
     {
+
         #region privates
+        private entityContainer _container = new entityContainer();
+
         #endregion
 
         #region ctor

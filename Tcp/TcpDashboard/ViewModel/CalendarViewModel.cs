@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using TcpDashboard.Business;
+using TcpDataModel;
 
 
 namespace TcpDashboard.ViewModel
@@ -15,11 +18,12 @@ namespace TcpDashboard.ViewModel
 
         private MainViewModel _mvm;
         private bool _weekMode = true;
-        private bool _dayMode = false;
+
         private DateTime _selectedDay;
         private DateTime _firstDayOfWeek;
         private DateTime _lastDayOfWeek;
-        private List<CourtBookings> _courtBookings = new List<CourtBookings>(); 
+        private ObservableCollection<CourtBookings> _courtBookings = new ObservableCollection<CourtBookings>();
+        private BookingManager _bookingManager;
 
         #endregion
        
@@ -29,6 +33,18 @@ namespace TcpDashboard.ViewModel
         public CalendarViewModel(MainViewModel mvm)
         {
             _mvm = mvm;
+            _bookingManager = new BookingManager();
+            using (entityContainer container = new entityContainer())
+            {
+                List<Court> tmpList  = (from b in container.CourtJeu select b).ToList();
+                List<CourtBookings> tmpBookings = new List<CourtBookings>();
+                foreach (var court in tmpList)
+                {
+                    tmpBookings.Add(new CourtBookings(court));
+                }
+                CourtBookings = new ObservableCollection<CourtBookings>(tmpBookings);
+            }
+            
         }
 
         #endregion
@@ -41,21 +57,11 @@ namespace TcpDashboard.ViewModel
             set
             {
                 _weekMode = value;
-                _dayMode = !value;
                 RaisePropertyChanged("weekMode");
             }
         }
 
-        public bool DayMode
-        {
-            get { return _dayMode; }
-            set
-            {
-                _dayMode = value;
-                _weekMode = !value; 
-                RaisePropertyChanged("dayMode");
-            }
-        }
+        
 
         public DateTime SelectedDay
         {
@@ -77,6 +83,16 @@ namespace TcpDashboard.ViewModel
         public DateTime LastDayOfSelectedWeek
         {
             get { return _lastDayOfWeek; }
+        }
+
+        public ObservableCollection<CourtBookings> CourtBookings
+        {
+            get { return _courtBookings; }
+            set
+            {
+                _courtBookings = value;
+                RaisePropertyChanged("courtBookings");
+            }
         }
         #endregion
 

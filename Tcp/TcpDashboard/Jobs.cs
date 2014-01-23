@@ -18,7 +18,7 @@ namespace TcpDashboard
         private volatile bool _doJobs = false;
         private Task _refreshCalendarInfo;
         private Task _refreshNewsInfo;
-        private Task _incrementNews ;
+        private Task _incrementNews;
         #endregion
 
         #region ctor
@@ -31,13 +31,13 @@ namespace TcpDashboard
             _refreshCalendarInfo = new Task(RefreshCalendar);
             _refreshNewsInfo = new Task(RefreshNews);
             _incrementNews = new Task(IncrementNews);
-            
+
         }
 
         #endregion
 
         #region getters/setters
-        
+
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace TcpDashboard
         #endregion
 
         #region privates
-        private  void RefreshNews()
+        private void RefreshNews()
         {
             while (_doJobs)
             {
@@ -55,7 +55,7 @@ namespace TcpDashboard
             }
         }
 
-        private  void RefreshCalendar()
+        private void RefreshCalendar()
         {
             while (_doJobs)
             {
@@ -64,7 +64,7 @@ namespace TcpDashboard
             }
         }
 
-        private  void IncrementNews()
+        private void IncrementNews()
         {
             while (_doJobs)
             {
@@ -88,17 +88,17 @@ namespace TcpDashboard
                 {
                     switch (_incrementNews.Status)
                     {
-                            case TaskStatus.RanToCompletion:
-                        {
-                            _incrementNews = new Task(IncrementNews);
-                            _incrementNews.Start();
-                            break;
-                        }
-                            case TaskStatus.Created:
-                        {
-                            _incrementNews.Start();
-                            break;
-                        }
+                        case TaskStatus.RanToCompletion:
+                            {
+                                _incrementNews = new Task(IncrementNews);
+                                _incrementNews.Start();
+                                break;
+                            }
+                        case TaskStatus.Created:
+                            {
+                                _incrementNews.Start();
+                                break;
+                            }
                     }
                     switch (_refreshCalendarInfo.Status)
                     {
@@ -129,7 +129,7 @@ namespace TcpDashboard
                             }
                     }
                     //we check to restart the threads if stopped
-                   
+
                 }
             }
         }

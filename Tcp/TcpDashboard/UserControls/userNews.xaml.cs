@@ -45,7 +45,7 @@ namespace TcpDashboard.UserControls
 
                 Console.Out.WriteLine(ex);
             }
-            
+
         }
 
         private void NewsViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -57,7 +57,7 @@ namespace TcpDashboard.UserControls
         private void LoadHtmlInWeb()
         {
             web.NavigateToString("<head></head><body bgcolor=\"#D45B07\">" + _mvm.NewsViewModel.CurrentNews.Content + "</body>");
-            
+
         }
     }
 }

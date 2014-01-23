@@ -3,23 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
+using TcpDataModel;
 
 namespace TcpDashboard.Business
 {
-    public class CourtBookings
+    public class CourtBookings : ViewModelBase
     {
         #region privates
+
+        private WeeklyBookings _selectedWeeklyBookings;
+        private Court _court;
+        private DateTime _selectedDay;
+        private DateTime _firstDayOfWeek;
+        private DateTime _lastDayOfWeek;
+        private bool _weekMode = true;
         #endregion
 
         #region ctor
 
-        public CourtBookings()
+        public CourtBookings(Court court)
         {
-            
+            _court = court;
         }
         #endregion
 
         #region getters/setters
+
         #endregion
 
         #region private Methods

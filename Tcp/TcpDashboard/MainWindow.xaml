@@ -16,7 +16,7 @@
         <controls:WindowCommands>
             <Button Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Lecteur RFID deconnecté" Visibility="{Binding Disconnected}" IsEnabled="False" Height="30" Width="30">
                 <Rectangle Width="13" Height="13">
-                    <Rectangle.Fill> 
+                    <Rectangle.Fill>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_connect}" />
                     </Rectangle.Fill>
                 </Rectangle>

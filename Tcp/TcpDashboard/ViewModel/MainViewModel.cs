@@ -28,7 +28,7 @@ namespace TcpDashboard.ViewModel
         private bool _readerStatus;
         private Visibility _connected = Visibility.Collapsed;
         private Visibility _disconnected = Visibility.Visible;
-        
+
         #endregion
 
         #region ctor
@@ -46,7 +46,7 @@ namespace TcpDashboard.ViewModel
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
 
-       
+
         #endregion
 
         #region getters/setters
@@ -134,6 +134,6 @@ namespace TcpDashboard.ViewModel
             _jobs.DoJobs = false;
 
         }
-        #endregion 
+        #endregion
     }
 }

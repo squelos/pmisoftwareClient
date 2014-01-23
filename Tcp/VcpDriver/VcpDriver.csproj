@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{00030F91-2733-417C-AD49-92A2100299DC}</ProjectGuid>
+    <ProjectGuid>{4D880852-5481-4202-B9F1-38DD440EEB0C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VcpDriver</RootNamespace>

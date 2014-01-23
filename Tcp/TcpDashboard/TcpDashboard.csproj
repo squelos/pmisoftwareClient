@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{443CC4A1-A50F-4D2D-8409-79F07927EE47}</ProjectGuid>
+    <ProjectGuid>{088DC3E3-2536-4747-AEB9-D99F57A8C75C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TcpDashboard</RootNamespace>
@@ -34,8 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
@@ -56,10 +55,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.0.12.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,35 +66,27 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Business\BookingManager.cs" />
-    <Compile Include="Business\CourtBookings.cs" />
-    <Compile Include="Business\DailyBookings.cs" />
     <Compile Include="Jobs.cs" />
     <Compile Include="UserControls\userCalendar.xaml.cs">
       <DependentUpon>userCalendar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UserCourt.xaml.cs">
+      <DependentUpon>UserCourt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UserDayColumn.xaml.cs">
       <DependentUpon>UserDayColumn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\userNews.xaml.cs">
-      <DependentUpon>userNews.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UserPdfReader.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\UserPdfReader.Designer.cs">
-      <DependentUpon>UserPdfReader.cs</DependentUpon>
+    <Compile Include="UserControls\UserNews.xaml.cs">
+      <DependentUpon>UserNews.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UserTimeHeader.xaml.cs">
       <DependentUpon>UserTimeHeader.xaml</DependentUpon>
@@ -110,8 +99,6 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="Business\VisualBooking.cs" />
-    <Compile Include="Business\WeeklyBookings.cs" />
     <Page Include="Assets\BaseDark.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -148,6 +135,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Business\BookingManager.cs" />
+    <Compile Include="Business\CourtBookings.cs" />
+    <Compile Include="Business\DailyBookings.cs" />
+    <Compile Include="Business\VisualBooking.cs" />
+    <Compile Include="Business\WeeklyBookings.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -160,11 +152,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\UserCourt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UserDayColumn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\userNews.xaml">
+    <Page Include="UserControls\UserNews.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,19 +204,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Entypo-license.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TcpDataModel\TcpDataModel.csproj">
       <Project>{44434e2f-8746-4e8e-bb0c-18afbb314fbd}</Project>
       <Name>TcpDataModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\VcpDriver\VcpDriver.csproj">
-      <Project>{00030f91-2733-417c-ad49-92a2100299dc}</Project>
+      <Project>{4d880852-5481-4202-b9f1-38dd440eeb0c}</Project>
       <Name>VcpDriver</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Entypo-license.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

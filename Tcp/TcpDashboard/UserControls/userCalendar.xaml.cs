@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
-using TcpDataModel;
 
 namespace TcpDashboard.UserControls
 {
@@ -22,8 +20,6 @@ namespace TcpDashboard.UserControls
     /// </summary>
     public partial class userCalendar : UserControl
     {
-        
-
         public userCalendar()
         {
             InitializeComponent();

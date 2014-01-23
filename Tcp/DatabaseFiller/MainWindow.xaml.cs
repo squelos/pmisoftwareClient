@@ -45,8 +45,8 @@ namespace DatabaseFiller
 
         private void Wrapper()
         {
-           FixedPart();
-            Task tBadges = new Task(()=> createBadges(pCreateBadges));
+            FixedPart();
+            Task tBadges = new Task(() => createBadges(pCreateBadges));
             Task tPlayers = new Task(() => createPlayers(pCreatePlayers));
 
             tPlayers.ContinueWith(task => createBookingPrefs(pCreateBookingPrefs));
@@ -56,12 +56,12 @@ namespace DatabaseFiller
             Task tAssignBadges = new Task(() => AssignBadges());
             tBadges.Start();
             tPlayers.Start();
-            Task.WaitAll(new[] {tBadges, tPlayers, tPlayers});
+            Task.WaitAll(new[] { tBadges, tPlayers, tPlayers });
             tAssignBadges.Start();
 
         }
 
-        
+
 
         private void FixedPart()
         {
@@ -265,7 +265,7 @@ namespace DatabaseFiller
                         GetRandom(100000000, 900000000).ToString(), GetRandom(100000000, 900000000).ToString(), "00000",
                         GetRandom(100000000, 900000000).ToString(),
                         prenoms[p] + "." + noms[n] + i + "@gmail.com");
-                   // player.lastLogin = DateTime.Now;
+                    // player.lastLogin = DateTime.Now;
                     player.BallLevel = ballLevels[GetRandom(0, 9)];
                     player.Status = statuses[GetRandom(0, 2)];
                     player.Category.Add(categories[GetRandom(0, 3)]);
@@ -281,7 +281,7 @@ namespace DatabaseFiller
             }
         }
 
-        static string GenerateSaltedHash(string text,string saltStr)
+        static string GenerateSaltedHash(string text, string saltStr)
         {
             byte[] plainText = Encoding.UTF8.GetBytes(text);
             byte[] salt = Encoding.UTF8.GetBytes(saltStr);
@@ -298,7 +298,7 @@ namespace DatabaseFiller
                 plainTextWithSaltBytes[plainText.Length + i] = salt[i];
             }
 
-            return Encoding.UTF8.GetString(algo.ComputeHash(plainTextWithSaltBytes)); 
+            return Encoding.UTF8.GetString(algo.ComputeHash(plainTextWithSaltBytes));
         }
 
         public static bool CompareByteArrays(byte[] array1, byte[] array2)
@@ -498,9 +498,9 @@ namespace DatabaseFiller
                     var pl = players[GetRandom(0, players.Count)];
                     badge.Player = pl;
                     pl.Badge.Add(badge);
-                    
+
                     i++;
-                   
+
                 }
 
 
@@ -541,7 +541,7 @@ namespace DatabaseFiller
                                                      });
                     container.SaveChanges();
                 }
-                
+
             }
 
 
@@ -650,10 +650,10 @@ namespace DatabaseFiller
         {
             using (entityContainer container = new entityContainer())
             {
-                List<Player> players =  new List<Player>(container.PlayerJeu);
+                List<Player> players = new List<Player>(container.PlayerJeu);
                 Player p = (from a in container.PlayerJeu where a.ID == 1 select a).First();
 
-                if(CompareStrings(GenerateSaltedHash("password0",p.salt), p.passwordHash))
+                if (CompareStrings(GenerateSaltedHash("password0", p.salt), p.passwordHash))
                 {
                     Console.Out.WriteLine("Yes");
                 }

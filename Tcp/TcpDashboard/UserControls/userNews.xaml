@@ -28,6 +28,6 @@
                 </StackPanel>
             </StackPanel>
         </GroupBox>
-      
+
     </Grid>
 </UserControl>

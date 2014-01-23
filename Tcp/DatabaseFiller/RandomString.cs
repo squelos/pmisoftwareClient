@@ -9,7 +9,7 @@ namespace DatabaseFiller
     public class RandomString
     {
 
-        private static Random random = new Random((int) DateTime.Now.Ticks);
+        private static Random random = new Random((int)DateTime.Now.Ticks);
 
         public string GetRandomString(int size)
         {

@@ -20,7 +20,7 @@ namespace TcpDashboard
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow 
+    public partial class MainWindow
     {
         private MainViewModel _mainViewModel;
         public MainWindow()
@@ -39,7 +39,7 @@ namespace TcpDashboard
             var mainViewModel = dataContext as MainViewModel;
             if (mainViewModel != null)
             {
-               
+
                 _mainViewModel = mainViewModel;
             }
         }
