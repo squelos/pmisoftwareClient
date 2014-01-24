@@ -18,6 +18,7 @@ namespace TcpDashboard.Business
         private DateTime _firstDayOfWeek;
         private DateTime _lastDayOfWeek;
         private bool _weekMode = true;
+
         #endregion
 
         #region ctor
@@ -29,6 +30,22 @@ namespace TcpDashboard.Business
         #endregion
 
         #region getters/setters
+         
+
+        public Court Court
+        {
+            get { return _court; }
+        }
+
+        public DateTime SelectedDay
+        {
+            get { return _selectedDay; }
+            set
+            {
+                _selectedDay = value;
+                RaisePropertyChanged("SelectedDate");
+            }
+        }
 
         #endregion
 

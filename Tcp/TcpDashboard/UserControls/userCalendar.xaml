@@ -33,7 +33,17 @@
                 </TabItem>
                 <TabItem Header="Vue individuelle">
                     <!--vue hebdo par terrain-->
-                    <controls:MetroAnimatedTabControl>
+                    <controls:MetroAnimatedTabControl ItemsSource="{Binding CalendarViewModel.CourtBookings}">
+                        <controls:MetroAnimatedTabControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label />
+                            </DataTemplate>
+                        </controls:MetroAnimatedTabControl.ItemTemplate>
+                        <controls:MetroAnimatedTabControl.ContentTemplate>
+                            <DataTemplate>
+                                
+                            </DataTemplate>
+                        </controls:MetroAnimatedTabControl.ContentTemplate>
                         
                     </controls:MetroAnimatedTabControl>
                 </TabItem>
