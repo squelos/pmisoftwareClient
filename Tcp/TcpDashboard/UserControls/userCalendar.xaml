@@ -12,35 +12,33 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Viewbox MaxHeight="350" Grid.Row="0">
-                <StackPanel Orientation="Vertical">
-                    <ComboBox />
-                    <StackPanel>
-                        <WrapPanel>
-                            <controls:ToggleSwitch OffLabel="Semaine" OnLabel="Jour"
-                                                   IsChecked="{Binding CalendarViewModel.WeekMode}" Margin="10,10,10,10"
-                                                   MinWidth="150" />
-                        </WrapPanel>
-                        <Calendar FontStretch="UltraExpanded" FontSize="21.333" FontWeight="Bold"
-                                  SelectionMode="SingleDate" SelectedDate="{Binding CalendarViewModel.SelectedDay}" />
+            <controls:MetroAnimatedTabControl>
+                <TabItem Header="Vue combinée">
+                    <!--vue journaliere par terrain-->
+                    <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="0">
+                        <ItemsControl ItemsSource="{Binding CalendarViewModel.CourtBookings}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel></WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate >
+                                <DataTemplate>
+                                    <!--must feed in the mode and the court bookings-->
+                                    <UserControls:UserCourt />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
-                    <DockPanel />
-                </StackPanel>
-            </Viewbox>
-            <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="0">
-                <ItemsControl ItemsSource="{Binding CalendarViewModel.CourtBookings}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel></WrapPanel>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate >
-                        <DataTemplate>
-                            <UserControls:UserCourt />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+                </TabItem>
+                <TabItem Header="Vue individuelle">
+                    <!--vue hebdo par terrain-->
+                    <controls:MetroAnimatedTabControl>
+                        
+                    </controls:MetroAnimatedTabControl>
+                </TabItem>
+            </controls:MetroAnimatedTabControl>
+            
 
         </Grid>
     </GroupBox>

@@ -11,14 +11,14 @@
                 <Label Content="{Binding NewsViewModel.CurrentNews.Title}" FontWeight="Bold" FontSize="20" />
                 <WebBrowser x:Name="web" />
                 <StackPanel Orientation="Horizontal">
-                    <Button Command="{Binding NewsViewModel.DecrementCommand}" ToolTip="Lecteur RFID connecté" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40">
+                    <Button Command="{Binding NewsViewModel.DecrementCommand}" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40">
                         <Rectangle Width="18" Height="18">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_arrow_left}" />
                             </Rectangle.Fill>
                         </Rectangle>
                     </Button>
-                    <Button Command="{Binding NewsViewModel.IncrementCommand}"  ToolTip="Lecteur RFID connecté" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40">
+                    <Button Command="{Binding NewsViewModel.IncrementCommand}"  Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40">
                         <Rectangle Width="18" Height="18">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_arrow_right}" />

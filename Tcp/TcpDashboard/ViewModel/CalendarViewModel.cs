@@ -5,7 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using TcpDashboard.Business;
 using TcpDataModel;
 
@@ -24,6 +26,8 @@ namespace TcpDashboard.ViewModel
         private DateTime _lastDayOfWeek;
         private ObservableCollection<CourtBookings> _courtBookings = new ObservableCollection<CourtBookings>();
         private BookingManager _bookingManager;
+        private RelayCommand _incrementDateCommand;
+        private RelayCommand _decrementDateCommand;
 
         #endregion
        
@@ -33,6 +37,10 @@ namespace TcpDashboard.ViewModel
         public CalendarViewModel(MainViewModel mvm)
         {
             _mvm = mvm;
+
+            _incrementDateCommand = new RelayCommand(IncrementDate);
+            _decrementDateCommand = new RelayCommand(DecrementDate);
+
             _bookingManager = new BookingManager();
             using (entityContainer container = new entityContainer())
             {
@@ -94,6 +102,16 @@ namespace TcpDashboard.ViewModel
                 RaisePropertyChanged("courtBookings");
             }
         }
+
+        public ICommand DecrementCommand
+        {
+            get { return _decrementDateCommand; }
+        }
+
+        public ICommand IncrementCommand
+        {
+            get { return _incrementDateCommand; }
+        }
         #endregion
 
         #region commands
@@ -101,6 +119,18 @@ namespace TcpDashboard.ViewModel
         #endregion
 
         #region privates
+
+        private void IncrementDate()
+        {
+            SelectedDay = SelectedDay.AddDays(1);
+        }
+
+
+        private void DecrementDate()
+        {
+            SelectedDay = SelectedDay.AddDays(-1);
+        }
+
 
         #endregion
 
