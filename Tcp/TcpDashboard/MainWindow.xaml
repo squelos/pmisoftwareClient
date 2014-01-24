@@ -36,7 +36,7 @@
                 <UserControls:userNews />
             </StackPanel>
             <StackPanel DockPanel.Dock="Left">
-                <UserControls:userCalendar />
+                <UserControls:userCalendar HorizontalAlignment="Stretch" />
             </StackPanel>
         </DockPanel>
     </Grid>

@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
-             d:DesignHeight="1000" d:DesignWidth="480">
+             d:DesignHeight="1000" d:DesignWidth="800">
     <GroupBox Header="Calendrier">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Viewbox MaxHeight="350">
+            <Viewbox MaxHeight="350" Grid.Row="0">
                 <StackPanel Orientation="Vertical">
                     <ComboBox />
                     <StackPanel>
@@ -27,15 +27,20 @@
                     <DockPanel />
                 </StackPanel>
             </Viewbox>
-            <WrapPanel Grid.Row="1">
-                <ItemsControl  ItemsSource="{Binding CalendarViewModel.CourtBookings}">
-                    <ItemsControl.ItemTemplate>
+            <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="0">
+                <ItemsControl ItemsSource="{Binding CalendarViewModel.CourtBookings}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate >
                         <DataTemplate>
                             <UserControls:UserCourt />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </WrapPanel>
+            </StackPanel>
 
         </Grid>
     </GroupBox>

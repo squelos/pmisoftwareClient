@@ -28,8 +28,7 @@ namespace TcpDashboard
         public MainWindow()
         {
             InitializeComponent();
-
-            InkInputHelper.DisableWPFTabletSupport();
+            //InkInputHelper.DisableWPFTabletSupport();
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -43,16 +42,15 @@ namespace TcpDashboard
             var mainViewModel = dataContext as MainViewModel;
             if (mainViewModel != null)
             {
-
                 _mainViewModel = mainViewModel;
             }
 
-            System.Windows.Automation.AutomationElement asForm =
-               System.Windows.Automation.AutomationElement.FromHandle(new WindowInteropHelper(this).Handle);
+            //System.Windows.Automation.AutomationElement asForm =
+            //   System.Windows.Automation.AutomationElement.FromHandle(new WindowInteropHelper(this).Handle);
 
-            // Windows 8 API to enable touch keyboard to monitor for focus tracking in this WPF application
-            InputPanelConfigurationLib.InputPanelConfiguration inputPanelConfig = new InputPanelConfigurationLib.InputPanelConfiguration();
-            inputPanelConfig.EnableFocusTracking();
+            //// Windows 8 API to enable touch keyboard to monitor for focus tracking in this WPF application
+            //InputPanelConfigurationLib.InputPanelConfiguration inputPanelConfig = new InputPanelConfigurationLib.InputPanelConfiguration();
+            //inputPanelConfig.EnableFocusTracking();
         }
     }
 }
