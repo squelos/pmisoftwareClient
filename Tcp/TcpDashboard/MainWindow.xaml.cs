@@ -8,11 +8,13 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using TcpDashboard.Assets;
 using TcpDashboard.ViewModel;
 
 namespace TcpDashboard
@@ -26,6 +28,8 @@ namespace TcpDashboard
         public MainWindow()
         {
             InitializeComponent();
+
+            InkInputHelper.DisableWPFTabletSupport();
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -42,6 +46,13 @@ namespace TcpDashboard
 
                 _mainViewModel = mainViewModel;
             }
+
+            System.Windows.Automation.AutomationElement asForm =
+               System.Windows.Automation.AutomationElement.FromHandle(new WindowInteropHelper(this).Handle);
+
+            // Windows 8 API to enable touch keyboard to monitor for focus tracking in this WPF application
+            InputPanelConfigurationLib.InputPanelConfiguration inputPanelConfig = new InputPanelConfigurationLib.InputPanelConfiguration();
+            inputPanelConfig.EnableFocusTracking();
         }
     }
 }
