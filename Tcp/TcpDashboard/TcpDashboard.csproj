@@ -89,6 +89,9 @@
     <Compile Include="UserControls\UserCourt.xaml.cs">
       <DependentUpon>UserCourt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UserDateSelection.xaml.cs">
+      <DependentUpon>UserDateSelection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UserDayColumn.xaml.cs">
       <DependentUpon>UserDayColumn.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UserCourt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserDateSelection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
