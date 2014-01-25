@@ -87,6 +87,12 @@
     <Compile Include="UC\UserCourt.xaml.cs">
       <DependentUpon>UserCourt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UC\UserDateSelection.xaml.cs">
+      <DependentUpon>UserDateSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UserNews.xaml.cs">
+      <DependentUpon>UserNews.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UC\UserTimeHeader.xaml.cs">
       <DependentUpon>UserTimeHeader.xaml</DependentUpon>
     </Compile>
@@ -107,11 +113,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UC\UserCalendar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UC\UserCourt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC\UserDateSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC\UserNews.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,13 +162,13 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TcpDataModel\TcpDataModel.csproj">
@@ -161,6 +179,9 @@
       <Project>{4d880852-5481-4202-b9f1-38dd440eeb0c}</Project>
       <Name>VcpDriver</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
