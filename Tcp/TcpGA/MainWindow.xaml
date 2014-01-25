@@ -4,7 +4,6 @@
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:ViewModel="clr-namespace:TcpGA.ViewModel"
-                      
                       x:Class="TcpGA.MainWindow"
                       Title="Tennis Club Portois" MinWidth="650" MinHeight="650" ShowTitleBar="True"
                       ShowIconOnTitleBar="True"
@@ -22,7 +21,7 @@
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_connect}" />
                     </Rectangle.Fill>
                 </Rectangle>
-            </Button>
+            </Button> 
             <Button Visibility="{Binding Connected}"  IsEnabled="False" Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35">
                 <Rectangle Width="13" Height="13">
                     <Rectangle.Fill>
