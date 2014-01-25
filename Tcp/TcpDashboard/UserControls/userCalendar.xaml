@@ -25,7 +25,7 @@
                             <ItemsControl.ItemTemplate >
                                 <DataTemplate>
                                     <!--must feed in the mode and the court bookings-->
-                                    <UserControls:UserCourt />
+                                    <UserControls:UserCourt WMode="True" CourtB="{Binding}"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -33,15 +33,16 @@
                 </TabItem>
                 <TabItem Header="Vue individuelle">
                     <!--vue hebdo par terrain-->
-                    <controls:MetroAnimatedTabControl ItemsSource="{Binding CalendarViewModel.CourtBookings}">
+                    
+                    <controls:MetroAnimatedTabControl x:Name="tab" ItemsSource="{Binding CalendarViewModel.CourtBookings}">
                         <controls:MetroAnimatedTabControl.ItemTemplate>
                             <DataTemplate>
-                                <Label />
+                                <TextBlock Text="{Binding Court.number}"/>
                             </DataTemplate>
                         </controls:MetroAnimatedTabControl.ItemTemplate>
                         <controls:MetroAnimatedTabControl.ContentTemplate>
                             <DataTemplate>
-                                
+                                <UserControls:UserCourt WMode="True" CourtB="{Binding}" DataContext="{Binding Mode=OneWay}"/>
                             </DataTemplate>
                         </controls:MetroAnimatedTabControl.ContentTemplate>
                         

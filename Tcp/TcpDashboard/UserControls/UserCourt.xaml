@@ -1,4 +1,4 @@
-﻿<UserControl xmlns:UserControls="clr-namespace:TcpDashboard.UserControls"  x:Class="TcpDashboard.UserControls.UserCourt"
+<UserControl xmlns:UserControls="clr-namespace:TcpDashboard.UserControls"  x:Class="TcpDashboard.UserControls.UserCourt"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,12 +9,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+    		<RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Heure" Grid.Column="0" Grid.Row="0"/>
-        <UserControls:UserTimeHeader  Grid.Column="0" Grid.Row="1"/>
+    	
+        <Label Content="Heure" Grid.Column="0" Grid.Row="1"/>
+        <UserControls:UserTimeHeader  Grid.Column="0" Grid.Row="2"/>
     </Grid>
 </UserControl>

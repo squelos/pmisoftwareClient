@@ -1,7 +1,6 @@
 using System;
 using System.Windows;
 using GalaSoft.MvvmLight;
-using VcpDriver;
 
 namespace TcpDashboard.ViewModel
 {
@@ -21,7 +20,7 @@ namespace TcpDashboard.ViewModel
     {
 
         #region privates
-        private Driver _driver = new Driver();
+        //private Driver _driver = new Driver();
         private Jobs _jobs;
         private NewsViewModel _newsViewModel;
         private CalendarViewModel _calendarViewModel;
@@ -37,8 +36,8 @@ namespace TcpDashboard.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            _driver.ConnectedStatusChanged += stat => ReaderStatus = stat;
-            _readerStatus = _driver.Connected;
+          //  _driver.ConnectedStatusChanged += stat => ReaderStatus = stat;
+            //_readerStatus = _driver.Connected;
             _newsViewModel = new NewsViewModel(this);
             _calendarViewModel = new CalendarViewModel(this);
             _jobs = new Jobs(_calendarViewModel, _newsViewModel, this);
@@ -70,15 +69,15 @@ namespace TcpDashboard.ViewModel
             }
         }
 
-        public Driver BadgeScanner
-        {
-            get { return _driver; }
-            set
-            {
-                _driver = value;
-                RaisePropertyChanged("driver");
-            }
-        }
+        //public Driver BadgeScanner
+        //{
+        //    get { return _driver; }
+        //    set
+        //    {
+        //        _driver = value;
+        //        RaisePropertyChanged("driver");
+        //    }
+        //}
 
         public NewsViewModel NewsViewModel
         {
@@ -130,7 +129,7 @@ namespace TcpDashboard.ViewModel
         void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             //clean up  and maybe log or show the error in a window for the user
-            _driver.Dispose();
+            //_driver.Dispose();
             _jobs.DoJobs = false;
 
         }
