@@ -4,6 +4,7 @@
                       xmlns:UserControls="clr-namespace:TcpDash.UC"
                        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                        xmlns:behaviours="http://metro.mahapps.com/winfx/xaml/shared"
+                      Margin="10,10,10,10" WindowStartupLocation="CenterScreen" WindowState="Maximized" Closing="MetroWindow_Closing" Loaded="MetroWindow_Loaded"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
           DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
         Title="MainWindow" Height="350" Width="525">
