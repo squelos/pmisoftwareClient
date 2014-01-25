@@ -75,7 +75,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Business\BookingManager.cs" />
+    <Compile Include="Business\CourtBookings.cs" />
+    <Compile Include="Business\DailyBookings.cs" />
+    <Compile Include="Business\VisualBookings.cs" />
+    <Compile Include="Business\WeeklyBookings.cs" />
+    <Compile Include="Jobs.cs" />
+    <Compile Include="UC\UserCalendar.xaml.cs">
+      <DependentUpon>UserCalendar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UserDateSelection.xaml.cs">
+      <DependentUpon>UserDateSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UserNews.xaml.cs">
+      <DependentUpon>UserNews.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\CalendarViewModel.cs" />
+    <Compile Include="ViewModel\DateTimeExtensions.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -89,6 +107,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UC\UserCalendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC\UserDateSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC\UserNews.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -114,9 +148,26 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Entypo-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TcpDataModel\TcpDataModel.csproj">
+      <Project>{44434e2f-8746-4e8e-bb0c-18afbb314fbd}</Project>
+      <Name>TcpDataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VcpDriver\VcpDriver.csproj">
+      <Project>{4d880852-5481-4202-b9f1-38dd440eeb0c}</Project>
+      <Name>VcpDriver</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
