@@ -14,14 +14,15 @@ namespace TcpDash.Business
         #region privates
 
         private List<VisualBooking> _visualBookings = new List<VisualBooking>();
+        private DateTime _dayDateTime;
 
         #endregion
 
         #region ctor
 
-        public DailyBookings()
+        public DailyBookings(DateTime day)
         {
-
+            _dayDateTime = day;
         }
         #endregion
 
@@ -30,6 +31,12 @@ namespace TcpDash.Business
         public List<VisualBooking> VisualBookingList
         {
             get { return _visualBookings; }
+        }
+
+        public DateTime DayDateTime
+        {
+            get { return _dayDateTime; }
+            set { _dayDateTime = value; }
         }
 
         #endregion

@@ -101,7 +101,7 @@ namespace TcpDash.Business
             List<DailyBookings> dBookings = new List<DailyBookings>();
             foreach (var dateTime in days)
             {
-                DailyBookings tmp = new DailyBookings();
+                DailyBookings tmp = new DailyBookings(dateTime.Date);
                 var res = vbList.Where(booking => booking.Start.Date == dateTime).ToList();
                 if (res.Count != 0)
                 {
@@ -110,7 +110,7 @@ namespace TcpDash.Business
                 
                 dBookings.Add(tmp);
             }
-            WeeklyBookings wBookings = new WeeklyBookings(dBookings);
+            WeeklyBookings wBookings = new WeeklyBookings(dBookings, _firstDayOfWeek.Date,_lastDayOfWeek.Date);
             cb.WeeklyBookingses = wBookings;
 
             //feed the dailyBookings into a weekly Booking

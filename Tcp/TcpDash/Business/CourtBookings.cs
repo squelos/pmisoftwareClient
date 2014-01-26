@@ -27,7 +27,6 @@ namespace TcpDash.Business
 
         #region getters/setters
 
-
         public Court Court
         {
             get { return _court; }

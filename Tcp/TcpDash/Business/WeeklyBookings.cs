@@ -15,12 +15,14 @@ namespace TcpDash.Business
         #region privates
 
         private List<DailyBookings> _dailyBookingses;
+        private DateTime _weekStart;
+        private DateTime _weekEnd;
         
         #endregion
  
         #region ctor
 
-        public WeeklyBookings(List<DailyBookings>  bList)
+        public WeeklyBookings(List<DailyBookings>  bList, DateTime start, DateTime end)
         {
             _dailyBookingses = bList;
         }
@@ -31,6 +33,18 @@ namespace TcpDash.Business
         public List<DailyBookings> DailyBookingses
         {
             get { return _dailyBookingses; }
+        }
+
+        public DateTime WeekStart
+        {
+            get { return _weekStart; }
+            set { _weekStart = value; }
+        }
+
+        public DateTime WeekEnd
+        {
+            get { return _weekEnd; }
+            set { _weekEnd = value; }
         }
         #endregion
 

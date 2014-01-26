@@ -47,13 +47,15 @@ namespace TcpDash.UC
             {
                 GroupBox gb = new GroupBox();
                 gb.Header = courtBookingse.Court.number;
-                UserDay uDay = new UserDay();
-                uDay.WeekMode = false;
+                UserDay uDay = new UserDay(_mvm);
+                
                 //feed a CourtBooking
                 //the courtBooking must contain the bookings of the day
-                uDay.CourtB = courtBookingse;
+                
                 gb.Content = uDay;
                 wrap.Children.Add(gb);
+                uDay.WeekMode = false;
+                uDay.CourtB = courtBookingse;
             }
         }
     }

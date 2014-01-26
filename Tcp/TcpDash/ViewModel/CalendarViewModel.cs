@@ -33,6 +33,7 @@ namespace TcpDash.ViewModel
 
         public CalendarViewModel(MainViewModel mvm)
         {
+            SelectedDay = DateTime.Now;
             _mvm = mvm;
 
             _incrementDateCommand = new RelayCommand(IncrementDate);
