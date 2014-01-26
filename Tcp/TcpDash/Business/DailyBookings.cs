@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TcpDash.Business
 {
+    /// <summary>
+    /// Class that contains the bookings of a specific day
+    /// </summary>
     public class DailyBookings
     {
         #region privates
@@ -23,6 +26,12 @@ namespace TcpDash.Business
         #endregion
 
         #region getters/setters
+
+        public List<VisualBooking> VisualBookingList
+        {
+            get { return _visualBookings; }
+        }
+
         #endregion
 
         #region private Methods

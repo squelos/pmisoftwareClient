@@ -14,10 +14,6 @@ namespace TcpDash.Business
 
         private WeeklyBookings _selectedWeeklyBookings;
         private Court _court;
-        private DateTime _selectedDay;
-        private DateTime _firstDayOfWeek;
-        private DateTime _lastDayOfWeek;
-        private bool _weekMode = true;
 
         #endregion
 
@@ -37,16 +33,24 @@ namespace TcpDash.Business
             get { return _court; }
         }
 
-        public DateTime SelectedDay
+        public WeeklyBookings WeeklyBookingses
         {
-            get { return _selectedDay; }
+            get
+            {
+                return _selectedWeeklyBookings;
+            }
             set
             {
-                _selectedDay = value;
-                RaisePropertyChanged("SelectedDate");
+                _selectedWeeklyBookings = value;
+                RaisePropertyChanged("weeklyBookings");
             }
         }
 
+
+
+        #endregion
+
+        #region events
         #endregion
 
         #region private Methods

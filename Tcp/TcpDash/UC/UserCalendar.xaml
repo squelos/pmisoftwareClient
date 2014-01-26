@@ -16,41 +16,11 @@
             <controls:MetroAnimatedTabControl>
                 <TabItem Header="Vue combinée">
                     <!--vue journaliere par terrain-->
-                    <UserControls:UserCombined />
-                    
-                        <!--<ItemsControl ItemsSource="{Binding CalendarViewModel.CourtBookings}">-->
-                            
-                            <!--<ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel></WrapPanel>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate >
-                                <DataTemplate>
-                                    --><!--must feed in the mode and the court bookings-->
-                                    <!--<UserControls:UserCourt />--><!--
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>-->
-                    
+                            <UserControls:UserCombined />
                 </TabItem>
                 <TabItem Header="Vue individuelle">
-                    <!--vue hebdo par terrain-->
-                    <UserControls:UserIndiv />
-                    <!--<controls:MetroAnimatedTabControl x:Name="tab" ItemsSource="{Binding CalendarViewModel.CourtBookings}">
-                        
-                        --><!--<controls:MetroAnimatedTabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Court.number}"/>
-                            </DataTemplate>
-                        </controls:MetroAnimatedTabControl.ItemTemplate>
-                        <controls:MetroAnimatedTabControl.ContentTemplate>
-                            <DataTemplate>
-                                --><!--<UserControls:UserCourt WMode="True" CourtB="{Binding}" DataContext="{Binding Mode=OneWay}"/>--><!--
-                            </DataTemplate>
-                        </controls:MetroAnimatedTabControl.ContentTemplate>--><!--
-
-                    </controls:MetroAnimatedTabControl>-->
+                            <!--vue hebdo par terrain-->
+                            <UserControls:UserIndiv />
                 </TabItem>
             </controls:MetroAnimatedTabControl>
 

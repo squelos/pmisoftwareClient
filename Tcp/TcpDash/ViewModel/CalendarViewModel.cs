@@ -22,13 +22,11 @@ namespace TcpDash.ViewModel
         private DateTime _selectedDay;
         private DateTime _firstDayOfWeek;
         private DateTime _lastDayOfWeek;
-        private ObservableCollection<CourtBookings> _courtBookings = new ObservableCollection<CourtBookings>();
-        private BookingManager _bookingManager;
-        private RelayCommand _incrementDateCommand;
-        private RelayCommand _decrementDateCommand;
+        private BookingManager _bookingManager = BookingManager.Instance;
+        private readonly RelayCommand _incrementDateCommand;
+        private readonly RelayCommand _decrementDateCommand;
 
         #endregion
-
 
         #region ctor
 
@@ -39,17 +37,10 @@ namespace TcpDash.ViewModel
             _incrementDateCommand = new RelayCommand(IncrementDate);
             _decrementDateCommand = new RelayCommand(DecrementDate);
 
-            _bookingManager = new BookingManager();
-            using (entityContainer container = new entityContainer())
-            {
-                List<Court> tmpList = (from b in container.CourtJeu select b).ToList();
-                List<CourtBookings> tmpBookings = new List<CourtBookings>();
-                foreach (var court in tmpList)
-                {
-                    tmpBookings.Add(new CourtBookings(court));
-                }
-                CourtBookings = new ObservableCollection<CourtBookings>(tmpBookings);
-            }
+            //get the court bookings from the BM 
+
+            // subscribe to Court Bookings changes from the manager
+            //if the court bookings change, refresh
 
         }
 
@@ -67,8 +58,6 @@ namespace TcpDash.ViewModel
             }
         }
 
-
-
         public DateTime SelectedDay
         {
             get { return _selectedDay; }
@@ -77,6 +66,7 @@ namespace TcpDash.ViewModel
                 _selectedDay = value;
                 _firstDayOfWeek = DateTime.Now.StartOfWeek();
                 _lastDayOfWeek = DateTime.Now.StartOfWeek().AddDays(6);
+                BookingManager.SelectedDateChanged(_selectedDay,_firstDayOfWeek,_lastDayOfWeek);
                 RaisePropertyChanged("selectedDay");
             }
         }
@@ -91,14 +81,9 @@ namespace TcpDash.ViewModel
             get { return _lastDayOfWeek; }
         }
 
-        public ObservableCollection<CourtBookings> CourtBookings
+        public BookingManager BookingManager
         {
-            get { return _courtBookings; }
-            set
-            {
-                _courtBookings = value;
-                RaisePropertyChanged("courtBookings");
-            }
+            get { return _bookingManager; }
         }
 
         public ICommand DecrementCommand
@@ -116,6 +101,23 @@ namespace TcpDash.ViewModel
 
         #endregion
 
+
+        #region events
+
+        public delegate void CourtNumberEventHandler(object sender, EventArgs e);
+        public event CourtNumberEventHandler CourtNumberChanged;
+        private void RaiseCourtNumberChanged()
+        {
+            if (CourtNumberChanged != null)
+            {
+                CourtNumberChanged(this, new EventArgs());
+            }
+        }
+
+        
+
+        #endregion
+
         #region privates
 
         private void IncrementDate()
@@ -123,17 +125,14 @@ namespace TcpDash.ViewModel
             SelectedDay = SelectedDay.AddDays(1);
         }
 
-
         private void DecrementDate()
         {
             SelectedDay = SelectedDay.AddDays(-1);
         }
 
-
         #endregion
 
         #region publics
-
         public void Refresh()
         {
             //throw new NotImplementedException();

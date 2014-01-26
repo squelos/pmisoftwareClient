@@ -7,8 +7,8 @@
              d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
     <Grid>
             <!--This view shows 1 day per court-->
-        <WrapPanel>
-            
+        <WrapPanel x:Name="wrap">
+            <!--We create one UC in day mode per court-->
         </WrapPanel>
     </Grid>
 </UserControl>

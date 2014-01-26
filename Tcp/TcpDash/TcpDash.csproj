@@ -93,6 +93,9 @@
     <Compile Include="UC\UserDateSelection.xaml.cs">
       <DependentUpon>UserDateSelection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UC\UserDay.xaml.cs">
+      <DependentUpon>UserDay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UC\UserIndiv.xaml.cs">
       <DependentUpon>UserIndiv.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UC\UserDateSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC\UserDay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

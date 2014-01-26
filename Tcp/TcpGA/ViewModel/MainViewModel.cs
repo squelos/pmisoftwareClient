@@ -28,7 +28,7 @@ namespace TcpGA.ViewModel
         private UnpaidViewModel _unpaid;
         private MailViewModel _mailvm;
         private NonRenewViewModel _nonRenewvm;
-        private VcpDriver.Driver _driver = new Driver();
+        private Driver _driver = new Driver();
         private bool _readerStatus;
         private Visibility _connected = Visibility.Collapsed;
         private Visibility _disconnected = Visibility.Collapsed;

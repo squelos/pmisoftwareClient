@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TcpDash.Business;
 using TcpDash.ViewModel;
 
 namespace TcpDash
@@ -15,6 +16,7 @@ namespace TcpDash
         private MainViewModel _mvm;
         private CalendarViewModel _calendarViewModel;
         private NewsViewModel _newsViewModel;
+        private BookingManager _bookingManager = BookingManager.Instance;
         private volatile bool _doJobs = false;
         private Task _refreshCalendarInfo;
         private Task _refreshNewsInfo;
@@ -31,6 +33,7 @@ namespace TcpDash
             _refreshCalendarInfo = new Task(RefreshCalendar);
             _refreshNewsInfo = new Task(RefreshNews);
             _incrementNews = new Task(IncrementNews);
+            //we also have to start refreshing the booking manager
 
         }
 

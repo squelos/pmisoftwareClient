@@ -30,7 +30,7 @@ namespace TcpDash
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //_mainViewModel.BadgeScanner.Dispose();
+            _mainViewModel.BadgeScanner.Dispose();
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
