@@ -16,38 +16,41 @@
             <controls:MetroAnimatedTabControl>
                 <TabItem Header="Vue combinée">
                     <!--vue journaliere par terrain-->
-                    <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="0">
-                        <ItemsControl ItemsSource="{Binding CalendarViewModel.CourtBookings}">
-                            <ItemsControl.ItemsPanel>
+                    <UserControls:UserCombined />
+                    
+                        <!--<ItemsControl ItemsSource="{Binding CalendarViewModel.CourtBookings}">-->
+                            
+                            <!--<ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel></WrapPanel>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate >
                                 <DataTemplate>
-                                    <!--must feed in the mode and the court bookings-->
-                                    <!--<UserControls:UserCourt WMode="True" CourtB="{Binding}"/>-->
+                                    --><!--must feed in the mode and the court bookings-->
+                                    <!--<UserControls:UserCourt />--><!--
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
+                        </ItemsControl>-->
+                    
                 </TabItem>
                 <TabItem Header="Vue individuelle">
                     <!--vue hebdo par terrain-->
-
-                    <controls:MetroAnimatedTabControl x:Name="tab" ItemsSource="{Binding CalendarViewModel.CourtBookings}">
-                        <controls:MetroAnimatedTabControl.ItemTemplate>
+                    <UserControls:UserIndiv />
+                    <!--<controls:MetroAnimatedTabControl x:Name="tab" ItemsSource="{Binding CalendarViewModel.CourtBookings}">
+                        
+                        --><!--<controls:MetroAnimatedTabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Court.number}"/>
                             </DataTemplate>
                         </controls:MetroAnimatedTabControl.ItemTemplate>
                         <controls:MetroAnimatedTabControl.ContentTemplate>
                             <DataTemplate>
-                                <!--<UserControls:UserCourt WMode="True" CourtB="{Binding}" DataContext="{Binding Mode=OneWay}"/>-->
+                                --><!--<UserControls:UserCourt WMode="True" CourtB="{Binding}" DataContext="{Binding Mode=OneWay}"/>--><!--
                             </DataTemplate>
-                        </controls:MetroAnimatedTabControl.ContentTemplate>
+                        </controls:MetroAnimatedTabControl.ContentTemplate>--><!--
 
-                    </controls:MetroAnimatedTabControl>
+                    </controls:MetroAnimatedTabControl>-->
                 </TabItem>
             </controls:MetroAnimatedTabControl>
 

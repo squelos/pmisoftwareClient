@@ -7,7 +7,7 @@
                       Margin="10,10,10,10" WindowStartupLocation="CenterScreen" WindowState="Maximized" Closing="MetroWindow_Closing" Loaded="MetroWindow_Loaded"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
           DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="700" Width="1800">
     <i:Interaction.Behaviors>
         <behaviours:BorderlessWindowBehavior ResizeWithGrip="True" AllowsTransparency="False" />
     </i:Interaction.Behaviors>
@@ -32,7 +32,7 @@
     <Grid>
         <DockPanel>
             <StackPanel DockPanel.Dock="Left">
-                <UserControls:UserNews />
+                <UserControls:UserNews  MaxWidth="450"/>
                 <UserControls:UserDateSelection/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Left">

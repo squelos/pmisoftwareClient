@@ -6,7 +6,7 @@
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
              d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
     <Grid>
-        <GroupBox Header="Actualités" MaxWidth="300">
+        <GroupBox Header="Actualités" >
             <StackPanel Orientation="Vertical">
                 <Label Content="{Binding NewsViewModel.CurrentNews.Title}" FontWeight="Bold" FontSize="20" />
                 <WebBrowser x:Name="web" />
