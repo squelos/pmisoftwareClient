@@ -23,6 +23,7 @@ namespace TcpDash.ViewModel
         private DateTime _firstDayOfWeek;
         private DateTime _lastDayOfWeek;
         private BookingManager _bookingManager = BookingManager.Instance;
+        private int _working = 0;
         private readonly RelayCommand _incrementDateCommand;
         private readonly RelayCommand _decrementDateCommand;
 
@@ -41,6 +42,7 @@ namespace TcpDash.ViewModel
 
             // subscribe to Court Bookings changes from the manager
             //if the court bookings change, refresh
+            _bookingManager.Changed += (sender, args) => RaisePropertyChanged("bookingManager");
 
         }
 

@@ -13,7 +13,7 @@ namespace TcpDash.Business
     {
         #region privates
 
-        private List<VisualBooking> _visualBookings;
+        private List<VisualBooking> _visualBookings = new List<VisualBooking>();
 
         #endregion
 

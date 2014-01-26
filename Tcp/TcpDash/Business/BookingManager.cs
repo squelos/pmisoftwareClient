@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Infrastructure.DependencyResolution;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 using TcpDataModel;
 using TcpDash.ViewModel;
 
@@ -30,6 +32,7 @@ namespace TcpDash.Business
         #region privates
         private entityContainer _container = new entityContainer();
         private ObservableCollection<CourtBookings> _courtBookings;
+        private List<Booking> _bookingSnapshot; 
 
         private DateTime _selectedDay;
         private DateTime _firstDayOfWeek;
@@ -64,34 +67,70 @@ namespace TcpDash.Business
             _firstDayOfWeek = DateTime.Now.StartOfWeek();
             _lastDayOfWeek = DateTime.Now.StartOfWeek().AddDays(6);
 
-            using (entityContainer container = new entityContainer())
-            {
-                List<Court> tmpList = (from b in container.CourtJeu select b).ToList();
-                List<CourtBookings> tmpBookings = new List<CourtBookings>();
-                foreach (var court in tmpList)
-                {
-                    tmpBookings.Add(new CourtBookings(court));
-                }
-                // we must fill the tmpBookings with the real bookings
-
-                
-                CourtBookingses = new ObservableCollection<CourtBookings>(tmpBookings);
-            }
+            Refresh();
         }
 
-        private void Refresh()
-        {
-            
-        }
+        
 
         private void FillCourtBooking(CourtBookings cb)
         {
             //in here we fill the courtBooking with the appropriate data (from the selected Day and week)
+            //get  the relevant Bookings for each day of the week
+            //TODO cache in order to improve performance
+            List<Booking> nonRecurring =
+                (_container.BookingJeu.Where(
+                    booking =>
+                        booking.Court.ID == cb.Court.ID && booking.BookingAggregation == null &&
+                        booking.start > _firstDayOfWeek &&
+                        booking.end < _lastDayOfWeek)).Include(booking => booking.Player1).Include(booking => booking.Player2)
+                        .Include(booking => booking.BookingAggregation).ToList();
+
+            //transform them into Visual Bookings
+            List<VisualBooking> vbList = new List<VisualBooking>();
+            foreach (Booking booking in nonRecurring)
+            {
+                vbList.Add(new VisualBooking(booking));
+            }
+            //group them into Daily Bookings
+            //first we get all the days we need
+            List<DateTime> days = new List<DateTime>();
+            for (int i = 0; i < 7; i++)
+            {
+                days.Add(_firstDayOfWeek.AddDays(i).Date);
+            }
+            List<DailyBookings> dBookings = new List<DailyBookings>();
+            foreach (var dateTime in days)
+            {
+                DailyBookings tmp = new DailyBookings();
+                var res = vbList.Where(booking => booking.Start.Date == dateTime).ToList();
+                if (res.Count != 0)
+                {
+                    tmp.VisualBookingList.AddRange(res);    
+                }
+                
+                dBookings.Add(tmp);
+            }
+            WeeklyBookings wBookings = new WeeklyBookings(dBookings);
+            cb.WeeklyBookingses = wBookings;
+
+            //feed the dailyBookings into a weekly Booking
         }
 
         #endregion
 
         #region events
+
+        public delegate void ChangedEventHandler(object sender, EventArgs e);
+
+        public event ChangedEventHandler Changed;
+
+        private void RaiseChanged()
+        {
+            if (Changed != null)
+            {
+                Changed(this, new EventArgs());
+            }
+        }
 
         #endregion
 
@@ -107,6 +146,32 @@ namespace TcpDash.Business
             _lastDayOfWeek = last;
 
             //must refresh the Data
+            foreach (var bookingse in CourtBookingses)
+            {
+                FillCourtBooking(bookingse);
+            }
+            
+        }
+
+        public void Refresh()
+        {
+            using (entityContainer container = new entityContainer())
+            {
+                List<Court> tmpList = (from b in container.CourtJeu select b).ToList();
+                List<CourtBookings> tmpBookings = new List<CourtBookings>();
+                foreach (var court in tmpList)
+                {
+                    tmpBookings.Add(new CourtBookings(court));
+                }
+                // we must fill the tmpBookings with the real bookings
+                foreach (CourtBookings tmpBooking in tmpBookings)
+                {
+                    FillCourtBooking(tmpBooking);
+                }
+                //TODO grab a snapshot of the DB for the caching
+                CourtBookingses = new ObservableCollection<CourtBookings>(tmpBookings);
+            }
+            RaiseChanged();
         }
         #endregion
     }

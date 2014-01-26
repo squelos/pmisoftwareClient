@@ -194,6 +194,13 @@ warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a 
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="statusName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="isOutOfDate" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="TrainingPreferencesSet">
           <Key>
             <PropertyRef Name="Id" />
@@ -509,6 +516,7 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <EntitySet Name="SeasonJeu" EntityType="Self.SeasonJeu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SemesterJeu" EntityType="Self.SemesterJeu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatusSet" EntityType="Self.StatusSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrainingPreferencesSet" EntityType="Self.TrainingPreferencesSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuthorizedTagsVersion" EntityType="Self.AuthorizedTagsVersion" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -700,7 +708,7 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <EntitySet Name="authorizedUserTags" EntityType="entity.authorizedUserTags" />
           <FunctionImport Name="dummyQuery" ReturnType="Collection(Boolean)" />
           <FunctionImport Name="getAuthorizedUsersTagsNumbers" ReturnType="Collection(Int64)">
-            <Parameter Name="userStatus" Mode="In" Type="Int32" />
+          <Parameter Name="userStatus" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getFilmedHours" ReturnType="Collection(entity.getFilmedHours_Result)" />
           <FunctionImport Name="incrementAuthorizedTagsVersionNumber" />
@@ -735,6 +743,7 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Table" EntityType="entity.Table" />
         </EntityContainer>
         <EntityType Name="Season">
           <Key>
@@ -1040,6 +1049,13 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="isOutOfDate" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1431,6 +1447,14 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="entity.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="entity.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Table">
+            <EntityTypeMapping TypeName="entity.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="isOutOfDate" ColumnName="isOutOfDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

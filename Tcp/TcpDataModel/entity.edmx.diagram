@@ -42,6 +42,7 @@
         <EntityTypeShape EntityType="entity.News" Width="1.5" PointX="7.875" PointY="1.125" />
         <EntityTypeShape EntityType="entity.AuthorizedTagsVersion" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="entity.authorizedUserTags" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="entity.Table" Width="1.5" PointX="0.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

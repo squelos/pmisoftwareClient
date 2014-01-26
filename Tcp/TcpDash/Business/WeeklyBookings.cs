@@ -13,15 +13,16 @@ namespace TcpDash.Business
     public class WeeklyBookings
     {
         #region privates
-        private List<DailyBookings> _dailyBookingses = new List<DailyBookings>();
+
+        private List<DailyBookings> _dailyBookingses;
         
         #endregion
  
         #region ctor
 
-        public WeeklyBookings()
+        public WeeklyBookings(List<DailyBookings>  bList)
         {
-
+            _dailyBookingses = bList;
         }
         #endregion
 

@@ -34,6 +34,9 @@ namespace TcpDash
             _refreshNewsInfo = new Task(RefreshNews);
             _incrementNews = new Task(IncrementNews);
             //we also have to start refreshing the booking manager
+            //TODO refresh the booking Manager from time to time
+            //TODO force the booking manager to fetch for new courts
+
 
         }
 
@@ -64,6 +67,15 @@ namespace TcpDash
             {
                 Thread.Sleep(150000);
                 _calendarViewModel.Refresh();
+            }
+        }
+
+        private void RefreshBookingManager()
+        {
+            while (_doJobs)
+            {
+                Thread.Sleep(300000);
+                _bookingManager.Refresh();
             }
         }
 

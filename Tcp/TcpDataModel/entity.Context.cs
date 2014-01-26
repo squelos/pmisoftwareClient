@@ -46,6 +46,7 @@ namespace TcpDataModel
         public virtual DbSet<News> NewsSet { get; set; }
         public virtual DbSet<AuthorizedTagsVersion> AuthorizedTagsVersion { get; set; }
         public virtual DbSet<authorizedUserTags> authorizedUserTags { get; set; }
+        public virtual DbSet<Table> Table { get; set; }
     
         public virtual ObjectResult<Nullable<bool>> dummyQuery()
         {
