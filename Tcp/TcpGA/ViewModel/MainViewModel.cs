@@ -19,7 +19,6 @@ namespace TcpGA.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-
         #region members
         private BadgesViewModel _badgesvm;
         private CourtViewModel _courtvm;
@@ -36,7 +35,6 @@ namespace TcpGA.ViewModel
         private int _selectedGeneralIndex;
 
         #endregion
-
 
         #region ctor
         public MainViewModel()
