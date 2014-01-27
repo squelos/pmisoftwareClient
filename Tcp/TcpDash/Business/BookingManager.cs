@@ -64,8 +64,8 @@ namespace TcpDash.Business
         private void Init()
         {
             _selectedDay = DateTime.Now;
-            _firstDayOfWeek = DateTime.Now.StartOfWeek();
-            _lastDayOfWeek = DateTime.Now.StartOfWeek().AddDays(6);
+            _firstDayOfWeek = Utility.GetFirst(_selectedDay);
+            _lastDayOfWeek = _firstDayOfWeek.AddDays(6);
 
             Refresh();
         }
@@ -148,7 +148,15 @@ namespace TcpDash.Business
             //must refresh the Data
             foreach (var bookingse in CourtBookingses)
             {
+                int y = 0;
+                foreach (var daily in bookingse.WeeklyBookingses.DailyBookingses)
+                {
+                    daily.DayDateTime = _firstDayOfWeek.AddDays(y);
+                    y++;
+                }
                 FillCourtBooking(bookingse);
+            
+                //TODO bug here
             }
             
             

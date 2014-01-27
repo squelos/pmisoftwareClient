@@ -64,11 +64,9 @@ namespace TcpDash.UC
             }
             //get the visual bookings
             DateTime day = _mvm.CalendarViewModel.SelectedDay;
-
             //we must only show the current day
             DailyBookings dailyBookings =
                 _courtBookings.WeeklyBookingses.DailyBookingses.FirstOrDefault(bookings => bookings.DayDateTime == day);
-            //TODO maybe the date ?
             //we only add to the first column
             if (dailyBookings != null)
             {
@@ -78,9 +76,6 @@ namespace TcpDash.UC
                     ShowVisualBooking(visualBooking, 0);
                 }
             }
-            //TODO seems bugged
-            //TODO check if bookings contains info
-
         }
 
         private void ShowVisualBooking(VisualBooking vb, int col)
@@ -94,7 +89,12 @@ namespace TcpDash.UC
 
             b.HorizontalAlignment = HorizontalAlignment.Stretch;
             b.VerticalAlignment = VerticalAlignment.Stretch;
-            b.Content = vb.Name;
+            
+            TextBlock tb = new TextBlock();
+            tb.TextWrapping = TextWrapping.Wrap;
+            tb.Text = vb.Name;
+            b.Content = tb;
+            
             grid.Children.Add(b);
             Grid.SetColumn(b, col);
             Grid.SetRow(b, CalculateRowStart(vb));

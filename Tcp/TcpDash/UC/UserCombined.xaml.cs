@@ -24,6 +24,7 @@ namespace TcpDash.UC
     {
 
         private MainViewModel _mvm;
+        private bool _firstLoad = true;
 
         public UserCombined()
         {
@@ -34,8 +35,12 @@ namespace TcpDash.UC
         {
             var dataContext = DataContext;
             _mvm = dataContext as MainViewModel;
-            if (_mvm != null) _mvm.CalendarViewModel.PropertyChanged += CalendarViewModelOnPropertyChanged;
-            CalendarViewModelOnPropertyChanged(this, null);
+            if (_firstLoad)
+            {
+                if (_mvm != null) _mvm.CalendarViewModel.PropertyChanged += CalendarViewModelOnPropertyChanged;
+                CalendarViewModelOnPropertyChanged(this, null);
+                _firstLoad = false;
+            }
         }
 
         private void CalendarViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -51,10 +56,10 @@ namespace TcpDash.UC
                 
                 //feed a CourtBooking
                 //the courtBooking must contain the bookings of the day
-                
+                uDay.CourtB = courtBookingse;
                 gb.Content = uDay;
                 wrap.Children.Add(gb);
-                uDay.CourtB = courtBookingse;
+                
             }
         }
     }

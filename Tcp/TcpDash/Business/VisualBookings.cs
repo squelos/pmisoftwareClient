@@ -36,7 +36,7 @@ namespace TcpDash.Business
             if (b.BookingAggregation == null)
             {
                 // then its a regular booking
-                _name = b.Player1.firstName.First() + " " + b.Player1.lastName + " vs " + b.Player2.firstName.First() +
+                _name = b.Player1.firstName.First() + " " + b.Player1.lastName +  " vs " + b.Player2.firstName.First() +
                         " " + b.Player2.lastName;
                 _special = false;
                 _start = b.start;

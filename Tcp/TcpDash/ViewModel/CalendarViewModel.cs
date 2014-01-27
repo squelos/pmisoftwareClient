@@ -33,7 +33,7 @@ namespace TcpDash.ViewModel
 
         public CalendarViewModel(MainViewModel mvm)
         {
-            SelectedDay = DateTime.Now;
+            SelectedDay = DateTime.Now.Date;
             _mvm = mvm;
 
             _incrementDateCommand = new RelayCommand(IncrementDate);
@@ -67,8 +67,8 @@ namespace TcpDash.ViewModel
             set
             {
                 _selectedDay = value;
-                _firstDayOfWeek = DateTime.Now.StartOfWeek();
-                _lastDayOfWeek = DateTime.Now.StartOfWeek().AddDays(6);
+                _firstDayOfWeek = Utility.GetFirst(_selectedDay);
+                _lastDayOfWeek = _firstDayOfWeek.AddDays(6);
                 BookingManager.SelectedDateChanged(_selectedDay,_firstDayOfWeek,_lastDayOfWeek);
                 RaisePropertyChanged("selectedDay");
             }
