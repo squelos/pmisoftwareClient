@@ -96,6 +96,9 @@
     <Compile Include="UC\UserDay.xaml.cs">
       <DependentUpon>UserDay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UC\UserDayHeader.xaml.cs">
+      <DependentUpon>UserDayHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UC\UserIndiv.xaml.cs">
       <DependentUpon>UserIndiv.xaml</DependentUpon>
     </Compile>
@@ -104,6 +107,9 @@
     </Compile>
     <Compile Include="UC\UserTimeHeader.xaml.cs">
       <DependentUpon>UserTimeHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UserWeek.xaml.cs">
+      <DependentUpon>UserWeek.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CalendarViewModel.cs" />
     <Compile Include="ViewModel\DateTimeExtensions.cs" />
@@ -146,6 +152,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UC\UserDayHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UC\UserIndiv.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UC\UserTimeHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC\UserWeek.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

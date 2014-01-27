@@ -18,21 +18,20 @@ using TcpDash.ViewModel;
 namespace TcpDash.UC
 {
     /// <summary>
-    /// Interaction logic for UserDay.xaml
+    /// Interaction logic for UserWeek.xaml
     /// </summary>
-    public partial class UserDay : UserControl
+    public partial class UserWeek : UserControl
     {
 
         #region privates
 
         private MainViewModel _mvm;
-        private bool _weekMode = false;
         private CourtBookings _courtBookings;
+
         #endregion
 
-
         #region ctor
-        public UserDay(MainViewModel mvm)
+        public UserWeek(MainViewModel mvm)
         {
             InitializeComponent();
             _mvm = mvm;
@@ -41,26 +40,6 @@ namespace TcpDash.UC
         #endregion
 
         #region getters/setters
-
-        public bool WeekMode
-        {
-            get { return _weekMode; }
-            set
-            {
-                _weekMode = value;
-                //if (value)
-                //{
-                //    dHeader.Visibility = Visibility.Visible;
-                //}
-                //else
-                //{
-                //    dHeader.Visibility = Visibility.Collapsed;
-                //}
-                //refresh
-                Refresh();
-            }
-        }
-
         public CourtBookings CourtB
         {
             get { return _courtBookings; }
@@ -71,15 +50,14 @@ namespace TcpDash.UC
                 Refresh();
             }
         }
-       
         #endregion
 
         #region publics
 
         #endregion
 
-        #region privates
 
+        #region privates
         private void Refresh()
         {
             if (_courtBookings == null)
@@ -89,35 +67,18 @@ namespace TcpDash.UC
             //get the visual bookings
             DateTime day = _mvm.CalendarViewModel.SelectedDay;
 
-            if (_weekMode)
-            {
-                //we must show the whole week planning
-                List<DailyBookings> listBookings = _courtBookings.WeeklyBookingses.DailyBookingses;
 
-                //grid has 7 columnsn and 30 rows
-                for (int i = 0; i < 7; i++)
-                {
-                    if (listBookings[i].VisualBookingList.Count() != 0)
-                    {
-                        foreach (var dailyBookingse in listBookings[i].VisualBookingList)
-                        {
-                            ShowVisualBooking(dailyBookingse, i);
-                        }
-                    }
-                }
-            }
-            else
+            //we must show the whole week planning
+            List<DailyBookings> listBookings = _courtBookings.WeeklyBookingses.DailyBookingses;
+
+            //grid has 7 columnsn and 30 rows
+            for (int i = 0; i < 7; i++)
             {
-                //we must only show the current day
-                DailyBookings dailyBookings =
-                    _courtBookings.WeeklyBookingses.DailyBookingses.FirstOrDefault(bookings => bookings.DayDateTime == day);
-                //we only add to the first column
-                if (dailyBookings != null)
+                if (listBookings[i].VisualBookingList.Count() != 0)
                 {
-                    foreach (var visualBooking in dailyBookings.VisualBookingList)
+                    foreach (var dailyBookingse in listBookings[i].VisualBookingList)
                     {
-                        //we add it to the appropriate row
-                        ShowVisualBooking(visualBooking,0);
+                        ShowVisualBooking(dailyBookingse, i);
                     }
                 }
             }
@@ -131,23 +92,22 @@ namespace TcpDash.UC
                 return;
             }
             Button b = new Button();
-            
-            b.HorizontalAlignment=HorizontalAlignment.Stretch;
+
+            b.HorizontalAlignment = HorizontalAlignment.Stretch;
             b.VerticalAlignment = VerticalAlignment.Stretch;
             b.Content = vb.Name;
             grid.Children.Add(b);
-            Grid.SetColumn(b,col);
-            Grid.SetRow(b,CalculateRowStart(vb));
+            Grid.SetColumn(b, col);
+            Grid.SetRow(b, CalculateRowStart(vb));
             Grid.SetRowSpan(b, CalculateRowSpan(vb));
         }
 
         private int CalculateRowStart(VisualBooking vb)
         {
-            
             int ret = vb.StartHour - 8;
             if (ret != 0)
             {
-                ret = ret*2;
+                ret = ret * 2;
             }
             if (vb.StartMin >= 30)
             {
@@ -167,7 +127,7 @@ namespace TcpDash.UC
             int ret = vb.EndHour - 8;
             if (ret != 0)
             {
-                ret = ret*2;
+                ret = ret * 2;
             }
             if (vb.EndMin >= 30)
             {
@@ -177,11 +137,9 @@ namespace TcpDash.UC
         }
         #endregion
 
-        private void UserDay_OnLoaded(object sender, RoutedEventArgs e)
+        private void UserWeek_OnLoaded(object sender, RoutedEventArgs e)
         {
-            //var dataContext = DataContext;
-            //var mainViewModel = dataContext as MainViewModel;
-            //_mvm = mainViewModel;
+            //throw new NotImplementedException();
         }
     }
 }

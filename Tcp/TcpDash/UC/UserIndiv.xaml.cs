@@ -46,12 +46,12 @@ namespace TcpDash.UC
             foreach (var courtBookingse in _mvm.CalendarViewModel.BookingManager.CourtBookingses)
             {
                 TabItem ti = new MetroTabItem(animatedTab);
-                UserDay uDay = new UserDay(_mvm);
-                uDay.WeekMode = true;
+                UserWeek uWeek = new UserWeek(_mvm);
+                
                 //feed a CourtBooking
-                uDay.CourtB = courtBookingse;
+                uWeek.CourtB = courtBookingse;
                 ti.Header = courtBookingse.Court.number;
-                ti.Content = uDay;
+                ti.Content = uWeek;
                 animatedTab.Items.Add(ti);
             }
         }
