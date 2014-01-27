@@ -24,24 +24,19 @@ namespace TcpDash.UC
     {
 
         #region privates
-
         private MainViewModel _mvm;
         private CourtBookings _courtBookings;
         #endregion
-
-
+        
         #region ctor
         public UserDay(MainViewModel mvm)
         {
             InitializeComponent();
             _mvm = mvm;
         }
-
         #endregion
 
         #region getters/setters
-
-
 
         public CourtBookings CourtB
         {
@@ -61,7 +56,6 @@ namespace TcpDash.UC
         #endregion
 
         #region privates
-
         private void Refresh()
         {
             if (_courtBookings == null)

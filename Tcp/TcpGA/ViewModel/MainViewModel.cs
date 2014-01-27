@@ -31,7 +31,7 @@ namespace TcpGA.ViewModel
         private Driver _driver = new Driver();
         private bool _readerStatus;
         private Visibility _connected = Visibility.Collapsed;
-        private Visibility _disconnected = Visibility.Collapsed;
+        private Visibility _disconnected = Visibility.Visible;
 
         private int _selectedGeneralIndex;
 

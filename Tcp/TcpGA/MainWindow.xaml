@@ -9,29 +9,24 @@
                       ShowIconOnTitleBar="True"
                       Width="1366" Height="768" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
                       Loaded="MetroWindow_Loaded" Margin="10,10,10,10" WindowStartupLocation="CenterScreen" WindowState="Maximized" Closing="MetroWindow_Closing">
-    <Window.Resources>
-        <Converters:BoolInverterConverter x:Key="BoolInverterConverter" />
-    </Window.Resources>
+    
     <Controls:MetroWindow.WindowCommands>
-
         <Controls:WindowCommands>
             <Button Style="{DynamicResource MetroCircleButtonStyle}" Visibility="{Binding Disconnected}" IsEnabled="False" Height="35" Width="35">
-                <Rectangle Width="13" Height="13">
+                <Rectangle Width="14" Height="14">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_connect}" />
                     </Rectangle.Fill>
                 </Rectangle>
             </Button> 
             <Button Visibility="{Binding Connected}"  IsEnabled="False" Style="{DynamicResource MetroCircleButtonStyle}" Height="35" Width="35">
-                <Rectangle Width="13" Height="13">
+                <Rectangle Width="14" Height="14">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_disconnect}" />
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-
         </Controls:WindowCommands>
-
     </Controls:MetroWindow.WindowCommands>
 
     <Controls:MetroWindow.Flyouts>
