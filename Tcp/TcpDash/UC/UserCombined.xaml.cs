@@ -54,7 +54,6 @@ namespace TcpDash.UC
                 
                 gb.Content = uDay;
                 wrap.Children.Add(gb);
-                uDay.WeekMode = false;
                 uDay.CourtB = courtBookingse;
             }
         }

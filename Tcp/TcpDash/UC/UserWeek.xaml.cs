@@ -67,7 +67,6 @@ namespace TcpDash.UC
             //get the visual bookings
             DateTime day = _mvm.CalendarViewModel.SelectedDay;
 
-
             //we must show the whole week planning
             List<DailyBookings> listBookings = _courtBookings.WeeklyBookingses.DailyBookingses;
 
