@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using System;
 using System.Windows;
+using GalaSoft.MvvmLight.Command;
 using VcpDriver;
 
 namespace TcpDash.ViewModel
@@ -28,6 +29,7 @@ namespace TcpDash.ViewModel
         private bool _readerStatus;
         private Visibility _connected = Visibility.Collapsed;
         private Visibility _disconnected = Visibility.Visible;
+        
 
         #endregion
 
@@ -134,6 +136,8 @@ namespace TcpDash.ViewModel
             _jobs.DoJobs = false;
 
         }
+
+
         #endregion
     }
 }

@@ -17,7 +17,6 @@ namespace TcpDash.Business
     /// </summary>
     public sealed class BookingManager
     {
-
         #region singleton
         private static readonly  Lazy<BookingManager> lazy = new Lazy<BookingManager>(() => new BookingManager());
         public static BookingManager Instance
@@ -39,8 +38,6 @@ namespace TcpDash.Business
         private DateTime _lastDayOfWeek;
 
         #endregion
-
-        
 
         #region getters/setters
 
@@ -133,7 +130,6 @@ namespace TcpDash.Business
         }
 
         #endregion
-
 
         #region publics
         /// <summary>

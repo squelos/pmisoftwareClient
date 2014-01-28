@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Win32;
 
 namespace TcpDash.Business
 {
@@ -44,5 +48,87 @@ namespace TcpDash.Business
                     return dt;
             }
         }
+
+        public static void ToggleExplorer()
+        {
+            Process[] proc = System.Diagnostics.Process.GetProcessesByName("explorer");
+            if (proc.Any())
+            {
+                StopExplorer();
+            }
+            else
+            {
+                StartExplorer();
+            }
+        }
+        public static void StartExplorer()
+        {
+            //RegistryKey ourKey = Registry.LocalMachine;
+            //ourKey = ourKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
+            //ourKey.SetValue("AutoRestartShell", 1);
+            string explorer = string.Format("{0}\\{1}", Environment.GetEnvironmentVariable("WINDIR"), "explorer.exe");
+            Process process = new Process();
+            process.StartInfo.FileName = explorer;
+            process.StartInfo.UseShellExecute = true;
+            process.Start();
+            
+        }
+
+        public static void StopExplorer()
+        {
+            //RegistryKey ourKey = Registry.LocalMachine;
+            //ourKey = ourKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
+            //ourKey.SetValue("AutoRestartShell", 0);
+            Process[] proc = System.Diagnostics.Process.GetProcessesByName("explorer");
+            if (proc.Any())
+            {
+                ForceKill(proc.First());
+            }
+            //ExitExplorer();
+           
+            //proc.Kill();
+        }
+
+        public static bool IsExplorerRunning()
+        {
+            Process[] proc = System.Diagnostics.Process.GetProcessesByName("explorer");
+            return proc.Any();
+        }
+
+        [DllImport("user32.dll")]
+        public static extern int FindWindow(string lpClassName, string lpWindowName);
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(int hWnd, uint Msg, int wParam, int lParam);
+
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool PostMessage(int hWnd, uint Msg, int wParam, int lParam);
+
+        static void ExitExplorer()
+        {
+            int hwnd;
+            hwnd = FindWindow("Progman", null);
+            PostMessage(hwnd, /*WM_QUIT*/ 0x12, 0, 0);
+            return;
+        }
+
+        public static void ForceKill(this Process process)
+        {
+            using (Process killer = new Process())
+            {
+                killer.StartInfo.FileName = "taskkill";
+                killer.StartInfo.Arguments = string.Format("/f /PID {0}", process.Id);
+                killer.StartInfo.CreateNoWindow = true;
+                killer.StartInfo.UseShellExecute = false;
+                killer.Start();
+                killer.WaitForExit();
+                if (killer.ExitCode != 0)
+                {
+                    throw new Win32Exception(killer.ExitCode);
+                }
+            }
+        }
+
+
     }
 }

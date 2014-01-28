@@ -104,7 +104,6 @@ namespace TcpDash.ViewModel
 
         #endregion
 
-
         #region events
 
         public delegate void CourtNumberEventHandler(object sender, EventArgs e);

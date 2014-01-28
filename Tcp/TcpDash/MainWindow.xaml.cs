@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TcpDash.Business;
 using TcpDash.ViewModel;
 
 namespace TcpDash
@@ -48,6 +49,22 @@ namespace TcpDash
             //// Windows 8 API to enable touch keyboard to monitor for focus tracking in this WPF application
             //InputPanelConfigurationLib.InputPanelConfiguration inputPanelConfig = new InputPanelConfigurationLib.InputPanelConfiguration();
             //inputPanelConfig.EnableFocusTracking();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            //if explorer is running
+            //we close it
+            if (Utility.IsExplorerRunning())
+            {
+                Utility.StopExplorer();
+            }
+            else
+            {
+                WindowAdmin admin = new WindowAdmin();
+                admin.ShowDialog();
+            }
+
         }
     }
 }
