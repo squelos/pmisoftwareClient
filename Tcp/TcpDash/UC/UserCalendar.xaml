@@ -6,25 +6,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
-              d:DesignHeight="1000" d:DesignWidth="800">
+              d:DesignHeight="1000" d:DesignWidth="1000">
     <GroupBox Header="Calendrier">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <controls:MetroAnimatedTabControl>
-                <TabItem Header="Vue combinée">
+        <controls:MetroAnimatedTabControl>
+            <TabItem Header="Vue combinée">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" IsEnabled="true">
                     <!--vue journaliere par terrain-->
-                            <UserControls:UserCombined />
-                </TabItem>
-                <TabItem Header="Vue individuelle">
-                            <!--vue hebdo par terrain-->
-                            <UserControls:UserIndiv />
-                </TabItem>
-            </controls:MetroAnimatedTabControl>
-
-
-        </Grid>
+                    <UserControls:UserCombined />
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Vue individuelle">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" IsEnabled="true">
+                        <!--vue hebdo par terrain-->
+                        <UserControls:UserIndiv />
+                </ScrollViewer>
+            </TabItem>
+        </controls:MetroAnimatedTabControl>
     </GroupBox>
 </UserControl>

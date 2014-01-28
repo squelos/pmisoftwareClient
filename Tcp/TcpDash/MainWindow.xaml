@@ -9,7 +9,7 @@
                       Closing="MetroWindow_Closing" Loaded="MetroWindow_Loaded"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
           DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
-        Title="MainWindow" Height="700" Width="1800"  >
+        Title="MainWindow" Height="700" Width="1800">
     <i:Interaction.Behaviors>
         <behaviours:BorderlessWindowBehavior ResizeWithGrip="True" AllowsTransparency="False" />
     </i:Interaction.Behaviors>
@@ -38,15 +38,11 @@
             </Button>
         </Controls:WindowCommands>
     </Controls:MetroWindow.WindowCommands>
-    <Grid>
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Left">
-                <UserControls:UserNews  MaxWidth="450"/>
-                <UserControls:UserDateSelection/>
-            </StackPanel>
-            <StackPanel DockPanel.Dock="Left">
-                <UserControls:UserCalendar HorizontalAlignment="Stretch" />
-            </StackPanel>
-        </DockPanel>
-    </Grid>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left">
+            <UserControls:UserNews  MaxWidth="450"/>
+            <UserControls:UserDateSelection/>
+        </StackPanel>
+        <UserControls:UserCalendar/>
+    </DockPanel>
 </Controls:MetroWindow>
