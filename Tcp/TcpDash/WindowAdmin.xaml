@@ -2,8 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="Admin" Height="300" Width="300"
-                      Margin="10,10,10,10" WindowStartupLocation="CenterScreen">
+        Title="Admin" Height="300" Width="300" BorderBrush="OrangeRed" BorderThickness="1"
+                      Margin="10,10,10,10" WindowStartupLocation="CenterScreen" Closing="WindowAdmin_OnClosing">
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,10,10">
             <Label x:Name="error" Content="Mot de passe administrateur :" Margin="10,10,10,10"/>

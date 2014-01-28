@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,7 @@ namespace TcpDash
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             //close
+            this.DialogResult = false;
             this.Close();
 
         }
@@ -40,16 +42,20 @@ namespace TcpDash
             if (passwordBox.Password == _password)
             {
                 //then password matches
-                Utility.StartExplorer();
+                //Utility.StartExplorer();
+                this.DialogResult = true;
                 this.Close();
             }
             else
             {
                 error.Visibility = Visibility.Visible;
             }
-            
+        }
 
-            
+        private void WindowAdmin_OnClosing(object sender, CancelEventArgs e)
+        {
+            if(DialogResult != true)
+            this.DialogResult = false;
         }
     }
 }

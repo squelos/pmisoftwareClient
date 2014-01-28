@@ -31,7 +31,20 @@ namespace TcpDash
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _mainViewModel.BadgeScanner.Dispose();
+            WindowAdmin admin = new WindowAdmin();
+            bool? result = admin.ShowDialog();
+            if (result == true)
+            {
+               //we clean up and close
+                _mainViewModel.BadgeScanner.Dispose();
+            }
+            else
+            {
+                //we cancel
+                e.Cancel = true;
+            }
+
+            
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -62,7 +75,13 @@ namespace TcpDash
             else
             {
                 WindowAdmin admin = new WindowAdmin();
-                admin.ShowDialog();
+                bool? result = admin.ShowDialog();
+                if (result == true)
+                {
+                    Utility.StartExplorer();
+                }
+                //if(admin.ShowDialog()== DialogResult.Value;
+                // if(admin.ShowDialog() != DialogResult.)
             }
 
         }

@@ -121,12 +121,18 @@ namespace TcpDash.UC
 
         private int CalculateRowSpan(VisualBooking vb)
         {
+            //TODO sometimes get neg values
             //default at 1
             return CalculateRowEnd(vb) - CalculateRowStart(vb);
         }
 
         private int CalculateRowEnd(VisualBooking vb)
         {
+            if (vb.EndHour < 8)
+            {
+                return 30;
+                //TODO prone to failure
+            }
             int ret = vb.EndHour - 8;
             if (ret != 0)
             {
