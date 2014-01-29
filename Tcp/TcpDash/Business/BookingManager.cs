@@ -31,7 +31,8 @@ namespace TcpDash.Business
         #region privates
         private entityContainer _container = new entityContainer();
         private ObservableCollection<CourtBookings> _courtBookings;
-        private List<Booking> _bookingSnapshot; 
+        private List<Booking> _bookingSnapshot;
+        private IQueryable<Booking> _proxiedBookings;
 
         private DateTime _selectedDay;
         private DateTime _firstDayOfWeek;
@@ -64,18 +65,23 @@ namespace TcpDash.Business
             _firstDayOfWeek = Utility.GetFirst(_selectedDay);
             _lastDayOfWeek = _firstDayOfWeek.AddDays(6);
 
+            RefreshProxy();
+
             Refresh();
         }
 
         
-
+        /// <summary>
+        /// uses the data in the proxy
+        /// </summary>
+        /// <param name="cb"></param>
         private void FillCourtBooking(CourtBookings cb)
         {
             //in here we fill the courtBooking with the appropriate data (from the selected Day and week)
             //get  the relevant Bookings for each day of the week
             //TODO cache in order to improve performance
             List<Booking> nonRecurring =
-                (_container.BookingJeu.Where(
+                (_proxiedBookings.Where(
                     booking =>
                         booking.Court.ID == cb.Court.ID && booking.BookingAggregation == null &&
                         booking.start > _firstDayOfWeek &&
@@ -111,6 +117,15 @@ namespace TcpDash.Business
             cb.WeeklyBookingses = wBookings;
 
             //feed the dailyBookings into a weekly Booking
+        }
+
+        private void RefreshProxy()
+        {
+            DateTime minStart = DateTime.Now.AddDays(-14);
+            DateTime maxDate = DateTime.Now.AddDays(20);
+            
+            _proxiedBookings =
+                _container.BookingJeu.Where(booking => booking.start > minStart && booking.start < maxDate);
         }
 
         #endregion
@@ -151,13 +166,14 @@ namespace TcpDash.Business
                     y++;
                 }
                 FillCourtBooking(bookingse);
-            
-                //TODO bug here
             }
             
             
         }
 
+        /// <summary>
+        /// this method should refresh the proxy
+        /// </summary>
         public void Refresh()
         {
             using (entityContainer container = new entityContainer())
