@@ -614,7 +614,7 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="entity" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
-        <EntityContainer Name="entityContainer" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="entityContainer" annotation:LazyLoadingEnabled="true" cg:TypeAccess="Public">
           <EntitySet Name="SeasonJeu" EntityType="entity.Season" />
           <EntitySet Name="SemesterJeu" EntityType="entity.Semester" />
           <EntitySet Name="PaymentJeu" EntityType="entity.Payment" />

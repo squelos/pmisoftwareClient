@@ -41,7 +41,8 @@ namespace TcpDash.ViewModel
                     _container.NewsSet.Where(news => news.Visibility && news.PublishDate > now)
                         .OrderByDescending(news => news.PublishDate)
                         .Take(15));
-            _currentNews = _newsCollection.First();
+            _currentNews = _newsCollection.FirstOrDefault();
+            //TODO Crashes because CurrentNews is null
             _incrementCommand = new RelayCommand(Increment);
             _decrementCommand = new RelayCommand(Decrement);
         }

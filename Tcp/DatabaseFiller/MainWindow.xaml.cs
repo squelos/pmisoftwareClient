@@ -2,20 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using TcpDataModel;
 
@@ -26,21 +18,17 @@ namespace DatabaseFiller
     /// </summary>
     public partial class MainWindow : Window
     {
-
         Random rand = new Random();
         // private entityContainer _container = new entityContainer();
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Task t = new Task(Wrapper);
             t.Start();
-
-
         }
 
         private void Wrapper()
@@ -58,7 +46,6 @@ namespace DatabaseFiller
             tPlayers.Start();
             Task.WaitAll(new[] { tBadges, tPlayers, tPlayers });
             tAssignBadges.Start();
-
         }
 
 
@@ -78,9 +65,6 @@ namespace DatabaseFiller
             createTerrains();
             createSeasons(pCreateSeasons);
         }
-
-
-
 
 
         private void createBadges(ProgressBar bar)
@@ -104,10 +88,7 @@ namespace DatabaseFiller
                 }
                 container.BadgeJeu.AddRange(badges);
                 container.SaveChanges();
-
             }
-
-
         }
 
         private void createTerrains()

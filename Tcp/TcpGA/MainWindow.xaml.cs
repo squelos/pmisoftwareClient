@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Data.Entity.Validation;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +28,7 @@ namespace TcpGA
 
         public MainWindow()
         {
+            
             _dispatcher = CustomDispatcher.Instance;
             _dispatcher.RegisterUI(this);
 
@@ -35,6 +38,8 @@ namespace TcpGA
             _dispatcher.CategoriesRequest += text => OpenPlayerCategories();
             _dispatcher.TrainingRequest += text => OpenPlayerTraining();
         }
+
+        
 
        
 

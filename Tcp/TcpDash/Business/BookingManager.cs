@@ -29,6 +29,7 @@ namespace TcpDash.Business
         #endregion
 
         #region privates
+
         private entityContainer _container = new entityContainer();
         private ObservableCollection<CourtBookings> _courtBookings;
         private List<Booking> _bookingSnapshot;

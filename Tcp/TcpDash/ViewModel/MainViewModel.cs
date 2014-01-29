@@ -1,3 +1,5 @@
+using System.Configuration;
+using System.Reflection;
 using GalaSoft.MvvmLight;
 using System;
 using System.Windows;
@@ -39,6 +41,7 @@ namespace TcpDash.ViewModel
         /// </summary>
         public MainViewModel()
         {
+            
              _driver.ConnectedStatusChanged += stat => ReaderStatus = stat;
             _readerStatus = _driver.Connected;
             _newsViewModel = new NewsViewModel(this);
@@ -135,6 +138,16 @@ namespace TcpDash.ViewModel
             _driver.Dispose();
             _jobs.DoJobs = false;
 
+        }
+
+        void SetConnectionString()
+        {
+            //TODO big hack
+            var settings = ConfigurationManager.ConnectionStrings[0];
+            var fi = typeof (ConfigurationElement).GetField("_bReadonly", BindingFlags.Instance | BindingFlags.NonPublic);
+            fi.SetValue(settings, false);
+
+            settings.ConnectionString = "datasource=bite";
         }
 
 

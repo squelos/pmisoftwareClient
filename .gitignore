@@ -6,6 +6,10 @@
 *.user
 *.sln.docstates
 
+#sensitive information
+*App.config
+*.exe.config
+
 # Build results
 
 [Dd]ebug/

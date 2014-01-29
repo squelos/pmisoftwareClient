@@ -1,4 +1,8 @@
 using System;
+using System.Configuration;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.SqlClient;
+using System.Reflection;
 using System.Windows;
 using TcpGA.BaseClasses;
 using VcpDriver;
@@ -39,6 +43,7 @@ namespace TcpGA.ViewModel
         #region ctor
         public MainViewModel()
         {
+           
             _driver.ConnectedStatusChanged += stat => ReaderStatus = stat;
             _readerStatus = _driver.Connected;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
@@ -53,6 +58,8 @@ namespace TcpGA.ViewModel
             //clean up here in the event of an exception, and maybe log or open up a window
             _driver.Dispose();
         }
+
+        
         #endregion
 
         #region props
