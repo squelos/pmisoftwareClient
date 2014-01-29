@@ -89,6 +89,8 @@ namespace TcpDash.UC
 
             b.HorizontalAlignment = HorizontalAlignment.Stretch;
             b.VerticalAlignment = VerticalAlignment.Stretch;
+            b.PreviewMouseLeftButtonDown += b_PreviewMouseLeftButtonDown;
+            b.MouseDown += BOnMouseDown;
             
             TextBlock tb = new TextBlock();
             tb.TextWrapping = TextWrapping.Wrap;
@@ -99,6 +101,18 @@ namespace TcpDash.UC
             Grid.SetColumn(b, col);
             Grid.SetRow(b, CalculateRowStart(vb));
             Grid.SetRowSpan(b, CalculateRowSpan(vb));
+        }
+
+        private void BOnMouseDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        {
+            mouseButtonEventArgs.Handled = true;
+
+        }
+
+        void b_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            
+            e.Handled = true;
         }
 
         private int CalculateRowStart(VisualBooking vb)
@@ -124,6 +138,10 @@ namespace TcpDash.UC
 
         private int CalculateRowEnd(VisualBooking vb)
         {
+            if (vb.EndHour < 8)
+            {
+                return 32;
+            }
             int ret = vb.EndHour - 8;
             if (ret != 0)
             {
@@ -142,6 +160,62 @@ namespace TcpDash.UC
             //var dataContext = DataContext;
             //var mainViewModel = dataContext as MainViewModel;
             //_mvm = mainViewModel;
+        }
+
+        private void GridMouseDown(object sender, MouseButtonEventArgs e)
+        {
+           // throw new NotImplementedException();
+        }
+
+        private void PreviewLeftMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var point = Mouse.GetPosition(grid);
+
+            int row = 0;
+            int col = 0;
+            double accHeight = 0.0;
+            double accWidth = 0.0;
+
+            foreach (var rowDef in grid.RowDefinitions)
+            {
+                accHeight += rowDef.ActualHeight;
+                if (accHeight >= point.Y)
+                    break;
+                row++;
+            }
+
+            foreach (var columnDefinition in grid.ColumnDefinitions)
+            {
+                accWidth += columnDefinition.ActualWidth;
+                if (accWidth >= point.X)
+                    break;
+                col++;
+            }
+            //here thanks to col and row we can infer the selected Cell
+            //we try to see if the selected cell contains anything. if it does, 
+            // do nothing, or show appropriate dialog
+            foreach (UIElement child in grid.Children)
+            {
+                if (Grid.GetColumn(child) == col && Grid.GetRow(child) == row)
+                {
+                    //then the row and col match and has an elem
+                }
+            }
+            //infer selected cell
+            //day is _mvm.CalendarViewModel.SelectedDay;
+            //need row now
+            // row 
+            // row/2 + 8 = hour.round down = hour
+            decimal hourDecimal = row/2 + 8;
+            int hour = (int)Math.Floor(hourDecimal);
+
+            DateTime day = _mvm.CalendarViewModel.SelectedDay;
+            //determine if it is "selectable"
+
+            //if it is selectable, show a new window to do the booking
+
+            //
+
         }
     }
 }

@@ -35,6 +35,18 @@ namespace TcpDash.UC
         {
             InitializeComponent();
             _mvm = mvm;
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    for (int j = 0; j < 31; j++)
+            //    {
+            //        Rectangle rect = new Rectangle();
+            //        rect.Stroke = new SolidColorBrush(Color.FromRgb(43, 00, 06));
+            //        rect.Fill = Brushes.Transparent;
+            //        grid.Children.Add(rect);
+            //        Grid.SetColumn(rect, i);
+            //        Grid.SetRow(rect, j);
+            //    }
+            //}
         }
 
         #endregion
@@ -55,7 +67,6 @@ namespace TcpDash.UC
         #region publics
 
         #endregion
-
 
         #region privates
         private void Refresh()
@@ -130,7 +141,7 @@ namespace TcpDash.UC
         {
             if (vb.EndHour < 8)
             {
-                return 30;
+                return 32;
                 //TODO prone to failure
             }
             int ret = vb.EndHour - 8;
@@ -149,6 +160,58 @@ namespace TcpDash.UC
         private void UserWeek_OnLoaded(object sender, RoutedEventArgs e)
         {
             //throw new NotImplementedException();
+        }
+
+        private void GridMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var point = Mouse.GetPosition(grid);
+
+            int row = 0;
+            int col = 0;
+            double accHeight = 0.0;
+            double accWidth = 0.0;
+
+            foreach (var rowDef in grid.RowDefinitions)
+            {
+                accHeight += rowDef.ActualHeight;
+                if (accHeight >= point.Y)
+                    break;
+                row++;
+            }
+
+            foreach (var columnDefinition in grid.ColumnDefinitions)
+            {
+                accWidth += columnDefinition.ActualWidth;
+                if (accWidth >= point.X)
+                    break;
+                col++;
+            }
+
+          //here thanks to col and row we can infer the selected Cell
+            //we try to see if the selected cell contains anything. if it does, 
+            // do nothing, or show appropriate dialog
+            foreach (UIElement child in grid.Children)
+            {
+                if (Grid.GetColumn(child) == col && Grid.GetRow(child) == row)
+                {
+                    //then the row and col match and has an elem
+                }
+            }
+            //infer selected cell
+            decimal hourDecimal = row / 2 + 8;
+            int hour = (int)Math.Floor(hourDecimal);
+
+            DateTime day = _courtBookings.WeeklyBookingses.DailyBookingses[col].DayDateTime;
+            //determine if it is "selectable"
+
+            //if it is selectable, show a new window to do the booking
+
+            //
         }
     }
 }

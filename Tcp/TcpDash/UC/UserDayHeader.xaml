@@ -8,13 +8,13 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
         <Label Content="Lundi" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Mardi" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top"/>

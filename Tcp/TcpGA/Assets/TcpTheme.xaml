@@ -25,6 +25,7 @@
     <SolidColorBrush x:Key="ScrollBarThumbForeground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ScrollBarThumbForegroundDragging" Color="#00FFFFFF"/>
     <SolidColorBrush x:Key="ScrollBarThumbForegroundHover" Color="#00FFFFFF"/>
+    
 
 
 

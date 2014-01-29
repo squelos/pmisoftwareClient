@@ -116,6 +116,8 @@
     <Compile Include="Business\VisualBookings.cs" />
     <Compile Include="Business\WeeklyBookings.cs" />
     <Compile Include="Jobs.cs" />
+    <Compile Include="SwipeHelper.cs" />
+    <Compile Include="UC\Extensions.cs" />
     <Compile Include="UC\UserCalendar.xaml.cs">
       <DependentUpon>UserCalendar.xaml</DependentUpon>
     </Compile>

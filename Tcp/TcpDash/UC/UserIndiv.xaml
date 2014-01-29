@@ -6,12 +6,8 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
              d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
-    <Grid>
-        
             <!--we create tabs for each court-->
-        <controls:MetroAnimatedTabControl x:Name="animatedTab">
+        <controls:MetroAnimatedTabControl x:Name="animatedTab" TouchMove="AnimatedTab_OnTouchMove" TouchDown="AnimatedTab_OnTouchDown">
             <!--Each tab contains a UC in week mode-->
         </controls:MetroAnimatedTabControl>
-            
-    </Grid>
 </UserControl>

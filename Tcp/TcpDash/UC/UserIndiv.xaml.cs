@@ -24,6 +24,8 @@ namespace TcpDash.UC
     public partial class UserIndiv : UserControl
     {
         private MainViewModel _mvm;
+        private TouchPoint _touchStart;
+        private SwipeHelper _helper = new SwipeHelper();
 
         public UserIndiv()
         {
@@ -54,6 +56,39 @@ namespace TcpDash.UC
                 ti.Content = uWeek;
                 animatedTab.Items.Add(ti);
             }
+        }
+
+        private void AnimatedTab_OnTouchMove(object sender, TouchEventArgs e)
+        {
+            if (!_helper.Swipped)
+            {                
+                var Touch = e.GetTouchPoint(this);
+                //right now a swipe is 200 pixels 
+
+                //Swipe Left
+                if (_touchStart != null && Touch.Position.X > (_touchStart.Position.X + 200))
+                {
+                    //swipe left
+                    
+                    animatedTab.PreviousTab();
+                    _helper.Swipped = true;
+                }
+
+                //Swipe Right
+
+                if (_touchStart != null && Touch.Position.X < (_touchStart.Position.X - 200))
+                {
+                     //swipe right
+                    animatedTab.NextTab();
+                     _helper.Swipped = true;
+                }
+            }
+            e.Handled = true;
+        }
+
+        private void AnimatedTab_OnTouchDown(object sender, TouchEventArgs e)
+        {
+            _touchStart = e.GetTouchPoint(this);
         }
     }
 }

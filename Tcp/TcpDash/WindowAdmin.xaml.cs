@@ -57,5 +57,7 @@ namespace TcpDash
             if(DialogResult != true)
             this.DialogResult = false;
         }
+
+       
     }
 }

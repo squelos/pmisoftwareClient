@@ -25,6 +25,8 @@ namespace TcpDash.UC
     public partial class UserNews : UserControl
     {
         private MainViewModel _mvm;
+        private TouchPoint _touchStart;
+        private SwipeHelper _helper = new SwipeHelper();
 
         public UserNews()
         {
@@ -58,6 +60,39 @@ namespace TcpDash.UC
         {
             web.NavigateToString("<head></head><body bgcolor=\"#D45B07\">" + _mvm.NewsViewModel.CurrentNews.Content + "</body>");
 
+        }
+
+        private void UserNews_OnTouchDown(object sender, TouchEventArgs e)
+        {
+            _touchStart = e.GetTouchPoint(this);
+        }
+
+        private void UserNews_OnTouchMove(object sender, TouchEventArgs e)
+        {
+            if (!_helper.Swipped)
+            {
+                var Touch = e.GetTouchPoint(this);
+                //right now a swipe is 200 pixels 
+
+                //Swipe Left
+                if (_touchStart != null && Touch.Position.X > (_touchStart.Position.X + 200))
+                {
+                    //swipe left
+                    _mvm.CalendarViewModel.DecrementCommand.Execute(null);
+                    
+                    _helper.Swipped = true;
+                }
+
+                //Swipe Right
+
+                if (_touchStart != null && Touch.Position.X < (_touchStart.Position.X - 200))
+                {
+                    //swipe right
+                    _mvm.CalendarViewModel.IncrementCommand.Execute(null);
+                    _helper.Swipped = true;
+                }
+            }
+            e.Handled = true;
         }
     }
 }

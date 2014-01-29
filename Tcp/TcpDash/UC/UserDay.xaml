@@ -4,17 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}" Loaded="UserDay_OnLoaded"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="1100" d:DesignWidth="300">
     <StackPanel Orientation="Vertical">
 
         
         <StackPanel Orientation="Horizontal">
             <UC:UserTimeHeader/>
-            <Grid x:Name="grid">
+            <Grid x:Name="grid" Background="Transparent" MouseDown="GridMouseDown" PreviewMouseLeftButtonDown="PreviewLeftMouseDown">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="25"/>
