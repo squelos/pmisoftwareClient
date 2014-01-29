@@ -59,6 +59,7 @@ namespace TcpDash.UC
         private void LoadHtmlInWeb()
         {
             web.NavigateToString("<head></head><body bgcolor=\"#D45B07\">" + _mvm.NewsViewModel.CurrentNews.Content + "</body>");
+            //TODO crashes
 
         }
 
