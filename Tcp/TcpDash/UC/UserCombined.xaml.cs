@@ -45,6 +45,7 @@ namespace TcpDash.UC
 
         private void CalendarViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
+            
             //we refresh to show the current day per court
             wrap.Children.Clear();
 

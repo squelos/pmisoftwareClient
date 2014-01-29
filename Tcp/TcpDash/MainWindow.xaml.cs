@@ -10,9 +10,12 @@ namespace TcpDash
     public partial class MainWindow
     {
         private MainViewModel _mainViewModel;
+        
         public MainWindow()
         {
             InitializeComponent();
+            UIDispatcher dispatcher = UIDispatcher.Instance;
+            dispatcher.RegisterUI(this);
             //InkInputHelper.DisableWPFTabletSupport();
         }
 

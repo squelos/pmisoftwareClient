@@ -146,6 +146,7 @@
     <Compile Include="UC\UserWeek.xaml.cs">
       <DependentUpon>UserWeek.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UIDispatcher.cs" />
     <Compile Include="ViewModel\CalendarViewModel.cs" />
     <Compile Include="ViewModel\DateTimeExtensions.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

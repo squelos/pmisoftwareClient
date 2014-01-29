@@ -21,6 +21,9 @@ namespace TcpDash
         private Task _refreshCalendarInfo;
         private Task _refreshNewsInfo;
         private Task _incrementNews;
+        private Task _proxyRefresh;
+        private Task _rotateDate;
+
         #endregion
 
         #region ctor
@@ -33,11 +36,12 @@ namespace TcpDash
             _refreshCalendarInfo = new Task(RefreshCalendar);
             _refreshNewsInfo = new Task(RefreshNews);
             _incrementNews = new Task(IncrementNews);
+            _proxyRefresh = new Task(ProxyRefresh);
+            _rotateDate = new Task(RotateDate);
+            
             //we also have to start refreshing the booking manager
             //TODO refresh the booking Manager from time to time
             //TODO force the booking manager to fetch for new courts
-
-
         }
 
         #endregion
@@ -88,6 +92,23 @@ namespace TcpDash
             }
         }
 
+        private void ProxyRefresh()
+        {
+            while (_doJobs)
+            {
+                Thread.Sleep(120000);
+                _bookingManager.Refresh();
+            }
+        }
+
+        private void RotateDate()
+        {
+            while (_doJobs)
+            {
+                Thread.Sleep(60000);
+                //TODO refresh date
+            }
+        }
 
         #endregion
 
@@ -140,6 +161,34 @@ namespace TcpDash
                         case TaskStatus.Created:
                             {
                                 _refreshNewsInfo.Start();
+                                break;
+                            }
+                    }
+                    switch (_proxyRefresh.Status)
+                    {
+                        case TaskStatus.RanToCompletion:
+                            {
+                                _proxyRefresh = new Task(ProxyRefresh);
+                                _proxyRefresh.Start();
+                                break;
+                            }
+                        case TaskStatus.Created:
+                            {
+                                _proxyRefresh.Start();
+                                break;
+                            }
+                    }
+                    switch (_rotateDate.Status)
+                    {
+                        case TaskStatus.RanToCompletion:
+                            {
+                                _rotateDate = new Task(RotateDate);
+                                _rotateDate.Start();
+                                break;
+                            }
+                        case TaskStatus.Created:
+                            {
+                                _rotateDate.Start();
                                 break;
                             }
                     }

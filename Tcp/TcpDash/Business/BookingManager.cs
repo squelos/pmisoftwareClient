@@ -34,6 +34,8 @@ namespace TcpDash.Business
         private ObservableCollection<CourtBookings> _courtBookings;
         private List<Booking> _bookingSnapshot;
         private IQueryable<Booking> _proxiedBookings;
+        private DateTime _startProxy;
+        private DateTime _endProxy;
 
         private DateTime _selectedDay;
         private DateTime _firstDayOfWeek;
@@ -124,9 +126,19 @@ namespace TcpDash.Business
         {
             DateTime minStart = DateTime.Now.AddDays(-14);
             DateTime maxDate = DateTime.Now.AddDays(20);
-            
+            _startProxy = minStart;
+            _endProxy = maxDate;
+
             _proxiedBookings =
                 _container.BookingJeu.Where(booking => booking.start > minStart && booking.start < maxDate);
+        }
+        private void RefreshProxy(DateTime s, DateTime e)
+        {
+            _startProxy = s;
+            _endProxy = e;
+            
+            _proxiedBookings =
+                _container.BookingJeu.Where(booking => booking.start > s && booking.start < e);
         }
 
         #endregion
@@ -156,6 +168,10 @@ namespace TcpDash.Business
             _selectedDay = selectedD;
             _firstDayOfWeek = first;
             _lastDayOfWeek = last;
+            if (first < _startProxy)
+            {
+                RefreshProxy(first,last);
+            }
 
             //must refresh the Data
             foreach (var bookingse in CourtBookingses)
@@ -168,8 +184,6 @@ namespace TcpDash.Business
                 }
                 FillCourtBooking(bookingse);
             }
-            
-            
         }
 
         /// <summary>
@@ -177,23 +191,51 @@ namespace TcpDash.Business
         /// </summary>
         public void Refresh()
         {
-            using (entityContainer container = new entityContainer())
+            if (UIDispatcher.Instance.GetMainWindow == null)
             {
-                List<Court> tmpList = (from b in container.CourtJeu select b).ToList();
-                List<CourtBookings> tmpBookings = new List<CourtBookings>();
-                foreach (var court in tmpList)
+                using (entityContainer container = new entityContainer())
                 {
-                    tmpBookings.Add(new CourtBookings(court));
+                    List<Court> tmpList = (from b in container.CourtJeu select b).ToList();
+                    List<CourtBookings> tmpBookings = new List<CourtBookings>();
+                    foreach (var court in tmpList)
+                    {
+                        tmpBookings.Add(new CourtBookings(court));
+                    }
+                    // we must fill the tmpBookings with the real bookings
+                    foreach (CourtBookings tmpBooking in tmpBookings)
+                    {
+                        FillCourtBooking(tmpBooking);
+                    }
+                    //TODO grab a snapshot of the DB for the caching
+                    CourtBookingses = new ObservableCollection<CourtBookings>(tmpBookings);
                 }
-                // we must fill the tmpBookings with the real bookings
-                foreach (CourtBookings tmpBooking in tmpBookings)
-                {
-                    FillCourtBooking(tmpBooking);
-                }
-                //TODO grab a snapshot of the DB for the caching
-                CourtBookingses = new ObservableCollection<CourtBookings>(tmpBookings);
+                RefreshProxy();
+                RaiseChanged();
+                
+                return;
             }
-            RaiseChanged();
+            UIDispatcher.Instance.GetMainWindow.Dispatcher.Invoke(() =>
+            {
+                using (entityContainer container = new entityContainer())
+                {
+                    List<Court> tmpList = (from b in container.CourtJeu select b).ToList();
+                    List<CourtBookings> tmpBookings = new List<CourtBookings>();
+                    foreach (var court in tmpList)
+                    {
+                        tmpBookings.Add(new CourtBookings(court));
+                    }
+                    // we must fill the tmpBookings with the real bookings
+                    foreach (CourtBookings tmpBooking in tmpBookings)
+                    {
+                        FillCourtBooking(tmpBooking);
+                    }
+                    //TODO grab a snapshot of the DB for the caching
+                    CourtBookingses = new ObservableCollection<CourtBookings>(tmpBookings);
+                }
+                RefreshProxy();
+                RaiseChanged();
+            });
+            
         }
         #endregion
     }
