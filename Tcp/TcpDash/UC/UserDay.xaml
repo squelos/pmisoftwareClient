@@ -6,7 +6,6 @@
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}" Loaded="UserDay_OnLoaded"
              d:DesignHeight="1100" d:DesignWidth="300">
     <StackPanel Orientation="Vertical">
-
         
         <StackPanel Orientation="Horizontal">
             <UC:UserTimeHeader/>

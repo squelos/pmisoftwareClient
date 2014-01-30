@@ -94,7 +94,7 @@ namespace VcpDriver
                     try
                     {
                         port.Open();
-
+                     
                         port.RtsEnable = true;
                         port.DtrEnable = true;
                         port.DataReceived += serialPort_dataReceived;
@@ -170,7 +170,6 @@ namespace VcpDriver
             Dispose(false);
         }
 
-
         protected void Dispose(bool disposing)
         {
             SerialPortService.CleanUp();
@@ -179,6 +178,7 @@ namespace VcpDriver
                 serialsPort.Dispose();
             }
         }
+
         public void Dispose()
         {
             Dispose(true); 

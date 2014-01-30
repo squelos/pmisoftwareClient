@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TcpDash.Business;
 using TcpDash.ViewModel;
 
@@ -55,6 +46,7 @@ namespace TcpDash.UC
 
         #endregion
 
+
         #region privates
         private void Refresh()
         {
@@ -72,6 +64,7 @@ namespace TcpDash.UC
             {
                 foreach (var visualBooking in dailyBookings.VisualBookingList)
                 {
+
                     //we add it to the appropriate row
                     ShowVisualBooking(visualBooking, 0);
                 }
@@ -106,18 +99,15 @@ namespace TcpDash.UC
         private void BOnMouseDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
             mouseButtonEventArgs.Handled = true;
-
         }
 
         void b_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            
             e.Handled = true;
         }
 
         private int CalculateRowStart(VisualBooking vb)
         {
-
             int ret = vb.StartHour - 8;
             if (ret != 0)
             {
@@ -211,10 +201,10 @@ namespace TcpDash.UC
 
             DateTime day = _mvm.CalendarViewModel.SelectedDay;
             //determine if it is "selectable"
+            //show a window that allows you to book 
+
 
             //if it is selectable, show a new window to do the booking
-
-            //
 
         }
     }
