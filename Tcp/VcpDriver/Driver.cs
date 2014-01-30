@@ -28,9 +28,19 @@ namespace VcpDriver
             }
             else
             {
-                Clean();
                 
-                //its a removal
+                List<SerialPort> existingPorts = _serialsPorts;
+                string[] avail = GetAvailablePorts();
+
+                foreach (var s in avail)
+                {
+                    if (existingPorts.Any(port => port.PortName == s))
+                    {
+
+                        existingPorts.Remove(existingPorts.Single(port => port.PortName == s));
+                    }
+                }
+                Clean(existingPorts.FirstOrDefault());
             }
         }
 
@@ -54,17 +64,18 @@ namespace VcpDriver
 
         #region privateMethdos
 
-        private void Clean()
+        private void Clean(SerialPort port)
         {
-            if (_serialPort != null)
+            if (port != null)
             {
-                _serialPort.DataReceived -= serialPort_dataReceived;
-                if (_serialPort.IsOpen)
+                port.DataReceived -= serialPort_dataReceived;
+                if (port.IsOpen)
                 {
-                    _serialPort.Close();
+                    port.Close();
                 }
-                _serialPort.Dispose();
+                port.Dispose();
                 Connected = false;
+                _serialsPorts.Remove(port);
             }
         }
 
