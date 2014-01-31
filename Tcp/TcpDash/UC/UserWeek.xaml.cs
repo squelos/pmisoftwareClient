@@ -110,6 +110,7 @@ namespace TcpDash.UC
             
             tb.Text = vb.Name;
             b.Content = tb;
+            b.Tag = vb;
             grid.Children.Add(b);
             Grid.SetColumn(b, col);
             Grid.SetRow(b, CalculateRowStart(vb));
@@ -164,7 +165,7 @@ namespace TcpDash.UC
 
         private void GridMouseDown(object sender, MouseButtonEventArgs e)
         {
-            //throw new NotImplementedException();
+            //
         }
 
         private void PreviewMouseDown(object sender, MouseButtonEventArgs e)

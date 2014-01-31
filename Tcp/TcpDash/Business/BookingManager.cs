@@ -18,12 +18,12 @@ namespace TcpDash.Business
     public sealed class BookingManager
     {
         #region singleton
-        private static readonly  Lazy<BookingManager> lazy = new Lazy<BookingManager>(() => new BookingManager());
+        private static readonly Lazy<BookingManager> lazy = new Lazy<BookingManager>(() => new BookingManager());
         public static BookingManager Instance
         { get { return lazy.Value; } }
         private BookingManager()
         {
-           Init();
+            Init();
         }
 
         #endregion
@@ -41,6 +41,8 @@ namespace TcpDash.Business
         private DateTime _firstDayOfWeek;
         private DateTime _lastDayOfWeek;
 
+        private List<Player> _players;
+
         #endregion
 
         #region getters/setters
@@ -50,9 +52,15 @@ namespace TcpDash.Business
             get { return _courtBookings; }
             set
             {
-                _courtBookings = value; 
+                _courtBookings = value;
                 // maybe raise something here ? 
             }
+        }
+
+        public List<Player> Players
+        {
+            get { return _players; }
+            set { _players = value; }
         }
 
         #endregion
@@ -73,7 +81,7 @@ namespace TcpDash.Business
             Refresh();
         }
 
-        
+
         /// <summary>
         /// uses the data in the proxy
         /// </summary>
@@ -111,12 +119,12 @@ namespace TcpDash.Business
                 var res = vbList.Where(booking => booking.Start.Date == dateTime).ToList();
                 if (res.Count != 0)
                 {
-                    tmp.VisualBookingList.AddRange(res);    
+                    tmp.VisualBookingList.AddRange(res);
                 }
-                
+
                 dBookings.Add(tmp);
             }
-            WeeklyBookings wBookings = new WeeklyBookings(dBookings, _firstDayOfWeek.Date,_lastDayOfWeek.Date);
+            WeeklyBookings wBookings = new WeeklyBookings(dBookings, _firstDayOfWeek.Date, _lastDayOfWeek.Date);
             cb.WeeklyBookingses = wBookings;
 
             //feed the dailyBookings into a weekly Booking
@@ -131,12 +139,13 @@ namespace TcpDash.Business
 
             _proxiedBookings =
                 _container.BookingJeu.Where(booking => booking.start > minStart && booking.start < maxDate);
+            _players = _container.PlayerJeu.Include(player => player.Badge).ToList();
         }
         private void RefreshProxy(DateTime s, DateTime e)
         {
             _startProxy = s;
             _endProxy = e;
-            
+
             _proxiedBookings =
                 _container.BookingJeu.Where(booking => booking.start > s && booking.start < e);
         }
@@ -170,7 +179,7 @@ namespace TcpDash.Business
             _lastDayOfWeek = last;
             if (first < _startProxy)
             {
-                RefreshProxy(first,last);
+                RefreshProxy(first, last);
             }
 
             //must refresh the Data
@@ -211,7 +220,7 @@ namespace TcpDash.Business
                 }
                 RefreshProxy();
                 RaiseChanged();
-                
+
                 return;
             }
             UIDispatcher.Instance.GetMainWindow.Dispatcher.Invoke(() =>
@@ -235,6 +244,24 @@ namespace TcpDash.Business
                 RefreshProxy();
                 RaiseChanged();
             });
+
+        }
+
+        public bool TryBooking(DateTime day, int sHour, int sMin, int eHour, int eMin, Court court, Player p1, Player p2)
+        {
+            DateTime start = new DateTime(day.Year, day.Month, day.Day, sHour, sMin, 0);
+            DateTime end = new DateTime(day.Year, day.Month, day.Day, eHour, eMin, 0);
+            if (eHour < 8)
+            {
+                end.AddDays(1);
+            }
+           
+            //try to book
+            if(_container.BookingJeu.Any(booking => booking.Court == court && booking.start))
+
+            //check to see if any bookings overlap on that time
+
+            //also check to see if the player 1 is allowed to book
             
         }
         #endregion

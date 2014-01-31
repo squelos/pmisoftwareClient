@@ -82,6 +82,7 @@ namespace TcpDash.UC
 
             b.HorizontalAlignment = HorizontalAlignment.Stretch;
             b.VerticalAlignment = VerticalAlignment.Stretch;
+            b.Tag = vb;
             b.PreviewMouseLeftButtonDown += b_PreviewMouseLeftButtonDown;
             b.MouseDown += BOnMouseDown;
             
@@ -147,14 +148,15 @@ namespace TcpDash.UC
 
         private void UserDay_OnLoaded(object sender, RoutedEventArgs e)
         {
-            //var dataContext = DataContext;
-            //var mainViewModel = dataContext as MainViewModel;
-            //_mvm = mainViewModel;
+            var dataContext = DataContext;
+            var mainViewModel = dataContext as MainViewModel;
+            _mvm = mainViewModel;
         }
 
         private void GridMouseDown(object sender, MouseButtonEventArgs e)
         {
-           // throw new NotImplementedException();
+          
+
         }
 
         private void PreviewLeftMouseDown(object sender, MouseButtonEventArgs e)
@@ -202,6 +204,8 @@ namespace TcpDash.UC
             DateTime day = _mvm.CalendarViewModel.SelectedDay;
             //determine if it is "selectable"
             //show a window that allows you to book 
+            BookingWindow bw = new BookingWindow(_courtBookings.Court, day, _mvm, hour);
+            bw.ShowDialog();
 
 
             //if it is selectable, show a new window to do the booking
