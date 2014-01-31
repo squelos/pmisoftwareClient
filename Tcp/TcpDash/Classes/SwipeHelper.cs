@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace TcpDash
+namespace TcpDash.Classes
 {
     public class SwipeHelper
     {
@@ -29,7 +25,7 @@ namespace TcpDash
                     Task t = new Task(() =>
                     {
                         _running = true;
-                        Thread.Sleep(1000);
+                        Thread.Sleep(750);
                         Swipped = false;
                         _running = false;
                     });

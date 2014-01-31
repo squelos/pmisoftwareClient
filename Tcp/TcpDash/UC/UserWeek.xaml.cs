@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TcpDash.Business;
+using TcpDash.Classes;
+using TcpDash.UI;
 using TcpDash.ViewModel;
 
 namespace TcpDash.UC
@@ -107,8 +109,11 @@ namespace TcpDash.UC
             b.VerticalAlignment = VerticalAlignment.Stretch;
             TextBlock tb = new TextBlock();
             tb.TextWrapping = TextWrapping.Wrap;
+
+            b.PreviewMouseDown += BOnPreviewMouseDown;
             
             tb.Text = vb.Name;
+          
             b.Content = tb;
             b.Tag = vb;
             grid.Children.Add(b);
@@ -116,6 +121,14 @@ namespace TcpDash.UC
             Grid.SetRow(b, CalculateRowStart(vb));
             Grid.SetRowSpan(b, CalculateRowSpan(vb));
         }
+
+        private void BOnPreviewMouseDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        {
+            // here we show the deletion window
+            DeletionWindow win = new DeletionWindow((sender as Button).Tag as VisualBooking);
+            UIDispatcher.Instance.ShowDialogAndBlur(win);
+        }
+
 
         private int CalculateRowStart(VisualBooking vb)
         {
@@ -163,10 +176,6 @@ namespace TcpDash.UC
             //throw new NotImplementedException();
         }
 
-        private void GridMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            //
-        }
 
         private void PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -208,6 +217,9 @@ namespace TcpDash.UC
             int hour = (int)Math.Floor(hourDecimal);
 
             DateTime day = _courtBookings.WeeklyBookingses.DailyBookingses[col].DayDateTime;
+
+            BookingWindow bw = new BookingWindow(_courtBookings.Court, day, _mvm, hour);
+            UIDispatcher.Instance.ShowDialogAndBlur(bw);
             //determine if it is "selectable"
 
             //if it is selectable, show a new window to do the booking

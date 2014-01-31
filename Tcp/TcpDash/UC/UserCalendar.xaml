@@ -6,8 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
-              d:DesignHeight="1000" d:DesignWidth="1000" TouchDown="UserCalendar_OnTouchDown"
-             TouchMove="UserCalendar_OnTouchMove">
+              d:DesignHeight="1000" d:DesignWidth="1000">
     <GroupBox Header="Calendrier">
         <controls:MetroAnimatedTabControl x:Name="tab">
             <TabItem Header="Vue combinée">

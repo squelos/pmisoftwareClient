@@ -111,7 +111,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BookingWindow.xaml.cs">
+    <Compile Include="UI\BookingWindow.xaml.cs">
       <DependentUpon>BookingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Business\BookingManager.cs" />
@@ -120,8 +120,8 @@
     <Compile Include="Business\Utility.cs" />
     <Compile Include="Business\VisualBookings.cs" />
     <Compile Include="Business\WeeklyBookings.cs" />
-    <Compile Include="Jobs.cs" />
-    <Compile Include="SwipeHelper.cs" />
+    <Compile Include="Classes\Jobs.cs" />
+    <Compile Include="Classes\SwipeHelper.cs" />
     <Compile Include="UC\Extensions.cs" />
     <Compile Include="UC\UserCalendar.xaml.cs">
       <DependentUpon>UserCalendar.xaml</DependentUpon>
@@ -150,17 +150,20 @@
     <Compile Include="UC\UserWeek.xaml.cs">
       <DependentUpon>UserWeek.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UIDispatcher.cs" />
+    <Compile Include="Classes\UIDispatcher.cs" />
+    <Compile Include="UI\DeletionWindow.xaml.cs">
+      <DependentUpon>DeletionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CalendarViewModel.cs" />
     <Compile Include="ViewModel\DateTimeExtensions.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="VirtualKeyboardHelper.cs" />
-    <Compile Include="WindowAdmin.xaml.cs">
+    <Compile Include="Classes\VirtualKeyboardHelper.cs" />
+    <Compile Include="UI\WindowAdmin.xaml.cs">
       <DependentUpon>WindowAdmin.xaml</DependentUpon>
     </Compile>
-    <Page Include="BookingWindow.xaml">
+    <Page Include="UI\BookingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -216,7 +219,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowAdmin.xaml">
+    <Page Include="UI\DeletionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\WindowAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

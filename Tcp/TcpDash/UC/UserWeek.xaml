@@ -9,15 +9,15 @@
         <UC:UserDayHeader Margin="50,0,0,0"/>
         <StackPanel Orientation="Horizontal">
             <UC:UserTimeHeader/>
-            <Grid x:Name="grid" Background="Transparent" MouseDown="GridMouseDown"  PreviewMouseLeftButtonDown="PreviewMouseDown">
+            <Grid x:Name="grid" Background="Transparent" MouseDown="PreviewMouseDown" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="175"/>
+                    <ColumnDefinition Width="175"/>
+                    <ColumnDefinition Width="175"/>
+                    <ColumnDefinition Width="175"/>
+                    <ColumnDefinition Width="175"/>
+                    <ColumnDefinition Width="175"/>
+                    <ColumnDefinition Width="175"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>

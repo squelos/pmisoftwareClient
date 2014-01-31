@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight;
 using System;
 using System.Windows;
 using GalaSoft.MvvmLight.Command;
+using TcpDash.Classes;
 using VcpDriver;
 
 namespace TcpDash.ViewModel

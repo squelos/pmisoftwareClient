@@ -17,6 +17,7 @@ namespace TcpDash.Business
         private DateTime _start;
         private DateTime _end;
         private string _name;
+        private Booking _booking;
         
         #endregion
 
@@ -32,6 +33,7 @@ namespace TcpDash.Business
         /// <param name="b"></param>
         public VisualBooking(Booking b)
         {
+            _booking = b;
             //we create a Visual Booking from a booking coming from the DataModel
             if (b.BookingAggregation == null)
             {
@@ -112,6 +114,11 @@ namespace TcpDash.Business
         public int EndMin
         {
             get { return _end.Minute; }
+        }
+
+        public Booking Booking
+        {
+            get { return _booking; }
         }
         #endregion
 

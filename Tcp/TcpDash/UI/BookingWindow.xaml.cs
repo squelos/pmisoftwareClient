@@ -9,7 +9,7 @@ using TcpDash.Business;
 using TcpDash.ViewModel;
 using TcpDataModel;
 
-namespace TcpDash
+namespace TcpDash.UI
 {
     /// <summary>
     /// Interaction logic for BookingWindow.xaml
@@ -137,7 +137,12 @@ namespace TcpDash
 
         private void CbStartHour_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbStartHour.SelectedValue != null) _selectedStartHour = (int)cbStartHour.SelectedValue;
+            if (cbStartHour.SelectedValue != null)
+            {
+                _selectedStartHour = (int)cbStartHour.SelectedValue;
+                
+                cbEndHour.SelectedIndex = cbStartHour.SelectedIndex ;
+            }
         }
 
         private void CbStartMin_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

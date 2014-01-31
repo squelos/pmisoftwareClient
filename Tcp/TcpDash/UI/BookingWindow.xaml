@@ -1,11 +1,11 @@
-﻿<controls:MetroWindow x:Class="TcpDash.BookingWindow"
+﻿<controls:MetroWindow x:Class="TcpDash.UI.BookingWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       BorderBrush="OrangeRed" BorderThickness="1"
-        Title="BookingWindow" Height="450" Width="450"
+        Title="Réservation" Height="450" Width="450"
                       Margin="10,10,10,10" WindowStartupLocation="CenterScreen" MinWidth="300" MaxWidth="400"
-                      MinHeight="590" MaxHeight="610" DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
+                      MinHeight="610" MaxHeight="630" DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
     <Grid Margin="50,20,50,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -22,9 +22,9 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label x:Name="lDate" Grid.Row="0" FontSize="{StaticResource HeaderFontSize}"/>
-        <Label x:Name="lTerrain" Grid.Row="1"/>
+        <Label x:Name="lTerrain" Grid.Row="1" FontSize="{StaticResource SubHeaderFontSize}"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,10">
-            <Label Content="Début" Margin="0,0,10,0"/>
+            <Label Content="Début" Margin="0,0,10,0" FontSize="{StaticResource ContentFontSize}"/>
             <ComboBox x:Name="cbStartHour" Margin="0,0,0,0" SelectionChanged="CbStartHour_OnSelectionChanged"/>
             <Label Content="h"/>
             <ComboBox x:Name="cbStartMin" SelectionChanged="CbStartMin_OnSelectionChanged"/>
@@ -37,12 +37,12 @@
             <ComboBox x:Name="cbEndMin" SelectionChanged="CbEndMin_OnSelectionChanged"/>
             <Label Content="min"/>
         </StackPanel>
-        <Label Content="Premier joueur : " Grid.Row="4" Margin="0,10,0,10"/>
+        <Label Content="Premier joueur : " Grid.Row="4" Margin="0,10,0,10" FontSize="{StaticResource MenuFontSize}"/>
         <controls:ProgressRing x:Name="ProgressRing" Grid.Row="5" IsActive="True" />
-        <Label x:Name="lFirstPlayer" Grid.Row="6" Margin="0,10,0,10" Content="Attente scan"/>
+        <Label x:Name="lFirstPlayer" Grid.Row="6" Margin="0,10,0,10" Content="Attente scan" FontSize="{StaticResource MenuFontSize}" HorizontalAlignment="Center"/>
         <controls:ToggleSwitch  HorizontalAlignment="Center" MinWidth="150" OnLabel="Filmée" OffLabel="Non filmée" Checked="ToggleSwitch_OnChecked" x:Name="ToggleSwitch" Grid.Row="7"/>
         <StackPanel Orientation="Horizontal" Grid.Row="8">
-            <Label Content="Second joueur : " Margin="0,10,0,10"/>
+            <Label Content="Second joueur : " Margin="0,10,0,10" FontSize="{StaticResource MenuFontSize}"/>
             <TextBox controls:TextboxHelper.Watermark="luke" controls:TextboxHelper.ClearTextButton="True" x:Name="sub" MinWidth="100" Margin="10,10,10,10" TextChanged="TextBoxBase_OnTextChanged"/>
         </StackPanel>
         <ComboBox x:Name="cbSecondPlayer" Grid.Row="9" Margin="0,10,0,10" SelectionChanged="CbSecondPlayer_OnSelectionChanged"/>

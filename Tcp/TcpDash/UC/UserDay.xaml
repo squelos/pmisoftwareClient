@@ -9,9 +9,9 @@
         
         <StackPanel Orientation="Horizontal">
             <UC:UserTimeHeader/>
-            <Grid x:Name="grid" Background="Transparent" MouseDown="GridMouseDown" PreviewMouseLeftButtonDown="PreviewLeftMouseDown">
+            <Grid x:Name="grid" Background="Transparent" MouseDown="PreviewLeftMouseDown">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="175"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>

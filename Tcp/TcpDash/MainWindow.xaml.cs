@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using TcpDash.Business;
+using TcpDash.Classes;
+using TcpDash.UI;
 using TcpDash.ViewModel;
 
 namespace TcpDash

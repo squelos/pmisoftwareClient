@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
+using TcpDash.Classes;
 using TcpDash.ViewModel;
 
 namespace TcpDash.UC
@@ -71,7 +72,7 @@ namespace TcpDash.UC
                      _helper.Swipped = true;
                 }
             }
-            e.Handled = true;
+            e.Handled = false;
         }
 
         private void AnimatedTab_OnTouchDown(object sender, TouchEventArgs e)

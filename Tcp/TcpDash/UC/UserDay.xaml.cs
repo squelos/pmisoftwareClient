@@ -6,6 +6,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using TcpDash.Business;
+using TcpDash.Classes;
+using TcpDash.UI;
 using TcpDash.ViewModel;
 using TcpDataModel;
 
@@ -86,10 +88,13 @@ namespace TcpDash.UC
             b.HorizontalAlignment = HorizontalAlignment.Stretch;
             b.VerticalAlignment = VerticalAlignment.Stretch;
             b.Tag = vb;
-            b.PreviewMouseLeftButtonDown += b_PreviewMouseLeftButtonDown;
-            b.MouseDown += BOnMouseDown;
+
+            b.PreviewMouseDown += b_PreviewMouseDown;
+
             
             TextBlock tb = new TextBlock();
+
+            
             tb.TextWrapping = TextWrapping.Wrap;
             tb.Text = vb.Name;
             b.Content = tb;
@@ -100,15 +105,13 @@ namespace TcpDash.UC
             Grid.SetRowSpan(b, CalculateRowSpan(vb));
         }
 
-        private void BOnMouseDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        void b_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            mouseButtonEventArgs.Handled = true;
+            // here we show the deletion window
+            DeletionWindow win = new DeletionWindow((sender as Button).Tag as VisualBooking);
+            UIDispatcher.Instance.ShowDialogAndBlur(win);
         }
 
-        void b_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled = true;
-        }
 
         private int CalculateRowStart(VisualBooking vb)
         {
@@ -156,11 +159,7 @@ namespace TcpDash.UC
             _mvm = mainViewModel;
         }
 
-        private void GridMouseDown(object sender, MouseButtonEventArgs e)
-        {
-          
-
-        }
+   
 
         private void PreviewLeftMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -209,11 +208,7 @@ namespace TcpDash.UC
             //show a window that allows you to book 
             BookingWindow bw = new BookingWindow(_courtBookings.Court, day, _mvm, hour);
             UIDispatcher.Instance.ShowDialogAndBlur(bw);
-            //win.Background = Brushes.Black;
-            
-
-            //if it is selectable, show a new window to do the booking
-
+            e.Handled = false;
         }
     }
 }
