@@ -5,11 +5,12 @@
                       ShowMinButton="False" ShowCloseButton="False"
                        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                        xmlns:behaviours="http://metro.mahapps.com/winfx/xaml/shared"
+                      WindowStyle="None" IgnoreTaskbarOnMaximize="True"
                       Margin="10,10,10,10" WindowStartupLocation="CenterScreen" WindowState="Maximized"
                       Closing="MetroWindow_Closing" Loaded="MetroWindow_Loaded"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
           DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
-        Title="MainWindow" Height="700" Width="1000">
+        Title="MainWindow" Topmost="True">
     <i:Interaction.Behaviors>
         <behaviours:BorderlessWindowBehavior ResizeWithGrip="True" AllowsTransparency="False" />
     </i:Interaction.Behaviors>

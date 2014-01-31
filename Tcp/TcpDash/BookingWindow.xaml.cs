@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -33,6 +32,7 @@ namespace TcpDash
         private Player _firstPlayer;
         private Player _secondPlayer;
         private string _playerSearch;
+        private bool _filmed = false;
 
         private BookingManager _bm = BookingManager.Instance;
         private Court _currentCourt;
@@ -42,7 +42,6 @@ namespace TcpDash
         private int _desiredHour;
 
         #endregion
-
 
         #region ctor
         public BookingWindow(Court c, DateTime d, MainViewModel mvm, int desiredHour)
@@ -79,13 +78,24 @@ namespace TcpDash
             lTerrain.Content = _currentCourt.number;
 
             _mvm.BadgeScanner.BadgeScanned += BadgeScanner_BadgeScanned;
-
         }
 
         void BadgeScanner_BadgeScanned(int badgeId)
         {
             _firstPlayer = _bm.Players.FirstOrDefault(player => player.Badge.Any(badge => badge.ID == badgeId));
-            lFirstPlayer.Content = _firstPlayer;
+            lFirstPlayer.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle,
+                new ThreadStart(() =>
+                {
+                    if (_firstPlayer == null)
+                    {
+                        lFirstPlayer.Content = "Badge non assigné";
+                    }
+                    else
+                    {
+                        lFirstPlayer.Content = _firstPlayer;
+                    }
+                    ProgressRing.Visibility = Visibility.Collapsed;
+                }));
         }
 
         #endregion
@@ -107,11 +117,14 @@ namespace TcpDash
         #region events
         private void ValidateClick(object sender, RoutedEventArgs e)
         {
-            
+
             //we try to book
             //first verify if all is filled
             //if not, show error message
-            bool result = _bm.TryBooking(_dayDate,_selectedStartHour, _selectedStartMin, _selectedEndHour, _selectedEndMin, _currentCourt, _firstPlayer, _secondPlayer);
+            //for test only HACKS
+            _firstPlayer = _secondPlayer;
+            int result = _bm.TryBooking(_dayDate, _selectedStartHour, _selectedStartMin, _selectedEndHour,
+                _selectedEndMin, _currentCourt, _firstPlayer, _secondPlayer, _filmed, null);
             //if not possible show error message
 
             //else : book and exit
@@ -154,7 +167,6 @@ namespace TcpDash
             _mvm.BadgeScanner.BadgeScanned -= BadgeScanner_BadgeScanned;
         }
 
-
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _playerSearch = sub.Text;
@@ -173,6 +185,11 @@ namespace TcpDash
                             player.lastName.Contains(_playerSearch));
                 //cbSecondPlayer.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new ThreadStart(() => cbSecondPlayer.item))
             }
+        }
+
+        private void ToggleSwitch_OnChecked(object sender, RoutedEventArgs e)
+        {
+            _filmed = (bool) ToggleSwitch.IsChecked;
         }
     }
 }

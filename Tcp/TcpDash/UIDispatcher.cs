@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media.Effects;
 using System.Windows.Threading;
+using MahApps.Metro.Controls;
 
 namespace TcpDash
 {
@@ -47,6 +50,14 @@ namespace TcpDash
                 _uiElement = element;
                 return true;
             }
+        }
+
+        public bool? ShowDialogAndBlur(Window win)
+        {
+            _uiElement.Effect = new BlurEffect();
+            bool? result = win.ShowDialog();
+            _uiElement.Effect = null;
+            return result;
         }
 
         public MainWindow GetMainWindow

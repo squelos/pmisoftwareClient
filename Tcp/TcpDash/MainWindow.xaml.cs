@@ -33,8 +33,6 @@ namespace TcpDash
                 //we cancel
                 e.Cancel = true;
             }
-
-            
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)

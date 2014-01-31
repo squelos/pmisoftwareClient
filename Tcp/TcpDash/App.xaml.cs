@@ -26,10 +26,10 @@ namespace TcpDash
                 new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.AttachTabTip()));
             //EventManager.RegisterClassHandler(typeof(ComboBox), ComboBox.GotFocusEvent,
             //    new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.AttachTabTip()));
-            //EventManager.RegisterClassHandler(typeof(TextBox), TextBox.LostFocusEvent,
-            //    new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.RemoveTabTip()));
-            //EventManager.RegisterClassHandler(typeof(PasswordBox), PasswordBox.LostFocusEvent,
-            //    new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.RemoveTabTip()));
+            EventManager.RegisterClassHandler(typeof(TextBox), TextBox.LostFocusEvent,
+                new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.RemoveTabTip()));
+            EventManager.RegisterClassHandler(typeof(PasswordBox), PasswordBox.LostFocusEvent,
+                new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.RemoveTabTip()));
             //EventManager.RegisterClassHandler(typeof(ComboBox), ComboBox.LostFocusEvent,
             //    new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.RemoveTabTip()));
         }

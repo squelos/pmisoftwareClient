@@ -47,6 +47,8 @@ namespace TcpDataModel
         public virtual DbSet<AuthorizedTagsVersion> AuthorizedTagsVersion { get; set; }
         public virtual DbSet<authorizedUserTags> authorizedUserTags { get; set; }
         public virtual DbSet<Table> Table { get; set; }
+        public virtual DbSet<LogEntry> LogEntry { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     
         public virtual ObjectResult<Nullable<bool>> dummyQuery()
         {
@@ -178,6 +180,86 @@ namespace TcpDataModel
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual int addLogEntry(string entryDate, string readerName, Nullable<int> tagNumber, Nullable<int> readerResponse)
+        {
+            var entryDateParameter = entryDate != null ?
+                new ObjectParameter("entryDate", entryDate) :
+                new ObjectParameter("entryDate", typeof(string));
+    
+            var readerNameParameter = readerName != null ?
+                new ObjectParameter("readerName", readerName) :
+                new ObjectParameter("readerName", typeof(string));
+    
+            var tagNumberParameter = tagNumber.HasValue ?
+                new ObjectParameter("tagNumber", tagNumber) :
+                new ObjectParameter("tagNumber", typeof(int));
+    
+            var readerResponseParameter = readerResponse.HasValue ?
+                new ObjectParameter("readerResponse", readerResponse) :
+                new ObjectParameter("readerResponse", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("addLogEntry", entryDateParameter, readerNameParameter, tagNumberParameter, readerResponseParameter);
+        }
+    
+        public virtual ObjectResult<mostBookedCourtsForPlayerCategory_Result> mostBookedCourtsForPlayerCategory(Nullable<int> category_Id)
+        {
+            var category_IdParameter = category_Id.HasValue ?
+                new ObjectParameter("Category_Id", category_Id) :
+                new ObjectParameter("Category_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<mostBookedCourtsForPlayerCategory_Result>("mostBookedCourtsForPlayerCategory", category_IdParameter);
+        }
+    
+        public virtual int mostBookedCourtsForPlayerCategory1(Nullable<int> category_Id)
+        {
+            var category_IdParameter = category_Id.HasValue ?
+                new ObjectParameter("Category_Id", category_Id) :
+                new ObjectParameter("Category_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("mostBookedCourtsForPlayerCategory1", category_IdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> tryPeriodBooking(string name, Nullable<bool> isSpecial, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<bool> isFilmed, Nullable<int> bookingAggregation, Nullable<int> courtId, Nullable<int> player1, Nullable<int> player2)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var isSpecialParameter = isSpecial.HasValue ?
+                new ObjectParameter("isSpecial", isSpecial) :
+                new ObjectParameter("isSpecial", typeof(bool));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            var isFilmedParameter = isFilmed.HasValue ?
+                new ObjectParameter("isFilmed", isFilmed) :
+                new ObjectParameter("isFilmed", typeof(bool));
+    
+            var bookingAggregationParameter = bookingAggregation.HasValue ?
+                new ObjectParameter("bookingAggregation", bookingAggregation) :
+                new ObjectParameter("bookingAggregation", typeof(int));
+    
+            var courtIdParameter = courtId.HasValue ?
+                new ObjectParameter("courtId", courtId) :
+                new ObjectParameter("courtId", typeof(int));
+    
+            var player1Parameter = player1.HasValue ?
+                new ObjectParameter("player1", player1) :
+                new ObjectParameter("player1", typeof(int));
+    
+            var player2Parameter = player2.HasValue ?
+                new ObjectParameter("player2", player2) :
+                new ObjectParameter("player2", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("tryPeriodBooking", nameParameter, isSpecialParameter, startDateParameter, endDateParameter, isFilmedParameter, bookingAggregationParameter, courtIdParameter, player1Parameter, player2Parameter);
         }
     }
 }

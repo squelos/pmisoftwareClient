@@ -43,6 +43,8 @@
         <EntityTypeShape EntityType="entity.AuthorizedTagsVersion" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="entity.authorizedUserTags" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="entity.Table" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="entity.LogEntry" Width="1.5" PointX="10.375" PointY="11.75" />
+        <EntityTypeShape EntityType="entity.sysdiagrams" Width="1.5" PointX="3.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -93,6 +93,12 @@
     <Compile Include="getFilmedHours_Result.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="LogEntry.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mostBookedCourtsForPlayerCategory_Result.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="News.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
@@ -136,6 +142,9 @@
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Status.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Table.cs">

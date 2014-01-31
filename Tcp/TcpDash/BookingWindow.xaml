@@ -5,9 +5,10 @@
                       BorderBrush="OrangeRed" BorderThickness="1"
         Title="BookingWindow" Height="450" Width="450"
                       Margin="10,10,10,10" WindowStartupLocation="CenterScreen" MinWidth="300" MaxWidth="400"
-                      MinHeight="560" MaxHeight="590" DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
+                      MinHeight="590" MaxHeight="610" DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
     <Grid Margin="50,20,50,20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -31,23 +32,25 @@
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,10">
             <Label Content="Fin" Margin="0,0,10,0"/>
-            <ComboBox x:Name="cbEndHour" Margin="18,0,10,0" SelectionChanged="CbEndHour_OnSelectionChanged"/>
+            <ComboBox x:Name="cbEndHour" Margin="18,0,0,0" SelectionChanged="CbEndHour_OnSelectionChanged"/>
+            <Label Content="h"/>
             <ComboBox x:Name="cbEndMin" SelectionChanged="CbEndMin_OnSelectionChanged"/>
+            <Label Content="min"/>
         </StackPanel>
         <Label Content="Premier joueur : " Grid.Row="4" Margin="0,10,0,10"/>
         <controls:ProgressRing x:Name="ProgressRing" Grid.Row="5" IsActive="True" />
         <Label x:Name="lFirstPlayer" Grid.Row="6" Margin="0,10,0,10" Content="Attente scan"/>
-
-        <StackPanel Orientation="Horizontal" Grid.Row="7">
+        <controls:ToggleSwitch  HorizontalAlignment="Center" MinWidth="150" OnLabel="Filmée" OffLabel="Non filmée" Checked="ToggleSwitch_OnChecked" x:Name="ToggleSwitch" Grid.Row="7"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="8">
             <Label Content="Second joueur : " Margin="0,10,0,10"/>
-            <TextBox x:Name="sub" MinWidth="100" Margin="10,10,10,10" TextChanged="TextBoxBase_OnTextChanged"/>
+            <TextBox controls:TextboxHelper.Watermark="luke" controls:TextboxHelper.ClearTextButton="True" x:Name="sub" MinWidth="100" Margin="10,10,10,10" TextChanged="TextBoxBase_OnTextChanged"/>
         </StackPanel>
-        <ComboBox x:Name="cbSecondPlayer" Grid.Row="8" Margin="0,10,0,10" SelectionChanged="CbSecondPlayer_OnSelectionChanged"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="9" Margin="0,10,0,10" HorizontalAlignment="Right">
+        <ComboBox x:Name="cbSecondPlayer" Grid.Row="9" Margin="0,10,0,10" SelectionChanged="CbSecondPlayer_OnSelectionChanged"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="10" Margin="0,10,0,10" HorizontalAlignment="Right">
             <Button  ToolTip="Valider" Style="{DynamicResource MetroCircleButtonStyle}" Height="45" Width="45" Click="ValidateClick" IsDefault="True">
                 <Rectangle Width="22" Height="22">
                     <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_check}" />
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_check}"/>
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
@@ -59,6 +62,6 @@
                 </Rectangle>
             </Button>
         </StackPanel>
-        <TextBlock Grid.Row="10" x:Name="errorTextblock"/>
+        <TextBlock Grid.Row="11" x:Name="errorTextblock"/>
     </Grid>
 </controls:MetroWindow>

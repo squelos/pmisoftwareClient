@@ -28,7 +28,6 @@ namespace VcpDriver
             }
             else
             {
-                
                 List<SerialPort> existingPorts = _serialsPorts;
                 string[] avail = GetAvailablePorts();
 
@@ -36,7 +35,6 @@ namespace VcpDriver
                 {
                     if (existingPorts.Any(port => port.PortName == s))
                     {
-
                         existingPorts.Remove(existingPorts.Single(port => port.PortName == s));
                     }
                 }

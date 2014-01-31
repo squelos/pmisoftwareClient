@@ -244,10 +244,9 @@ namespace TcpDash.Business
                 RefreshProxy();
                 RaiseChanged();
             });
-
         }
 
-        public bool TryBooking(DateTime day, int sHour, int sMin, int eHour, int eMin, Court court, Player p1, Player p2)
+        public int TryBooking(DateTime day, int sHour, int sMin, int eHour, int eMin, Court court, Player p1, Player p2, bool filmed, int? bookingAggregId)
         {
             DateTime start = new DateTime(day.Year, day.Month, day.Day, sHour, sMin, 0);
             DateTime end = new DateTime(day.Year, day.Month, day.Day, eHour, eMin, 0);
@@ -255,14 +254,10 @@ namespace TcpDash.Business
             {
                 end.AddDays(1);
             }
-           
-            //try to book
-            if(_container.BookingJeu.Any(booking => booking.Court == court && booking.start))
-
-            //check to see if any bookings overlap on that time
-
-            //also check to see if the player 1 is allowed to book
+            var res = _container.tryPeriodBooking("Perso", false, start, end, filmed, bookingAggregId, court.ID, p1.ID,
+                p2.ID);
             
+            return (int)res.FirstOrDefault();
         }
         #endregion
     }

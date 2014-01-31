@@ -3,8 +3,11 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Effects;
 using TcpDash.Business;
 using TcpDash.ViewModel;
+using TcpDataModel;
 
 namespace TcpDash.UC
 {
@@ -205,8 +208,9 @@ namespace TcpDash.UC
             //determine if it is "selectable"
             //show a window that allows you to book 
             BookingWindow bw = new BookingWindow(_courtBookings.Court, day, _mvm, hour);
-            bw.ShowDialog();
-
+            UIDispatcher.Instance.ShowDialogAndBlur(bw);
+            //win.Background = Brushes.Black;
+            
 
             //if it is selectable, show a new window to do the booking
 
