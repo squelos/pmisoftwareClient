@@ -4,8 +4,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       BorderBrush="OrangeRed" BorderThickness="1"
         Title="Suppression" Height="450" Width="450"
-                      Margin="10,10,10,10" WindowStartupLocation="CenterScreen" MinWidth="300" MaxWidth="400"
-                      MinHeight="300" MaxHeight="310" >
+                      Margin="10,10,10,10" WindowStartupLocation="CenterScreen" MinHeight="500" >
     <Grid Margin="15,15,15,15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -29,17 +28,18 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Début :" Grid.Column="0" Grid.Row="0" FontSize="{StaticResource MenuFontSize}"/>
-            <Label Content="Fin :" Grid.Column="0" Grid.Row="1" FontSize="{StaticResource MenuFontSize}"/>
-            <Label x:Name="lStartTime" Grid.Column="1" Grid.Row="0"/>
-            <Label x:Name="lEndTime" Grid.Column="1" Grid.Row="1"/>
+            <Label Content="Début :" Grid.Column="0" Grid.Row="0" FontSize="{StaticResource MenuFontSize}" VerticalAlignment="Center"/>
+            <Label Content="Fin :" Grid.Column="0" Grid.Row="1" FontSize="{StaticResource MenuFontSize}" VerticalAlignment="Center"/>
+            <Label x:Name="lStartTime" Grid.Column="1" Grid.Row="0" FontSize="{StaticResource HeaderFontSize}"/>
+            <Label x:Name="lEndTime" Grid.Column="1" Grid.Row="1" FontSize="{StaticResource HeaderFontSize}"/>
         </Grid>
         <Label x:Name="lP1" Grid.Row="3"/>
         <Label x:Name="lP2" Grid.Row="4"/>
         <TextBlock x:Name="TextBlock" Text="Pour supprimer la réservation scannez un des badges des joueurs" FontSize="{StaticResource FlatButtonFontSize}" Grid.Row="5" TextWrapping="Wrap"/>
-        <controls:ProgressRing x:Name="Ring" IsActive="True" Grid.Row="6" />
-        <StackPanel Orientation="Horizontal" Grid.Row="7" HorizontalAlignment="Right">
-            <Button  ToolTip="Supprimer" Style="{DynamicResource MetroCircleButtonStyle}" Height="45" Width="45"  IsDefault="True" Click="DeleteClick">
+        <Label x:Name="lScannedUser" Grid.Row="6" FontSize="{StaticResource HeaderFontSize}"/>
+        <controls:ProgressRing x:Name="Ring" IsActive="True" Grid.Row="7" />
+        <StackPanel Orientation="Horizontal" Grid.Row="8" HorizontalAlignment="Right">
+            <Button  ToolTip="Supprimer" Style="{DynamicResource MetroCircleButtonStyle}" Height="45" Width="45"  IsDefault="True" IsEnabled="False" Click="DeleteClick" x:Name="bDelete">
                 <Rectangle Width="22" Height="22">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />

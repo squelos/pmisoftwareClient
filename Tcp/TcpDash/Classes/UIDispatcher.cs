@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace TcpDash.Classes
 {
@@ -49,13 +53,39 @@ namespace TcpDash.Classes
 
         public bool? ShowDialogAndBlur(Window win)
         {
+            OverlayMainWindow();
             BlurEffect blur = new BlurEffect();
-            blur.Radius = 7;
+            blur.Radius = 8;
             _uiElement.Effect = blur;
+            Task t = new Task(() =>
+            {
+                Thread.Sleep(120000);
+                _uiElement.Dispatcher.Invoke(win.Close);
+                //win.Close();
+            });
+            t.Start();
 
             bool? result = win.ShowDialog();
             _uiElement.Effect = null;
+            HideOverlayMainWindow();
             return result;
+        }
+
+        public void OverlayMainWindow()
+        {
+            _uiElement.News.Visibility = Visibility.Hidden;
+            _uiElement.ShowOverlayAsync();
+        }
+
+        public void HideOverlayMainWindow()
+        {
+            _uiElement.HideOverlayAsync();
+            _uiElement.News.Visibility = Visibility.Visible;
+        }
+
+        public void ShowMessageDialog(MetroWindow win,string title, string msg)
+        {
+            win.ShowMessageAsync(title, msg, MessageDialogStyle.Affirmative);
         }
 
         public MainWindow GetMainWindow

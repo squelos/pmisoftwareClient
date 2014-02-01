@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using TcpDash.Business;
+using TcpDash.Classes;
 using TcpDash.ViewModel;
 using TcpDataModel;
 
@@ -82,7 +84,7 @@ namespace TcpDash.UI
 
         void BadgeScanner_BadgeScanned(int badgeId)
         {
-            _firstPlayer = _bm.Players.FirstOrDefault(player => player.Badge.Any(badge => badge.ID == badgeId));
+            _firstPlayer = _bm.Players.FirstOrDefault(player => player.Badge.Any(badge => badge.number == badgeId));
             lFirstPlayer.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle,
                 new ThreadStart(() =>
                 {
@@ -117,16 +119,70 @@ namespace TcpDash.UI
         #region events
         private void ValidateClick(object sender, RoutedEventArgs e)
         {
-
+            bool errors = false;
             //we try to book
             //first verify if all is filled
             //if not, show error message
-            //for test only HACKS
-            _firstPlayer = _secondPlayer;
-            int result = _bm.TryBooking(_dayDate, _selectedStartHour, _selectedStartMin, _selectedEndHour,
-                _selectedEndMin, _currentCourt, _firstPlayer, _secondPlayer, _filmed, null);
-            //if not possible show error message
+            if (_dayDate < DateTime.Now.Date)
+            {
+                errors = true;
+                UIDispatcher.Instance.ShowMessageDialog(this,"Erreur", "Impossible de réserver dans le passé");
+            }
+            if (_firstPlayer == null)
+            {
+                errors = true;
+                UIDispatcher.Instance.ShowMessageDialog(this,"Erreur", "Aucun premier joueur n'est sélectionné");
+                return;
+            }
+            if (_secondPlayer == null)
+            {
+                errors = true;
+                UIDispatcher.Instance.ShowMessageDialog(this,"Erreur", "Aucun second joueur n'est sélectionné");
+                return;
+            }
+            DateTime start = new DateTime(_dayDate.Year, _dayDate.Month, _dayDate.Day, _selectedStartMin, _selectedStartMin, 0);
+            DateTime end = new DateTime(_dayDate.Year, _dayDate.Month, _dayDate.Day, _selectedEndHour, _selectedEndMin, 0);
+            if (start.AddHours(1) != end)
+            {
+                //then the first player must be an admin
+                if (_firstPlayer.Status.Id < 2)
+                {
+                    errors = true;
+                    UIDispatcher.Instance.ShowMessageDialog(this,"Erreur", "Seul un administrateur peut effectuer des réservations de plus d'une heure");
+                }
+            }
 
+
+            //for test only HACKS
+            if (errors)
+            {
+                return;
+            }
+
+            
+            int result = _bm.TryBooking(_dayDate, _selectedStartHour, _selectedStartMin, _selectedEndHour,
+                _selectedEndMin, _currentCourt, _firstPlayer, _secondPlayer, _filmed,null);
+            //if not possible show error message
+           
+
+            switch (result)
+            {
+                case 1 :
+                    UIDispatcher.Instance.ShowMessageDialog(this,"Réservation effectuée avec succès", "Votre réservation a été effectuée avec succès");
+                    break;
+                case 2:
+                    UIDispatcher.Instance.ShowMessageDialog(this,"Echec", "Le terrain n'existe pas");
+                    break;
+                case 3:
+                    UIDispatcher.Instance.ShowMessageDialog(this,"Echec", "Le quota de réservations pour la semaine a été dépassé");
+                    break;
+                case 4:
+                    UIDispatcher.Instance.ShowMessageDialog(this,"Echec", "Une réservation sur ce créneau horaire est déjà existante");
+                    break;
+                case 5:
+                    UIDispatcher.Instance.ShowMessageDialog(this,"Echec", "Un des joueurs n'a pas payé pour le semestre");
+                    break;
+            }
             //else : book and exit
         }
 
@@ -174,7 +230,7 @@ namespace TcpDash.UI
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            _playerSearch = sub.Text;
+            _playerSearch = sub.Text.ToLower();
 
 
             if (_playerSearch.Length < 4)
@@ -186,8 +242,8 @@ namespace TcpDash.UI
                 cbSecondPlayer.ItemsSource =
                     _playerList.Where(
                         player =>
-                            player.firstName.Contains(_playerSearch) ||
-                            player.lastName.Contains(_playerSearch));
+                            player.firstName.ToLower().Contains(_playerSearch) ||
+                            player.lastName.ToLower().Contains(_playerSearch));
                 //cbSecondPlayer.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new ThreadStart(() => cbSecondPlayer.item))
             }
         }

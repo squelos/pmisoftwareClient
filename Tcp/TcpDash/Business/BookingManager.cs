@@ -91,7 +91,6 @@ namespace TcpDash.Business
         {
             //in here we fill the courtBooking with the appropriate data (from the selected Day and week)
             //get  the relevant Bookings for each day of the week
-            //TODO cache in order to improve performance
             List<Booking> nonRecurring =
                 (_proxiedBookings.Where(
                     booking =>
@@ -138,9 +137,11 @@ namespace TcpDash.Business
             _startProxy = minStart;
             _endProxy = maxDate;
 
+            _container = new entityContainer();
+
             _proxiedBookings =
                 _container.BookingJeu.Where(booking => booking.start > minStart && booking.start < maxDate);
-            _players = _container.PlayerJeu.Include(player => player.Badge).ToList();
+            _players = _container.PlayerJeu.Include(player => player.Badge).Include(player => player.Status).ToList();
         }
         private void RefreshProxy(DateTime s, DateTime e)
         {
@@ -259,6 +260,17 @@ namespace TcpDash.Business
                 p2.ID);
             
             return (int)res.FirstOrDefault();
+        }
+
+        public bool DeleteBooking(Booking b)
+        {
+            bool ret = false;
+            
+                _container.BookingJeu.Remove(b);
+                _container.SaveChanges();
+                Refresh();
+                ret = true;
+            return ret;
         }
         #endregion
     }
