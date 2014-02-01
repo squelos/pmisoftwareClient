@@ -19,9 +19,14 @@ namespace TcpDash.Business
     public sealed class BookingManager
     {
         #region singleton
+
         private static readonly Lazy<BookingManager> lazy = new Lazy<BookingManager>(() => new BookingManager());
+
         public static BookingManager Instance
-        { get { return lazy.Value; } }
+        {
+            get { return lazy.Value; }
+        }
+
         private BookingManager()
         {
             Init();
@@ -44,9 +49,21 @@ namespace TcpDash.Business
 
         private List<Player> _players;
 
+        private int _working;
+
         #endregion
 
         #region getters/setters
+
+        public int Working
+        {
+            get { return _working; }
+            set
+            {
+                _working = value;
+                RaiseWorkingChanged();
+            }
+        }
 
         public ObservableCollection<CourtBookings> CourtBookingses
         {
@@ -96,8 +113,9 @@ namespace TcpDash.Business
                     booking =>
                         booking.Court.ID == cb.Court.ID && booking.BookingAggregation == null &&
                         booking.start > _firstDayOfWeek &&
-                        booking.end < _lastDayOfWeek)).Include(booking => booking.Player1).Include(booking => booking.Player2)
-                        .Include(booking => booking.BookingAggregation).ToList();
+                        booking.end < _lastDayOfWeek)).Include(booking => booking.Player1)
+                    .Include(booking => booking.Player2)
+                    .Include(booking => booking.BookingAggregation).ToList();
 
             //transform them into Visual Bookings
             List<VisualBooking> vbList = new List<VisualBooking>();
@@ -143,6 +161,7 @@ namespace TcpDash.Business
                 _container.BookingJeu.Where(booking => booking.start > minStart && booking.start < maxDate);
             _players = _container.PlayerJeu.Include(player => player.Badge).Include(player => player.Status).ToList();
         }
+
         private void RefreshProxy(DateTime s, DateTime e)
         {
             _startProxy = s;
@@ -158,7 +177,10 @@ namespace TcpDash.Business
 
         public delegate void ChangedEventHandler(object sender, EventArgs e);
 
+        public delegate void WorkingEventHandler(object sender, int value);
+
         public event ChangedEventHandler Changed;
+        public event WorkingEventHandler WorkingChanged;
 
         private void RaiseChanged()
         {
@@ -168,9 +190,18 @@ namespace TcpDash.Business
             }
         }
 
+        private void RaiseWorkingChanged()
+        {
+            if (WorkingChanged != null)
+            {
+                WorkingChanged(this, _working);
+            }
+        }
+
         #endregion
 
         #region publics
+
         /// <summary>
         ///  Call this method when the selected date has changed
         /// </summary>
@@ -179,7 +210,7 @@ namespace TcpDash.Business
             _selectedDay = selectedD;
             _firstDayOfWeek = first;
             _lastDayOfWeek = last;
-            if (first < _startProxy)
+            if (first < _startProxy || last > _endProxy)
             {
                 RefreshProxy(first, last);
             }
@@ -217,7 +248,6 @@ namespace TcpDash.Business
                     {
                         FillCourtBooking(tmpBooking);
                     }
-                    //TODO grab a snapshot of the DB for the caching
                     CourtBookingses = new ObservableCollection<CourtBookings>(tmpBookings);
                 }
                 RefreshProxy();
@@ -240,7 +270,6 @@ namespace TcpDash.Business
                     {
                         FillCourtBooking(tmpBooking);
                     }
-                    //TODO grab a snapshot of the DB for the caching
                     CourtBookingses = new ObservableCollection<CourtBookings>(tmpBookings);
                 }
                 RefreshProxy();
@@ -248,7 +277,8 @@ namespace TcpDash.Business
             });
         }
 
-        public int TryBooking(DateTime day, int sHour, int sMin, int eHour, int eMin, Court court, Player p1, Player p2, bool filmed, int? bookingAggregId)
+        public int TryBooking(DateTime day, int sHour, int sMin, int eHour, int eMin, Court court, Player p1, Player p2,
+            bool filmed, int? bookingAggregId)
         {
             DateTime start = new DateTime(day.Year, day.Month, day.Day, sHour, sMin, 0);
             DateTime end = new DateTime(day.Year, day.Month, day.Day, eHour, eMin, 0);
@@ -258,20 +288,28 @@ namespace TcpDash.Business
             }
             var res = _container.tryPeriodBooking("Perso", false, start, end, filmed, bookingAggregId, court.ID, p1.ID,
                 p2.ID);
-            
-            return (int)res.FirstOrDefault();
+
+            int ret = (int) res.FirstOrDefault();
+            if (ret == 1)
+            {
+                Refresh();
+            }
+
+
+            return ret;
         }
 
         public bool DeleteBooking(Booking b)
         {
             bool ret = false;
-            
-                _container.BookingJeu.Remove(b);
-                _container.SaveChanges();
-                Refresh();
-                ret = true;
+
+            _container.BookingJeu.Remove(b);
+            _container.SaveChanges();
+            Refresh();
+            ret = true;
             return ret;
         }
+
         #endregion
     }
 }

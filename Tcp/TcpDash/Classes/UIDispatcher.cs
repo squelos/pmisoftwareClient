@@ -9,23 +9,26 @@ using MahApps.Metro.Controls.Dialogs;
 
 namespace TcpDash.Classes
 {
-    class UIDispatcher
+    internal class UIDispatcher
     {
-
         #region members
 
         private MainWindow _uiElement;
+
         #endregion
 
         #region singleton
+
         private static readonly Lazy<UIDispatcher> lazy =
             new Lazy<UIDispatcher>(() => new UIDispatcher());
 
-        public static UIDispatcher Instance { get { return lazy.Value; } }
+        public static UIDispatcher Instance
+        {
+            get { return lazy.Value; }
+        }
 
         private UIDispatcher()
         {
-
         }
 
         #endregion
@@ -83,9 +86,16 @@ namespace TcpDash.Classes
             _uiElement.News.Visibility = Visibility.Visible;
         }
 
-        public void ShowMessageDialog(MetroWindow win,string title, string msg)
+        public void ShowMessageDialog(MetroWindow win, string title, string msg)
         {
-            win.ShowMessageAsync(title, msg, MessageDialogStyle.Affirmative);
+            if (_uiElement.CheckAccess())
+            {
+                win.ShowMessageAsync(title, msg, MessageDialogStyle.Affirmative);
+            }
+            else
+            {
+                _uiElement.Dispatcher.Invoke(() => win.ShowMessageAsync(title, msg, MessageDialogStyle.Affirmative));
+            }
         }
 
         public MainWindow GetMainWindow
@@ -103,13 +113,10 @@ namespace TcpDash.Classes
             _uiElement.Dispatcher.Invoke(DispatcherPriority.Background, action);
         }
 
-
         #endregion
 
         #region privateRaising
 
-
         #endregion
-
     }
 }

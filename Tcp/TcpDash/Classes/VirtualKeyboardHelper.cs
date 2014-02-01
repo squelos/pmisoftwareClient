@@ -25,7 +25,6 @@ namespace TcpDash.Classes
                 {
                     //Vide car exception seulement si on trigger la méthide deux fois. Exception apparemment sans incidence.
                 }
-
             }
         }
     }

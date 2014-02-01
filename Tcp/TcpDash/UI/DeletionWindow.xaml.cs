@@ -1,6 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using TcpDash.Business;
 using TcpDash.Classes;
 using TcpDash.ViewModel;
@@ -20,10 +24,12 @@ namespace TcpDash.UI
         private BookingManager _bm = BookingManager.Instance;
         private bool _canDelete = false;
         private Player _player;
+        private int _working = 0;
+
         #endregion
 
-
         #region ctor
+
         public DeletionWindow(VisualBooking vb, MainViewModel mvm)
         {
             InitializeComponent();
@@ -56,7 +62,6 @@ namespace TcpDash.UI
                     CanDelete = true;
                 // if the user is an admin, he can also delete
             }
-
         }
 
         #endregion
@@ -66,6 +71,29 @@ namespace TcpDash.UI
         #endregion
 
         #region events
+
+        #endregion
+
+        #region getters/setters
+
+        public int Working
+        {
+            get { return _working; }
+            set
+            {
+                _working = value;
+                if (_working != 0)
+                {
+                    Dispatcher.Invoke(DispatcherPriority.ApplicationIdle,
+                        new ThreadStart(() => ProgressBar.Visibility = Visibility.Visible));
+                }
+                else
+                {
+                    Dispatcher.Invoke(DispatcherPriority.ApplicationIdle,
+                        new ThreadStart(() => ProgressBar.Visibility = Visibility.Hidden));
+                }
+            }
+        }
 
         #endregion
 
@@ -97,13 +125,23 @@ namespace TcpDash.UI
 
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
-            //try to delete
-            _bm.DeleteBooking(_vb.Booking);
-            //cant delete, show error
+            Working++;
+            Task t = new Task(() =>
+            {
+                //TODO do this in another thread
+                //try to delete
+                _bm.DeleteBooking(_vb.Booking);
+                //cant delete, show error
 
-            //delete
-            DialogResult = true;
-            Close();
+                //delete
+                Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new ThreadStart(() =>
+                {
+                    DialogResult = true;
+                    Close();
+                }));
+                Working--;
+            });
+            t.Start();
         }
 
         private void CancelClick(object sender, RoutedEventArgs e)
@@ -116,6 +154,11 @@ namespace TcpDash.UI
         {
             _mvm.BadgeScanner.BadgeScanned -= OnBadgeScanned;
             // remove evepnt handler for the scan
+        }
+
+        private void DeletionWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = _working != 0;
         }
     }
 }

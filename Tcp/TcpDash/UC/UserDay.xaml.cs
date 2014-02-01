@@ -18,18 +18,21 @@ namespace TcpDash.UC
     /// </summary>
     public partial class UserDay : UserControl
     {
-
         #region privates
+
         private MainViewModel _mvm;
         private CourtBookings _courtBookings;
+
         #endregion
-        
+
         #region ctor
+
         public UserDay(MainViewModel mvm)
         {
             InitializeComponent();
             _mvm = mvm;
         }
+
         #endregion
 
         #region getters/setters
@@ -51,8 +54,8 @@ namespace TcpDash.UC
 
         #endregion
 
-
         #region privates
+
         private void Refresh()
         {
             if (_courtBookings == null)
@@ -69,7 +72,6 @@ namespace TcpDash.UC
             {
                 foreach (var visualBooking in dailyBookings.VisualBookingList)
                 {
-
                     //we add it to the appropriate row
                     ShowVisualBooking(visualBooking, 0);
                 }
@@ -91,21 +93,21 @@ namespace TcpDash.UC
 
             b.PreviewMouseDown += b_PreviewMouseDown;
 
-            
+
             TextBlock tb = new TextBlock();
 
-            
+
             tb.TextWrapping = TextWrapping.Wrap;
             tb.Text = vb.Name;
             b.Content = tb;
-            
+
             grid.Children.Add(b);
             Grid.SetColumn(b, col);
             Grid.SetRow(b, CalculateRowStart(vb));
             Grid.SetRowSpan(b, CalculateRowSpan(vb));
         }
 
-        void b_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void b_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             // here we show the deletion window
             DeletionWindow win = new DeletionWindow((sender as Button).Tag as VisualBooking, _mvm);
@@ -118,7 +120,7 @@ namespace TcpDash.UC
             int ret = vb.StartHour - 8;
             if (ret != 0)
             {
-                ret = ret * 2;
+                ret = ret*2;
             }
             if (vb.StartMin >= 30)
             {
@@ -142,7 +144,7 @@ namespace TcpDash.UC
             int ret = vb.EndHour - 8;
             if (ret != 0)
             {
-                ret = ret * 2;
+                ret = ret*2;
             }
             if (vb.EndMin >= 30)
             {
@@ -150,6 +152,7 @@ namespace TcpDash.UC
             }
             return ret;
         }
+
         #endregion
 
         private void UserDay_OnLoaded(object sender, RoutedEventArgs e)
@@ -159,7 +162,6 @@ namespace TcpDash.UC
             _mvm = mainViewModel;
         }
 
-   
 
         private void PreviewLeftMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -201,7 +203,7 @@ namespace TcpDash.UC
             // row 
             // row/2 + 8 = hour.round down = hour
             decimal hourDecimal = row/2 + 8;
-            int hour = (int)Math.Floor(hourDecimal);
+            int hour = (int) Math.Floor(hourDecimal);
 
             DateTime day = _mvm.CalendarViewModel.SelectedDay;
             //determine if it is "selectable"

@@ -23,8 +23,8 @@ namespace TcpDash.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-
         #region privates
+
         private Driver _driver = new Driver();
         private Jobs _jobs;
         private NewsViewModel _newsViewModel;
@@ -32,18 +32,17 @@ namespace TcpDash.ViewModel
         private bool _readerStatus;
         private Visibility _connected = Visibility.Collapsed;
         private Visibility _disconnected = Visibility.Visible;
-        
 
         #endregion
 
         #region ctor
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
-            
-             _driver.ConnectedStatusChanged += stat => ReaderStatus = stat;
+            _driver.ConnectedStatusChanged += stat => ReaderStatus = stat;
             _readerStatus = _driver.Connected;
             _newsViewModel = new NewsViewModel(this);
             _calendarViewModel = new CalendarViewModel(this);
@@ -52,10 +51,10 @@ namespace TcpDash.ViewModel
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
 
-
         #endregion
 
         #region getters/setters
+
         public bool ReaderStatus
         {
             get { return _readerStatus; }
@@ -130,15 +129,16 @@ namespace TcpDash.ViewModel
         #endregion
 
         #region publics
+
         #endregion
 
         #region privates
-        void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             //clean up  and maybe log or show the error in a window for the user
             _driver.Dispose();
             _jobs.DoJobs = false;
-
         }
 
         #endregion

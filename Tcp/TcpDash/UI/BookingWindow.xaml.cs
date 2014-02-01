@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Odbc;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -41,22 +43,25 @@ namespace TcpDash.UI
         private DateTime _dayDate;
         private MainViewModel _mvm;
 
+        private int _working = 0;
+
         private int _desiredHour;
 
         #endregion
 
         #region ctor
+
         public BookingWindow(Court c, DateTime d, MainViewModel mvm, int desiredHour)
         {
             InitializeComponent();
 
-            int[] hours = new[] { 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
+            int[] hours = new[] {8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23};
             _startHours.AddRange(hours);
 
-            int[] mins = new[] { 0, 30 };
+            int[] mins = new[] {0, 30};
             _mins.AddRange(mins);
 
-            int[] endHours = new int[] { 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0 };
+            int[] endHours = new int[] {9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0};
             _endHours.AddRange(endHours);
 
             _currentCourt = c;
@@ -69,7 +74,9 @@ namespace TcpDash.UI
             cbEndMin.ItemsSource = _mins;
             cbStartHour.ItemsSource = _startHours;
             cbStartHour.SelectedValue = desiredHour;
+            cbStartHour.SelectedValue = cbStartHour.SelectedValue;
             cbEndHour.SelectedIndex = cbStartHour.SelectedIndex;
+            cbEndHour.SelectedValue = cbEndHour.SelectedValue;
             cbEndMin.SelectedIndex = 0;
 
             cbStartMin.ItemsSource = _mins;
@@ -82,7 +89,7 @@ namespace TcpDash.UI
             _mvm.BadgeScanner.BadgeScanned += BadgeScanner_BadgeScanned;
         }
 
-        void BadgeScanner_BadgeScanned(int badgeId)
+        private void BadgeScanner_BadgeScanned(int badgeId)
         {
             _firstPlayer = _bm.Players.FirstOrDefault(player => player.Badge.Any(badge => badge.number == badgeId));
             lFirstPlayer.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle,
@@ -107,18 +114,39 @@ namespace TcpDash.UI
         public List<Player> Players
         {
             get { return _playerList; }
-
         }
+
+        public int Working
+        {
+            get { return _working; }
+            set
+            {
+                _working = value;
+                if (_working != 0)
+                {
+                    Dispatcher.Invoke(() => { ProgressBar.Visibility = Visibility.Visible; });
+                }
+                else
+                {
+                    Dispatcher.Invoke(() => { ProgressBar.Visibility = Visibility.Hidden; });
+                }
+            }
+        }
+
         #endregion
 
         #region publics
 
         #endregion
 
-
         #region events
+
         private void ValidateClick(object sender, RoutedEventArgs e)
         {
+            _selectedStartHour = (int) cbStartHour.SelectedValue;
+            _selectedStartMin = (int) cbStartMin.SelectedValue;
+            _selectedEndHour = (int) cbEndHour.SelectedValue;
+            _selectedEndMin = (int) cbEndMin.SelectedValue;
             bool errors = false;
             //we try to book
             //first verify if all is filled
@@ -126,63 +154,80 @@ namespace TcpDash.UI
             if (_dayDate < DateTime.Now.Date)
             {
                 errors = true;
-                UIDispatcher.Instance.ShowMessageDialog(this,"Erreur", "Impossible de réserver dans le passé");
+                UIDispatcher.Instance.ShowMessageDialog(this, "Erreur", "Impossible de réserver dans le passé");
             }
             if (_firstPlayer == null)
             {
                 errors = true;
-                UIDispatcher.Instance.ShowMessageDialog(this,"Erreur", "Aucun premier joueur n'est sélectionné");
+                UIDispatcher.Instance.ShowMessageDialog(this, "Erreur", "Aucun premier joueur n'est sélectionné");
                 return;
             }
             if (_secondPlayer == null)
             {
                 errors = true;
-                UIDispatcher.Instance.ShowMessageDialog(this,"Erreur", "Aucun second joueur n'est sélectionné");
+                UIDispatcher.Instance.ShowMessageDialog(this, "Erreur", "Aucun second joueur n'est sélectionné");
                 return;
             }
-            DateTime start = new DateTime(_dayDate.Year, _dayDate.Month, _dayDate.Day, _selectedStartMin, _selectedStartMin, 0);
-            DateTime end = new DateTime(_dayDate.Year, _dayDate.Month, _dayDate.Day, _selectedEndHour, _selectedEndMin, 0);
+            DateTime start = new DateTime(_dayDate.Year, _dayDate.Month, _dayDate.Day, _selectedStartHour,
+                _selectedStartMin, 0);
+            DateTime end = new DateTime(_dayDate.Year, _dayDate.Month, _dayDate.Day, _selectedEndHour, _selectedEndMin,
+                0);
             if (start.AddHours(1) != end)
             {
                 //then the first player must be an admin
                 if (_firstPlayer.Status.Id < 2)
                 {
                     errors = true;
-                    UIDispatcher.Instance.ShowMessageDialog(this,"Erreur", "Seul un administrateur peut effectuer des réservations de plus d'une heure");
+                    UIDispatcher.Instance.ShowMessageDialog(this, "Erreur",
+                        "Seul un administrateur peut effectuer des réservations de plus d'une heure");
                 }
             }
-
-
-            //for test only HACKS
             if (errors)
             {
                 return;
             }
 
-            
-            int result = _bm.TryBooking(_dayDate, _selectedStartHour, _selectedStartMin, _selectedEndHour,
-                _selectedEndMin, _currentCourt, _firstPlayer, _secondPlayer, _filmed,null);
-            //if not possible show error message
-           
-
-            switch (result)
+            Task t1 = new Task(() =>
             {
-                case 1 :
-                    UIDispatcher.Instance.ShowMessageDialog(this,"Réservation effectuée avec succès", "Votre réservation a été effectuée avec succès");
-                    break;
-                case 2:
-                    UIDispatcher.Instance.ShowMessageDialog(this,"Echec", "Le terrain n'existe pas");
-                    break;
-                case 3:
-                    UIDispatcher.Instance.ShowMessageDialog(this,"Echec", "Le quota de réservations pour la semaine a été dépassé");
-                    break;
-                case 4:
-                    UIDispatcher.Instance.ShowMessageDialog(this,"Echec", "Une réservation sur ce créneau horaire est déjà existante");
-                    break;
-                case 5:
-                    UIDispatcher.Instance.ShowMessageDialog(this,"Echec", "Un des joueurs n'a pas payé pour le semestre");
-                    break;
-            }
+                Working++;
+                //TODO split this in another thread
+                int result = _bm.TryBooking(_dayDate, _selectedStartHour, _selectedStartMin, _selectedEndHour,
+                    _selectedEndMin, _currentCourt, _firstPlayer, _secondPlayer, _filmed, null);
+                //if not possible show error message
+                Working--;
+
+                switch (result)
+                {
+                    case 1:
+                        UIDispatcher.Instance.ShowMessageDialog(this, "Réservation effectuée avec succès",
+                            "Votre réservation a été effectuée avec succès");
+                        Task t2 = new Task(() =>
+                        {
+                            Thread.Sleep(10000);
+                            UIDispatcher.Instance.BeginInvoke(Close);
+                        });
+                        t2.Start();
+                        break;
+                    case 2:
+                        UIDispatcher.Instance.ShowMessageDialog(this, "Echec", "Le terrain n'existe pas");
+                        break;
+                    case 3:
+                        UIDispatcher.Instance.ShowMessageDialog(this, "Echec",
+                            "Le quota de réservations pour la semaine a été dépassé");
+                        break;
+                    case 4:
+                        UIDispatcher.Instance.ShowMessageDialog(this, "Echec",
+                            "Une réservation sur ce créneau horaire est déjà existante");
+                        break;
+                    case 5:
+                        UIDispatcher.Instance.ShowMessageDialog(this, "Echec",
+                            "Un des joueurs n'a pas payé pour le semestre");
+                        break;
+                }
+            });
+
+            t1.Start();
+
             //else : book and exit
         }
 
@@ -195,30 +240,29 @@ namespace TcpDash.UI
         {
             if (cbStartHour.SelectedValue != null)
             {
-                _selectedStartHour = (int)cbStartHour.SelectedValue;
-                
-                cbEndHour.SelectedIndex = cbStartHour.SelectedIndex ;
+                _selectedStartHour = (int) cbStartHour.SelectedValue;
+                cbEndHour.SelectedIndex = cbStartHour.SelectedIndex;
             }
         }
 
         private void CbStartMin_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbStartMin.SelectedValue != null) _selectedStartMin = (int)cbStartMin.SelectedValue;
+            if (cbStartMin.SelectedValue != null) _selectedStartMin = (int) cbStartMin.SelectedValue;
         }
 
         private void CbEndHour_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbEndHour.SelectedValue != null) _selectedEndHour = (int)cbEndHour.SelectedValue;
+            if (cbEndHour.SelectedValue != null) _selectedEndHour = (int) cbEndHour.SelectedValue;
         }
 
         private void CbEndMin_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbEndMin.SelectedValue != null) _selectedEndMin = (int)cbEndMin.SelectedValue;
+            if (cbEndMin.SelectedValue != null) _selectedEndMin = (int) cbEndMin.SelectedValue;
         }
 
         private void CbSecondPlayer_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbSecondPlayer.SelectedValue != null) _secondPlayer = (Player)cbSecondPlayer.SelectedValue;
+            if (cbSecondPlayer.SelectedValue != null) _secondPlayer = (Player) cbSecondPlayer.SelectedValue;
         }
 
         #endregion
@@ -239,18 +283,23 @@ namespace TcpDash.UI
             }
             else
             {
+                //TODO do this in another thread
                 cbSecondPlayer.ItemsSource =
                     _playerList.Where(
                         player =>
                             player.firstName.ToLower().Contains(_playerSearch) ||
                             player.lastName.ToLower().Contains(_playerSearch));
-                //cbSecondPlayer.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new ThreadStart(() => cbSecondPlayer.item))
             }
         }
 
         private void ToggleSwitch_OnChecked(object sender, RoutedEventArgs e)
         {
             _filmed = (bool) ToggleSwitch.IsChecked;
+        }
+
+        private void BookingWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = _working != 0;
         }
     }
 }

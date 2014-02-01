@@ -18,15 +18,15 @@ namespace TcpDash.Business
         private DateTime _end;
         private string _name;
         private Booking _booking;
-        
+
         #endregion
 
         #region ctor
 
         public VisualBooking()
         {
-
         }
+
         /// <summary>
         /// ctor that creates a VisualBooking from a booking
         /// </summary>
@@ -38,21 +38,23 @@ namespace TcpDash.Business
             if (b.BookingAggregation == null)
             {
                 // then its a regular booking
-                _name = b.Player1.firstName.First() + " " + b.Player1.lastName +  " vs " + b.Player2.firstName.First() +
+                _name = b.Player1.firstName.First() + " " + b.Player1.lastName + " vs " + b.Player2.firstName.First() +
                         " " + b.Player2.lastName;
                 _special = false;
                 _start = b.start;
                 _end = b.end;
-                
             }
             else
             {
                 //TODO handle reccuring bookings
                 _name = b.BookingAggregation.name;
                 _special = true;
+                _start = b.start;
+                _end = b.end;
             }
             _filmed = b.Filmed;
         }
+
         #endregion
 
         #region getters/setters
@@ -66,10 +68,7 @@ namespace TcpDash.Business
         public bool IsFilmed
         {
             get { return _filmed; }
-            set
-            {
-                _filmed = value;
-            }
+            set { _filmed = value; }
         }
 
         public string Name
@@ -120,12 +119,12 @@ namespace TcpDash.Business
         {
             get { return _booking; }
         }
+
         #endregion
 
         #region private Methods
 
         #endregion
-
 
         #region publics
 

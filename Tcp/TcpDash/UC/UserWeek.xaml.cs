@@ -24,7 +24,6 @@ namespace TcpDash.UC
     /// </summary>
     public partial class UserWeek : UserControl
     {
-
         #region privates
 
         private MainViewModel _mvm;
@@ -33,6 +32,7 @@ namespace TcpDash.UC
         #endregion
 
         #region ctor
+
         public UserWeek(MainViewModel mvm)
         {
             InitializeComponent();
@@ -54,6 +54,7 @@ namespace TcpDash.UC
         #endregion
 
         #region getters/setters
+
         public CourtBookings CourtB
         {
             get { return _courtBookings; }
@@ -64,6 +65,7 @@ namespace TcpDash.UC
                 Refresh();
             }
         }
+
         #endregion
 
         #region publics
@@ -71,6 +73,7 @@ namespace TcpDash.UC
         #endregion
 
         #region privates
+
         private void Refresh()
         {
             if (_courtBookings == null)
@@ -111,9 +114,9 @@ namespace TcpDash.UC
             tb.TextWrapping = TextWrapping.Wrap;
 
             b.PreviewMouseDown += BOnPreviewMouseDown;
-            
+
             tb.Text = vb.Name;
-          
+
             b.Content = tb;
             b.Tag = vb;
             grid.Children.Add(b);
@@ -125,7 +128,7 @@ namespace TcpDash.UC
         private void BOnPreviewMouseDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
             // here we show the deletion window
-            DeletionWindow win = new DeletionWindow((sender as Button).Tag as VisualBooking,_mvm);
+            DeletionWindow win = new DeletionWindow((sender as Button).Tag as VisualBooking, _mvm);
             UIDispatcher.Instance.ShowDialogAndBlur(win);
         }
 
@@ -135,7 +138,7 @@ namespace TcpDash.UC
             int ret = vb.StartHour - 8;
             if (ret != 0)
             {
-                ret = ret * 2;
+                ret = ret*2;
             }
             if (vb.StartMin >= 30)
             {
@@ -146,7 +149,6 @@ namespace TcpDash.UC
 
         private int CalculateRowSpan(VisualBooking vb)
         {
-            //TODO sometimes get neg values
             //default at 1
             return CalculateRowEnd(vb) - CalculateRowStart(vb);
         }
@@ -161,7 +163,7 @@ namespace TcpDash.UC
             int ret = vb.EndHour - 8;
             if (ret != 0)
             {
-                ret = ret * 2;
+                ret = ret*2;
             }
             if (vb.EndMin >= 30)
             {
@@ -169,6 +171,7 @@ namespace TcpDash.UC
             }
             return ret;
         }
+
         #endregion
 
         private void UserWeek_OnLoaded(object sender, RoutedEventArgs e)
@@ -202,7 +205,7 @@ namespace TcpDash.UC
                 col++;
             }
 
-          //here thanks to col and row we can infer the selected Cell
+            //here thanks to col and row we can infer the selected Cell
             //we try to see if the selected cell contains anything. if it does, 
             // do nothing, or show appropriate dialog
             foreach (UIElement child in grid.Children)
@@ -213,8 +216,8 @@ namespace TcpDash.UC
                 }
             }
             //infer selected cell
-            decimal hourDecimal = row / 2 + 8;
-            int hour = (int)Math.Floor(hourDecimal);
+            decimal hourDecimal = row/2 + 8;
+            int hour = (int) Math.Floor(hourDecimal);
 
             DateTime day = _courtBookings.WeeklyBookingses.DailyBookingses[col].DayDateTime;
 

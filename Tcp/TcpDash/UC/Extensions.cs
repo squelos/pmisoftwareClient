@@ -13,7 +13,7 @@ namespace TcpDash.UC
         {
             if (tc.Items.Count >= 2)
             {
-                if (tc.SelectedIndex < tc.Items.Count-1)
+                if (tc.SelectedIndex < tc.Items.Count - 1)
                 {
                     tc.SelectedIndex++;
                 }
@@ -23,6 +23,7 @@ namespace TcpDash.UC
                 }
             }
         }
+
         public static void PreviousTab(this MetroAnimatedTabControl tc)
         {
             if (tc.Items.Count >= 2)
@@ -33,7 +34,7 @@ namespace TcpDash.UC
                 }
                 else
                 {
-                    tc.SelectedIndex = tc.Items.Count-1;
+                    tc.SelectedIndex = tc.Items.Count - 1;
                 }
             }
         }

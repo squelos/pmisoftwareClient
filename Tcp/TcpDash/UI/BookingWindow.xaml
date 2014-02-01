@@ -1,61 +1,73 @@
 ﻿<controls:MetroWindow x:Class="TcpDash.UI.BookingWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       BorderBrush="OrangeRed" BorderThickness="1"
-        Title="Réservation" Height="450" Width="450"
-                      Margin="10,10,10,10" WindowStartupLocation="CenterScreen" 
-                      MinHeight="610" MaxHeight="630" DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
+                      Title="Réservation" Height="450" Width="450"
+                      Margin="10,10,10,10" WindowStartupLocation="CenterScreen"
+                      MinHeight="610" MaxHeight="630"
+                      DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                      Closing="BookingWindow_OnClosing">
     <Grid Margin="50,20,50,20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label x:Name="lDate" Grid.Row="0" FontSize="{StaticResource HeaderFontSize}"/>
-        <Label x:Name="lTerrain" Grid.Row="1" FontSize="{StaticResource SubHeaderFontSize}"/>
+        <Label x:Name="lDate" Grid.Row="0" FontSize="{StaticResource HeaderFontSize}" />
+        <Label x:Name="lTerrain" Grid.Row="1" FontSize="{StaticResource SubHeaderFontSize}" />
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,10">
-            <Label Content="Début" Margin="0,0,10,0" FontSize="{StaticResource ContentFontSize}"/>
-            <ComboBox x:Name="cbStartHour" Margin="0,0,0,0" SelectionChanged="CbStartHour_OnSelectionChanged"/>
-            <Label Content="h"/>
-            <ComboBox x:Name="cbStartMin" SelectionChanged="CbStartMin_OnSelectionChanged"/>
-            <Label Content="min"/>
+            <Label Content="Début" Margin="0,0,10,0" FontSize="{StaticResource ContentFontSize}" />
+            <ComboBox x:Name="cbStartHour" Margin="0,0,0,0" SelectionChanged="CbStartHour_OnSelectionChanged" />
+            <Label Content="h" />
+            <ComboBox x:Name="cbStartMin" SelectionChanged="CbStartMin_OnSelectionChanged" />
+            <Label Content="min" />
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,10">
-            <Label Content="Fin" Margin="0,0,10,0"/>
-            <ComboBox x:Name="cbEndHour" Margin="18,0,0,0" SelectionChanged="CbEndHour_OnSelectionChanged"/>
-            <Label Content="h"/>
-            <ComboBox x:Name="cbEndMin" SelectionChanged="CbEndMin_OnSelectionChanged"/>
-            <Label Content="min"/>
+            <Label Content="Fin" Margin="0,0,10,0" />
+            <ComboBox x:Name="cbEndHour" Margin="18,0,0,0" SelectionChanged="CbEndHour_OnSelectionChanged" />
+            <Label Content="h" />
+            <ComboBox x:Name="cbEndMin" SelectionChanged="CbEndMin_OnSelectionChanged" />
+            <Label Content="min" />
         </StackPanel>
-        <Label Content="Premier joueur : " Grid.Row="4" Margin="0,10,0,10" FontSize="{StaticResource MenuFontSize}"/>
+        <Label Content="Premier joueur : " Grid.Row="4" Margin="0,10,0,10" FontSize="{StaticResource MenuFontSize}" />
         <controls:ProgressRing x:Name="ProgressRing" Grid.Row="5" IsActive="True" />
-        <Label x:Name="lFirstPlayer" Grid.Row="6" Margin="0,10,0,10" Content="Attente scan" FontSize="{StaticResource MenuFontSize}" HorizontalAlignment="Center"/>
-        <controls:ToggleSwitch  HorizontalAlignment="Center" MinWidth="150" OnLabel="Filmée" OffLabel="Non filmée" Checked="ToggleSwitch_OnChecked" x:Name="ToggleSwitch" Grid.Row="7"/>
+        <Label x:Name="lFirstPlayer" Grid.Row="6" Margin="0,10,0,10" Content="Attente scan"
+               FontSize="{StaticResource MenuFontSize}" HorizontalAlignment="Center" />
+        <controls:ToggleSwitch HorizontalAlignment="Center" MinWidth="150" OnLabel="Filmée" OffLabel="Non filmée"
+                               Checked="ToggleSwitch_OnChecked" x:Name="ToggleSwitch" Grid.Row="7" />
         <StackPanel Orientation="Horizontal" Grid.Row="8">
-            <Label Content="Second joueur : " Margin="0,10,0,10" FontSize="{StaticResource MenuFontSize}"/>
-            <TextBox controls:TextboxHelper.Watermark="luke" controls:TextboxHelper.ClearTextButton="True" x:Name="sub" MinWidth="100" Margin="10,10,10,10" TextChanged="TextBoxBase_OnTextChanged"/>
+            <Label Content="Second joueur : " Margin="0,10,0,10" FontSize="{StaticResource MenuFontSize}" />
+            <TextBox controls:TextboxHelper.Watermark="luke" controls:TextboxHelper.ClearTextButton="True" x:Name="sub"
+                     MinWidth="100" Margin="10,10,10,10" TextChanged="TextBoxBase_OnTextChanged" />
 
         </StackPanel>
-        <ComboBox x:Name="cbSecondPlayer" Grid.Row="9" Margin="0,10,0,10" SelectionChanged="CbSecondPlayer_OnSelectionChanged"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="10" Margin="0,10,0,10" HorizontalAlignment="Right">
-            <Button  ToolTip="Valider" Style="{DynamicResource MetroCircleButtonStyle}" Height="45" Width="45" Click="ValidateClick" IsDefault="True">
+        <ComboBox x:Name="cbSecondPlayer" Grid.Row="9" Margin="0,10,0,10"
+                  SelectionChanged="CbSecondPlayer_OnSelectionChanged" />
+        <controls:MetroProgressBar x:Name="ProgressBar" IsIndeterminate="True" Grid.Row="10" Margin="25,10,25,10"
+                                   Visibility="Hidden" />
+        <StackPanel Orientation="Horizontal" Grid.Row="11" Margin="0,10,0,10" HorizontalAlignment="Right">
+
+            <Button ToolTip="Valider" Style="{DynamicResource MetroCircleButtonStyle}" Height="45" Width="45"
+                    Click="ValidateClick" IsDefault="True">
                 <Rectangle Width="22" Height="22">
                     <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_check}"/>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_check}" />
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            <Button  ToolTip="Annuler" Style="{DynamicResource MetroCircleButtonStyle}" Height="45" Width="45" Click="CancelClick" IsCancel="True">
+            <Button ToolTip="Annuler" Style="{DynamicResource MetroCircleButtonStyle}" Height="45" Width="45"
+                    Click="CancelClick" IsCancel="True">
                 <Rectangle Width="22" Height="22">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cancel}" />
@@ -63,6 +75,6 @@
                 </Rectangle>
             </Button>
         </StackPanel>
-        <TextBlock Grid.Row="11" x:Name="errorTextblock"/>
+        <TextBlock Grid.Row="12" x:Name="errorTextblock" />
     </Grid>
 </controls:MetroWindow>

@@ -8,8 +8,8 @@ namespace TcpDash.UI
     /// </summary>
     public partial class WindowAdmin
     {
-
         private string _password = "Tennis1";
+
         public WindowAdmin()
         {
             InitializeComponent();
@@ -20,7 +20,6 @@ namespace TcpDash.UI
             //close
             this.DialogResult = false;
             this.Close();
-
         }
 
         private void ValidOnclick(object sender, RoutedEventArgs e)
@@ -41,10 +40,8 @@ namespace TcpDash.UI
 
         private void WindowAdmin_OnClosing(object sender, CancelEventArgs e)
         {
-            if(DialogResult != true)
-            this.DialogResult = false;
+            if (DialogResult != true)
+                this.DialogResult = false;
         }
-
-       
     }
 }
