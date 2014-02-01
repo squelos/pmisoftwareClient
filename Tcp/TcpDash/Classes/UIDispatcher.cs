@@ -49,7 +49,10 @@ namespace TcpDash.Classes
 
         public bool? ShowDialogAndBlur(Window win)
         {
-            _uiElement.Effect = new BlurEffect();
+            BlurEffect blur = new BlurEffect();
+            blur.Radius = 7;
+            _uiElement.Effect = blur;
+
             bool? result = win.ShowDialog();
             _uiElement.Effect = null;
             return result;

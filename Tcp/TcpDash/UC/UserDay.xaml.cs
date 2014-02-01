@@ -108,7 +108,7 @@ namespace TcpDash.UC
         void b_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             // here we show the deletion window
-            DeletionWindow win = new DeletionWindow((sender as Button).Tag as VisualBooking);
+            DeletionWindow win = new DeletionWindow((sender as Button).Tag as VisualBooking, _mvm);
             UIDispatcher.Instance.ShowDialogAndBlur(win);
         }
 

@@ -13,25 +13,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TcpDash.Business;
+using TcpDash.ViewModel;
+using TcpDataModel;
 
 namespace TcpDash.UI
 {
     /// <summary>
     /// Interaction logic for DeletionWindow.xaml
     /// </summary>
-    public partial class DeletionWindow
+    public partial class DeletionWindow : IDisposable
     {
         #region privates
 
         private VisualBooking _vb;
+        private MainViewModel _mvm;
+        private Player _player;
         #endregion
 
 
         #region ctor
-        public DeletionWindow(VisualBooking vb)
+        public DeletionWindow(VisualBooking vb, MainViewModel mvm)
         {
             InitializeComponent();
             _vb = vb;
+            _mvm = mvm;
 
             lDate.Content = _vb.Start.ToShortDateString();
             lCourt.Content = _vb.Booking.Court.number;
@@ -41,7 +46,14 @@ namespace TcpDash.UI
             lEndTime.Content = end;
             lP1.Content = _vb.Booking.Player1;
             lP2.Content = _vb.Booking.Player2;
+            _mvm.BadgeScanner.BadgeScanned += OnBadgeScanned;
         }
+
+        private void OnBadgeScanned(int badgeId)
+        {
+           
+        }
+
         #endregion
 
         #region publics
@@ -71,6 +83,12 @@ namespace TcpDash.UI
         {
             this.DialogResult = false;
             this.Close();
+        }
+
+        public void Dispose()
+        {
+            _mvm.BadgeScanner.BadgeScanned -= OnBadgeScanned;
+            // remove evepnt handler for the scan
         }
     }
 }
