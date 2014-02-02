@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TcpDash.Business;
+using TcpDash.Classes;
 using TcpDataModel;
 
 namespace TcpDash.ViewModel
@@ -26,6 +27,9 @@ namespace TcpDash.ViewModel
         private int _working = 0;
         private readonly RelayCommand _incrementDateCommand;
         private readonly RelayCommand _decrementDateCommand;
+        private DateTime _userSelectedDate;
+        private int _rotateDate = 0;
+
 
         #endregion
 
@@ -66,6 +70,7 @@ namespace TcpDash.ViewModel
             set
             {
                 _selectedDay = value;
+                _userSelectedDate = value;
                 _firstDayOfWeek = Utility.GetFirst(_selectedDay);
                 _lastDayOfWeek = _firstDayOfWeek.AddDays(6);
                 BookingManager.SelectedDateChanged(_selectedDay, _firstDayOfWeek, _lastDayOfWeek);
@@ -143,6 +148,24 @@ namespace TcpDash.ViewModel
 
         public void RefreshManagers()
         {
+        }
+
+        public void RotateDate()
+        {
+            _rotateDate++;
+            if (_rotateDate < 7)
+            {
+                _selectedDay = _userSelectedDate.Date.AddDays(_rotateDate);
+                _firstDayOfWeek = Utility.GetFirst(_selectedDay);
+                _lastDayOfWeek = _firstDayOfWeek.AddDays(6);
+                BookingManager.SelectedDateChanged(_selectedDay, _firstDayOfWeek, _lastDayOfWeek);
+                UIDispatcher.Instance.Invoke(() => RaisePropertyChanged("selectedDay"));
+                
+            }
+            else
+            {
+                _rotateDate = 0;
+            }
         }
 
         #endregion

@@ -335,6 +335,10 @@ namespace TcpDash.UI
         private void BookingWindow_OnClosing(object sender, CancelEventArgs e)
         {
             e.Cancel = _working != 0;
+            if (e.Cancel == false)
+            {
+                _mvm.BadgeScanner.BadgeScanned -= BadgeScanner_BadgeScanned;
+            }
         }
     }
 }
