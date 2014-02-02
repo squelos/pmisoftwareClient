@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TcpDash.Business;
 using TcpDash.Classes;
@@ -37,6 +38,7 @@ namespace TcpDash.UI
         private Player _secondPlayer;
         private string _playerSearch;
         private bool _filmed = false;
+        private bool _firstScan = false;
 
         private BookingManager _bm = BookingManager.Instance;
         private Court _currentCourt;
@@ -79,9 +81,12 @@ namespace TcpDash.UI
             cbEndHour.SelectedValue = cbEndHour.SelectedValue;
             cbEndMin.SelectedIndex = 0;
 
+            ucRecent.Changed += ucRecent_Changed;
+
             cbStartMin.ItemsSource = _mins;
             cbStartMin.SelectedIndex = 0;
             cbSecondPlayer.ItemsSource = _playerList;
+            //cbSecondPlayer.SelectionChanged += cbSecondPlayer_SelectionChanged;
 
             lDate.Content = _dayDate.ToShortDateString();
             lTerrain.Content = _currentCourt.number;
@@ -89,8 +94,29 @@ namespace TcpDash.UI
             _mvm.BadgeScanner.BadgeScanned += BadgeScanner_BadgeScanned;
         }
 
+        void ucRecent_Changed(object sender, Player player)
+        {
+            _secondPlayer = player;
+            cbSecondPlayer.SelectedValue = player;
+            cbSecondPlayer.Text = player.ToString();
+        }
+
+        //void cbSecondPlayer_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    _secondPlayer = 
+        //}
+
         private void BadgeScanner_BadgeScanned(int badgeId)
         {
+            if (!_firstScan)
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, new ThreadStart(() =>
+                {
+                    BeginStoryboard(FindResource("Storyboard1") as Storyboard);
+                    _firstScan = true;
+                }));
+
+            }
             _firstPlayer = _bm.Players.FirstOrDefault(player => player.Badge.Any(badge => badge.number == badgeId));
             lFirstPlayer.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle,
                 new ThreadStart(() =>
@@ -102,6 +128,7 @@ namespace TcpDash.UI
                     else
                     {
                         lFirstPlayer.Content = _firstPlayer;
+                        ucRecent.FirstPlayer = _firstPlayer;
                     }
                     ProgressRing.Visibility = Visibility.Collapsed;
                 }));
@@ -274,7 +301,7 @@ namespace TcpDash.UI
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            _playerSearch = sub.Text.ToLower();
+            //_playerSearch = sub.Text.ToLower();
 
 
             if (_playerSearch.Length < 4)
@@ -283,12 +310,20 @@ namespace TcpDash.UI
             }
             else
             {
-                //TODO do this in another thread
-                cbSecondPlayer.ItemsSource =
-                    _playerList.Where(
-                        player =>
-                            player.firstName.ToLower().Contains(_playerSearch) ||
-                            player.lastName.ToLower().Contains(_playerSearch));
+                Task t = new Task(() =>
+                {
+                    Working++;
+                    Dispatcher.Invoke(() =>
+                    {
+                        cbSecondPlayer.ItemsSource =
+                      _playerList.Where(
+                          player =>
+                              player.firstName.ToLower().Contains(_playerSearch) ||
+                              player.lastName.ToLower().Contains(_playerSearch)).OrderBy(player => player.lastName);
+                    });
+                    Working--;
+                });
+                t.Start();
             }
         }
 

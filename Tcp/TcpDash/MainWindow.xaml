@@ -47,7 +47,7 @@
         <StackPanel DockPanel.Dock="Left">
             <UserControls:UserNews MaxWidth="450" x:Name="News" />
             <UserControls:UserDateSelection />
-            <UserControls:UserWorking MaxWidth="450" />
+            <UserControls:UserWorking MaxWidth="450"/>
         </StackPanel>
         <UserControls:UserCalendar />
     </DockPanel>

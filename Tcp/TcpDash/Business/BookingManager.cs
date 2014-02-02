@@ -54,7 +54,6 @@ namespace TcpDash.Business
         #endregion
 
         #region getters/setters
-
         public int Working
         {
             get { return _working; }
@@ -111,7 +110,7 @@ namespace TcpDash.Business
             List<Booking> nonRecurring =
                 (_proxiedBookings.Where(
                     booking =>
-                        booking.Court.ID == cb.Court.ID && booking.BookingAggregation == null &&
+                        booking.Court.ID == cb.Court.ID &&
                         booking.start > _firstDayOfWeek &&
                         booking.end < _lastDayOfWeek)).Include(booking => booking.Player1)
                     .Include(booking => booking.Player2)
@@ -226,6 +225,36 @@ namespace TcpDash.Business
                 }
                 FillCourtBooking(bookingse);
             }
+            //most fail code ever
+            //lock (this)
+            //{
+            //    Working++;
+            //    Task t = new Task(() =>
+            //    {
+            //        _selectedDay = selectedD;
+            //        _firstDayOfWeek = first;
+            //        _lastDayOfWeek = last;
+            //        if (first < _startProxy || last > _endProxy)
+            //        {
+            //            RefreshProxy(first, last);
+            //        }
+
+            //        //must refresh the Data
+            //        foreach (var bookingse in CourtBookingses)
+            //        {
+            //            int y = 0;
+            //            foreach (var daily in bookingse.WeeklyBookingses.DailyBookingses)
+            //            {
+            //                daily.DayDateTime = _firstDayOfWeek.AddDays(y);
+            //                y++;
+            //            }
+            //            FillCourtBooking(bookingse);
+            //        }
+            //        Working--;
+            //    });
+            //    t.Start();
+            //}
+
         }
 
         /// <summary>
@@ -289,7 +318,7 @@ namespace TcpDash.Business
             var res = _container.tryPeriodBooking("Perso", false, start, end, filmed, bookingAggregId, court.ID, p1.ID,
                 p2.ID);
 
-            int ret = (int) res.FirstOrDefault();
+            int ret = (int)res.FirstOrDefault();
             if (ret == 1)
             {
                 Refresh();

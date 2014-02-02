@@ -20,14 +20,18 @@ namespace TcpDash.UC
 
         private void _bm_WorkingChanged(object sender, int value)
         {
-            if (value != 0)
+            Dispatcher.Invoke(() =>
             {
-                ProgressBar.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                ProgressBar.Visibility = Visibility.Hidden;
-            }
+                if (value != 0)
+                {
+                    ProgressBar.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    ProgressBar.Visibility = Visibility.Hidden;
+                }
+            });
+            
         }
     }
 }

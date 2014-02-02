@@ -111,6 +111,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UC\RecentPlayers.xaml.cs">
+      <DependentUpon>RecentPlayers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UC\UserWorking.xaml.cs">
       <DependentUpon>UserWorking.xaml</DependentUpon>
     </Compile>
@@ -166,6 +169,10 @@
     <Compile Include="UI\WindowAdmin.xaml.cs">
       <DependentUpon>WindowAdmin.xaml</DependentUpon>
     </Compile>
+    <Page Include="UC\RecentPlayers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UC\UserWorking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
