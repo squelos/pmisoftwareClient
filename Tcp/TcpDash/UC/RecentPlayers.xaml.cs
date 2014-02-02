@@ -54,8 +54,7 @@ namespace TcpDash.UC
                     var res =
                         cont.BookingJeu.Where(booking => booking.Player1.ID == _firstPlayer.ID)
                             .OrderByDescending(booking => booking.creationDate)
-                            .Distinct()
-                            .Select(booking => booking.Player2).ToList().Take(5);
+                            .Select(booking => booking.Player2).Distinct().ToList().Take(5);
                     Dispatcher.Invoke(() => lb.ItemsSource = res);
                     Working--;
                 });

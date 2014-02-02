@@ -152,13 +152,17 @@ namespace TcpDash.UI
 
         public void Dispose()
         {
-            _mvm.BadgeScanner.BadgeScanned -= OnBadgeScanned;
+            //_mvm.BadgeScanner.BadgeScanned -= OnBadgeScanned;
             // remove evepnt handler for the scan
         }
 
         private void DeletionWindow_OnClosing(object sender, CancelEventArgs e)
         {
+            
+
             e.Cancel = _working != 0;
+            if(!e.Cancel)
+                _mvm.BadgeScanner.BadgeScanned -= OnBadgeScanned;
         }
     }
 }

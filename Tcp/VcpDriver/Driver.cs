@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace VcpDriver
 {
@@ -91,7 +92,16 @@ namespace VcpDriver
                     SerialPort port = new SerialPort(availablePort, _baudRate, Parity.None, _dataBits, _stopBits);
                     try
                     {
-                        port.Open();
+                        try
+                        {
+                            port.Open();
+                        }
+                        catch (Exception)
+                        {
+                            Thread.Sleep(500);
+                            port.Open();
+                        }
+                        
                      
                         port.RtsEnable = true;
                         port.DtrEnable = true;
