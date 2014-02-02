@@ -29,6 +29,7 @@ namespace TcpGA.ViewModel
         private PlayersViewModel _playersvm;
         private SeasonsViewModel _seasonsvm;
         private UnpaidViewModel _unpaid;
+        private LogsViewModel _logsvm;
         private MailViewModel _mailvm;
         private NonRenewViewModel _nonRenewvm;
         private Driver _driver = new Driver();
@@ -124,6 +125,19 @@ namespace TcpGA.ViewModel
                     _playersvm.PropertyChanging += (sender, args) => RaisePropertyChangingEvent("playersvm");
                 }
                 return _playersvm;
+            }
+        }
+
+        public LogsViewModel LogsViewModel 
+        {
+            get
+            {
+                if(_logsvm == null)
+                {
+                    _logsvm = new LogsViewModel(this);
+                    _logsvm.PropertyChanged += (sender, args) => RaisePropertyChangedEvent("logsvm");
+                }
+                return _logsvm;
             }
         }
 

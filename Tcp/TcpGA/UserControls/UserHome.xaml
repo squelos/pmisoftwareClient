@@ -16,6 +16,9 @@
             </controls:Tile>
             <controls:Tile Title="Saisons"  Margin="10,10,10,10" Background="Green">
             </controls:Tile>
+            <controls:Tile Title="Journaux"  Margin="10,10,10,10" Background="Purple">
+            </controls:Tile>
+
         </WrapPanel>
     </Grid>
 </UserControl>

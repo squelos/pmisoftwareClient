@@ -45,6 +45,7 @@
         <EntityTypeShape EntityType="entity.Table" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="entity.LogEntry" Width="1.5" PointX="10.375" PointY="11.75" />
         <EntityTypeShape EntityType="entity.sysdiagrams" Width="1.5" PointX="3.375" PointY="12.75" />
+        <AssociationConnector Association="entity.FK_LogEntrynew_PlayerJeu" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

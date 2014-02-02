@@ -5,8 +5,8 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="entity.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'TCP_DB.dbo.AuthorizedTagsVersion' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="AuthorizedTagsVersion">
           <Key>
             <PropertyRef Name="versionNumber" />
@@ -82,6 +82,7 @@ warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a 
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Player_ID" Type="int" />
           <Property Name="timestamp" Type="datetime" Nullable="false" />
           <Property Name="reader_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="tag_number" Type="int" Nullable="false" />
@@ -231,8 +232,8 @@ warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a 
           <Property Name="Player_ID" Type="int" Nullable="false" />
           <Property Name="Day_Id" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="authorizedUserTags">
           <Key>
             <PropertyRef Name="number" />
@@ -320,6 +321,18 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             </Principal>
             <Dependent Role="TrainingPreferencesSet">
               <PropertyRef Name="Day_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LogEntrynew_PlayerJeu">
+          <End Role="PlayerJeu" Type="Self.PlayerJeu" Multiplicity="0..1" />
+          <End Role="LogEntry" Type="Self.LogEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerJeu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LogEntry">
+              <PropertyRef Name="Player_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -610,6 +623,10 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             <End Role="DaySet" EntitySet="DaySet" />
             <End Role="TrainingPreferencesSet" EntitySet="TrainingPreferencesSet" />
           </AssociationSet>
+          <AssociationSet Name="FK_LogEntrynew_PlayerJeu" Association="Self.FK_LogEntrynew_PlayerJeu">
+            <End Role="PlayerJeu" EntitySet="PlayerJeu" />
+            <End Role="LogEntry" EntitySet="LogEntry" />
+          </AssociationSet>
           <AssociationSet Name="FK_OpeningBadge" Association="Self.FK_OpeningBadge">
             <End Role="BadgeJeu" EntitySet="BadgeJeu" />
             <End Role="OpeningJeu" EntitySet="OpeningJeu" />
@@ -822,6 +839,10 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             <Parameter Name="player1" Mode="In" Type="Int32" />
             <Parameter Name="player2" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_LogEntrynew_PlayerJeu" Association="entity.FK_LogEntrynew_PlayerJeu">
+            <End Role="Player" EntitySet="PlayerJeu" />
+            <End Role="LogEntry" EntitySet="LogEntry" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Season">
           <Key>
@@ -942,6 +963,7 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <Property Name="passwordResetDemand" Type="DateTime" Precision="3" />
           <Property Name="Subscribed" Type="Boolean" />
           <Property Name="Sex" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LogEntry" Relationship="entity.FK_LogEntrynew_PlayerJeu" FromRole="Player" ToRole="LogEntry" />
         </EntityType>
         <EntityType Name="PreferencePeriod">
           <Key>
@@ -1143,6 +1165,8 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <Property Name="reader_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="tag_number" Type="Int32" Nullable="false" />
           <Property Name="reader_response" Type="Int32" Nullable="false" />
+          <Property Name="Player_ID" Type="Int32" />
+          <NavigationProperty Name="PlayerJeu" Relationship="entity.FK_LogEntrynew_PlayerJeu" FromRole="LogEntry" ToRole="Player" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1158,6 +1182,18 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <Property Type="Int32" Name="Court" Nullable="false" />
           <Property Type="Int32" Name="NB" Nullable="true" />
         </ComplexType>
+        <Association Name="FK_LogEntrynew_PlayerJeu">
+          <End Type="entity.Player" Role="Player" Multiplicity="0..1" />
+          <End Type="entity.LogEntry" Role="LogEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LogEntry">
+              <PropertyRef Name="Player_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1560,6 +1596,7 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <EntitySetMapping Name="LogEntry">
             <EntityTypeMapping TypeName="entity.LogEntry">
               <MappingFragment StoreEntitySet="LogEntry">
+                <ScalarProperty Name="Player_ID" ColumnName="Player_ID" />
                 <ScalarProperty Name="reader_response" ColumnName="reader_response" />
                 <ScalarProperty Name="tag_number" ColumnName="tag_number" />
                 <ScalarProperty Name="reader_name" ColumnName="reader_name" />

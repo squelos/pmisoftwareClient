@@ -132,6 +132,9 @@
     <Compile Include="Pages\players\PlayerTraining.xaml.cs">
       <DependentUpon>PlayerTraining.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UserLogEntries.xaml.cs">
+      <DependentUpon>UserLogEntries.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UserBadge.xaml.cs">
       <DependentUpon>UserBadge.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,7 @@
     <Compile Include="Utility\Crypto.cs" />
     <Compile Include="ViewModel\BadgesViewModel.cs" />
     <Compile Include="ViewModel\CourtViewModel.cs" />
+    <Compile Include="ViewModel\LogsViewModel.cs" />
     <Compile Include="ViewModel\MailViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NonRenewViewMOdel.cs" />
@@ -241,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\UserLogEntries.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
