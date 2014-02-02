@@ -1,27 +1,34 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace TcpDash.Classes
 {
-    class UIDispatcher
+    internal class UIDispatcher
     {
-
         #region members
 
         private MainWindow _uiElement;
+
         #endregion
 
         #region singleton
+
         private static readonly Lazy<UIDispatcher> lazy =
             new Lazy<UIDispatcher>(() => new UIDispatcher());
 
-        public static UIDispatcher Instance { get { return lazy.Value; } }
+        public static UIDispatcher Instance
+        {
+            get { return lazy.Value; }
+        }
 
         private UIDispatcher()
         {
-
         }
 
         #endregion
@@ -49,10 +56,46 @@ namespace TcpDash.Classes
 
         public bool? ShowDialogAndBlur(Window win)
         {
-            _uiElement.Effect = new BlurEffect();
+            OverlayMainWindow();
+            BlurEffect blur = new BlurEffect();
+            blur.Radius = 8;
+            _uiElement.Effect = blur;
+            Task t = new Task(() =>
+            {
+                Thread.Sleep(120000);
+                _uiElement.Dispatcher.Invoke(win.Close);
+                //win.Close();
+            });
+            t.Start();
+
             bool? result = win.ShowDialog();
             _uiElement.Effect = null;
+            HideOverlayMainWindow();
             return result;
+        }
+
+        public void OverlayMainWindow()
+        {
+            _uiElement.News.Visibility = Visibility.Hidden;
+            _uiElement.ShowOverlayAsync();
+        }
+
+        public void HideOverlayMainWindow()
+        {
+            _uiElement.HideOverlayAsync();
+            _uiElement.News.Visibility = Visibility.Visible;
+        }
+
+        public void ShowMessageDialog(MetroWindow win, string title, string msg)
+        {
+            if (_uiElement.CheckAccess())
+            {
+                win.ShowMessageAsync(title, msg, MessageDialogStyle.Affirmative);
+            }
+            else
+            {
+                _uiElement.Dispatcher.Invoke(() => win.ShowMessageAsync(title, msg, MessageDialogStyle.Affirmative));
+            }
         }
 
         public MainWindow GetMainWindow
@@ -70,13 +113,10 @@ namespace TcpDash.Classes
             _uiElement.Dispatcher.Invoke(DispatcherPriority.Background, action);
         }
 
-
         #endregion
 
         #region privateRaising
 
-
         #endregion
-
     }
 }

@@ -23,6 +23,7 @@ namespace TcpDash.Business
         {
             _court = court;
         }
+
         #endregion
 
         #region getters/setters
@@ -34,10 +35,7 @@ namespace TcpDash.Business
 
         public WeeklyBookings WeeklyBookingses
         {
-            get
-            {
-                return _selectedWeeklyBookings;
-            }
+            get { return _selectedWeeklyBookings; }
             set
             {
                 _selectedWeeklyBookings = value;
@@ -45,17 +43,15 @@ namespace TcpDash.Business
             }
         }
 
-
-
         #endregion
 
         #region events
+
         #endregion
 
         #region private Methods
 
         #endregion
-
 
         #region publics
 

@@ -24,6 +24,7 @@ namespace TcpDash.Business
         {
             _dayDateTime = day;
         }
+
         #endregion
 
         #region getters/setters
@@ -44,7 +45,6 @@ namespace TcpDash.Business
         #region private Methods
 
         #endregion
-
 
         #region publics
 

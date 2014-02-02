@@ -44,7 +44,6 @@ namespace TcpDash.ViewModel
             // subscribe to Court Bookings changes from the manager
             //if the court bookings change, refresh
             _bookingManager.Changed += (sender, args) => RaisePropertyChanged("bookingManager");
-
         }
 
         #endregion
@@ -69,7 +68,7 @@ namespace TcpDash.ViewModel
                 _selectedDay = value;
                 _firstDayOfWeek = Utility.GetFirst(_selectedDay);
                 _lastDayOfWeek = _firstDayOfWeek.AddDays(6);
-                BookingManager.SelectedDateChanged(_selectedDay,_firstDayOfWeek,_lastDayOfWeek);
+                BookingManager.SelectedDateChanged(_selectedDay, _firstDayOfWeek, _lastDayOfWeek);
                 RaisePropertyChanged("selectedDay");
             }
         }
@@ -98,6 +97,7 @@ namespace TcpDash.ViewModel
         {
             get { return _incrementDateCommand; }
         }
+
         #endregion
 
         #region commands
@@ -107,7 +107,9 @@ namespace TcpDash.ViewModel
         #region events
 
         public delegate void CourtNumberEventHandler(object sender, EventArgs e);
+
         public event CourtNumberEventHandler CourtNumberChanged;
+
         private void RaiseCourtNumberChanged()
         {
             if (CourtNumberChanged != null)
@@ -115,8 +117,6 @@ namespace TcpDash.ViewModel
                 CourtNumberChanged(this, new EventArgs());
             }
         }
-
-        
 
         #endregion
 
@@ -135,6 +135,7 @@ namespace TcpDash.ViewModel
         #endregion
 
         #region publics
+
         public void Refresh()
         {
             //throw new NotImplementedException();
@@ -142,8 +143,8 @@ namespace TcpDash.ViewModel
 
         public void RefreshManagers()
         {
-
         }
+
         #endregion
     }
 }

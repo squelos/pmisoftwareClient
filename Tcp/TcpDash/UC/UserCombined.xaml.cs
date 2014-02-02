@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -22,7 +23,6 @@ namespace TcpDash.UC
     /// </summary>
     public partial class UserCombined : UserControl
     {
-
         private MainViewModel _mvm;
         private bool _firstLoad = true;
 
@@ -45,8 +45,9 @@ namespace TcpDash.UC
 
         private void CalendarViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            
             //we refresh to show the current day per court
+            // here we fade
+            BeginStoryboard(FindResource("Storyboard1") as Storyboard);
             wrap.Children.Clear();
 
             foreach (var courtBookingse in _mvm.CalendarViewModel.BookingManager.CourtBookingses)
@@ -54,13 +55,12 @@ namespace TcpDash.UC
                 GroupBox gb = new GroupBox();
                 gb.Header = courtBookingse.Court.number;
                 UserDay uDay = new UserDay(_mvm);
-                
+
                 //feed a CourtBooking
                 //the courtBooking must contain the bookings of the day
                 uDay.CourtB = courtBookingse;
                 gb.Content = uDay;
                 wrap.Children.Add(gb);
-                
             }
         }
     }

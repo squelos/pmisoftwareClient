@@ -8,9 +8,9 @@ namespace TcpDash.Classes
         private bool _swiped = false;
         private Task t;
         private bool _running = false;
+
         public SwipeHelper()
         {
-            
         }
 
         public bool Swipped
@@ -21,7 +21,6 @@ namespace TcpDash.Classes
                 _swiped = value;
                 if (value && !_running)
                 {
-                    
                     Task t = new Task(() =>
                     {
                         _running = true;

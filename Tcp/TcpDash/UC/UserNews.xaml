@@ -1,25 +1,27 @@
 ﻿<UserControl x:Class="TcpDash.UC.UserNews"
-               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
              d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded"
              TouchDown="UserNews_OnTouchDown" TouchMove="UserNews_OnTouchMove">
     <Grid>
-        <GroupBox Header="Actualités" >
+        <GroupBox Header="Actualités">
             <StackPanel Orientation="Vertical">
                 <Label Content="{Binding NewsViewModel.CurrentNews.Title}" FontWeight="Bold" FontSize="20" />
                 <WebBrowser x:Name="web" />
                 <StackPanel Orientation="Horizontal">
-                    <Button Command="{Binding NewsViewModel.DecrementCommand}" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40">
+                    <Button Command="{Binding NewsViewModel.DecrementCommand}"
+                            Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40">
                         <Rectangle Width="18" Height="18">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_arrow_left}" />
                             </Rectangle.Fill>
                         </Rectangle>
                     </Button>
-                    <Button Command="{Binding NewsViewModel.IncrementCommand}"  Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40">
+                    <Button Command="{Binding NewsViewModel.IncrementCommand}"
+                            Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40">
                         <Rectangle Width="18" Height="18">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_arrow_right}" />

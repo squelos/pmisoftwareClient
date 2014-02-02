@@ -12,7 +12,7 @@ namespace TcpDash
     public partial class MainWindow
     {
         private MainViewModel _mainViewModel;
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +27,7 @@ namespace TcpDash
             bool? result = admin.ShowDialog();
             if (result == true)
             {
-               //we clean up and close
+                //we clean up and close
                 _mainViewModel.BadgeScanner.Dispose();
             }
             else
@@ -73,7 +73,6 @@ namespace TcpDash
                 //if(admin.ShowDialog()== DialogResult.Value;
                 // if(admin.ShowDialog() != DialogResult.)
             }
-
         }
     }
 }

@@ -24,6 +24,7 @@ namespace TcpDash.UC
     {
         private TouchPoint _touchStart;
         private SwipeHelper _helper = new SwipeHelper();
+
         public UserDateSelection()
         {
             InitializeComponent();

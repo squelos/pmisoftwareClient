@@ -45,10 +45,8 @@ namespace TcpDash.UC
             }
             catch (Exception ex)
             {
-
                 Console.Out.WriteLine(ex);
             }
-
         }
 
         private void NewsViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -59,9 +57,8 @@ namespace TcpDash.UC
 
         private void LoadHtmlInWeb()
         {
-            web.NavigateToString("<head></head><body bgcolor=\"#D45B07\">" + _mvm.NewsViewModel.CurrentNews.Content + "</body>");
-            //TODO crashes
-
+            web.NavigateToString("<head></head><body bgcolor=\"#D45B07\">" + _mvm.NewsViewModel.CurrentNews.Content +
+                                 "</body>");
         }
 
         private void UserNews_OnTouchDown(object sender, TouchEventArgs e)
@@ -81,7 +78,7 @@ namespace TcpDash.UC
                 {
                     //swipe left
                     _mvm.CalendarViewModel.DecrementCommand.Execute(null);
-                    
+
                     _helper.Swipped = true;
                 }
 

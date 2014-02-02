@@ -21,15 +21,15 @@ namespace TcpDash
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotFocusEvent,
+            EventManager.RegisterClassHandler(typeof (TextBox), TextBox.GotFocusEvent,
                 new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.AttachTabTip()));
-            EventManager.RegisterClassHandler(typeof(PasswordBox), PasswordBox.GotFocusEvent,
+            EventManager.RegisterClassHandler(typeof (PasswordBox), PasswordBox.GotFocusEvent,
                 new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.AttachTabTip()));
             //EventManager.RegisterClassHandler(typeof(ComboBox), ComboBox.GotFocusEvent,
             //    new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.AttachTabTip()));
-            EventManager.RegisterClassHandler(typeof(TextBox), TextBox.LostFocusEvent,
+            EventManager.RegisterClassHandler(typeof (TextBox), TextBox.LostFocusEvent,
                 new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.RemoveTabTip()));
-            EventManager.RegisterClassHandler(typeof(PasswordBox), PasswordBox.LostFocusEvent,
+            EventManager.RegisterClassHandler(typeof (PasswordBox), PasswordBox.LostFocusEvent,
                 new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.RemoveTabTip()));
             //EventManager.RegisterClassHandler(typeof(ComboBox), ComboBox.LostFocusEvent,
             //    new RoutedEventHandler((sender, args) => VirtualKeyBoardHelper.RemoveTabTip()));
@@ -37,7 +37,8 @@ namespace TcpDash
 
         public static void ShowKeyboard()
         {
-            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.System) + Path.DirectorySeparatorChar + "osk.exe");
+            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.System) + Path.DirectorySeparatorChar +
+                          "osk.exe");
         }
     }
 }

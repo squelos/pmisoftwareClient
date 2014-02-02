@@ -29,7 +29,7 @@ namespace TcpDash.UC
             CalendarViewModel_PropertyChanged(this, null);
         }
 
-        void CalendarViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void CalendarViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             //we refresh the tabs and their contents
             //this shows a weekly planning for each court in a different tab
@@ -38,7 +38,7 @@ namespace TcpDash.UC
             {
                 TabItem ti = new MetroTabItem(animatedTab);
                 UserWeek uWeek = new UserWeek(_mvm);
-                
+
                 //feed a CourtBooking
                 uWeek.CourtB = courtBookingse;
                 ti.Header = courtBookingse.Court.number;
@@ -50,7 +50,7 @@ namespace TcpDash.UC
         private void AnimatedTab_OnTouchMove(object sender, TouchEventArgs e)
         {
             if (!_helper.Swipped)
-            {                
+            {
                 var Touch = e.GetTouchPoint(this);
                 //right now a swipe is 200 pixels 
 
@@ -58,7 +58,7 @@ namespace TcpDash.UC
                 if (_touchStart != null && Touch.Position.X > (_touchStart.Position.X + 200))
                 {
                     //swipe left
-                    
+
                     animatedTab.PreviousTab();
                     _helper.Swipped = true;
                 }
@@ -67,9 +67,9 @@ namespace TcpDash.UC
 
                 if (_touchStart != null && Touch.Position.X < (_touchStart.Position.X - 200))
                 {
-                     //swipe right
+                    //swipe right
                     animatedTab.NextTab();
-                     _helper.Swipped = true;
+                    _helper.Swipped = true;
                 }
             }
             e.Handled = false;

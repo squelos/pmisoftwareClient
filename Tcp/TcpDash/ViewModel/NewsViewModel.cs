@@ -47,8 +47,6 @@ namespace TcpDash.ViewModel
             _decrementCommand = new RelayCommand(Decrement);
         }
 
-
-
         #endregion
 
         #region getters/setters
@@ -71,14 +69,18 @@ namespace TcpDash.ViewModel
                 _currentNews = value;
                 RaisePropertyChanged("currentNews");
             }
-
         }
 
         public ICommand DecrementCommand
-        { get { return _decrementCommand; } }
+        {
+            get { return _decrementCommand; }
+        }
 
         public ICommand IncrementCommand
-        { get { return _incrementCommand; } }
+        {
+            get { return _incrementCommand; }
+        }
+
         #endregion
 
         #region commands
@@ -95,9 +97,9 @@ namespace TcpDash.ViewModel
         {
             DateTime now = DateTime.Now.AddMonths(-2);
             RecentNews = new ObservableCollection<News>(
-                    _container.NewsSet.Where(news => news.Visibility && news.PublishDate > now)
-                        .OrderByDescending(news => news.PublishDate)
-                        .Take(15));
+                _container.NewsSet.Where(news => news.Visibility && news.PublishDate > now)
+                    .OrderByDescending(news => news.PublishDate)
+                    .Take(15));
         }
 
         public void Increment()
@@ -117,6 +119,7 @@ namespace TcpDash.ViewModel
                 _newsI = 0;
             }
         }
+
         public void Decrement()
         {
             //if the recentNews contains nothing
@@ -135,12 +138,12 @@ namespace TcpDash.ViewModel
             }
             CurrentNews = RecentNews[_newsI];
         }
+
         #endregion
 
         public void Dispose()
         {
             _threadRun = false;
-
         }
     }
 }

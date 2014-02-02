@@ -17,33 +17,33 @@ namespace TcpDash.Business
             switch (dt.DayOfWeek)
             {
                 case DayOfWeek.Monday:
-                    {
-                        return dt.Date;
-                    }
+                {
+                    return dt.Date;
+                }
                 case DayOfWeek.Tuesday:
-                    {
-                        return dt.AddDays(-1).Date;
-                    }
+                {
+                    return dt.AddDays(-1).Date;
+                }
                 case DayOfWeek.Wednesday:
-                    {
-                        return dt.AddDays(-2).Date;
-                    }
+                {
+                    return dt.AddDays(-2).Date;
+                }
                 case DayOfWeek.Thursday:
-                    {
-                        return dt.AddDays(-3).Date;
-                    }
+                {
+                    return dt.AddDays(-3).Date;
+                }
                 case DayOfWeek.Friday:
-                    {
-                        return dt.AddDays(-4).Date;
-                    }
+                {
+                    return dt.AddDays(-4).Date;
+                }
                 case DayOfWeek.Saturday:
-                    {
-                        return dt.AddDays(-5).Date;
-                    }
+                {
+                    return dt.AddDays(-5).Date;
+                }
                 case DayOfWeek.Sunday:
-                    {
-                        return dt.AddDays(-6).Date;
-                    }
+                {
+                    return dt.AddDays(-6).Date;
+                }
                 default:
                     return dt;
             }
@@ -61,24 +61,18 @@ namespace TcpDash.Business
                 StartExplorer();
             }
         }
+
         public static void StartExplorer()
         {
-            //RegistryKey ourKey = Registry.LocalMachine;
-            //ourKey = ourKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
-            //ourKey.SetValue("AutoRestartShell", 1);
             string explorer = string.Format("{0}\\{1}", Environment.GetEnvironmentVariable("WINDIR"), "explorer.exe");
             Process process = new Process();
             process.StartInfo.FileName = explorer;
             process.StartInfo.UseShellExecute = true;
             process.Start();
-
         }
 
         public static void StopExplorer()
         {
-            //RegistryKey ourKey = Registry.LocalMachine;
-            //ourKey = ourKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
-            //ourKey.SetValue("AutoRestartShell", 0);
             Process[] proc = System.Diagnostics.Process.GetProcessesByName("explorer");
             if (proc.Any())
             {
@@ -97,6 +91,7 @@ namespace TcpDash.Business
 
         [DllImport("user32.dll")]
         public static extern int FindWindow(string lpClassName, string lpWindowName);
+
         [DllImport("user32.dll")]
         public static extern int SendMessage(int hWnd, uint Msg, int wParam, int lParam);
 
@@ -104,7 +99,7 @@ namespace TcpDash.Business
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool PostMessage(int hWnd, uint Msg, int wParam, int lParam);
 
-        static void ExitExplorer()
+        private static void ExitExplorer()
         {
             int hwnd;
             hwnd = FindWindow("Progman", null);
@@ -140,11 +135,12 @@ namespace TcpDash.Business
         public static uint GetIdleTime()
         {
             LASTINPUTINFO lastInPut = new LASTINPUTINFO();
-            lastInPut.cbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(lastInPut);
+            lastInPut.cbSize = (uint) System.Runtime.InteropServices.Marshal.SizeOf(lastInPut);
             GetLastInputInfo(ref lastInPut);
 
-            return ((uint)Environment.TickCount - lastInPut.dwTime);
+            return ((uint) Environment.TickCount - lastInPut.dwTime);
         }
+
         /// <summary>
         /// Get the Last input time in ticks
         /// </summary>
@@ -152,7 +148,7 @@ namespace TcpDash.Business
         public static long GetLastInputTime()
         {
             LASTINPUTINFO lastInPut = new LASTINPUTINFO();
-            lastInPut.cbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(lastInPut);
+            lastInPut.cbSize = (uint) System.Runtime.InteropServices.Marshal.SizeOf(lastInPut);
             if (!GetLastInputInfo(ref lastInPut))
             {
                 throw new Exception(GetLastError().ToString());
@@ -173,7 +169,5 @@ namespace TcpDash.Business
         }
 
         #endregion
-
-
     }
 }
