@@ -44,13 +44,20 @@
             </Button>
         </Controls:WindowCommands>
     </Controls:MetroWindow.WindowCommands>
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Left">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel DockPanel.Dock="Left" Grid.Column="0">
             <UserControls:UserImageDisplay MaxWidth="450" PreviewMouseDown="ImagePreviewMouseDown" />
             <UserControls:UserDateSelection />
             <UserControls:UserWorking MaxWidth="450"/>
             <Button />
         </StackPanel>
-        <UserControls:UserCalendar />
-    </DockPanel>
+        <UserControls:UserCalendar Grid.Column="1"/>
+    </Grid>
 </Controls:MetroWindow>

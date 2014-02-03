@@ -119,9 +119,6 @@
     <Compile Include="UC\UserImageDisplay.xaml.cs">
       <DependentUpon>UserImageDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UC\UserMenu.xaml.cs">
-      <DependentUpon>UserMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UC\UserWorking.xaml.cs">
       <DependentUpon>UserWorking.xaml</DependentUpon>
     </Compile>
@@ -194,10 +191,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UC\UserImageDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UC\UserMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

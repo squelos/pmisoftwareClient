@@ -26,7 +26,6 @@ namespace TcpDash.ViewModel
         private bool _stopRotation = false;
         #endregion
 
-
         #region ctor
         public ImageViewModel(MainViewModel mvm)
         {
@@ -36,7 +35,6 @@ namespace TcpDash.ViewModel
             InitRotation();
         }
         #endregion
-
         
         #region getters/setters
 
@@ -60,7 +58,6 @@ namespace TcpDash.ViewModel
             }
         }
         #endregion
-
 
         #region events
 
@@ -244,7 +241,6 @@ namespace TcpDash.ViewModel
             t.Start();
         }
         #endregion
-
 
     }
 }

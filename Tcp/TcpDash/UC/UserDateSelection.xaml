@@ -29,7 +29,6 @@
                         </Rectangle>
                     </Button>
                 </DockPanel>
-
             </StackPanel>
         </Viewbox>
     </Grid>
