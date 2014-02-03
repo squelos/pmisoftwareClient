@@ -30,6 +30,7 @@ namespace TcpDash.ViewModel
         private NewsViewModel _newsViewModel;
         private CalendarViewModel _calendarViewModel;
         private ImageViewModel _imageViewModel;
+        private VideoViewModel _videoViewModel;
         private bool _readerStatus;
         private Visibility _connected = Visibility.Collapsed;
         private Visibility _disconnected = Visibility.Visible;
@@ -48,6 +49,7 @@ namespace TcpDash.ViewModel
             _newsViewModel = new NewsViewModel(this);
             _calendarViewModel = new CalendarViewModel(this);
             _imageViewModel = new ImageViewModel(this);
+            _videoViewModel = new VideoViewModel(this);
             _jobs = new Jobs(_calendarViewModel, _newsViewModel, this);
             _jobs.DoJobs = true;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
@@ -115,6 +117,16 @@ namespace TcpDash.ViewModel
             {
                 _calendarViewModel = value;
                 RaisePropertyChanged("calendarViewModel");
+            }
+        }
+
+        public VideoViewModel VideoViewModel
+        {
+            get { return _videoViewModel; }
+            set
+            {
+                _videoViewModel = value;
+                RaisePropertyChanged("videoViewModel");
             }
         }
 
