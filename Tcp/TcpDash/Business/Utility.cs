@@ -161,6 +161,11 @@ namespace TcpDash.Business
             return GetLastInputTime()/10000000/60;
         }
 
+        public static long GetLastInputTimeSec()
+        {
+            return GetLastInputTime()/10000000;
+        }
+
         internal struct LASTINPUTINFO
         {
             public uint cbSize;

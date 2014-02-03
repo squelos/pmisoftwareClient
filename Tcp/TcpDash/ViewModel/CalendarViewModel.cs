@@ -161,25 +161,25 @@ namespace TcpDash.ViewModel
         }
 
         public void RotateDate()
-        {
-            
+        {   
+            //TODO Buggy as fuck
             if (_rotateDate < 7)
             {
-                _selectedDay = _userSelectedDate.Date.AddDays(_rotateDate);
-                _firstDayOfWeek = Utility.GetFirst(_selectedDay);
-                _lastDayOfWeek = _firstDayOfWeek.AddDays(6);
-                BookingManager.SelectedDateChanged(_selectedDay, _firstDayOfWeek, _lastDayOfWeek);
-                UIDispatcher.Instance.Invoke(() =>
-                {
-                    RaisePropertyChanged("selectedDay");
-                    RaiseRequest();
-                });
-                
+               
             }
             else
             {
                 _rotateDate = 0;
             }
+            SelectedDay = _userSelectedDate.Date.AddDays(_rotateDate);
+            _firstDayOfWeek = Utility.GetFirst(_selectedDay);
+            _lastDayOfWeek = _firstDayOfWeek.AddDays(6);
+            BookingManager.SelectedDateChanged(_selectedDay, _firstDayOfWeek, _lastDayOfWeek);
+            UIDispatcher.Instance.Invoke(() =>
+            {
+                RaisePropertyChanged("selectedDay");
+                RaiseRequest();
+            });
             _rotateDate++;
         }
 

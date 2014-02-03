@@ -77,12 +77,12 @@ namespace TcpDash.Classes
         public void OverlayMainWindow()
         {
             //_uiElement.News.Visibility = Visibility.Hidden;
-            //_uiElement.ShowOverlayAsync();
+            _uiElement.ShowOverlayAsync();
         }
 
         public void HideOverlayMainWindow()
         {
-            //_uiElement.HideOverlayAsync();
+            _uiElement.HideOverlayAsync();
             //_uiElement.News.Visibility = Visibility.Visible;
         }
 

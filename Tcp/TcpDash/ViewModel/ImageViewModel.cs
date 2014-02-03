@@ -100,6 +100,7 @@ namespace TcpDash.ViewModel
 
         public void Back()
         {
+            //TODO buggy as fuck
             if (_stringList.Count != 0 )
             {
                 if (_iterator == 0)
@@ -115,13 +116,12 @@ namespace TcpDash.ViewModel
                     bmpImage.EndInit();
                 source = bmpImage;
                 RaiseMoveLeft(source);
-                
-                
             }
         }
 
         public void Forward()
         {
+            //TODO buggy as fuck a bite
             if (_stringList.Count != 0 )
             {
                 if (_iterator == _stringList.Count - 1)
@@ -137,7 +137,6 @@ namespace TcpDash.ViewModel
                 bmpImage.EndInit();
                 source = bmpImage;
                 RaiseMoveRight(source);
-                
             }
         }
         #endregion
@@ -221,6 +220,7 @@ namespace TcpDash.ViewModel
             }
             Task t = new Task(() =>
             {
+                //TODO buggy as fuck
                 while (_rotation)
                 {
                     

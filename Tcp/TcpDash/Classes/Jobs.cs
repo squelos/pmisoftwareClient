@@ -99,13 +99,22 @@ namespace TcpDash.Classes
         {
             while (_doJobs)
             {
-                Thread.Sleep(12000);
-                //check if inactive 
-                //if inactive over 3 min do the rotation
-                if (Utility.GetLastInputTimeMinutes() > 3)
+                Thread.Sleep(6000);
+                UIDispatcher.Instance.Invoke(() =>
                 {
                     _calendarViewModel.RotateDate();
+                });
+                //check if inactive 
+                //if inactive over 3 min do the rotation
+                //_calendarViewModel.RotateDate();
+                if (Utility.GetLastInputTimeSec()>30)
+                {
+                    
                 }
+                //if (Utility.GetLastInputTimeMinutes() > 1)
+                //{
+                //    _calendarViewModel.RotateDate();
+                //}
                 //TODO refresh date
             }
         }

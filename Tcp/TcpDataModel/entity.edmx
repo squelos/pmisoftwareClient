@@ -5,8 +5,8 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="entity.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'TCP_DB.dbo.AuthorizedTagsVersion' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AuthorizedTagsVersion">
           <Key>
             <PropertyRef Name="versionNumber" />
@@ -24,6 +24,7 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.AuthorizedTagsVersion' n'a pas de c
           <Property Name="isEnabled" Type="bit" Nullable="false" />
           <Property Name="isMaster" Type="bit" Nullable="false" />
           <Property Name="Player_ID" Type="int" />
+          <Property Name="forbidden" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="BallLevelSet">
           <Key>
@@ -97,15 +98,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.AuthorizedTagsVersion' n'a pas de c
           <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PublishDate" Type="datetime" Nullable="false" />
           <Property Name="Visibility" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="OpeningJeu">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="time" Type="datetime" Nullable="false" />
-          <Property Name="Court_ID" Type="int" />
-          <Property Name="Badge_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PaymentJeu">
           <Key>
@@ -215,13 +207,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.AuthorizedTagsVersion' n'a pas de c
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="Table">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="isOutOfDate" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="TrainingPreferencesSet">
           <Key>
             <PropertyRef Name="Id" />
@@ -232,8 +217,8 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.AuthorizedTagsVersion' n'a pas de c
           <Property Name="Player_ID" Type="int" Nullable="false" />
           <Property Name="Day_Id" Type="int" Nullable="false" />
         </EntityType>
-        <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="authorizedUserTags">
           <Key>
             <PropertyRef Name="number" />
@@ -288,18 +273,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CourtOpening">
-          <End Role="CourtJeu" Type="Self.CourtJeu" Multiplicity="0..1" />
-          <End Role="OpeningJeu" Type="Self.OpeningJeu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CourtJeu">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="OpeningJeu">
-              <PropertyRef Name="Court_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DayPreferencePeriod">
           <End Role="DaySet" Type="Self.DaySet" Multiplicity="1" />
           <End Role="PreferencePeriodJeu" Type="Self.PreferencePeriodJeu" Multiplicity="*" />
@@ -333,18 +306,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
             </Principal>
             <Dependent Role="LogEntry">
               <PropertyRef Name="Player_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OpeningBadge">
-          <End Role="BadgeJeu" Type="Self.BadgeJeu" Multiplicity="1" />
-          <End Role="OpeningJeu" Type="Self.OpeningJeu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BadgeJeu">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="OpeningJeu">
-              <PropertyRef Name="Badge_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -571,7 +532,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
           <EntitySet Name="DaySet" EntityType="Self.DaySet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LogEntry" EntityType="Self.LogEntry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsSet" EntityType="Self.NewsSet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OpeningJeu" EntityType="Self.OpeningJeu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentJeu" EntityType="Self.PaymentJeu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentMethodSet" EntityType="Self.PaymentMethodSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentSemester" EntityType="Self.PaymentSemester" Schema="dbo" store:Type="Tables" />
@@ -582,7 +542,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
           <EntitySet Name="SemesterJeu" EntityType="Self.SemesterJeu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatusSet" EntityType="Self.StatusSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrainingPreferencesSet" EntityType="Self.TrainingPreferencesSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuthorizedTagsVersion" EntityType="Self.AuthorizedTagsVersion" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -611,10 +570,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
             <End Role="PlayerJeu" EntitySet="PlayerJeu" />
             <End Role="BookingJeu" EntitySet="BookingJeu" />
           </AssociationSet>
-          <AssociationSet Name="FK_CourtOpening" Association="Self.FK_CourtOpening">
-            <End Role="CourtJeu" EntitySet="CourtJeu" />
-            <End Role="OpeningJeu" EntitySet="OpeningJeu" />
-          </AssociationSet>
           <AssociationSet Name="FK_DayPreferencePeriod" Association="Self.FK_DayPreferencePeriod">
             <End Role="DaySet" EntitySet="DaySet" />
             <End Role="PreferencePeriodJeu" EntitySet="PreferencePeriodJeu" />
@@ -626,10 +581,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
           <AssociationSet Name="FK_LogEntrynew_PlayerJeu" Association="Self.FK_LogEntrynew_PlayerJeu">
             <End Role="PlayerJeu" EntitySet="PlayerJeu" />
             <End Role="LogEntry" EntitySet="LogEntry" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OpeningBadge" Association="Self.FK_OpeningBadge">
-            <End Role="BadgeJeu" EntitySet="BadgeJeu" />
-            <End Role="OpeningJeu" EntitySet="OpeningJeu" />
           </AssociationSet>
           <AssociationSet Name="FK_PaymentMethodPayment" Association="Self.FK_PaymentMethodPayment">
             <End Role="PaymentMethodSet" EntitySet="PaymentMethodSet" />
@@ -692,7 +643,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
           <EntitySet Name="BookingAggregationJeu" EntityType="entity.BookingAggregation" />
           <EntitySet Name="BookingJeu" EntityType="entity.Booking" />
           <EntitySet Name="CourtJeu" EntityType="entity.Court" />
-          <EntitySet Name="OpeningJeu" EntityType="entity.Opening" />
           <EntitySet Name="PlayerJeu" EntityType="entity.Player" />
           <EntitySet Name="PreferencePeriodJeu" EntityType="entity.PreferencePeriod" />
           <AssociationSet Name="BookingAggregation" Association="entity.BookingAggregationBooking">
@@ -702,10 +652,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
           <AssociationSet Name="BookingCourt" Association="entity.BookingCourt">
             <End Role="Booking" EntitySet="BookingJeu" />
             <End Role="Court" EntitySet="CourtJeu" />
-          </AssociationSet>
-          <AssociationSet Name="CourtOpening" Association="entity.CourtOpening">
-            <End Role="Court" EntitySet="CourtJeu" />
-            <End Role="Opening" EntitySet="OpeningJeu" />
           </AssociationSet>
           <AssociationSet Name="BadgePlayer" Association="entity.BadgePlayer">
             <End Role="Badge" EntitySet="BadgeJeu" />
@@ -726,10 +672,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
           <AssociationSet Name="PaymentSemester" Association="entity.PaymentSemester">
             <End Role="Payment" EntitySet="PaymentJeu" />
             <End Role="Semester" EntitySet="SemesterJeu" />
-          </AssociationSet>
-          <AssociationSet Name="OpeningBadge" Association="entity.OpeningBadge">
-            <End Role="Opening" EntitySet="OpeningJeu" />
-            <End Role="Badge" EntitySet="BadgeJeu" />
           </AssociationSet>
           <EntitySet Name="CategorySet" EntityType="entity.Category" />
           <AssociationSet Name="PlayerCategory" Association="entity.PlayerCategory">
@@ -813,7 +755,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="Table" EntityType="entity.Table" />
           <EntitySet Name="LogEntry" EntityType="entity.LogEntry" />
           <EntitySet Name="sysdiagrams" EntityType="entity.sysdiagrams" />
           <FunctionImport Name="addLogEntry">
@@ -881,10 +822,10 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Player" Relationship="entity.BadgePlayer" FromRole="Badge" ToRole="Player" />
-          <NavigationProperty Name="Opening" Relationship="entity.OpeningBadge" FromRole="Badge" ToRole="Opening" />
           <Property Type="Int64" Name="number" Nullable="false" />
           <Property Type="Boolean" Name="isEnabled" Nullable="false" />
           <Property Type="Boolean" Name="isMaster" Nullable="false" />
+          <Property Name="forbidden" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="BookingAggregation">
           <Key>
@@ -916,18 +857,8 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Booking" Relationship="entity.BookingCourt" FromRole="Court" ToRole="Booking" />
-          <NavigationProperty Name="Opening" Relationship="entity.CourtOpening" FromRole="Court" ToRole="Opening" />
           <Property Type="String" Name="number" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="Boolean" Name="isCovered" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Opening">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Court" Relationship="entity.CourtOpening" FromRole="Opening" ToRole="Court" />
-          <Property Type="DateTime" Name="time" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Badge" Relationship="entity.OpeningBadge" FromRole="Opening" ToRole="Badge" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -985,10 +916,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
           <End Type="entity.Booking" Role="Booking" Multiplicity="*" />
           <End Type="entity.Court" Role="Court" Multiplicity="1" />
         </Association>
-        <Association Name="CourtOpening">
-          <End Type="entity.Court" Role="Court" Multiplicity="0..1" />
-          <End Type="entity.Opening" Role="Opening" Multiplicity="*" />
-        </Association>
         <Association Name="BadgePlayer">
           <End Type="entity.Badge" Role="Badge" Multiplicity="*" />
           <End Type="entity.Player" Role="Player" Multiplicity="0..1" />
@@ -1008,10 +935,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
         <Association Name="PaymentSemester">
           <End Type="entity.Payment" Role="Payment" Multiplicity="*" />
           <End Type="entity.Semester" Role="Semester" Multiplicity="*" />
-        </Association>
-        <Association Name="OpeningBadge">
-          <End Type="entity.Opening" Role="Opening" Multiplicity="*" />
-          <End Type="entity.Badge" Role="Badge" Multiplicity="1" />
         </Association>
         <EntityType Name="Category">
           <Key>
@@ -1149,13 +1072,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="Table">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="isOutOfDate" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="LogEntry">
           <Key>
             <PropertyRef Name="ID" />
@@ -1231,7 +1147,8 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
     <EntitySetMapping Name="BadgeJeu">
       <EntityTypeMapping TypeName="IsTypeOf(entity.Badge)">
         <MappingFragment StoreEntitySet="BadgeJeu">
-          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="forbidden" ColumnName="forbidden" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="number" ColumnName="number" />
           <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
           <ScalarProperty Name="isMaster" ColumnName="isMaster" />
@@ -1265,14 +1182,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="number" ColumnName="number" />
           <ScalarProperty Name="isCovered" ColumnName="isCovered" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OpeningJeu">
-      <EntityTypeMapping TypeName="IsTypeOf(entity.Opening)">
-        <MappingFragment StoreEntitySet="OpeningJeu">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="time" ColumnName="time" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1391,15 +1300,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CourtOpening" TypeName="entity.CourtOpening" StoreEntitySet="OpeningJeu">
-      <EndProperty Name="Court">
-        <ScalarProperty Name="ID" ColumnName="Court_ID" />
-      </EndProperty>
-      <EndProperty Name="Opening">
-        <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
-      <Condition ColumnName="Court_ID" IsNull="false" />
-    </AssociationSetMapping>
     <AssociationSetMapping Name="BadgePlayer" TypeName="entity.BadgePlayer" StoreEntitySet="BadgeJeu">
       <EndProperty Name="Player">
         <ScalarProperty Name="ID" ColumnName="Player_ID" />
@@ -1439,14 +1339,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
       </EndProperty>
       <EndProperty Name="Semester">
         <ScalarProperty Name="ID" ColumnName="Semester_ID" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="OpeningBadge" TypeName="entity.OpeningBadge" StoreEntitySet="OpeningJeu">
-      <EndProperty Name="Badge">
-        <ScalarProperty Name="ID" ColumnName="Badge_ID" />
-      </EndProperty>
-      <EndProperty Name="Opening">
-        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="PlayerCategory" TypeName="entity.PlayerCategory" StoreEntitySet="PlayerCategory">
@@ -1585,14 +1477,6 @@ avertissement 6002: La table/vue 'TCP_DB.dbo.authorizedUserTags' n'a pas de clé
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="entity.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="entity.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="Table">
-            <EntityTypeMapping TypeName="entity.Table">
-              <MappingFragment StoreEntitySet="Table">
-                <ScalarProperty Name="isOutOfDate" ColumnName="isOutOfDate" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LogEntry">
             <EntityTypeMapping TypeName="entity.LogEntry">
               <MappingFragment StoreEntitySet="LogEntry">

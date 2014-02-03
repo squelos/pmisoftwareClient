@@ -331,8 +331,9 @@ namespace TcpDash.Business
         public bool DeleteBooking(Booking b)
         {
             bool ret = false;
-
-            _container.BookingJeu.Remove(b);
+            var bToDelete = _container.BookingJeu.First(booking => booking.ID == b.ID);
+            //TODO Crash
+            _container.BookingJeu.Remove(bToDelete);
             _container.SaveChanges();
             Refresh();
             ret = true;
