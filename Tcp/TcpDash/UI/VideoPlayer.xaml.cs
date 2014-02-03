@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace TcpDash.UI
 {
     /// <summary>
@@ -22,6 +23,29 @@ namespace TcpDash.UI
         public VideoPlayer()
         {
             InitializeComponent();
+            
+            SetFullScreen();
+        }
+
+        private void SetFullScreen()
+        {
+            var secondaryScreen = System.Windows.Forms.Screen.AllScreens.FirstOrDefault(s => !s.Primary);
+
+            if (secondaryScreen != null)
+            {
+                if (!this.IsLoaded)
+                    this.WindowStartupLocation = WindowStartupLocation.Manual;
+
+                var workingArea = secondaryScreen.WorkingArea;
+                this.Left = workingArea.Left;
+                this.Top = workingArea.Top;
+                this.Width = workingArea.Width;
+                this.Height = workingArea.Height;
+                // If window isn't loaded then maxmizing will result in the window displaying on the primary monitor
+                if (this.IsLoaded)
+                    this.WindowState = WindowState.Maximized;
+            }
+
         }
 
         private void MediaElem_OnSourceUpdated(object sender, DataTransferEventArgs e)

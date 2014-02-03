@@ -102,9 +102,6 @@
     <Compile Include="News.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Opening.cs">
-      <DependentUpon>entity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Partials\Badge.cs" />
     <Compile Include="Partials\BallLevel.cs" />
     <Compile Include="Partials\Booking.cs" />
@@ -145,9 +142,6 @@
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>entity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Table.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="TrainingPreferences.cs">

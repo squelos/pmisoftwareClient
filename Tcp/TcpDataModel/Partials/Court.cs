@@ -8,7 +8,6 @@ namespace TcpDataModel
 {
     public partial class Court
     {
-
         public Court(string num, bool covered) : this()
         {
             this.number = num;

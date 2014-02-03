@@ -8,12 +8,17 @@ namespace TcpDataModel
 {
     public partial class Badge
     {
-        public Badge(long id, bool enable, bool master ) : this()
+        public Badge(long id, bool enable, bool master )
         {
             number = id;
             isEnabled = enable;
             isMaster = master;
            
+        }
+
+        public Badge()
+        {
+            
         }
 
         public override string ToString()

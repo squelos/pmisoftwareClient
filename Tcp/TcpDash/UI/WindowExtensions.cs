@@ -11,7 +11,7 @@ namespace TcpDash.UI
     {
         public static void MaximizeToSecondaryMonitor(this Window window)
         {
-            var secondaryScreen = System.Windows.Forms.Screen.AllScreens.Where(s => !s.Primary).FirstOrDefault();
+            var secondaryScreen = System.Windows.Forms.Screen.AllScreens.FirstOrDefault(s => !s.Primary);
 
             if (secondaryScreen != null)
             {

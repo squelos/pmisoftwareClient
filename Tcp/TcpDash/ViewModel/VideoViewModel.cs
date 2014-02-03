@@ -24,6 +24,15 @@ namespace TcpDash.ViewModel
 
         #region getters/setters
 
+        public Uri Source
+        {
+            get { return _videoSource; }
+            set
+            {
+                _videoSource = value;
+                RaisePropertyChanged("videoSource");
+            }
+        }
 
         #endregion
 

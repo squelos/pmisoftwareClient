@@ -99,17 +99,17 @@ namespace TcpDash.Classes
         {
             while (_doJobs)
             {
-                Thread.Sleep(6000);
-                UIDispatcher.Instance.Invoke(() =>
-                {
-                    _calendarViewModel.RotateDate();
-                });
+                Thread.Sleep(20000);
+                
                 //check if inactive 
                 //if inactive over 3 min do the rotation
                 //_calendarViewModel.RotateDate();
-                if (Utility.GetLastInputTimeSec()>30)
+                if (Utility.GetLastInputTimeSec()>120)
                 {
-                    
+                    UIDispatcher.Instance.Invoke(() =>
+                    {
+                        _calendarViewModel.RotateDate();
+                    });
                 }
                 //if (Utility.GetLastInputTimeMinutes() > 1)
                 //{

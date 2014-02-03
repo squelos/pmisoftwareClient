@@ -158,12 +158,15 @@ namespace TcpDash.Business
 
         public static long GetLastInputTimeMinutes()
         {
-            return GetLastInputTime()/10000000/60;
+            TimeSpan ts = TimeSpan.FromTicks(GetLastInputTime());
+            return ts.Minutes;
+            
         }
 
         public static long GetLastInputTimeSec()
         {
-            return GetLastInputTime()/10000000;
+            TimeSpan ts = TimeSpan.FromTicks(GetLastInputTime());
+            return ts.Seconds;
         }
 
         internal struct LASTINPUTINFO

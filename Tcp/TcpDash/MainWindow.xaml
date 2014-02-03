@@ -49,6 +49,7 @@
             <UserControls:UserImageDisplay MaxWidth="450" PreviewMouseDown="ImagePreviewMouseDown" />
             <UserControls:UserDateSelection />
             <UserControls:UserWorking MaxWidth="450"/>
+            <Button />
         </StackPanel>
         <UserControls:UserCalendar />
     </DockPanel>

@@ -158,6 +158,7 @@ namespace TcpDash.ViewModel
 
         public void RefreshManagers()
         {
+
         }
 
         public void RotateDate()
