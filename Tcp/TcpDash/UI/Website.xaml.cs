@@ -35,7 +35,6 @@ namespace TcpDash.UI
                 if (Utility.GetLastInputTimeMinutes() > 2)
                 {
                     Dispatcher.Invoke(Close);
-                    
                 }
             });
         }

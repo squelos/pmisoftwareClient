@@ -5,7 +5,7 @@
                       BorderBrush="OrangeRed" BorderThickness="1" IgnoreTaskbarOnMaximize="True"
                       Margin="10,10,10,10" WindowStartupLocation="CenterScreen" WindowState="Maximized"
                        DataContext="{Binding Source={StaticResource Locator }, Path=Main}" Topmost="True"
-        Title="ImageWindow" Height="300" Width="300">
+        Title="ImageWindow" Height="300" Width="300" Background="Black">
     <Grid>
         <Viewbox>
             <UC:UserImageDisplay />

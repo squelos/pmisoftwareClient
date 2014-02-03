@@ -63,7 +63,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
-    <Grid>
+    <Grid Background="Transparent" Margin="10,10,10,10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -73,7 +73,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <Label Content="Gallerie d'images" FontSize="{StaticResource HeaderFontSize}" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0"/>
+        <!--<Label Content="Gallerie d'images" FontSize="{StaticResource HeaderFontSize}" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0"/>-->
         <!--<Rectangle Grid.Row="1" Fill="Transparent" Stroke="OrangeRed"/>-->
         <Image x:Name="imageBox" Source="{Binding ImageViewModel.Source}" Grid.Row="1" Grid.Column="0" MinWidth="200" MinHeight="150" Margin="0" Grid.ColumnSpan="2" >
 
