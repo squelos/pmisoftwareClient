@@ -14,11 +14,7 @@
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 	</UserControl.Resources>
-	<UserControl.Triggers>
-		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
-			<BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
-		</EventTrigger>
-	</UserControl.Triggers>
+	
     <!--This view shows 1 day per court-->
     <WrapPanel x:Name="wrap">
         <!--We create one UC in day mode per court-->

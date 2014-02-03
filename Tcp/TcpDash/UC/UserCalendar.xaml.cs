@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TcpDash.Classes;
+using TcpDash.ViewModel;
 
 namespace TcpDash.UC
 {
@@ -23,10 +24,23 @@ namespace TcpDash.UC
     {
         private TouchPoint _touchStart;
         private SwipeHelper _helper = new SwipeHelper();
+        private MainViewModel _mvm;
 
         public UserCalendar()
         {
             InitializeComponent();
+        }
+
+        private void UserCalendar_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var dataContext = DataContext;
+            _mvm = dataContext as MainViewModel;
+            _mvm.CalendarViewModel.RequestSent += CalendarViewModelOnRequestSent;
+        }
+
+        private void CalendarViewModelOnRequestSent(object sender, EventArgs eventArgs)
+        {
+            tab.SelectedIndex = 0;
         }
     }
 }

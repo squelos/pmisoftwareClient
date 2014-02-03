@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using TcpDash.Business;
 using TcpDash.Classes;
 using TcpDash.UI;
@@ -73,6 +74,20 @@ namespace TcpDash
                 //if(admin.ShowDialog()== DialogResult.Value;
                 // if(admin.ShowDialog() != DialogResult.)
             }
+        }
+
+        private void ButtonClickOpenWebsite(object sender, RoutedEventArgs e)
+        {
+            Website web = new Website();
+            web.ShowDialog();
+        }
+
+        private void ImagePreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+            ImageWindow win = new ImageWindow();
+            win.ShowDialog();
+            
         }
     }
 }

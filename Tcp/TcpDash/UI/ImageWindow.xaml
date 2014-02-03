@@ -1,0 +1,14 @@
+﻿<controls:MetroWindow xmlns:UC="clr-namespace:TcpDash.UC"  x:Class="TcpDash.UI.ImageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" WindowStyle="None" 
+                      BorderBrush="OrangeRed" BorderThickness="1" IgnoreTaskbarOnMaximize="True"
+                      Margin="10,10,10,10" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+                       DataContext="{Binding Source={StaticResource Locator }, Path=Main}" Topmost="True"
+        Title="ImageWindow" Height="300" Width="300">
+    <Grid>
+        <Viewbox>
+            <UC:UserImageDisplay />
+        </Viewbox>
+    </Grid>
+</controls:MetroWindow>

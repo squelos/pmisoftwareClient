@@ -112,14 +112,24 @@ namespace TcpDash.ViewModel
         #region events
 
         public delegate void CourtNumberEventHandler(object sender, EventArgs e);
-
         public event CourtNumberEventHandler CourtNumberChanged;
+        public delegate void RequestFocusOnCombinedView(object sender, EventArgs e);
+
+        public event RequestFocusOnCombinedView RequestSent;
 
         private void RaiseCourtNumberChanged()
         {
             if (CourtNumberChanged != null)
             {
                 CourtNumberChanged(this, new EventArgs());
+            }
+        }
+
+        private void RaiseRequest()
+        {
+            if (RequestSent != null)
+            {
+                RequestSent(this, new EventArgs());
             }
         }
 
@@ -152,20 +162,25 @@ namespace TcpDash.ViewModel
 
         public void RotateDate()
         {
-            _rotateDate++;
+            
             if (_rotateDate < 7)
             {
                 _selectedDay = _userSelectedDate.Date.AddDays(_rotateDate);
                 _firstDayOfWeek = Utility.GetFirst(_selectedDay);
                 _lastDayOfWeek = _firstDayOfWeek.AddDays(6);
                 BookingManager.SelectedDateChanged(_selectedDay, _firstDayOfWeek, _lastDayOfWeek);
-                UIDispatcher.Instance.Invoke(() => RaisePropertyChanged("selectedDay"));
+                UIDispatcher.Instance.Invoke(() =>
+                {
+                    RaisePropertyChanged("selectedDay");
+                    RaiseRequest();
+                });
                 
             }
             else
             {
                 _rotateDate = 0;
             }
+            _rotateDate++;
         }
 
         #endregion

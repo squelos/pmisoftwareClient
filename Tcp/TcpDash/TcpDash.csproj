@@ -114,6 +114,9 @@
     <Compile Include="UC\RecentPlayers.xaml.cs">
       <DependentUpon>RecentPlayers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UC\UserImageDisplay.xaml.cs">
+      <DependentUpon>UserImageDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UC\UserWorking.xaml.cs">
       <DependentUpon>UserWorking.xaml</DependentUpon>
     </Compile>
@@ -160,8 +163,15 @@
     <Compile Include="UI\DeletionWindow.xaml.cs">
       <DependentUpon>DeletionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ImageWindow.xaml.cs">
+      <DependentUpon>ImageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Website.xaml.cs">
+      <DependentUpon>Website.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CalendarViewModel.cs" />
     <Compile Include="ViewModel\DateTimeExtensions.cs" />
+    <Compile Include="ViewModel\ImageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -170,6 +180,10 @@
       <DependentUpon>WindowAdmin.xaml</DependentUpon>
     </Compile>
     <Page Include="UC\RecentPlayers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC\UserImageDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -234,6 +248,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\DeletionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ImageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Website.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

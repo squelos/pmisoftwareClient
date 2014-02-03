@@ -1,0 +1,18 @@
+﻿<controls:MetroWindow x:Class="TcpDash.UI.Website"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                      xmlns:behaviours="http://metro.mahapps.com/winfx/xaml/shared"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                       WindowStyle="None" IgnoreTaskbarOnMaximize="True"
+                      Margin="10,10,10,10" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+                      DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
+                      Topmost="True"
+        Title="Website" Height="300" Width="300">
+    <i:Interaction.Behaviors>
+        <behaviours:BorderlessWindowBehavior ResizeWithGrip="True" AllowsTransparency="False" />
+    </i:Interaction.Behaviors>
+    <Grid>
+        <WebBrowser Source="http://www.tennis-club-portois.fr" ></WebBrowser>
+    </Grid>
+</controls:MetroWindow>

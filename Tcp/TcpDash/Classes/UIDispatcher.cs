@@ -76,14 +76,14 @@ namespace TcpDash.Classes
 
         public void OverlayMainWindow()
         {
-            _uiElement.News.Visibility = Visibility.Hidden;
-            _uiElement.ShowOverlayAsync();
+            //_uiElement.News.Visibility = Visibility.Hidden;
+            //_uiElement.ShowOverlayAsync();
         }
 
         public void HideOverlayMainWindow()
         {
-            _uiElement.HideOverlayAsync();
-            _uiElement.News.Visibility = Visibility.Visible;
+            //_uiElement.HideOverlayAsync();
+            //_uiElement.News.Visibility = Visibility.Visible;
         }
 
         public void ShowMessageDialog(MetroWindow win, string title, string msg)

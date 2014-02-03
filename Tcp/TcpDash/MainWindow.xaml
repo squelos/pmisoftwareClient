@@ -17,6 +17,7 @@
     </i:Interaction.Behaviors>
     <Controls:MetroWindow.WindowCommands>
         <Controls:WindowCommands>
+            <Button Content="Tennis Club Portois" Click="ButtonClickOpenWebsite"></Button>
             <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="30" Width="30"
                     Click="ButtonBase_OnClick">
                 <Rectangle Width="13" Height="13">
@@ -45,7 +46,7 @@
     </Controls:MetroWindow.WindowCommands>
     <DockPanel>
         <StackPanel DockPanel.Dock="Left">
-            <UserControls:UserNews MaxWidth="450" x:Name="News" />
+            <UserControls:UserImageDisplay MaxWidth="450" PreviewMouseDown="ImagePreviewMouseDown" />
             <UserControls:UserDateSelection />
             <UserControls:UserWorking MaxWidth="450"/>
         </StackPanel>
