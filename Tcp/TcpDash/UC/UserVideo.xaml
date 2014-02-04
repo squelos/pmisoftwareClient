@@ -12,17 +12,16 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="50" Width="50" Grid.Row="0" 
-                    Click="Play" >
+                    Click="Play" Background="White" BorderBrush="#FFD24726" Foreground="#FFD24726" >
             <Rectangle Width="23" Height="23" >
                 <Rectangle.Fill>
                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_play}"  />
                 </Rectangle.Fill>
-                
             </Rectangle>
         </Button>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
             <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="50" Width="50"
-                    Click="Previous">
+                    Click="Previous" Background="White" Foreground="#FFD24726">
                 <Rectangle Width="23" Height="23">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_navigate_previous}" />
@@ -30,7 +29,7 @@
                 </Rectangle>
             </Button>
             <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="50" Width="50"
-                    Click="Pause">
+                    Click="Pause" Background="White" Foreground="#FFD24726">
                 <Rectangle Width="23" Height="23">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_pause}" />
@@ -38,7 +37,7 @@
                 </Rectangle>
             </Button>
             <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="50" Width="50"
-                    Click="Next">
+                    Click="Next" Background="White" Foreground="#FFD24726" BorderBrush="#FFD24726">
                 <Rectangle Width="23" Height="23">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_navigate_next}" />
