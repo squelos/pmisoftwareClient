@@ -54,7 +54,7 @@ namespace TcpDash.UC
 
         void ImageViewModel_MoveLeft(object sender, ImageSource imgSource)
         {
-            BeginStoryboard(FindResource("Left") as Storyboard);
+            BeginStoryboard(FindResource("Fade") as Storyboard);
             Task t = new Task(() =>
             {
                 Thread.Sleep(500);
@@ -68,7 +68,7 @@ namespace TcpDash.UC
 
         void ImageViewModel_MoveRight(object sender, ImageSource imgSource)
         {
-            BeginStoryboard(FindResource("Right") as Storyboard);
+            BeginStoryboard(FindResource("Fade") as Storyboard);
             Task t = new Task(() =>
             {
                 Thread.Sleep(500);

@@ -35,7 +35,7 @@ namespace TcpDash.ViewModel
             InitRotation();
         }
         #endregion
-        
+
         #region getters/setters
 
         public ImageSource Source
@@ -90,7 +90,7 @@ namespace TcpDash.ViewModel
                 Fade(this, src);
             }
         }
-        
+
         #endregion
 
         #region public
@@ -98,19 +98,23 @@ namespace TcpDash.ViewModel
         public void Back()
         {
             //TODO buggy as fuck
-            if (_stringList.Count != 0 )
+            if (_stringList.Count != 0)
             {
-                if (_iterator == 0)
+                if (_iterator > 0)
                 {
-                    _iterator = _stringList.Count-1;
+                    _iterator--;
                 }
-                _iterator--;
-                ImageSource source;
-                 BitmapImage bmpImage = new BitmapImage();
-                    bmpImage.BeginInit();
+                else
+                {
+                    _iterator = _stringList.Count - 1;
+                }
 
-                    bmpImage.UriSource = new Uri(_stringList[_iterator]);
-                    bmpImage.EndInit();
+                ImageSource source;
+                BitmapImage bmpImage = new BitmapImage();
+                bmpImage.BeginInit();
+
+                bmpImage.UriSource = new Uri(_stringList[_iterator]);
+                bmpImage.EndInit();
                 source = bmpImage;
                 RaiseMoveLeft(source);
             }
@@ -119,13 +123,16 @@ namespace TcpDash.ViewModel
         public void Forward()
         {
             //TODO buggy as fuck a bite
-            if (_stringList.Count != 0 )
+            if (_stringList.Count != 0)
             {
-                if (_iterator == _stringList.Count - 1)
+                if (_iterator + 1 == _stringList.Count)
                 {
                     _iterator = 0;
                 }
-                _iterator++;
+                else
+                {
+                    _iterator++;
+                }
                 ImageSource source;
                 BitmapImage bmpImage = new BitmapImage();
                 bmpImage.BeginInit();
@@ -220,19 +227,19 @@ namespace TcpDash.ViewModel
                 //TODO buggy as fuck
                 while (_rotation)
                 {
-                    
-                    if (_stringList.Count != 0 && !StopRotation )
+
+                    if (_stringList.Count != 0 && !StopRotation)
                     {
                         if (_iterator == _stringList.Count - 1)
                         {
                             _iterator = 0;
                         }
-                        
+
                         ShowImage(new Uri(_stringList[_iterator]));
                         _iterator++;
                     }
                     Thread.Sleep(15000);
-                    
+
                 }
                 // Load the first img if there is one
 

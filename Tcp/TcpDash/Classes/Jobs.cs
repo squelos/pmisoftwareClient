@@ -100,7 +100,6 @@ namespace TcpDash.Classes
             while (_doJobs)
             {
                 Thread.Sleep(20000);
-                
                 //check if inactive 
                 //if inactive over 3 min do the rotation
                 //_calendarViewModel.RotateDate();

@@ -11,12 +11,13 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="50" Width="50" Grid.Row="0"
-                    Click="Play">
-            <Rectangle Width="23" Height="23">
+        <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="50" Width="50" Grid.Row="0" 
+                    Click="Play" >
+            <Rectangle Width="23" Height="23" >
                 <Rectangle.Fill>
-                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_play}" />
+                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_play}"  />
                 </Rectangle.Fill>
+                
             </Rectangle>
         </Button>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
