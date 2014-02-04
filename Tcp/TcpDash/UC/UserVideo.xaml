@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="TcpDash.UC.UserVideo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"  DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
+             d:DesignHeight="300" d:DesignWidth="300" MinWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="50" Width="50" Grid.Row="0"
+                    Click="Play">
+            <Rectangle Width="23" Height="23">
+                <Rectangle.Fill>
+                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_play}" />
+                </Rectangle.Fill>
+            </Rectangle>
+        </Button>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+            <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="50" Width="50"
+                    Click="Previous">
+                <Rectangle Width="23" Height="23">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_navigate_previous}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="50" Width="50"
+                    Click="Pause">
+                <Rectangle Width="23" Height="23">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_pause}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="50" Width="50"
+                    Click="Next">
+                <Rectangle Width="23" Height="23">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_navigate_next}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+        </StackPanel>
+        <ListBox  Grid.Row="2" ItemsSource="{Binding VideoViewModel.Paths}" SelectedValue="{Binding VideoViewModel.SelectedPath}">
+        
+    </ListBox>
+    </Grid>
+</UserControl>

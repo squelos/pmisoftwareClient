@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using MahApps.Metro.Controls;
 using TcpDash.Business;
 using TcpDash.Classes;
 using TcpDash.UI;
@@ -36,6 +37,16 @@ namespace TcpDash
                 //we cancel
                 e.Cancel = true;
             }
+        }
+        private void ToggleFlyout(int index)
+        {
+            var flyout = this.Flyouts.Items[index] as Flyout;
+            if (flyout == null)
+            {
+                return;
+            }
+
+            flyout.IsOpen = !flyout.IsOpen;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -88,6 +99,11 @@ namespace TcpDash
             ImageWindow win = new ImageWindow();
             win.ShowDialog();
             
+        }
+
+        private void VideoClick(object sender, RoutedEventArgs e)
+        {
+            ToggleFlyout(0);
         }
     }
 }

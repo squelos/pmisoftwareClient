@@ -44,6 +44,14 @@
             </Button>
         </Controls:WindowCommands>
     </Controls:MetroWindow.WindowCommands>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout Header="Videos" Position="Right" >
+                <UserControls:UserVideo/>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -56,7 +64,15 @@
             <UserControls:UserImageDisplay MaxWidth="450" PreviewMouseDown="ImagePreviewMouseDown" />
             <UserControls:UserDateSelection />
             <UserControls:UserWorking MaxWidth="450"/>
-            <Button />
+            <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="50" Width="50"
+                    Click="VideoClick">
+                <Rectangle Width="23" Height="23">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_camera_film}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            
         </StackPanel>
         <UserControls:UserCalendar Grid.Column="1"/>
     </Grid>

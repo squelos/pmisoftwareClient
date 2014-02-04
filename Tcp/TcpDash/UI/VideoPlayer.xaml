@@ -2,13 +2,13 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" WindowStyle="None" 
-                      WindowState="Maximized"
+                      Background="Black"
                       Margin="10,10,10,10" WindowStartupLocation="Manual"
                       BorderBrush="OrangeRed" BorderThickness="1" IgnoreTaskbarOnMaximize="True"
         Title="VideoPlayer" Height="300" Width="300"
-        DataContext="{Binding Source={StaticResource Locator }, Path=Main}" Topmost="True">
+        DataContext="{Binding Source={StaticResource Locator }, Path=Main}" Topmost="True" Loaded="VideoPlayer_OnLoaded">
     <Grid>
-        <MediaElement x:Name="MediaElem" Source="{Binding VideoViewModel }" SourceUpdated="MediaElem_OnSourceUpdated">
+        <MediaElement x:Name="MediaElem" Source="{Binding VideoViewModel }" SourceUpdated="MediaElem_OnSourceUpdated" LoadedBehavior="Manual">
             
         </MediaElement>
     </Grid>
