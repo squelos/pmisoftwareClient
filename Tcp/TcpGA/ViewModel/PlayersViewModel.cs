@@ -20,6 +20,7 @@ namespace TcpGA.ViewModel
 
         private Player _player;
         private Player _selectedPlayer;
+        private Category _newCategory;
         private ObservableCollection<Player> _players;
         private String _filterStr;
         private List<Player> _viewPlayers = new List<Player>();
@@ -29,6 +30,7 @@ namespace TcpGA.ViewModel
         private RelayCommand _saveCommand;
         private RelayCommand _cancelCommand;
         private RelayCommand _updateCommand;
+        private RelayCommand _addCategoryCommand;
         private List<Category> _categories;
         private MainViewModel _mvm;
 
@@ -39,6 +41,7 @@ namespace TcpGA.ViewModel
         public PlayersViewModel(MainViewModel mvm)
         {
             _mvm = mvm;
+            _newCategory = new Category();
             _players =
                 new ObservableCollection<Player>(Container.PlayerJeu.Include(player => player.Badge).ToList());
 
@@ -55,12 +58,15 @@ namespace TcpGA.ViewModel
                 }
                 else if (args.Action == NotifyCollectionChangedAction.Add)
                 {
-                    foreach (Player p in args.OldItems)
+                    if (args.OldItems != null)
                     {
-                        if (p.Payment.Count() == 0 ||
-                            p.Payment.Last().Semester.Last().end < DateTime.Now)
+                        foreach (Player p in args.OldItems)
                         {
-                            CustomDispatcher.Instance.BeginInvoke(() => Unpaid.Add(p));
+                            if (p.Payment.Count() == 0 ||
+                                p.Payment.Last().Semester.Last().end < DateTime.Now)
+                            {
+                                CustomDispatcher.Instance.BeginInvoke(() => Unpaid.Add(p));
+                            }
                         }
                     }
                 }
@@ -73,6 +79,7 @@ namespace TcpGA.ViewModel
             _saveCommand = new RelayCommand(Save);
             _cancelCommand = new RelayCommand(Cancel);
             _updateCommand = new RelayCommand(Update);
+            _addCategoryCommand = new RelayCommand(AddCat);
             InitializePlayers();
         }
 
@@ -101,9 +108,30 @@ namespace TcpGA.ViewModel
             }
         }
 
+        public Category NewCategory
+        {
+            get { return _newCategory; }
+            set
+            {
+                _newCategory = value; 
+                RaisePropertyChangedEvent("newCategory");
+            }
+        }
+
+        public ICommand AddCatCommand
+        {
+            get { return _addCategoryCommand; }
+        }
+
         public List<Category> Categories
         {
             get { return _categories; }
+            set
+            {
+                _categories = value;
+                RaisePropertyChangedEvent("categories");
+            }
+
         }
 
         public Player CurrentPlayer
@@ -220,6 +248,14 @@ namespace TcpGA.ViewModel
                 CurrentPlayer.salt = Crypto.GetRandomString(32);
             });
             t.Start();
+        }
+
+        private void AddCat()
+        {
+            _categories.Add(_newCategory);
+            Container.SaveChanges();
+            Categories =  (from a in Container.CategorySet select a).ToList();
+            _newCategory = new Category();
         }
 
         #endregion

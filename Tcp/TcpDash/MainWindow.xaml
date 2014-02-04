@@ -61,7 +61,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel DockPanel.Dock="Left" Grid.Column="0">
-            <UserControls:UserImageDisplay MaxWidth="450" PreviewMouseDown="ImagePreviewMouseDown" />
+            <UserControls:UserImageDisplay MaxWidth="450" PreviewMouseDown="ImagePreviewMouseDown" MaxHeight="400"/>
             <UserControls:UserDateSelection />
             <UserControls:UserWorking MaxWidth="450"/>
             <Button Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="True" Height="50" Width="50"

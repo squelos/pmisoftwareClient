@@ -24,5 +24,10 @@ namespace TcpGA.UserControls
         {
             InitializeComponent();
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            //TODO 
+        }
     }
 }
