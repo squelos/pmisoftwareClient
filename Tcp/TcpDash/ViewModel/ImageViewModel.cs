@@ -82,7 +82,6 @@ namespace TcpDash.ViewModel
                 MoveRight(this, src);
             }
         }
-
         public void RaiseFade(ImageSource src)
         {
             if (Fade != null)
@@ -90,7 +89,6 @@ namespace TcpDash.ViewModel
                 Fade(this, src);
             }
         }
-
         #endregion
 
         #region public
