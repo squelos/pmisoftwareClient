@@ -48,6 +48,9 @@
                     <RowDefinition Height="25" />
                     <RowDefinition Height="25" />
                 </Grid.RowDefinitions>
+                <!--<Line Stroke="#32CF6248" Fill="Transparent" Grid.RowSpan="32"/>-->
+                
+                
             </Grid>
         </StackPanel>
     </StackPanel>

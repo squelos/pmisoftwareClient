@@ -93,9 +93,7 @@ namespace TcpDash.UC
 
             b.PreviewMouseDown += b_PreviewMouseDown;
 
-
             TextBlock tb = new TextBlock();
-
 
             tb.TextWrapping = TextWrapping.Wrap;
             tb.Text = vb.Name;

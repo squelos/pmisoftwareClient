@@ -93,7 +93,8 @@ namespace TcpDash.UC
                 {
                     foreach (var dailyBookingse in listBookings[i].VisualBookingList)
                     {
-                        ShowVisualBooking(dailyBookingse, i);
+                        Dispatcher.Invoke(() => ShowVisualBooking(dailyBookingse, i));
+                        //ShowVisualBooking(dailyBookingse, i);
                     }
                 }
             }
@@ -116,6 +117,7 @@ namespace TcpDash.UC
             b.PreviewMouseDown += BOnPreviewMouseDown;
 
             tb.Text = vb.Name;
+            
 
             b.Content = tb;
             b.Tag = vb;
