@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
              mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator }, Path=Main}"
              d:DesignHeight="300" d:DesignWidth="600">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -19,6 +24,11 @@
                           EnableRowVirtualization="True" Height="Auto"
                           ItemsSource="{Binding LogsViewModel.LogEntries}"
                           RowDetailsVisibilityMode="VisibleWhenSelected" Width="Auto" SelectionChanged="LogEntriesDataGrid_OnSelectionChanged">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Margin" Value="10,0,10,0"/>
+                        </Style>
+                    </DataGrid.CellStyle>
                     <DataGrid.Columns>
                         <DataGridTextColumn IsReadOnly="True" x:Name="IdColumn" Binding="{Binding ID}"
                                             Header="ID"/>
@@ -26,8 +36,8 @@
                                                     Header="Prénom" />
                         <DataGridTextColumn IsReadOnly="True" Binding="{Binding PlayerJeu.lastName}"
                                                     Header="Nom" />
-                        <DataGridTextColumn IsReadOnly="True" x:Name="timestampColumn" Binding="{Binding timestamp}"
-                                                Header="Date" />
+                <DataGridTextColumn IsReadOnly="True" x:Name="timestampColumn" Binding="{Binding timestamp, Mode=OneWay, StringFormat=\{0:F\}, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
+                                                Header="Date"/>
                         <DataGridTextColumn IsReadOnly="True" x:Name="readerColumn" Binding="{Binding reader_name}"
                                             Header="Porte" />
                         <DataGridTextColumn IsReadOnly="True" x:Name="tagColumn" Binding="{Binding tag_number}" Header="Bagde"/>
@@ -36,12 +46,46 @@
                 </DataGrid>
 
             <GridSplitter Width="3" Margin="3,3,3,3" Grid.Column="1" IsEnabled="False"/>
-
+        <StackPanel Grid.Column="0" Grid.Row="1" FlowDirection="LeftToRight" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Command="{Binding LogsViewModel.FirstPageCommand}" Margin="2">
+                <Rectangle Width="15" Height="15">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="../Assets/superflechegauche.png"></ImageBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Command="{Binding LogsViewModel.PreviousPageCommand}" Margin="2">
+                <Rectangle Width="15" Height="15">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="../Assets/flechegauche.png"></ImageBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <TextBox Text="{Binding LogsViewModel.CurrentPage, UpdateSourceTrigger=PropertyChanged}" Margin="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBlock VerticalAlignment="Center"> / </TextBlock>
+            <TextBlock Text="{Binding LogsViewModel.LastPage, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="2"/>
+            <Button Command="{Binding LogsViewModel.NextPageCommand}" Margin="2">
+                <Rectangle Width="15" Height="15">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="../Assets/flechedroite.png"></ImageBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Command="{Binding LogsViewModel.LastPageCommand}" Margin="2">
+                <Rectangle Width="15" Height="15">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="../Assets/superflechedroite.png"></ImageBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+        </StackPanel>
 
         <controls:MetroAnimatedSingleRowTabControl Grid.Column="2">
             <TabItem Header="Recherche">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -65,8 +109,17 @@
                     <Label Grid.Column="0" Grid.Row="2" Margin="5">Par badge</Label>
                     <TextBox Grid.Column="1" Grid.Row="2" Margin="5" Text="{Binding LogsViewModel.TagSearch, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
+                    <Label Grid.Column="0" Grid.Row="3" Margin="5">Depuis</Label>
+                    <DatePicker HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="3" Margin="5" SelectedDate="{Binding LogsViewModel.StartDate, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <Label Grid.Column="0" Grid.Row="4" Margin="5">Jusque</Label>
+                    <DatePicker HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="4" Margin="5" SelectedDate="{Binding LogsViewModel.EndDate, UpdateSourceTrigger=PropertyChanged}"/>
+
+
                 </Grid>
             </TabItem>
+
+
 
         </controls:MetroAnimatedSingleRowTabControl>
     </Grid>
