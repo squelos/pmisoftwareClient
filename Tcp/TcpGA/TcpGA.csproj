@@ -364,6 +364,12 @@
   <ItemGroup>
     <Resource Include="splashScreen.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\flechedroite.png" />
+    <Resource Include="Assets\flechegauche.png" />
+    <Resource Include="Assets\superflechedroite.png" />
+    <Resource Include="Assets\superflechegauche.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
