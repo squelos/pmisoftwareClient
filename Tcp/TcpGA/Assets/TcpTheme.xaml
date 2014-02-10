@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:mui="http://firstfloorsoftware.com/ModernUI">
+                    xmlns:ext="clr-namespace:TcpGA">
 
     <!-- derive from Light or Dark theme-->
 
@@ -25,7 +25,7 @@
     <SolidColorBrush x:Key="ScrollBarThumbForeground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ScrollBarThumbForegroundDragging" Color="#00FFFFFF"/>
     <SolidColorBrush x:Key="ScrollBarThumbForegroundHover" Color="#00FFFFFF"/>
-    
+
 
 
 
@@ -34,6 +34,26 @@
 
     <!--<SolidColorBrush x:Key="ScrollBarThumbForegroundHover" Color="#00FFFFFF"/>-->
     <SolidColorBrush x:Key="DataGridGridLines" Color="#00E69D69"/>
-   
-    
+
+    <Style x:Key="AlternateRowsStyle" TargetType="{x:Type DataGridRow}">
+        <Style.Triggers>
+            <Trigger Property="AlternationIndex" Value="0">
+                <Setter Property="Background" Value="White" />
+            </Trigger>
+            <Trigger Property="AlternationIndex" Value="1">
+                <Setter Property="Background" Value="#FCD0A9" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TcpGridRow" TargetType="{x:Type DataGridRow}">
+        <Style.BasedOn>
+            <ext:MergedStyles
+                BasedOn="{StaticResource AlternateRowsStyle}"
+                MergeStyle="{StaticResource MetroDataGridRow}"
+                />
+        </Style.BasedOn>
+    </Style>
+
+
 </ResourceDictionary>

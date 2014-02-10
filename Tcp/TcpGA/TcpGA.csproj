@@ -111,6 +111,7 @@
     <Compile Include="BaseClasses\CustomUserControl.cs" />
     <Compile Include="BaseClasses\ViewModelBase.cs" />
     <Compile Include="Converters\BoolInverterConverter.cs" />
+    <Compile Include="MergedStylesExtension.cs" />
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
