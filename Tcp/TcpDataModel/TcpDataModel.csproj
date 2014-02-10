@@ -51,9 +51,6 @@
     <Compile Include="AuthorizedTagsVersion.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="authorizedUserTags.cs">
-      <DependentUpon>entity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Badge.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
@@ -102,6 +99,9 @@
     <Compile Include="News.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="OpeningJeu.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Partials\Badge.cs" />
     <Compile Include="Partials\BallLevel.cs" />
     <Compile Include="Partials\Booking.cs" />
@@ -122,6 +122,12 @@
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="PreferencePeriod.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductQuantitySet.cs">
+      <DependentUpon>entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductSet.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
