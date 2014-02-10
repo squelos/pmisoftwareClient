@@ -99,6 +99,15 @@ warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a 
           <Property Name="PublishDate" Type="datetime" Nullable="false" />
           <Property Name="Visibility" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="OpeningJeu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="time" Type="datetime" Nullable="false" />
+          <Property Name="Court_ID" Type="int" />
+          <Property Name="Badge_ID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="PaymentJeu">
           <Key>
             <PropertyRef Name="ID" />
@@ -162,6 +171,7 @@ warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a 
           <Property Name="BallLevel_Id" Type="int" />
           <Property Name="Subscribed" Type="bit" />
           <Property Name="Sex" Type="bit" Nullable="false" />
+          <Property Name="CanFilm" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PreferencePeriodJeu">
           <Key>
@@ -174,6 +184,29 @@ warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a 
           <Property Name="endmin" Type="int" Nullable="false" />
           <Property Name="Player_ID" Type="int" Nullable="false" />
           <Property Name="Day_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TCP_DB.dbo.ProductQuantitySet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProductQuantitySet">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+            <PropertyRef Name="Payment_ID" />
+            <PropertyRef Name="Product_Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Payment_ID" Type="int" Nullable="false" />
+          <Property Name="Product_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SeasonJeu">
           <Key>
@@ -216,14 +249,6 @@ warning 6002: The table/view 'TCP_DB.dbo.AuthorizedTagsVersion' does not have a 
           <Property Name="end" Type="int" Nullable="false" />
           <Property Name="Player_ID" Type="int" Nullable="false" />
           <Property Name="Day_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="authorizedUserTags">
-          <Key>
-            <PropertyRef Name="number" />
-          </Key>
-          <Property Name="number" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_BadgePlayer">
           <End Role="PlayerJeu" Type="Self.PlayerJeu" Multiplicity="0..1" />
@@ -273,6 +298,18 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CourtOpening">
+          <End Role="CourtJeu" Type="Self.CourtJeu" Multiplicity="0..1" />
+          <End Role="OpeningJeu" Type="Self.OpeningJeu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourtJeu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OpeningJeu">
+              <PropertyRef Name="Court_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DayPreferencePeriod">
           <End Role="DaySet" Type="Self.DaySet" Multiplicity="1" />
           <End Role="PreferencePeriodJeu" Type="Self.PreferencePeriodJeu" Multiplicity="*" />
@@ -309,6 +346,18 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OpeningBadge">
+          <End Role="BadgeJeu" Type="Self.BadgeJeu" Multiplicity="1" />
+          <End Role="OpeningJeu" Type="Self.OpeningJeu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BadgeJeu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OpeningJeu">
+              <PropertyRef Name="Badge_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PaymentMethodPayment">
           <End Role="PaymentMethodSet" Type="Self.PaymentMethodSet" Multiplicity="1" />
           <End Role="PaymentJeu" Type="Self.PaymentJeu" Multiplicity="*" />
@@ -318,6 +367,18 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             </Principal>
             <Dependent Role="PaymentJeu">
               <PropertyRef Name="PaymentMethod_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentProductQuantity">
+          <End Role="PaymentJeu" Type="Self.PaymentJeu" Multiplicity="1" />
+          <End Role="ProductQuantitySet" Type="Self.ProductQuantitySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentJeu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductQuantitySet">
+              <PropertyRef Name="Payment_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -441,6 +502,18 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductQuantityProduct">
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="1" />
+          <End Role="ProductQuantitySet" Type="Self.ProductQuantitySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductQuantitySet">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SeasonSemester">
           <End Role="SeasonJeu" Type="Self.SeasonJeu" Multiplicity="0..1" />
           <End Role="SemesterJeu" Type="Self.SemesterJeu" Multiplicity="*" />
@@ -453,75 +526,6 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="addLogEntry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="entryDate" Type="nvarchar" Mode="In" />
-          <Parameter Name="readerName" Type="nvarchar" Mode="In" />
-          <Parameter Name="tagNumber" Type="int" Mode="In" />
-          <Parameter Name="readerResponse" Type="int" Mode="In" />
-        </Function>
-        <Function Name="dummyQuery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="getAuthorizedUsersTagsNumbers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="userStatus" Type="int" Mode="In" />
-        </Function>
-        <Function Name="getFilmedHours" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="incrementAuthorizedTagsVersionNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="invalidateOverdues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="mostBookedCourtsForPlayerCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Category_Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="canBookForDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="tcpAdmin" ReturnType="bit">
-          <Parameter Name="player1" Type="int" Mode="In" />
-          <Parameter Name="player2" Type="int" Mode="In" />
-          <Parameter Name="givenDate" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="getSeasonIDForDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="tcpAdmin" ReturnType="int">
-          <Parameter Name="givenDate" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="mostBookedCourtsForPlayerCategory1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="tcpAdmin" StoreFunctionName="mostBookedCourtsForPlayerCategory">
-          <Parameter Name="Category_Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="tryPeriodBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="tcpAdmin">
-          <Parameter Name="name" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="isSpecial" Type="bit" Mode="In" />
-          <Parameter Name="startDate" Type="datetime" Mode="In" />
-          <Parameter Name="endDate" Type="datetime" Mode="In" />
-          <Parameter Name="isFilmed" Type="bit" Mode="In" />
-          <Parameter Name="bookingAggregation" Type="int" Mode="In" />
-          <Parameter Name="courtId" Type="int" Mode="In" />
-          <Parameter Name="player1" Type="int" Mode="In" />
-          <Parameter Name="player2" Type="int" Mode="In" />
-        </Function>
         <EntityContainer Name="entityStoreContainer">
           <EntitySet Name="BadgeJeu" EntityType="Self.BadgeJeu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BallLevelSet" EntityType="Self.BallLevelSet" Schema="dbo" store:Type="Tables" />
@@ -532,12 +536,14 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <EntitySet Name="DaySet" EntityType="Self.DaySet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LogEntry" EntityType="Self.LogEntry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsSet" EntityType="Self.NewsSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OpeningJeu" EntityType="Self.OpeningJeu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentJeu" EntityType="Self.PaymentJeu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentMethodSet" EntityType="Self.PaymentMethodSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentSemester" EntityType="Self.PaymentSemester" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlayerCategory" EntityType="Self.PlayerCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlayerJeu" EntityType="Self.PlayerJeu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PreferencePeriodJeu" EntityType="Self.PreferencePeriodJeu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductSet" EntityType="Self.ProductSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SeasonJeu" EntityType="Self.SeasonJeu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SemesterJeu" EntityType="Self.SemesterJeu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatusSet" EntityType="Self.StatusSet" Schema="dbo" store:Type="Tables" />
@@ -549,10 +555,13 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
     [AuthorizedTagsVersion].[lastUpdated] AS [lastUpdated]
     FROM [dbo].[AuthorizedTagsVersion] AS [AuthorizedTagsVersion]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="authorizedUserTags" EntityType="Self.authorizedUserTags" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="ProductQuantitySet" EntityType="Self.ProductQuantitySet" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [authorizedUserTags].[number] AS [number]
-    FROM [dbo].[authorizedUserTags] AS [authorizedUserTags]</DefiningQuery>
+    [ProductQuantitySet].[Id] AS [Id], 
+    [ProductQuantitySet].[Quantity] AS [Quantity], 
+    [ProductQuantitySet].[Payment_ID] AS [Payment_ID], 
+    [ProductQuantitySet].[Product_Id] AS [Product_Id]
+    FROM [dbo].[ProductQuantitySet] AS [ProductQuantitySet]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_BadgePlayer" Association="Self.FK_BadgePlayer">
             <End Role="PlayerJeu" EntitySet="PlayerJeu" />
@@ -570,6 +579,10 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             <End Role="PlayerJeu" EntitySet="PlayerJeu" />
             <End Role="BookingJeu" EntitySet="BookingJeu" />
           </AssociationSet>
+          <AssociationSet Name="FK_CourtOpening" Association="Self.FK_CourtOpening">
+            <End Role="CourtJeu" EntitySet="CourtJeu" />
+            <End Role="OpeningJeu" EntitySet="OpeningJeu" />
+          </AssociationSet>
           <AssociationSet Name="FK_DayPreferencePeriod" Association="Self.FK_DayPreferencePeriod">
             <End Role="DaySet" EntitySet="DaySet" />
             <End Role="PreferencePeriodJeu" EntitySet="PreferencePeriodJeu" />
@@ -582,9 +595,17 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             <End Role="PlayerJeu" EntitySet="PlayerJeu" />
             <End Role="LogEntry" EntitySet="LogEntry" />
           </AssociationSet>
+          <AssociationSet Name="FK_OpeningBadge" Association="Self.FK_OpeningBadge">
+            <End Role="BadgeJeu" EntitySet="BadgeJeu" />
+            <End Role="OpeningJeu" EntitySet="OpeningJeu" />
+          </AssociationSet>
           <AssociationSet Name="FK_PaymentMethodPayment" Association="Self.FK_PaymentMethodPayment">
             <End Role="PaymentMethodSet" EntitySet="PaymentMethodSet" />
             <End Role="PaymentJeu" EntitySet="PaymentJeu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentProductQuantity" Association="Self.FK_PaymentProductQuantity">
+            <End Role="PaymentJeu" EntitySet="PaymentJeu" />
+            <End Role="ProductQuantitySet" EntitySet="ProductQuantitySet" />
           </AssociationSet>
           <AssociationSet Name="FK_PaymentSemester_Payment" Association="Self.FK_PaymentSemester_Payment">
             <End Role="PaymentJeu" EntitySet="PaymentJeu" />
@@ -625,6 +646,10 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <AssociationSet Name="FK_PreferencePeriodPlayer" Association="Self.FK_PreferencePeriodPlayer">
             <End Role="PlayerJeu" EntitySet="PlayerJeu" />
             <End Role="PreferencePeriodJeu" EntitySet="PreferencePeriodJeu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductQuantityProduct" Association="Self.FK_ProductQuantityProduct">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="ProductQuantitySet" EntitySet="ProductQuantitySet" />
           </AssociationSet>
           <AssociationSet Name="FK_SeasonSemester" Association="Self.FK_SeasonSemester">
             <End Role="SeasonJeu" EntitySet="SeasonJeu" />
@@ -784,6 +809,25 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             <End Role="Player" EntitySet="PlayerJeu" />
             <End Role="LogEntry" EntitySet="LogEntry" />
           </AssociationSet>
+          <EntitySet Name="ProductSet" EntityType="entity.Product" />
+          <EntitySet Name="ProductQuantitySet" EntityType="entity.ProductQuantity" />
+          <AssociationSet Name="PaymentProductQuantity" Association="entity.PaymentProductQuantity">
+            <End Role="Payment" EntitySet="PaymentJeu" />
+            <End Role="ProductQuantity" EntitySet="ProductQuantitySet" />
+          </AssociationSet>
+          <AssociationSet Name="ProductQuantityProduct" Association="entity.ProductQuantityProduct">
+            <End Role="ProductQuantity" EntitySet="ProductQuantitySet" />
+            <End Role="Product" EntitySet="ProductSet" />
+          </AssociationSet>
+          <EntitySet Name="OpeningJeu" EntityType="entity.OpeningJeu" />
+          <AssociationSet Name="FK_OpeningBadge" Association="entity.FK_OpeningBadge">
+            <End Role="Badge" EntitySet="BadgeJeu" />
+            <End Role="OpeningJeu" EntitySet="OpeningJeu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourtOpening" Association="entity.FK_CourtOpening">
+            <End Role="Court" EntitySet="CourtJeu" />
+            <End Role="OpeningJeu" EntitySet="OpeningJeu" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Season">
           <Key>
@@ -815,6 +859,7 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <Property Name="raison" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="invalid" Type="Boolean" Nullable="false" />
           <Property Name="comment" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ProductQuantity" Relationship="entity.PaymentProductQuantity" FromRole="Payment" ToRole="ProductQuantity" />
         </EntityType>
         <EntityType Name="Badge">
           <Key>
@@ -826,6 +871,7 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <Property Type="Boolean" Name="isEnabled" Nullable="false" />
           <Property Type="Boolean" Name="isMaster" Nullable="false" />
           <Property Name="forbidden" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="OpeningJeu" Relationship="entity.FK_OpeningBadge" FromRole="Badge" ToRole="OpeningJeu" />
         </EntityType>
         <EntityType Name="BookingAggregation">
           <Key>
@@ -859,6 +905,7 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <NavigationProperty Name="Booking" Relationship="entity.BookingCourt" FromRole="Court" ToRole="Booking" />
           <Property Type="String" Name="number" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="Boolean" Name="isCovered" Nullable="false" />
+          <NavigationProperty Name="OpeningJeu" Relationship="entity.FK_CourtOpening" FromRole="Court" ToRole="OpeningJeu" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -895,6 +942,7 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <Property Name="Subscribed" Type="Boolean" />
           <Property Name="Sex" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="LogEntry" Relationship="entity.FK_LogEntrynew_PlayerJeu" FromRole="Player" ToRole="LogEntry" />
+          <Property Name="CanFilm" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="PreferencePeriod">
           <Key>
@@ -1110,6 +1158,68 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="ProductQuantity" Relationship="entity.ProductQuantityProduct" FromRole="Product" ToRole="ProductQuantity" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductQuantity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Payment" Relationship="entity.PaymentProductQuantity" FromRole="ProductQuantity" ToRole="Payment" />
+          <NavigationProperty Name="Product" Relationship="entity.ProductQuantityProduct" FromRole="ProductQuantity" ToRole="Product" />
+        </EntityType>
+        <Association Name="PaymentProductQuantity">
+          <End Type="entity.Payment" Role="Payment" Multiplicity="1" />
+          <End Type="entity.ProductQuantity" Role="ProductQuantity" Multiplicity="*" />
+        </Association>
+        <Association Name="ProductQuantityProduct">
+          <End Type="entity.ProductQuantity" Role="ProductQuantity" Multiplicity="*" />
+          <End Type="entity.Product" Role="Product" Multiplicity="1" />
+        </Association>
+        <EntityType Name="OpeningJeu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Court_ID" Type="Int32" />
+          <Property Name="Badge_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BadgeJeu" Relationship="entity.FK_OpeningBadge" FromRole="OpeningJeu" ToRole="Badge" />
+          <NavigationProperty Name="CourtJeu" Relationship="entity.FK_CourtOpening" FromRole="OpeningJeu" ToRole="Court" />
+        </EntityType>
+        <Association Name="FK_OpeningBadge">
+          <End Type="entity.Badge" Role="Badge" Multiplicity="1" />
+          <End Type="entity.OpeningJeu" Role="OpeningJeu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Badge">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OpeningJeu">
+              <PropertyRef Name="Badge_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourtOpening">
+          <End Type="entity.Court" Role="Court" Multiplicity="0..1" />
+          <End Type="entity.OpeningJeu" Role="OpeningJeu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Court">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OpeningJeu">
+              <PropertyRef Name="Court_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1147,11 +1257,11 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
     <EntitySetMapping Name="BadgeJeu">
       <EntityTypeMapping TypeName="IsTypeOf(entity.Badge)">
         <MappingFragment StoreEntitySet="BadgeJeu">
-          <ScalarProperty Name="forbidden" ColumnName="forbidden" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="number" ColumnName="number" />
           <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
           <ScalarProperty Name="isMaster" ColumnName="isMaster" />
+          <ScalarProperty Name="forbidden" ColumnName="forbidden" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1188,11 +1298,7 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
     <EntitySetMapping Name="PlayerJeu">
       <EntityTypeMapping TypeName="IsTypeOf(entity.Player)">
         <MappingFragment StoreEntitySet="PlayerJeu">
-          <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Subscribed" ColumnName="Subscribed" />
-                <ScalarProperty Name="passwordResetDemand" ColumnName="passwordResetDemand" />
-                <ScalarProperty Name="passwordReset" ColumnName="passwordReset" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="firstName" ColumnName="firstName" />
           <ScalarProperty Name="lastName" ColumnName="lastName" />
           <ScalarProperty Name="birthDate" ColumnName="birthDate" />
@@ -1209,6 +1315,11 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <ScalarProperty Name="licenceNumber" ColumnName="licenceNumber" />
           <ScalarProperty Name="login" ColumnName="login" />
           <ScalarProperty Name="salt" ColumnName="salt" />
+          <ScalarProperty Name="passwordReset" ColumnName="passwordReset" />
+          <ScalarProperty Name="passwordResetDemand" ColumnName="passwordResetDemand" />
+          <ScalarProperty Name="Subscribed" ColumnName="Subscribed" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="CanFilm" ColumnName="CanFilm" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1280,6 +1391,55 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
           <ScalarProperty Name="Content" ColumnName="Content" />
           <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
           <ScalarProperty Name="Visibility" ColumnName="Visibility" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuthorizedTagsVersion">
+      <EntityTypeMapping TypeName="IsTypeOf(entity.AuthorizedTagsVersion)">
+        <MappingFragment StoreEntitySet="AuthorizedTagsVersion">
+          <ScalarProperty Name="versionNumber" ColumnName="versionNumber" />
+          <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(entity.LogEntry)">
+        <MappingFragment StoreEntitySet="LogEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="reader_name" ColumnName="reader_name" />
+          <ScalarProperty Name="tag_number" ColumnName="tag_number" />
+          <ScalarProperty Name="reader_response" ColumnName="reader_response" />
+          <ScalarProperty Name="Player_ID" ColumnName="Player_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IsTypeOf(entity.sysdiagrams)">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductSet">
+      <EntityTypeMapping TypeName="IsTypeOf(entity.Product)">
+        <MappingFragment StoreEntitySet="ProductSet">
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductQuantitySet">
+      <EntityTypeMapping TypeName="IsTypeOf(entity.ProductQuantity)">
+        <MappingFragment StoreEntitySet="ProductQuantitySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1416,101 +1576,32 @@ warning 6002: The table/view 'TCP_DB.dbo.authorizedUserTags' does not have a pri
       </EndProperty>
       <Condition ColumnName="Season_ID" IsNull="false" />
     </AssociationSetMapping>
-          <EntitySetMapping Name="AuthorizedTagsVersion">
-            <EntityTypeMapping TypeName="entity.AuthorizedTagsVersion">
-              <MappingFragment StoreEntitySet="AuthorizedTagsVersion">
-                <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
-                <ScalarProperty Name="versionNumber" ColumnName="versionNumber" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="authorizedUserTags">
-            <EntityTypeMapping TypeName="entity.authorizedUserTags">
-              <MappingFragment StoreEntitySet="authorizedUserTags">
-                <ScalarProperty Name="number" ColumnName="number" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="dummyQuery" FunctionName="entity.Store.dummyQuery" />
-          <FunctionImportMapping FunctionImportName="getAuthorizedUsersTagsNumbers" FunctionName="entity.Store.getAuthorizedUsersTagsNumbers" />
-          <FunctionImportMapping FunctionImportName="getFilmedHours" FunctionName="entity.Store.getFilmedHours">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="entity.getFilmedHours_Result">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="DebutMois" ColumnName="DebutMois" />
-                <ScalarProperty Name="DebutJour" ColumnName="DebutJour" />
-                <ScalarProperty Name="DebutHeure" ColumnName="DebutHeure" />
-                <ScalarProperty Name="DebutMinute" ColumnName="DebutMinute" />
-                <ScalarProperty Name="Debut" ColumnName="Debut" />
-                <ScalarProperty Name="Duree" ColumnName="Duree" />
+    <AssociationSetMapping Name="PaymentProductQuantity" TypeName="entity.PaymentProductQuantity" StoreEntitySet="ProductQuantitySet">
+      <EndProperty Name="Payment">
+        <ScalarProperty Name="ID" ColumnName="Payment_ID" />
+      </EndProperty>
+      <EndProperty Name="ProductQuantity">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProductQuantityProduct" TypeName="entity.ProductQuantityProduct" StoreEntitySet="ProductQuantitySet">
+      <EndProperty Name="Product">
+        <ScalarProperty Name="Id" ColumnName="Product_Id" />
+      </EndProperty>
+      <EndProperty Name="ProductQuantity">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+          <EntitySetMapping Name="OpeningJeu">
+            <EntityTypeMapping TypeName="entity.OpeningJeu">
+              <MappingFragment StoreEntitySet="OpeningJeu">
+                <ScalarProperty Name="Badge_ID" ColumnName="Badge_ID" />
                 <ScalarProperty Name="Court_ID" ColumnName="Court_ID" />
-                <ScalarProperty Name="firstname1" ColumnName="firstname1" />
-                <ScalarProperty Name="lastname1" ColumnName="lastname1" />
-                <ScalarProperty Name="firstname2" ColumnName="firstname2" />
-                <ScalarProperty Name="lastname2" ColumnName="lastname2" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="incrementAuthorizedTagsVersionNumber" FunctionName="entity.Store.incrementAuthorizedTagsVersionNumber" />
-          <FunctionImportMapping FunctionImportName="invalidateOverdues" FunctionName="entity.Store.invalidateOverdues" />
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="entity.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="entity.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="entity.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="entity.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="entity.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="entity.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="entity.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="entity.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="entity.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="LogEntry">
-            <EntityTypeMapping TypeName="entity.LogEntry">
-              <MappingFragment StoreEntitySet="LogEntry">
-                <ScalarProperty Name="Player_ID" ColumnName="Player_ID" />
-                <ScalarProperty Name="reader_response" ColumnName="reader_response" />
-                <ScalarProperty Name="tag_number" ColumnName="tag_number" />
-                <ScalarProperty Name="reader_name" ColumnName="reader_name" />
-                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="time" ColumnName="time" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="entity.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="addLogEntry" FunctionName="entity.Store.addLogEntry" />
-          <FunctionImportMapping FunctionImportName="mostBookedCourtsForPlayerCategory" FunctionName="entity.Store.mostBookedCourtsForPlayerCategory">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="entity.mostBookedCourtsForPlayerCategory_Result">
-                <ScalarProperty Name="Court" ColumnName="Court" />
-                <ScalarProperty Name="NB" ColumnName="NB" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="mostBookedCourtsForPlayerCategory1" FunctionName="entity.Store.mostBookedCourtsForPlayerCategory1" />
-          <FunctionImportMapping FunctionImportName="tryPeriodBooking" FunctionName="entity.Store.tryPeriodBooking" />
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

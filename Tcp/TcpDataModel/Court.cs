@@ -17,6 +17,7 @@ namespace TcpDataModel
         public Court()
         {
             this.Booking = new ObservableCollection<Booking>();
+            this.OpeningJeu = new ObservableCollection<OpeningJeu>();
         }
     
         public int ID { get; set; }
@@ -24,5 +25,6 @@ namespace TcpDataModel
         public bool isCovered { get; set; }
     
         public virtual ObservableCollection<Booking> Booking { get; set; }
+        public virtual ObservableCollection<OpeningJeu> OpeningJeu { get; set; }
     }
 }

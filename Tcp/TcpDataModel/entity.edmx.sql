@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/20/2013 09:52:11
+-- Date Created: 02/10/2014 15:01:30
 -- Generated from EDMX file: C:\Users\squelos\Documents\GitHub\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
 -- --------------------------------------------------
 
@@ -23,9 +23,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_BookingCourt]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingCourt];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CourtOpening]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OpeningJeu] DROP CONSTRAINT [FK_CourtOpening];
-GO
 IF OBJECT_ID(N'[dbo].[FK_BadgePlayer]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[BadgeJeu] DROP CONSTRAINT [FK_BadgePlayer];
 GO
@@ -43,9 +40,6 @@ IF OBJECT_ID(N'[dbo].[FK_PaymentSemester_Payment]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_PaymentSemester_Semester]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PaymentSemester] DROP CONSTRAINT [FK_PaymentSemester_Semester];
-GO
-IF OBJECT_ID(N'[dbo].[FK_OpeningBadge]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OpeningJeu] DROP CONSTRAINT [FK_OpeningBadge];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PlayerCategory_Player]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PlayerCategory] DROP CONSTRAINT [FK_PlayerCategory_Player];
@@ -77,6 +71,15 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_SeasonSemester]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[SemesterJeu] DROP CONSTRAINT [FK_SeasonSemester];
 GO
+IF OBJECT_ID(N'[dbo].[FK_LogEntrynew_PlayerJeu]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LogEntry] DROP CONSTRAINT [FK_LogEntrynew_PlayerJeu];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentProductQuantity]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProductQuantitySet] DROP CONSTRAINT [FK_PaymentProductQuantity];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductQuantityProduct]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProductQuantitySet] DROP CONSTRAINT [FK_ProductQuantityProduct];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -103,9 +106,6 @@ GO
 IF OBJECT_ID(N'[dbo].[CourtJeu]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CourtJeu];
 GO
-IF OBJECT_ID(N'[dbo].[OpeningJeu]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[OpeningJeu];
-GO
 IF OBJECT_ID(N'[dbo].[PlayerJeu]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PlayerJeu];
 GO
@@ -129,6 +129,27 @@ IF OBJECT_ID(N'[dbo].[DaySet]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[BallLevelSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[BallLevelSet];
+GO
+IF OBJECT_ID(N'[dbo].[NewsSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NewsSet];
+GO
+IF OBJECT_ID(N'[dbo].[AuthorizedTagsVersion]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AuthorizedTagsVersion];
+GO
+IF OBJECT_ID(N'[dbo].[authorizedUserTags]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[authorizedUserTags];
+GO
+IF OBJECT_ID(N'[dbo].[LogEntry]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LogEntry];
+GO
+IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[sysdiagrams];
+GO
+IF OBJECT_ID(N'[dbo].[ProductSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProductSet];
+GO
+IF OBJECT_ID(N'[dbo].[ProductQuantitySet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProductQuantitySet];
 GO
 IF OBJECT_ID(N'[dbo].[PaymentSemester]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PaymentSemester];
@@ -175,6 +196,7 @@ CREATE TABLE [dbo].[BadgeJeu] (
     [number] bigint  NOT NULL,
     [isEnabled] bit  NOT NULL,
     [isMaster] bit  NOT NULL,
+    [forbidden] bit  NOT NULL,
     [Player_ID] int  NULL
 );
 GO
@@ -210,15 +232,6 @@ CREATE TABLE [dbo].[CourtJeu] (
 );
 GO
 
--- Creating table 'OpeningJeu'
-CREATE TABLE [dbo].[OpeningJeu] (
-    [ID] int IDENTITY(1,1) NOT NULL,
-    [time] datetime  NOT NULL,
-    [Court_ID] int  NULL,
-    [Badge_ID] int  NOT NULL
-);
-GO
-
 -- Creating table 'PlayerJeu'
 CREATE TABLE [dbo].[PlayerJeu] (
     [ID] int IDENTITY(1,1) NOT NULL,
@@ -234,10 +247,15 @@ CREATE TABLE [dbo].[PlayerJeu] (
     [phone2] nvarchar(max)  NULL,
     [isEnabled] bit  NOT NULL,
     [passwordHash] nvarchar(max)  NOT NULL,
-    [lastLogin] datetime  NOT NULL,
+    [lastLogin] datetime  NULL,
     [licenceNumber] nvarchar(max)  NULL,
     [login] nvarchar(max)  NOT NULL,
     [salt] nvarchar(max)  NOT NULL,
+    [passwordReset] nvarchar(max)  NULL,
+    [passwordResetDemand] datetime  NULL,
+    [Subscribed] bit  NULL,
+    [Sex] bit  NOT NULL,
+    [CanFilm] bit  NOT NULL,
     [Status_Id] int  NOT NULL,
     [BallLevel_Id] int  NULL
 );
@@ -310,6 +328,57 @@ CREATE TABLE [dbo].[NewsSet] (
 );
 GO
 
+-- Creating table 'AuthorizedTagsVersion'
+CREATE TABLE [dbo].[AuthorizedTagsVersion] (
+    [versionNumber] int  NOT NULL,
+    [lastUpdated] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'authorizedUserTags'
+CREATE TABLE [dbo].[authorizedUserTags] (
+    [number] bigint  NOT NULL
+);
+GO
+
+-- Creating table 'LogEntry'
+CREATE TABLE [dbo].[LogEntry] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [timestamp] datetime  NOT NULL,
+    [reader_name] nvarchar(50)  NOT NULL,
+    [tag_number] int  NOT NULL,
+    [reader_response] int  NOT NULL,
+    [Player_ID] int  NULL
+);
+GO
+
+-- Creating table 'sysdiagrams'
+CREATE TABLE [dbo].[sysdiagrams] (
+    [name] nvarchar(128)  NOT NULL,
+    [principal_id] int  NOT NULL,
+    [diagram_id] int IDENTITY(1,1) NOT NULL,
+    [version] int  NULL,
+    [definition] varbinary(max)  NULL
+);
+GO
+
+-- Creating table 'ProductSet'
+CREATE TABLE [dbo].[ProductSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [Price] decimal(18,2)  NOT NULL
+);
+GO
+
+-- Creating table 'ProductQuantitySet'
+CREATE TABLE [dbo].[ProductQuantitySet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Quantity] nvarchar(max)  NOT NULL,
+    [Payment_ID] int  NOT NULL,
+    [Product_Id] int  NOT NULL
+);
+GO
+
 -- Creating table 'PaymentSemester'
 CREATE TABLE [dbo].[PaymentSemester] (
     [Payment_ID] int  NOT NULL,
@@ -370,12 +439,6 @@ ADD CONSTRAINT [PK_CourtJeu]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [ID] in table 'OpeningJeu'
-ALTER TABLE [dbo].[OpeningJeu]
-ADD CONSTRAINT [PK_OpeningJeu]
-    PRIMARY KEY CLUSTERED ([ID] ASC);
-GO
-
 -- Creating primary key on [ID] in table 'PlayerJeu'
 ALTER TABLE [dbo].[PlayerJeu]
 ADD CONSTRAINT [PK_PlayerJeu]
@@ -430,6 +493,42 @@ ADD CONSTRAINT [PK_NewsSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [versionNumber], [lastUpdated] in table 'AuthorizedTagsVersion'
+ALTER TABLE [dbo].[AuthorizedTagsVersion]
+ADD CONSTRAINT [PK_AuthorizedTagsVersion]
+    PRIMARY KEY CLUSTERED ([versionNumber], [lastUpdated] ASC);
+GO
+
+-- Creating primary key on [number] in table 'authorizedUserTags'
+ALTER TABLE [dbo].[authorizedUserTags]
+ADD CONSTRAINT [PK_authorizedUserTags]
+    PRIMARY KEY CLUSTERED ([number] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'LogEntry'
+ALTER TABLE [dbo].[LogEntry]
+ADD CONSTRAINT [PK_LogEntry]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [diagram_id] in table 'sysdiagrams'
+ALTER TABLE [dbo].[sysdiagrams]
+ADD CONSTRAINT [PK_sysdiagrams]
+    PRIMARY KEY CLUSTERED ([diagram_id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ProductSet'
+ALTER TABLE [dbo].[ProductSet]
+ADD CONSTRAINT [PK_ProductSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ProductQuantitySet'
+ALTER TABLE [dbo].[ProductQuantitySet]
+ADD CONSTRAINT [PK_ProductQuantitySet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- Creating primary key on [Payment_ID], [Semester_ID] in table 'PaymentSemester'
 ALTER TABLE [dbo].[PaymentSemester]
 ADD CONSTRAINT [PK_PaymentSemester]
@@ -471,20 +570,6 @@ ADD CONSTRAINT [FK_BookingCourt]
 -- Creating non-clustered index for FOREIGN KEY 'FK_BookingCourt'
 CREATE INDEX [IX_FK_BookingCourt]
 ON [dbo].[BookingJeu]
-    ([Court_ID]);
-GO
-
--- Creating foreign key on [Court_ID] in table 'OpeningJeu'
-ALTER TABLE [dbo].[OpeningJeu]
-ADD CONSTRAINT [FK_CourtOpening]
-    FOREIGN KEY ([Court_ID])
-    REFERENCES [dbo].[CourtJeu]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CourtOpening'
-CREATE INDEX [IX_FK_CourtOpening]
-ON [dbo].[OpeningJeu]
     ([Court_ID]);
 GO
 
@@ -565,20 +650,6 @@ ADD CONSTRAINT [FK_PaymentSemester_Semester]
 CREATE INDEX [IX_FK_PaymentSemester_Semester]
 ON [dbo].[PaymentSemester]
     ([Semester_ID]);
-GO
-
--- Creating foreign key on [Badge_ID] in table 'OpeningJeu'
-ALTER TABLE [dbo].[OpeningJeu]
-ADD CONSTRAINT [FK_OpeningBadge]
-    FOREIGN KEY ([Badge_ID])
-    REFERENCES [dbo].[BadgeJeu]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_OpeningBadge'
-CREATE INDEX [IX_FK_OpeningBadge]
-ON [dbo].[OpeningJeu]
-    ([Badge_ID]);
 GO
 
 -- Creating foreign key on [Player_ID] in table 'PlayerCategory'
@@ -714,6 +785,48 @@ ADD CONSTRAINT [FK_SeasonSemester]
 CREATE INDEX [IX_FK_SeasonSemester]
 ON [dbo].[SemesterJeu]
     ([Season_ID]);
+GO
+
+-- Creating foreign key on [Player_ID] in table 'LogEntry'
+ALTER TABLE [dbo].[LogEntry]
+ADD CONSTRAINT [FK_LogEntrynew_PlayerJeu]
+    FOREIGN KEY ([Player_ID])
+    REFERENCES [dbo].[PlayerJeu]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_LogEntrynew_PlayerJeu'
+CREATE INDEX [IX_FK_LogEntrynew_PlayerJeu]
+ON [dbo].[LogEntry]
+    ([Player_ID]);
+GO
+
+-- Creating foreign key on [Payment_ID] in table 'ProductQuantitySet'
+ALTER TABLE [dbo].[ProductQuantitySet]
+ADD CONSTRAINT [FK_PaymentProductQuantity]
+    FOREIGN KEY ([Payment_ID])
+    REFERENCES [dbo].[PaymentJeu]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PaymentProductQuantity'
+CREATE INDEX [IX_FK_PaymentProductQuantity]
+ON [dbo].[ProductQuantitySet]
+    ([Payment_ID]);
+GO
+
+-- Creating foreign key on [Product_Id] in table 'ProductQuantitySet'
+ALTER TABLE [dbo].[ProductQuantitySet]
+ADD CONSTRAINT [FK_ProductQuantityProduct]
+    FOREIGN KEY ([Product_Id])
+    REFERENCES [dbo].[ProductSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProductQuantityProduct'
+CREATE INDEX [IX_FK_ProductQuantityProduct]
+ON [dbo].[ProductQuantitySet]
+    ([Product_Id]);
 GO
 
 -- --------------------------------------------------

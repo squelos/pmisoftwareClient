@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1a932b47b9f34da6a29968e675ba7f26" Name="Diagram1" ZoomLevel="84" >
-        <EntityTypeShape EntityType="entity.Season" Width="1.5" PointX="3" PointY="1.5" />
+      <Diagram DiagramId="1a932b47b9f34da6a29968e675ba7f26" Name="Diagram1" ZoomLevel="83" >
+        <EntityTypeShape EntityType="entity.Season" Width="1.5" PointX="3.375" PointY="0.5" />
         <EntityTypeShape EntityType="entity.Semester" Width="1.5" PointX="5.5" PointY="1.125" />
         <EntityTypeShape EntityType="entity.Payment" Width="1.5" PointX="5.5" PointY="3.75" />
         <EntityTypeShape EntityType="entity.Badge" Width="1.5" PointX="10.75" PointY="8.125" />
@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="entity.Booking" Width="1.5" PointX="10.75" PointY="2.875" />
         <EntityTypeShape EntityType="entity.Court" Width="1.5" PointX="12.75" PointY="2.125" />
         <EntityTypeShape EntityType="entity.Player" Width="1.5" PointX="8" PointY="3.625" />
-        <EntityTypeShape EntityType="entity.PreferencePeriod" Width="1.5" PointX="3.25" PointY="5.625" />
+        <EntityTypeShape EntityType="entity.PreferencePeriod" Width="1.5" PointX="3.25" PointY="6" />
         <AssociationConnector Association="entity.BookingAggregationBooking" />
         <AssociationConnector Association="entity.BookingCourt" />
         <AssociationConnector Association="entity.BadgePlayer" />
@@ -21,27 +21,34 @@
         <AssociationConnector Association="entity.PlayerBooking" />
         <AssociationConnector Association="entity.PlayerPayment" />
         <AssociationConnector Association="entity.PaymentSemester" />
-        <EntityTypeShape EntityType="entity.Category" Width="1.5" PointX="5.625" PointY="6.625" />
+        <EntityTypeShape EntityType="entity.Category" Width="1.5" PointX="5.5" PointY="7.125" />
         <AssociationConnector Association="entity.PlayerCategory" />
         <EntityTypeShape EntityType="entity.TrainingPreferences" Width="1.5" PointX="4.75" PointY="9.125" />
         <AssociationConnector Association="entity.PlayerTrainingPreferences" />
         <EntityTypeShape EntityType="entity.Status" Width="1.5" PointX="10.75" PointY="6.25" />
         <AssociationConnector Association="entity.PlayerStatus" />
-        <EntityTypeShape EntityType="entity.PaymentMethod" Width="1.5" PointX="3.375" PointY="3.875" />
+        <EntityTypeShape EntityType="entity.PaymentMethod" Width="1.5" PointX="3.375" PointY="4.25" />
         <AssociationConnector Association="entity.PaymentMethodPayment" />
         <EntityTypeShape EntityType="entity.Day" Width="1.5" PointX="2.125" PointY="9" />
         <AssociationConnector Association="entity.DayPreferencePeriod" />
         <AssociationConnector Association="entity.DayTrainingPreferences" />
-        <EntityTypeShape EntityType="entity.BallLevel" Width="1.5" PointX="7.875" PointY="11" />
+        <EntityTypeShape EntityType="entity.BallLevel" Width="1.5" PointX="7.875" PointY="11.5" />
         <AssociationConnector Association="entity.PlayerBallLevel" />
         <AssociationConnector Association="entity.BookingPlayer2" />
         <AssociationConnector Association="entity.SeasonSemester" />
-        <EntityTypeShape EntityType="entity.News" Width="1.5" PointX="7.875" PointY="1.125" />
-        <EntityTypeShape EntityType="entity.AuthorizedTagsVersion" Width="2.125" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="entity.authorizedUserTags" Width="2.125" PointX="0.625" PointY="5.75" />
+        <EntityTypeShape EntityType="entity.News" Width="1.5" PointX="8" PointY="1" />
+        <EntityTypeShape EntityType="entity.AuthorizedTagsVersion" Width="2.125" PointX="0.75" PointY="4.125" />
+        <EntityTypeShape EntityType="entity.authorizedUserTags" Width="2.125" PointX="0.625" PointY="6.125" />
         <EntityTypeShape EntityType="entity.LogEntry" Width="1.5" PointX="10.375" PointY="11.75" />
-        <EntityTypeShape EntityType="entity.sysdiagrams" Width="1.5" PointX="3.375" PointY="12.75" />
+        <EntityTypeShape EntityType="entity.sysdiagrams" Width="1.5" PointX="3.375" PointY="12" />
         <AssociationConnector Association="entity.FK_LogEntrynew_PlayerJeu" />
+        <EntityTypeShape EntityType="entity.Product" Width="1.5" PointX="0.875" PointY="1.125" />
+        <EntityTypeShape EntityType="entity.ProductQuantity" Width="1.5" PointX="3.375" PointY="2.125" />
+        <AssociationConnector Association="entity.PaymentProductQuantity" />
+        <AssociationConnector Association="entity.ProductQuantityProduct" />
+        <EntityTypeShape EntityType="entity.OpeningJeu" Width="1.5" PointX="15.375" PointY="5.25" />
+        <AssociationConnector Association="entity.FK_OpeningBadge" />
+        <AssociationConnector Association="entity.FK_CourtOpening" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

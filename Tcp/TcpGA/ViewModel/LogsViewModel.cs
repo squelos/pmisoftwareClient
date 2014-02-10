@@ -10,6 +10,7 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using System.Data.Entity.SqlServer;
 
 
 namespace TcpGA.ViewModel
@@ -267,7 +268,7 @@ namespace TcpGA.ViewModel
                      where (l.timestamp >= StartDate && l.timestamp <= EndDate) 
                         && ((_playerSearch == "") || l.PlayerJeu != null && (l.PlayerJeu.firstName.ToLower().Contains(_playerSearch.ToLower()) || l.PlayerJeu.lastName.ToLower().Contains(_playerSearch.ToLower()))
                         && l.reader_name.ToLower().Contains(_readerSearch)
-                        && l.tag_number.ToString().Contains(_tagSearch))
+                        && SqlFunctions.StringConvert((double)l.tag_number).Contains(_tagSearch))
                      select l).Skip((CurrentPage-1)*_itemsPerPage).Take(_itemsPerPage).ToList<LogEntry>());
 
             int count = (from l in Container.LogEntry
@@ -277,7 +278,7 @@ namespace TcpGA.ViewModel
                          where (l.timestamp >= StartDate && l.timestamp <= EndDate)
                             && ((_playerSearch == "") || l.PlayerJeu != null && (l.PlayerJeu.firstName.ToLower().Contains(_playerSearch.ToLower()) || l.PlayerJeu.lastName.ToLower().Contains(_playerSearch.ToLower()))
                             && l.reader_name.ToLower().Contains(_readerSearch)
-                            && l.tag_number.ToString().Contains(_tagSearch))
+                            && SqlFunctions.StringConvert((double)l.tag_number).Contains(_tagSearch))
                          select l).Count();
 
             LastPage = (int)(count / _itemsPerPage);

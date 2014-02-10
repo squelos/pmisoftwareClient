@@ -12,20 +12,18 @@ namespace TcpDataModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class Badge
+    public partial class Product
     {
-        public Badge()
+        public Product()
         {
-            this.OpeningJeu = new ObservableCollection<OpeningJeu>();
+            this.ProductQuantity = new ObservableCollection<ProductQuantity>();
         }
     
-        public int ID { get; set; }
-        public long number { get; set; }
-        public bool isEnabled { get; set; }
-        public bool isMaster { get; set; }
-        public bool forbidden { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public bool Deleted { get; set; }
     
-        public virtual Player Player { get; set; }
-        public virtual ObservableCollection<OpeningJeu> OpeningJeu { get; set; }
+        public virtual ObservableCollection<ProductQuantity> ProductQuantity { get; set; }
     }
 }
