@@ -44,12 +44,11 @@ namespace TcpDataModel
         public virtual DbSet<BallLevel> BallLevelSet { get; set; }
         public virtual DbSet<News> NewsSet { get; set; }
         public virtual DbSet<AuthorizedTagsVersion> AuthorizedTagsVersion { get; set; }
-        public virtual DbSet<authorizedUserTags> authorizedUserTags { get; set; }
         public virtual DbSet<LogEntry> LogEntry { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Product> ProductSet { get; set; }
-        public virtual DbSet<ProductQuantity> ProductQuantitySet { get; set; }
         public virtual DbSet<OpeningJeu> OpeningJeu { get; set; }
+        public virtual DbSet<ProductQuantitySet> ProductQuantitySet { get; set; }
+        public virtual DbSet<ProductSet> ProductSet { get; set; }
     
         public virtual ObjectResult<Nullable<bool>> dummyQuery()
         {

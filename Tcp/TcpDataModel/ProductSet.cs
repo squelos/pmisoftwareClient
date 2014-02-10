@@ -12,11 +12,11 @@ namespace TcpDataModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class Product
+    public partial class ProductSet
     {
-        public Product()
+        public ProductSet()
         {
-            this.ProductQuantity = new ObservableCollection<ProductQuantity>();
+            this.ProductQuantitySet = new ObservableCollection<ProductQuantitySet>();
         }
     
         public int Id { get; set; }
@@ -24,6 +24,6 @@ namespace TcpDataModel
         public decimal Price { get; set; }
         public bool Deleted { get; set; }
     
-        public virtual ObservableCollection<ProductQuantity> ProductQuantity { get; set; }
+        public virtual ObservableCollection<ProductQuantitySet> ProductQuantitySet { get; set; }
     }
 }

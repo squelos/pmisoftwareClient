@@ -51,9 +51,6 @@
     <Compile Include="AuthorizedTagsVersion.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="authorizedUserTags.cs">
-      <DependentUpon>entity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Badge.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
@@ -127,10 +124,10 @@
     <Compile Include="PreferencePeriod.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Product.cs">
+    <Compile Include="ProductQuantitySet.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductQuantity.cs">
+    <Compile Include="ProductSet.cs">
       <DependentUpon>entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />

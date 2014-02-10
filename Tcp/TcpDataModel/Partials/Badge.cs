@@ -16,10 +16,7 @@ namespace TcpDataModel
            
         }
 
-        public Badge()
-        {
-            
-        }
+        
 
         public override string ToString()
         {

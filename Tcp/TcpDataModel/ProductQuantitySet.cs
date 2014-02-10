@@ -12,8 +12,14 @@ namespace TcpDataModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class authorizedUserTags
+    public partial class ProductQuantitySet
     {
-        public long number { get; set; }
+        public int Id { get; set; }
+        public string Quantity { get; set; }
+        public int Payment_ID { get; set; }
+        public int Product_Id { get; set; }
+    
+        public virtual Payment PaymentJeu { get; set; }
+        public virtual ProductSet ProductSet { get; set; }
     }
 }

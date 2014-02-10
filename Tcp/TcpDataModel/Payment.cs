@@ -17,7 +17,7 @@ namespace TcpDataModel
         public Payment()
         {
             this.Semester = new ObservableCollection<Semester>();
-            this.ProductQuantity = new ObservableCollection<ProductQuantity>();
+            this.ProductQuantitySet = new ObservableCollection<ProductQuantitySet>();
         }
     
         public int ID { get; set; }
@@ -30,6 +30,6 @@ namespace TcpDataModel
         public virtual Player Player { get; set; }
         public virtual ObservableCollection<Semester> Semester { get; set; }
         public virtual PaymentMethod PaymentMethod { get; set; }
-        public virtual ObservableCollection<ProductQuantity> ProductQuantity { get; set; }
+        public virtual ObservableCollection<ProductQuantitySet> ProductQuantitySet { get; set; }
     }
 }
