@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="200" d:DesignWidth="900">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0" />
@@ -16,12 +16,33 @@
             <ColumnDefinition Width="175" />
             <ColumnDefinition Width="175" />
         </Grid.ColumnDefinitions>
-        <Label Content="Lundi" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" />
-        <Label Content="Mardi" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" />
-        <Label Content="Mercredi" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" />
-        <Label Content="Jeudi" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Top" />
-        <Label Content="Vendredi" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Top" />
-        <Label Content="Samedi" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Top" />
-        <Label Content="Dimanche" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <DockPanel Grid.Column="1">
+            <Label Content="Lundi" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" DockPanel.Dock="Top"/>
+            <Label  DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="lMonday"/>
+        </DockPanel>
+        <DockPanel Grid.Column="2">
+            <Label Content="Mardi" HorizontalAlignment="Center" VerticalAlignment="Top" DockPanel.Dock="Top"/>
+            <Label   HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="lTuesday"/>
+        </DockPanel>
+        <DockPanel Grid.Column="3">
+            <Label Content="Mercredi" HorizontalAlignment="Center" VerticalAlignment="Top" DockPanel.Dock="Top" />
+            <Label Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="lWednesday"/>
+        </DockPanel>
+        <DockPanel Grid.Column="4">
+            <Label Content="Jeudi" HorizontalAlignment="Center" VerticalAlignment="Top" DockPanel.Dock="Top" />
+            <Label  HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="lThursday"/>
+        </DockPanel>
+        <DockPanel Grid.Column="5">
+            <Label Content="Vendredi"  HorizontalAlignment="Center" VerticalAlignment="Top" DockPanel.Dock="Top" />
+            <Label  Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="lFriday"/>
+        </DockPanel>
+        <DockPanel Grid.Column="6">
+            <Label Content="Samedi" HorizontalAlignment="Center" VerticalAlignment="Top" DockPanel.Dock="Top" />
+            <Label  Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Top"  x:Name="lSaturday"/>
+        </DockPanel>
+        <DockPanel Grid.Column="7">
+            <Label Content="Dimanche"  HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label  HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="lSunday"/>
+        </DockPanel>
     </Grid>
 </UserControl>

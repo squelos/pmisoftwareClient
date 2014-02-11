@@ -85,7 +85,7 @@ namespace TcpDash.UC
 
             //we must show the whole week planning
             List<DailyBookings> listBookings = _courtBookings.WeeklyBookingses.DailyBookingses;
-
+            header.FirstDayOfWeek = listBookings.First().DayDateTime;
             //grid has 7 columnsn and 30 rows
             for (int i = 0; i < 7; i++)
             {

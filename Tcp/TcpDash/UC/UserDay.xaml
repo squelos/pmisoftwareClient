@@ -9,9 +9,10 @@
     <StackPanel Orientation="Vertical">
 
         <StackPanel Orientation="Horizontal">
-            <UC:UserTimeHeader />
+            
             <Grid x:Name="grid" Background="Transparent" MouseDown="PreviewLeftMouseDown">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="175" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -48,8 +49,8 @@
                     <RowDefinition Height="25" />
                     <RowDefinition Height="25" />
                 </Grid.RowDefinitions>
+                <UC:UserTimeHeader  Grid.Column="0" Grid.Row="0" Grid.RowSpan="32"/>
                 <!--<Line Stroke="#32CF6248" Fill="Transparent" Grid.RowSpan="32"/>-->
-                
                 
             </Grid>
         </StackPanel>

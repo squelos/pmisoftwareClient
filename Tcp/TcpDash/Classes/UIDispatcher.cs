@@ -14,6 +14,8 @@ namespace TcpDash.Classes
         #region members
 
         private MainWindow _uiElement;
+        private Window _shownWindow;
+
 
         #endregion
 
@@ -57,6 +59,7 @@ namespace TcpDash.Classes
         public bool? ShowDialogAndBlur(Window win)
         {
             OverlayMainWindow();
+            
             BlurEffect blur = new BlurEffect();
             blur.Radius = 8;
             _uiElement.Effect = blur;
@@ -64,14 +67,26 @@ namespace TcpDash.Classes
             {
                 Thread.Sleep(120000);
                 _uiElement.Dispatcher.Invoke(win.Close);
-                //win.Close();
+                _shownWindow = null;
             });
             t.Start();
-
+            _shownWindow = win;
             bool? result = win.ShowDialog();
             _uiElement.Effect = null;
+            
+            _shownWindow = null;
             HideOverlayMainWindow();
             return result;
+        }
+
+       
+
+        void _uiElement_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (_shownWindow != null)
+            {
+                _shownWindow.Close();
+            }
         }
 
         public void OverlayMainWindow()

@@ -20,9 +20,37 @@ namespace TcpDash.UC
     /// </summary>
     public partial class UserDayHeader : UserControl
     {
+        private DateTime _firstDayOfWeek;
         public UserDayHeader()
         {
             InitializeComponent();
+        }
+
+        public DateTime FirstDayOfWeek
+        {
+            get { return _firstDayOfWeek; }
+            set
+            {
+                _firstDayOfWeek = value;
+                Refresh();    
+            }
+        }
+
+        private void Refresh()
+        {
+            lMonday.Content = _firstDayOfWeek.ToShortDateString();
+
+            lTuesday.Content = _firstDayOfWeek.AddDays(1).ToShortDateString();
+
+            lWednesday.Content = _firstDayOfWeek.AddDays(2).ToShortDateString() ;
+
+            lThursday.Content = _firstDayOfWeek.AddDays(3).ToShortDateString() ;
+
+            lFriday.Content = _firstDayOfWeek.AddDays(4).ToShortDateString() ;
+
+            lSaturday.Content = _firstDayOfWeek.AddDays(5).ToShortDateString() ;
+
+            lSunday.Content = _firstDayOfWeek.AddDays(6).ToShortDateString();
         }
     }
 }
