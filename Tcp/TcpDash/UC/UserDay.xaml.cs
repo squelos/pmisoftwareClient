@@ -3,8 +3,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Effects;
 using TcpDash.Business;
 using TcpDash.Classes;
 using TcpDash.UI;
@@ -73,7 +71,7 @@ namespace TcpDash.UC
                 foreach (var visualBooking in dailyBookings.VisualBookingList)
                 {
                     //we add it to the appropriate row
-                    ShowVisualBooking(visualBooking, 0);
+                    ShowVisualBooking(visualBooking, 1);
                 }
             }
         }
