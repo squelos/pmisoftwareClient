@@ -46,7 +46,7 @@
     </Controls:MetroWindow.WindowCommands>
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout Header="Videos" Position="Right" >
+            <Controls:Flyout Header="Videos" Position="Right">
                 <UserControls:UserVideo/>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
