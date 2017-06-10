@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/10/2014 15:01:30
--- Generated from EDMX file: C:\Users\squelos\Documents\GitHub\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
+-- Date Created: 06/11/2017 01:40:26
+-- Generated from EDMX file: C:\dev\tcp\pmisoftwareClient\Tcp\TcpDataModel\entity.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [TCP_DB];
+USE [tcpdb];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,44 +17,20 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_BadgePlayer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BadgeJeu] DROP CONSTRAINT [FK_BadgePlayer];
+GO
 IF OBJECT_ID(N'[dbo].[FK_BookingAggregationBooking]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingAggregationBooking];
 GO
 IF OBJECT_ID(N'[dbo].[FK_BookingCourt]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingCourt];
 GO
-IF OBJECT_ID(N'[dbo].[FK_BadgePlayer]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[BadgeJeu] DROP CONSTRAINT [FK_BadgePlayer];
+IF OBJECT_ID(N'[dbo].[FK_BookingPlayer2]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingPlayer2];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PreferencePeriodPlayer]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PreferencePeriodJeu] DROP CONSTRAINT [FK_PreferencePeriodPlayer];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PlayerBooking]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_PlayerBooking];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PlayerPayment]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PaymentJeu] DROP CONSTRAINT [FK_PlayerPayment];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PaymentSemester_Payment]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PaymentSemester] DROP CONSTRAINT [FK_PaymentSemester_Payment];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PaymentSemester_Semester]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PaymentSemester] DROP CONSTRAINT [FK_PaymentSemester_Semester];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PlayerCategory_Player]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlayerCategory] DROP CONSTRAINT [FK_PlayerCategory_Player];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PlayerCategory_Category]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlayerCategory] DROP CONSTRAINT [FK_PlayerCategory_Category];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PlayerTrainingPreferences]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TrainingPreferencesSet] DROP CONSTRAINT [FK_PlayerTrainingPreferences];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PlayerStatus]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlayerJeu] DROP CONSTRAINT [FK_PlayerStatus];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PaymentMethodPayment]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PaymentJeu] DROP CONSTRAINT [FK_PaymentMethodPayment];
+IF OBJECT_ID(N'[dbo].[FK_CourtOpening]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OpeningJeu] DROP CONSTRAINT [FK_CourtOpening];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DayPreferencePeriod]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PreferencePeriodJeu] DROP CONSTRAINT [FK_DayPreferencePeriod];
@@ -62,40 +38,67 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_DayTrainingPreferences]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TrainingPreferencesSet] DROP CONSTRAINT [FK_DayTrainingPreferences];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PlayerBallLevel]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlayerJeu] DROP CONSTRAINT [FK_PlayerBallLevel];
-GO
-IF OBJECT_ID(N'[dbo].[FK_BookingPlayer2]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_BookingPlayer2];
-GO
-IF OBJECT_ID(N'[dbo].[FK_SeasonSemester]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SemesterJeu] DROP CONSTRAINT [FK_SeasonSemester];
-GO
 IF OBJECT_ID(N'[dbo].[FK_LogEntrynew_PlayerJeu]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[LogEntry] DROP CONSTRAINT [FK_LogEntrynew_PlayerJeu];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OpeningBadge]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OpeningJeu] DROP CONSTRAINT [FK_OpeningBadge];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentMethodPayment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentJeu] DROP CONSTRAINT [FK_PaymentMethodPayment];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PaymentProductQuantity]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ProductQuantitySet] DROP CONSTRAINT [FK_PaymentProductQuantity];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentSemester_Payment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentSemester] DROP CONSTRAINT [FK_PaymentSemester_Payment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentSemester_Semester]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentSemester] DROP CONSTRAINT [FK_PaymentSemester_Semester];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerBallLevel]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlayerJeu] DROP CONSTRAINT [FK_PlayerBallLevel];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerBooking]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BookingJeu] DROP CONSTRAINT [FK_PlayerBooking];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerCategory_Category]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlayerCategory] DROP CONSTRAINT [FK_PlayerCategory_Category];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerCategory_Player]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlayerCategory] DROP CONSTRAINT [FK_PlayerCategory_Player];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerPayment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentJeu] DROP CONSTRAINT [FK_PlayerPayment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerStatus]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlayerJeu] DROP CONSTRAINT [FK_PlayerStatus];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlayerTrainingPreferences]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TrainingPreferencesSet] DROP CONSTRAINT [FK_PlayerTrainingPreferences];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PreferencePeriodPlayer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PreferencePeriodJeu] DROP CONSTRAINT [FK_PreferencePeriodPlayer];
+GO
 IF OBJECT_ID(N'[dbo].[FK_ProductQuantityProduct]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ProductQuantitySet] DROP CONSTRAINT [FK_ProductQuantityProduct];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SeasonSemester]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SemesterJeu] DROP CONSTRAINT [FK_SeasonSemester];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[SeasonJeu]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SeasonJeu];
-GO
-IF OBJECT_ID(N'[dbo].[SemesterJeu]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SemesterJeu];
-GO
-IF OBJECT_ID(N'[dbo].[PaymentJeu]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PaymentJeu];
+IF OBJECT_ID(N'[dbo].[AuthorizedTagsVersion]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AuthorizedTagsVersion];
 GO
 IF OBJECT_ID(N'[dbo].[BadgeJeu]', 'U') IS NOT NULL
     DROP TABLE [dbo].[BadgeJeu];
+GO
+IF OBJECT_ID(N'[dbo].[BallLevelSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BallLevelSet];
 GO
 IF OBJECT_ID(N'[dbo].[BookingAggregationJeu]', 'U') IS NOT NULL
     DROP TABLE [dbo].[BookingAggregationJeu];
@@ -103,8 +106,35 @@ GO
 IF OBJECT_ID(N'[dbo].[BookingJeu]', 'U') IS NOT NULL
     DROP TABLE [dbo].[BookingJeu];
 GO
+IF OBJECT_ID(N'[dbo].[CategorySet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CategorySet];
+GO
 IF OBJECT_ID(N'[dbo].[CourtJeu]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CourtJeu];
+GO
+IF OBJECT_ID(N'[dbo].[DaySet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DaySet];
+GO
+IF OBJECT_ID(N'[dbo].[LogEntry]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LogEntry];
+GO
+IF OBJECT_ID(N'[dbo].[NewsSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NewsSet];
+GO
+IF OBJECT_ID(N'[dbo].[OpeningJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OpeningJeu];
+GO
+IF OBJECT_ID(N'[dbo].[PaymentJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PaymentJeu];
+GO
+IF OBJECT_ID(N'[dbo].[PaymentMethodSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PaymentMethodSet];
+GO
+IF OBJECT_ID(N'[dbo].[PaymentSemester]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PaymentSemester];
+GO
+IF OBJECT_ID(N'[dbo].[PlayerCategory]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PlayerCategory];
 GO
 IF OBJECT_ID(N'[dbo].[PlayerJeu]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PlayerJeu];
@@ -112,50 +142,26 @@ GO
 IF OBJECT_ID(N'[dbo].[PreferencePeriodJeu]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PreferencePeriodJeu];
 GO
-IF OBJECT_ID(N'[dbo].[CategorySet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CategorySet];
-GO
-IF OBJECT_ID(N'[dbo].[TrainingPreferencesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TrainingPreferencesSet];
-GO
-IF OBJECT_ID(N'[dbo].[StatusSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[StatusSet];
-GO
-IF OBJECT_ID(N'[dbo].[PaymentMethodSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PaymentMethodSet];
-GO
-IF OBJECT_ID(N'[dbo].[DaySet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[DaySet];
-GO
-IF OBJECT_ID(N'[dbo].[BallLevelSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[BallLevelSet];
-GO
-IF OBJECT_ID(N'[dbo].[NewsSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[NewsSet];
-GO
-IF OBJECT_ID(N'[dbo].[AuthorizedTagsVersion]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AuthorizedTagsVersion];
-GO
-IF OBJECT_ID(N'[dbo].[authorizedUserTags]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[authorizedUserTags];
-GO
-IF OBJECT_ID(N'[dbo].[LogEntry]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[LogEntry];
-GO
-IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[sysdiagrams];
+IF OBJECT_ID(N'[dbo].[ProductQuantitySet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProductQuantitySet];
 GO
 IF OBJECT_ID(N'[dbo].[ProductSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ProductSet];
 GO
-IF OBJECT_ID(N'[dbo].[ProductQuantitySet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ProductQuantitySet];
+IF OBJECT_ID(N'[dbo].[SeasonJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SeasonJeu];
 GO
-IF OBJECT_ID(N'[dbo].[PaymentSemester]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PaymentSemester];
+IF OBJECT_ID(N'[dbo].[SemesterJeu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SemesterJeu];
 GO
-IF OBJECT_ID(N'[dbo].[PlayerCategory]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PlayerCategory];
+IF OBJECT_ID(N'[dbo].[StatusSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StatusSet];
+GO
+IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[sysdiagrams];
+GO
+IF OBJECT_ID(N'[dbo].[TrainingPreferencesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TrainingPreferencesSet];
 GO
 
 -- --------------------------------------------------
@@ -182,9 +188,9 @@ CREATE TABLE [dbo].[PaymentJeu] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [amount] float  NOT NULL,
     [date] datetime  NOT NULL,
-    [raison] nvarchar(max)  NOT NULL,
+    [raison] nvarchar(500)  NOT NULL,
     [invalid] bit  NOT NULL,
-    [comment] nvarchar(max)  NOT NULL,
+    [comment] nvarchar(500)  NOT NULL,
     [Player_ID] int  NOT NULL,
     [PaymentMethod_Id] int  NOT NULL
 );
@@ -204,14 +210,14 @@ GO
 -- Creating table 'BookingAggregationJeu'
 CREATE TABLE [dbo].[BookingAggregationJeu] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [name] nvarchar(max)  NOT NULL
+    [name] nvarchar(500)  NOT NULL
 );
 GO
 
 -- Creating table 'BookingJeu'
 CREATE TABLE [dbo].[BookingJeu] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [name] nvarchar(max)  NOT NULL,
+    [name] nvarchar(500)  NOT NULL,
     [isSpecial] bit  NOT NULL,
     [start] datetime  NOT NULL,
     [end] datetime  NOT NULL,
@@ -227,7 +233,7 @@ GO
 -- Creating table 'CourtJeu'
 CREATE TABLE [dbo].[CourtJeu] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [number] nvarchar(max)  NOT NULL,
+    [number] nvarchar(500)  NOT NULL,
     [isCovered] bit  NOT NULL
 );
 GO
@@ -235,22 +241,22 @@ GO
 -- Creating table 'PlayerJeu'
 CREATE TABLE [dbo].[PlayerJeu] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [firstName] nvarchar(max)  NOT NULL,
-    [lastName] nvarchar(max)  NOT NULL,
+    [firstName] nvarchar(500)  NOT NULL,
+    [lastName] nvarchar(500)  NOT NULL,
     [birthDate] datetime  NOT NULL,
-    [ranking] nvarchar(max)  NOT NULL,
-    [email] nvarchar(max)  NOT NULL,
-    [street] nvarchar(max)  NOT NULL,
-    [zipCode] nvarchar(max)  NOT NULL,
-    [city] nvarchar(max)  NOT NULL,
-    [phone1] nvarchar(max)  NOT NULL,
+    [ranking] nvarchar(500)  NOT NULL,
+    [email] nvarchar(500)  NOT NULL,
+    [street] nvarchar(500)  NOT NULL,
+    [zipCode] nvarchar(500)  NOT NULL,
+    [city] nvarchar(500)  NOT NULL,
+    [phone1] nvarchar(500)  NOT NULL,
     [phone2] nvarchar(max)  NULL,
     [isEnabled] bit  NOT NULL,
-    [passwordHash] nvarchar(max)  NOT NULL,
+    [passwordHash] nvarchar(500)  NOT NULL,
     [lastLogin] datetime  NULL,
     [licenceNumber] nvarchar(max)  NULL,
-    [login] nvarchar(max)  NOT NULL,
-    [salt] nvarchar(max)  NOT NULL,
+    [login] nvarchar(500)  NOT NULL,
+    [salt] nvarchar(500)  NOT NULL,
     [passwordReset] nvarchar(max)  NULL,
     [passwordResetDemand] datetime  NULL,
     [Subscribed] bit  NULL,
@@ -276,7 +282,7 @@ GO
 -- Creating table 'CategorySet'
 CREATE TABLE [dbo].[CategorySet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [categoryName] nvarchar(max)  NOT NULL
+    [categoryName] nvarchar(500)  NOT NULL
 );
 GO
 
@@ -293,36 +299,36 @@ GO
 -- Creating table 'StatusSet'
 CREATE TABLE [dbo].[StatusSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [statusName] nvarchar(max)  NOT NULL
+    [statusName] nvarchar(500)  NOT NULL
 );
 GO
 
 -- Creating table 'PaymentMethodSet'
 CREATE TABLE [dbo].[PaymentMethodSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [methodName] nvarchar(max)  NOT NULL
+    [methodName] nvarchar(500)  NOT NULL
 );
 GO
 
 -- Creating table 'DaySet'
 CREATE TABLE [dbo].[DaySet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [name] nvarchar(max)  NOT NULL
+    [name] nvarchar(500)  NOT NULL
 );
 GO
 
 -- Creating table 'BallLevelSet'
 CREATE TABLE [dbo].[BallLevelSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [ballName] nvarchar(max)  NOT NULL
+    [ballName] nvarchar(500)  NOT NULL
 );
 GO
 
 -- Creating table 'NewsSet'
 CREATE TABLE [dbo].[NewsSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Title] nvarchar(max)  NOT NULL,
-    [Content] nvarchar(max)  NOT NULL,
+    [Title] nvarchar(500)  NOT NULL,
+    [Content] nvarchar(500)  NOT NULL,
     [PublishDate] datetime  NOT NULL,
     [Visibility] bit  NOT NULL
 );
@@ -332,12 +338,6 @@ GO
 CREATE TABLE [dbo].[AuthorizedTagsVersion] (
     [versionNumber] int  NOT NULL,
     [lastUpdated] datetime  NOT NULL
-);
-GO
-
--- Creating table 'authorizedUserTags'
-CREATE TABLE [dbo].[authorizedUserTags] (
-    [number] bigint  NOT NULL
 );
 GO
 
@@ -362,11 +362,12 @@ CREATE TABLE [dbo].[sysdiagrams] (
 );
 GO
 
--- Creating table 'ProductSet'
-CREATE TABLE [dbo].[ProductSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [Price] decimal(18,2)  NOT NULL
+-- Creating table 'OpeningJeu'
+CREATE TABLE [dbo].[OpeningJeu] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [time] datetime  NOT NULL,
+    [Court_ID] int  NULL,
+    [Badge_ID] int  NOT NULL
 );
 GO
 
@@ -376,6 +377,15 @@ CREATE TABLE [dbo].[ProductQuantitySet] (
     [Quantity] nvarchar(max)  NOT NULL,
     [Payment_ID] int  NOT NULL,
     [Product_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'ProductSet'
+CREATE TABLE [dbo].[ProductSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [Price] decimal(18,2)  NOT NULL,
+    [Deleted] bit  NOT NULL
 );
 GO
 
@@ -499,12 +509,6 @@ ADD CONSTRAINT [PK_AuthorizedTagsVersion]
     PRIMARY KEY CLUSTERED ([versionNumber], [lastUpdated] ASC);
 GO
 
--- Creating primary key on [number] in table 'authorizedUserTags'
-ALTER TABLE [dbo].[authorizedUserTags]
-ADD CONSTRAINT [PK_authorizedUserTags]
-    PRIMARY KEY CLUSTERED ([number] ASC);
-GO
-
 -- Creating primary key on [ID] in table 'LogEntry'
 ALTER TABLE [dbo].[LogEntry]
 ADD CONSTRAINT [PK_LogEntry]
@@ -517,15 +521,21 @@ ADD CONSTRAINT [PK_sysdiagrams]
     PRIMARY KEY CLUSTERED ([diagram_id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ProductSet'
-ALTER TABLE [dbo].[ProductSet]
-ADD CONSTRAINT [PK_ProductSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+-- Creating primary key on [ID] in table 'OpeningJeu'
+ALTER TABLE [dbo].[OpeningJeu]
+ADD CONSTRAINT [PK_OpeningJeu]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'ProductQuantitySet'
 ALTER TABLE [dbo].[ProductQuantitySet]
 ADD CONSTRAINT [PK_ProductQuantitySet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ProductSet'
+ALTER TABLE [dbo].[ProductSet]
+ADD CONSTRAINT [PK_ProductSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -552,6 +562,7 @@ ADD CONSTRAINT [FK_BookingAggregationBooking]
     REFERENCES [dbo].[BookingAggregationJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BookingAggregationBooking'
 CREATE INDEX [IX_FK_BookingAggregationBooking]
@@ -566,6 +577,7 @@ ADD CONSTRAINT [FK_BookingCourt]
     REFERENCES [dbo].[CourtJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BookingCourt'
 CREATE INDEX [IX_FK_BookingCourt]
@@ -580,6 +592,7 @@ ADD CONSTRAINT [FK_BadgePlayer]
     REFERENCES [dbo].[PlayerJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BadgePlayer'
 CREATE INDEX [IX_FK_BadgePlayer]
@@ -594,6 +607,7 @@ ADD CONSTRAINT [FK_PreferencePeriodPlayer]
     REFERENCES [dbo].[PlayerJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PreferencePeriodPlayer'
 CREATE INDEX [IX_FK_PreferencePeriodPlayer]
@@ -608,6 +622,7 @@ ADD CONSTRAINT [FK_PlayerBooking]
     REFERENCES [dbo].[PlayerJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PlayerBooking'
 CREATE INDEX [IX_FK_PlayerBooking]
@@ -622,6 +637,7 @@ ADD CONSTRAINT [FK_PlayerPayment]
     REFERENCES [dbo].[PlayerJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PlayerPayment'
 CREATE INDEX [IX_FK_PlayerPayment]
@@ -645,6 +661,7 @@ ADD CONSTRAINT [FK_PaymentSemester_Semester]
     REFERENCES [dbo].[SemesterJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PaymentSemester_Semester'
 CREATE INDEX [IX_FK_PaymentSemester_Semester]
@@ -668,6 +685,7 @@ ADD CONSTRAINT [FK_PlayerCategory_Category]
     REFERENCES [dbo].[CategorySet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PlayerCategory_Category'
 CREATE INDEX [IX_FK_PlayerCategory_Category]
@@ -682,6 +700,7 @@ ADD CONSTRAINT [FK_PlayerTrainingPreferences]
     REFERENCES [dbo].[PlayerJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PlayerTrainingPreferences'
 CREATE INDEX [IX_FK_PlayerTrainingPreferences]
@@ -696,6 +715,7 @@ ADD CONSTRAINT [FK_PlayerStatus]
     REFERENCES [dbo].[StatusSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PlayerStatus'
 CREATE INDEX [IX_FK_PlayerStatus]
@@ -710,6 +730,7 @@ ADD CONSTRAINT [FK_PaymentMethodPayment]
     REFERENCES [dbo].[PaymentMethodSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PaymentMethodPayment'
 CREATE INDEX [IX_FK_PaymentMethodPayment]
@@ -724,6 +745,7 @@ ADD CONSTRAINT [FK_DayPreferencePeriod]
     REFERENCES [dbo].[DaySet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DayPreferencePeriod'
 CREATE INDEX [IX_FK_DayPreferencePeriod]
@@ -738,6 +760,7 @@ ADD CONSTRAINT [FK_DayTrainingPreferences]
     REFERENCES [dbo].[DaySet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DayTrainingPreferences'
 CREATE INDEX [IX_FK_DayTrainingPreferences]
@@ -752,6 +775,7 @@ ADD CONSTRAINT [FK_PlayerBallLevel]
     REFERENCES [dbo].[BallLevelSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PlayerBallLevel'
 CREATE INDEX [IX_FK_PlayerBallLevel]
@@ -766,6 +790,7 @@ ADD CONSTRAINT [FK_BookingPlayer2]
     REFERENCES [dbo].[PlayerJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BookingPlayer2'
 CREATE INDEX [IX_FK_BookingPlayer2]
@@ -780,6 +805,7 @@ ADD CONSTRAINT [FK_SeasonSemester]
     REFERENCES [dbo].[SeasonJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_SeasonSemester'
 CREATE INDEX [IX_FK_SeasonSemester]
@@ -794,11 +820,42 @@ ADD CONSTRAINT [FK_LogEntrynew_PlayerJeu]
     REFERENCES [dbo].[PlayerJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_LogEntrynew_PlayerJeu'
 CREATE INDEX [IX_FK_LogEntrynew_PlayerJeu]
 ON [dbo].[LogEntry]
     ([Player_ID]);
+GO
+
+-- Creating foreign key on [Badge_ID] in table 'OpeningJeu'
+ALTER TABLE [dbo].[OpeningJeu]
+ADD CONSTRAINT [FK_OpeningBadge]
+    FOREIGN KEY ([Badge_ID])
+    REFERENCES [dbo].[BadgeJeu]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OpeningBadge'
+CREATE INDEX [IX_FK_OpeningBadge]
+ON [dbo].[OpeningJeu]
+    ([Badge_ID]);
+GO
+
+-- Creating foreign key on [Court_ID] in table 'OpeningJeu'
+ALTER TABLE [dbo].[OpeningJeu]
+ADD CONSTRAINT [FK_CourtOpening]
+    FOREIGN KEY ([Court_ID])
+    REFERENCES [dbo].[CourtJeu]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CourtOpening'
+CREATE INDEX [IX_FK_CourtOpening]
+ON [dbo].[OpeningJeu]
+    ([Court_ID]);
 GO
 
 -- Creating foreign key on [Payment_ID] in table 'ProductQuantitySet'
@@ -808,6 +865,7 @@ ADD CONSTRAINT [FK_PaymentProductQuantity]
     REFERENCES [dbo].[PaymentJeu]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PaymentProductQuantity'
 CREATE INDEX [IX_FK_PaymentProductQuantity]
@@ -822,6 +880,7 @@ ADD CONSTRAINT [FK_ProductQuantityProduct]
     REFERENCES [dbo].[ProductSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProductQuantityProduct'
 CREATE INDEX [IX_FK_ProductQuantityProduct]
