@@ -836,9 +836,9 @@
           <Property Type="Double" Name="amount" Nullable="false" />
           <Property Type="DateTime" Name="date" Nullable="false" Precision="3" />
           <NavigationProperty Name="PaymentMethod" Relationship="entity.PaymentMethodPayment" FromRole="Payment" ToRole="PaymentMethod" />
-          <Property Name="raison" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="raison" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <Property Name="invalid" Type="Boolean" Nullable="false" />
-          <Property Name="comment" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="comment" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <NavigationProperty Name="ProductQuantitySet" Relationship="entity.FK_PaymentProductQuantity" FromRole="Payment" ToRole="ProductQuantitySet" />
         </EntityType>
         <EntityType Name="Badge">
@@ -859,7 +859,7 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Booking" Relationship="entity.BookingAggregationBooking" FromRole="BookingAggregation" ToRole="Booking" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="name" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -869,7 +869,7 @@
           <NavigationProperty Name="BookingAggregation" Relationship="entity.BookingAggregationBooking" FromRole="Booking" ToRole="BookingAggregation" />
           <NavigationProperty Name="Court" Relationship="entity.BookingCourt" FromRole="Booking" ToRole="Court" />
           <NavigationProperty Name="Player1" Relationship="entity.PlayerBooking" FromRole="Booking" ToRole="Player" />
-          <Property Type="String" Name="name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="name" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <Property Type="Boolean" Name="isSpecial" Nullable="false" />
           <Property Type="DateTime" Name="start" Nullable="false" Precision="3" />
           <Property Type="DateTime" Name="end" Nullable="false" Precision="3" />
@@ -883,7 +883,7 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Booking" Relationship="entity.BookingCourt" FromRole="Court" ToRole="Booking" />
-          <Property Type="String" Name="number" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="number" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <Property Type="Boolean" Name="isCovered" Nullable="false" />
           <NavigationProperty Name="OpeningJeu" Relationship="entity.FK_CourtOpening" FromRole="Court" ToRole="OpeningJeu" />
         </EntityType>
@@ -896,18 +896,18 @@
           <NavigationProperty Name="PreferencePeriod" Relationship="entity.PreferencePeriodPlayer" FromRole="Player" ToRole="PreferencePeriod" />
           <NavigationProperty Name="Booking" Relationship="entity.PlayerBooking" FromRole="Player" ToRole="Booking" />
           <NavigationProperty Name="Payment" Relationship="entity.PlayerPayment" FromRole="Player" ToRole="Payment" />
-          <Property Type="String" Name="firstName" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="lastName" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="firstName" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
+          <Property Type="String" Name="lastName" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <Property Type="DateTime" Name="birthDate" Nullable="false" Precision="3" />
-          <Property Type="String" Name="ranking" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="email" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="street" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="zipCode" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="city" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="phone1" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="ranking" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
+          <Property Type="String" Name="email" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
+          <Property Type="String" Name="street" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
+          <Property Type="String" Name="zipCode" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
+          <Property Type="String" Name="city" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
+          <Property Type="String" Name="phone1" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <Property Type="String" Name="phone2" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="Boolean" Name="isEnabled" Nullable="false" />
-          <Property Type="String" Name="passwordHash" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="passwordHash" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <Property Type="DateTime" Name="lastLogin" Nullable="true" Precision="3" />
           <Property Type="String" Name="licenceNumber" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Category" Relationship="entity.PlayerCategory" FromRole="Player" ToRole="Category" />
@@ -915,8 +915,8 @@
           <NavigationProperty Name="Status" Relationship="entity.PlayerStatus" FromRole="Player" ToRole="Status" />
           <NavigationProperty Name="BallLevel" Relationship="entity.PlayerBallLevel" FromRole="Player" ToRole="BallLevel" />
           <NavigationProperty Name="Booking1" Relationship="entity.BookingPlayer2" FromRole="Player" ToRole="Booking" />
-          <Property Name="login" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="salt" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="login" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
+          <Property Name="salt" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <Property Name="passwordReset" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="passwordResetDemand" Type="DateTime" Precision="3" />
           <Property Name="Subscribed" Type="Boolean" />
@@ -969,7 +969,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="categoryName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="categoryName" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <NavigationProperty Name="Player" Relationship="entity.PlayerCategory" FromRole="Category" ToRole="Player" />
         </EntityType>
         <Association Name="PlayerCategory">
@@ -995,7 +995,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="statusName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="statusName" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <NavigationProperty Name="Player" Relationship="entity.PlayerStatus" FromRole="Status" ToRole="Player" />
         </EntityType>
         <Association Name="PlayerStatus">
@@ -1007,7 +1007,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="methodName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="methodName" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <NavigationProperty Name="Payment" Relationship="entity.PaymentMethodPayment" FromRole="PaymentMethod" ToRole="Payment" />
         </EntityType>
         <Association Name="PaymentMethodPayment">
@@ -1019,7 +1019,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="name" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <NavigationProperty Name="PreferencePeriod" Relationship="entity.DayPreferencePeriod" FromRole="Day" ToRole="PreferencePeriod" />
           <NavigationProperty Name="TrainingPreferences" Relationship="entity.DayTrainingPreferences" FromRole="Day" ToRole="TrainingPreferences" />
         </EntityType>
@@ -1036,7 +1036,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ballName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ballName" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <NavigationProperty Name="Player" Relationship="entity.PlayerBallLevel" FromRole="BallLevel" ToRole="Player" />
         </EntityType>
         <Association Name="PlayerBallLevel">
@@ -1056,8 +1056,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
+          <Property Name="Content" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="500" />
           <Property Name="PublishDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Visibility" Type="Boolean" Nullable="false" />
         </EntityType>
